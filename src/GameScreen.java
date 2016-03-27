@@ -1,15 +1,20 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+import java.awt.Insets;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
@@ -53,13 +58,8 @@ public class GameScreen extends JFrame {
 		btnNewButton.setBounds(0, 0, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(10, 34, 112, 183);
-		contentPane.add(panel);
-		
 		JPanel gameboard = new JPanel();
-		gameboard.setBounds(180, 7, 210, 210);
+		gameboard.setBounds(10, 34, 175, 175);
 		gameboard.setLayout(new GridLayout(6, 6, 0, 0));
 		// TODO hack add 36 JLabels with alternating backgrounds
 		Color lighterGray = new Color(230, 230, 230);
@@ -74,6 +74,24 @@ public class GameScreen extends JFrame {
 			}
 		}
 		contentPane.add(gameboard);
+		
+		JPanel bullpen = new JPanel();
+		bullpen.setBorder(new LineBorder(new Color(0, 0, 0)));
+		bullpen.setBounds(207, 11, 217, 198);
+		contentPane.add(bullpen);
+		bullpen.setLayout(null);
+		
+		int tileSize = gameboard.getHeight() / 6;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < (3-i); j++) {
+				JLabel lblBox = new JLabel();
+				lblBox.setBackground(new Color(128, 128, 128));
+				lblBox.setBounds(10 + (tileSize * i), 10 + (tileSize * j), tileSize, tileSize);
+				lblBox.setBorder(new LineBorder(Color.BLACK));
+				lblBox.setOpaque(true);
+				bullpen.add(lblBox);
+			}
+		}
 		
 		JLabel lblNewLabel = new JLabel("Score: 6");
 		lblNewLabel.setBounds(10, 234, 60, 14);
