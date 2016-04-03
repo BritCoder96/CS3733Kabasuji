@@ -18,6 +18,7 @@ import java.awt.Insets;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
+import java.awt.Font;
 
 public class GameScreen extends JFrame {
 
@@ -44,22 +45,23 @@ public class GameScreen extends JFrame {
 	 */
 	public GameScreen() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(Title.windowSize);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Options");
+		JButton btnNewButton = new JButton("Pause");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(0, 0, 89, 23);
+		btnNewButton.setBounds(0, 0, 120, 45);
 		contentPane.add(btnNewButton);
 		
 		JPanel gameboard = new JPanel();
-		gameboard.setBounds(10, 34, 175, 175);
+		gameboard.setBounds(10, 88, 356, 356);
 		gameboard.setLayout(new GridLayout(6, 6, 0, 0));
 		// TODO hack add 36 JLabels with alternating backgrounds
 		Color lighterGray = new Color(230, 230, 230);
@@ -77,7 +79,7 @@ public class GameScreen extends JFrame {
 		
 		JPanel bullpen = new JPanel();
 		bullpen.setBorder(new LineBorder(new Color(0, 0, 0)));
-		bullpen.setBounds(207, 11, 217, 198);
+		bullpen.setBounds(388, 11, 386, 481);
 		contentPane.add(bullpen);
 		bullpen.setLayout(null);
 		
@@ -94,15 +96,17 @@ public class GameScreen extends JFrame {
 		}
 		
 		JLabel lblNewLabel = new JLabel("Score: 6");
-		lblNewLabel.setBounds(10, 234, 60, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setBounds(81, 552, 88, 29);
 		contentPane.add(lblNewLabel);
 		
 		StarsDisplay starsDisplay = new StarsDisplay();
-		starsDisplay.setBounds(113, 221, 186, 40);
+		starsDisplay.setBounds(250, 552, 186, 40);
 		contentPane.add(starsDisplay);
 		
 		JLabel lblNewLabel_1 = new JLabel("Moves/Time Left");
-		lblNewLabel_1.setBounds(324, 234, 100, 14);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel_1.setBounds(517, 552, 186, 29);
 		contentPane.add(lblNewLabel_1);
 	}
 }

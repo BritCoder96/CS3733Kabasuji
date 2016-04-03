@@ -5,11 +5,14 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Rectangle;
+
 import javax.swing.JButton;
 
 public class Title {
 
 	private JFrame frame;
+	public static Rectangle windowSize = new Rectangle(100, 100, 800, 650);
 
 	/**
 	 * Launch the application.
@@ -39,30 +42,33 @@ public class Title {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(windowSize);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblKabasuji = new JLabel("Kabasuji");
-		lblKabasuji.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblKabasuji.setBounds(171, 20, 95, 44);
+		lblKabasuji.setFont(new Font("Tahoma", Font.PLAIN, 44));
+		lblKabasuji.setBounds(307, 58, 169, 63);
 		frame.getContentPane().add(lblKabasuji);
 		
 		JLabel lblATileLaying = new JLabel("A tile laying game");
-		lblATileLaying.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblATileLaying.setBounds(154, 84, 128, 27);
+		lblATileLaying.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		lblATileLaying.setBounds(265, 163, 253, 39);
 		frame.getContentPane().add(lblATileLaying);
 		
 		JButton btnNewGame = new JButton("Play");
-		btnNewGame.setBounds(174, 131, 89, 23);
+		btnNewGame.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewGame.setBounds(332, 244, 120, 45);
 		frame.getContentPane().add(btnNewGame);
 		
 		JButton btnOptions = new JButton("Options");
-		btnOptions.setBounds(174, 174, 89, 23);
+		btnOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnOptions.setBounds(332, 331, 120, 45);
 		frame.getContentPane().add(btnOptions);
 		
 		JButton btnExit = new JButton("Exit");
-		btnExit.setBounds(174, 217, 89, 23);
+		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnExit.setBounds(332, 418, 120, 45);
 		frame.getContentPane().add(btnExit);
 	}
 }

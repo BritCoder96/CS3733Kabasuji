@@ -40,14 +40,14 @@ public class PuzzleEditor extends JFrame {
 	 */
 	public PuzzleEditor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(Title.windowSize);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel gameboard = new JPanel();
-		gameboard.setBounds(44, 44, 175, 175);
+		gameboard.setBounds(60, 71, 325, 325);
 		gameboard.setLayout(new GridLayout(6, 6, 0, 0));
 		// TODO hack add 36 JLabels with alternating backgrounds
 		Color lighterGray = new Color(230, 230, 230);
@@ -65,7 +65,7 @@ public class PuzzleEditor extends JFrame {
 		
 		JPanel bullpen = new JPanel();
 		bullpen.setBorder(new LineBorder(new Color(0, 0, 0)));
-		bullpen.setBounds(240, 38, 184, 184);
+		bullpen.setBounds(412, 14, 350, 455);
 		contentPane.add(bullpen);
 		bullpen.setLayout(null);
 		
@@ -82,54 +82,66 @@ public class PuzzleEditor extends JFrame {
 		}
 		
 		JLabel label = new JLabel("7");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label.setBounds(18, 71, 9, 14);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		label.setBounds(24, 445, 16, 24);
 		contentPane.add(label);
 		
 		JButton btnIncrease = new JButton("");
-		btnIncrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
-		btnIncrease.setBounds(10, 44, 24, 24);
+		btnIncrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
+		btnIncrease.setBounds(20, 420, 24, 24);
 		contentPane.add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
-		btnDecrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
-		btnDecrease.setBounds(11, 87, 24, 24);
+		btnDecrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
+		btnDecrease.setBounds(20, 472, 24, 24);
 		contentPane.add(btnDecrease);
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(18, 230, 89, 23);
+		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnDelete.setBounds(60, 551, 120, 45);
 		contentPane.add(btnDelete);
 		
 		JButton btnDraw = new JButton("Draw");
-		btnDraw.setBounds(114, 230, 89, 23);
+		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnDraw.setBounds(240, 551, 120, 45);
 		contentPane.add(btnDraw);
 		
 		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(213, 230, 89, 23);
+		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnSave.setBounds(420, 551, 120, 45);
 		contentPane.add(btnSave);
 		
 		JButton btnPublish = new JButton("Publish");
+		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPublish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPublish.setBounds(314, 230, 89, 23);
+		btnPublish.setBounds(600, 551, 120, 45);
 		contentPane.add(btnPublish);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(10, 10, 65, 23);
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBack.setBounds(10, 10, 120, 45);
 		contentPane.add(btnBack);
 		
 		JButton btnOptions = new JButton("Options");
-		btnOptions.setBounds(80, 10, 78, 23);
+		btnOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnOptions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnOptions.setBounds(162, 11, 120, 45);
 		contentPane.add(btnOptions);
 		
 		JButton btnSolveForMe = new JButton("Solve for Me");
-		btnSolveForMe.setBounds(168, 10, 105, 23);
+		btnSolveForMe.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnSolveForMe.setBounds(71, 436, 159, 46);
 		contentPane.add(btnSolveForMe);
 		
 		JButton btnAddPiece = new JButton("Add Piece");
-		btnAddPiece.setBounds(283, 10, 98, 23);
+		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnAddPiece.setBounds(257, 436, 136, 46);
 		contentPane.add(btnAddPiece);
 	}
 

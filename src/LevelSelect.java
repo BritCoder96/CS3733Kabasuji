@@ -9,6 +9,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LevelSelect extends JFrame {
 
@@ -35,49 +39,59 @@ public class LevelSelect extends JFrame {
 	 */
 	public LevelSelect() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(Title.windowSize);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(0, 0, 55, 23);
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBack.setBounds(0, 0, 120, 45);
 		contentPane.add(btnBack);
 		
 		JButton btnPause = new JButton("Options");
-		btnPause.setBounds(65, 0, 69, 23);
+		btnPause.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnPause.setBounds(131, 0, 120, 45);
 		contentPane.add(btnPause);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(103, 57, 186, 125);
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBounds(222, 141, 338, 268);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblCurrentLevel = new JLabel("Current Level");
-		lblCurrentLevel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCurrentLevel.setBounds(41, 11, 102, 28);
+		lblCurrentLevel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblCurrentLevel.setBounds(97, 43, 144, 28);
 		panel.add(lblCurrentLevel);
 		
 		StarsDisplay starsDisplay = new StarsDisplay();
-		starsDisplay.setBounds(0, 46, 186, 40);
+		starsDisplay.setBounds(76, 114, 186, 40);
 		panel.add(starsDisplay);
 		
 		JLabel lblScore = new JLabel("Score");
-		lblScore.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblScore.setBounds(75, 97, 35, 14);
+		lblScore.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblScore.setBounds(141, 197, 55, 28);
 		panel.add(lblScore);
 		
 		JButton btnPlay = new JButton("Play");
-		btnPlay.setBounds(152, 205, 89, 23);
+		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnPlay.setBounds(332, 467, 120, 45);
 		contentPane.add(btnPlay);
 		
 		JButton btnPrevious = new JButton("Previous");
-		btnPrevious.setBounds(10, 108, 89, 23);
+		btnPrevious.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnPrevious.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnPrevious.setBounds(51, 253, 120, 45);
 		contentPane.add(btnPrevious);
 		
 		JButton btnNext = new JButton("Next");
-		btnNext.setBounds(299, 108, 89, 23);
+		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNext.setBounds(611, 253, 120, 45);
 		contentPane.add(btnNext);
 	}
 }

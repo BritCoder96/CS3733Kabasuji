@@ -36,14 +36,14 @@ public class LightningEditor extends JFrame {
 	 */
 	public LightningEditor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(Title.windowSize);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel gameboard = new JPanel();
-		gameboard.setBounds(195, 54, 175, 175);
+		gameboard.setBounds(283, 94, 430, 430);
 		gameboard.setLayout(new GridLayout(6, 6, 0, 0));
 		// TODO hack add 36 JLabels with alternating backgrounds
 		Color lighterGray = new Color(230, 230, 230);
@@ -60,42 +60,48 @@ public class LightningEditor extends JFrame {
 		contentPane.add(gameboard);
 		
 		JLabel label = new JLabel("1:00");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label.setBounds(48, 71, 33, 14);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		label.setBounds(99, 141, 63, 34);
 		contentPane.add(label);
 		
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
-		btnIncrease.setBounds(52, 44, 24, 24);
+		btnIncrease.setBounds(117, 117, 24, 24);
 		contentPane.add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
-		btnDecrease.setBounds(53, 87, 24, 24);
+		btnDecrease.setBounds(117, 174, 24, 24);
 		contentPane.add(btnDecrease);
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(21, 125, 89, 23);
+		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnDelete.setBounds(69, 248, 120, 45);
 		contentPane.add(btnDelete);
 		
 		JButton btnDraw = new JButton("Draw");
-		btnDraw.setBounds(21, 159, 89, 23);
+		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnDraw.setBounds(69, 321, 120, 45);
 		contentPane.add(btnDraw);
 		
 		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(21, 193, 89, 23);
+		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnSave.setBounds(69, 391, 120, 45);
 		contentPane.add(btnSave);
 		
 		JButton btnPublish = new JButton("Publish");
-		btnPublish.setBounds(21, 227, 89, 23);
+		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnPublish.setBounds(69, 460, 120, 45);
 		contentPane.add(btnPublish);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(10, 10, 65, 23);
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBack.setBounds(10, 10, 120, 45);
 		contentPane.add(btnBack);
 		
 		JButton btnOptions = new JButton("Options");
-		btnOptions.setBounds(80, 10, 78, 23);
+		btnOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnOptions.setBounds(140, 10, 120, 45);
 		contentPane.add(btnOptions);
 	}
 

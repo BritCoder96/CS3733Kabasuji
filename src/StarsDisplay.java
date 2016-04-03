@@ -18,7 +18,7 @@ public class StarsDisplay extends JPanel {
 		setLayout(null);
 		
 		JLabel star1 = new JLabel("Star1");
-		star1.setBounds(0, 0, 28, 28);
+		star1.setBounds(30, 0, 28, 28);
 		setFilledStarIcon(star1);
 		add(star1);
 		
@@ -28,7 +28,7 @@ public class StarsDisplay extends JPanel {
 		add(star2);
 		
 		JLabel star3 = new JLabel("Star3");
-		star3.setBounds(158, 0, 28, 28);
+		star3.setBounds(128, 0, 28, 28);
 		setEmptyStarIcon(star3);
 		add(star3);
 
