@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 
 import javax.swing.JButton;
+import javax.swing.JSpinner;
 
 public class Title {
 
@@ -60,11 +61,6 @@ public class Title {
 		btnNewGame.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewGame.setBounds(332, 244, 120, 45);
 		frame.getContentPane().add(btnNewGame);
-		
-		JButton btnOptions = new JButton("Options");
-		btnOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnOptions.setBounds(332, 331, 120, 45);
-		frame.getContentPane().add(btnOptions);
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));

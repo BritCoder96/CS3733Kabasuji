@@ -33,31 +33,30 @@ public class PauseOverlay extends JFrame {
 	 */
 	public PauseOverlay() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 200, 250);
+		setBounds(100, 100, 250, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblPaused = new JLabel("Paused");
-		lblPaused.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblPaused.setBounds(53, 11, 77, 25);
+		lblPaused.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblPaused.setBounds(67, 28, 99, 34);
 		contentPane.add(lblPaused);
 		
 		JButton btnResume = new JButton("Resume");
-		btnResume.setBounds(47, 49, 89, 23);
+		btnResume.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnResume.setBounds(57, 100, 120, 45);
 		contentPane.add(btnResume);
 		
-		JButton btnOptions = new JButton("Options");
-		btnOptions.setBounds(47, 83, 89, 23);
-		contentPane.add(btnOptions);
-		
 		JButton btnTitle = new JButton("Title");
-		btnTitle.setBounds(47, 117, 89, 23);
+		btnTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnTitle.setBounds(57, 163, 120, 45);
 		contentPane.add(btnTitle);
 		
 		JButton btnQuit = new JButton("Quit");
-		btnQuit.setBounds(47, 151, 89, 23);
+		btnQuit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnQuit.setBounds(57, 230, 120, 45);
 		contentPane.add(btnQuit);
 	}
 

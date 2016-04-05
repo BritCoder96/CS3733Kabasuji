@@ -49,11 +49,6 @@ public class FileSelect extends JFrame {
 		btnBack.setBounds(0, 0, 120, 45);
 		contentPane.add(btnBack);
 		
-		JButton btnOptions = new JButton("Options");
-		btnOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnOptions.setBounds(128, 0, 120, 45);
-		contentPane.add(btnOptions);
-		
 		JLabel lblSelectFile = new JLabel("Select File");
 		lblSelectFile.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblSelectFile.setBounds(314, 97, 155, 39);

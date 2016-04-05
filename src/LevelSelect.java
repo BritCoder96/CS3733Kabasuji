@@ -50,11 +50,6 @@ public class LevelSelect extends JFrame {
 		btnBack.setBounds(0, 0, 120, 45);
 		contentPane.add(btnBack);
 		
-		JButton btnPause = new JButton("Options");
-		btnPause.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnPause.setBounds(131, 0, 120, 45);
-		contentPane.add(btnPause);
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(222, 141, 338, 268);

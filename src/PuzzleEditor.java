@@ -98,41 +98,32 @@ public class PuzzleEditor extends JFrame {
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDelete.setBounds(60, 551, 120, 45);
+		btnDelete.setBounds(30, 551, 120, 45);
 		contentPane.add(btnDelete);
 		
 		JButton btnDraw = new JButton("Draw");
 		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDraw.setBounds(240, 551, 120, 45);
+		btnDraw.setBounds(180, 551, 120, 45);
 		contentPane.add(btnDraw);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSave.setBounds(420, 551, 120, 45);
+		btnSave.setBounds(330, 551, 120, 45);
 		contentPane.add(btnSave);
 		
-		JButton btnPublish = new JButton("Publish");
+		JButton btnPublish = new JButton("Undo");
 		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPublish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPublish.setBounds(600, 551, 120, 45);
+		btnPublish.setBounds(480, 551, 120, 45);
 		contentPane.add(btnPublish);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(10, 10, 120, 45);
 		contentPane.add(btnBack);
-		
-		JButton btnOptions = new JButton("Options");
-		btnOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnOptions.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnOptions.setBounds(162, 11, 120, 45);
-		contentPane.add(btnOptions);
 		
 		JButton btnSolveForMe = new JButton("Solve for Me");
 		btnSolveForMe.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -143,6 +134,11 @@ public class PuzzleEditor extends JFrame {
 		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnAddPiece.setBounds(257, 436, 136, 46);
 		contentPane.add(btnAddPiece);
+		
+		JButton btnRedo = new JButton("Redo");
+		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnRedo.setBounds(630, 551, 120, 45);
+		contentPane.add(btnRedo);
 	}
 
 }

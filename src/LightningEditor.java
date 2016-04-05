@@ -89,7 +89,7 @@ public class LightningEditor extends JFrame {
 		btnSave.setBounds(69, 391, 120, 45);
 		contentPane.add(btnSave);
 		
-		JButton btnPublish = new JButton("Publish");
+		JButton btnPublish = new JButton("Undo");
 		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPublish.setBounds(69, 460, 120, 45);
 		contentPane.add(btnPublish);
@@ -99,10 +99,9 @@ public class LightningEditor extends JFrame {
 		btnBack.setBounds(10, 10, 120, 45);
 		contentPane.add(btnBack);
 		
-		JButton btnOptions = new JButton("Options");
-		btnOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnOptions.setBounds(140, 10, 120, 45);
-		contentPane.add(btnOptions);
+		JButton btnRedo = new JButton("Redo");
+		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnRedo.setBounds(69, 516, 120, 45);
+		contentPane.add(btnRedo);
 	}
-
 }
