@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controllers.MoveToBuilderLevelListController;
 import main.KabasujiMain;
 
 import javax.swing.JLabel;
@@ -41,6 +42,7 @@ public class BuilderTitle extends JPanel {
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(338, 305, 120, 45);
 		add(btnEdit);
+		btnEdit.addActionListener(new MoveToBuilderLevelListController(frame, this));
 
 		
 	}
