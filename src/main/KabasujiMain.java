@@ -3,17 +3,21 @@ import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 
+import views.KabasujiFrame;
+
 public class KabasujiMain {
 
 	public static Rectangle windowSize = new Rectangle(100, 100, 800, 650);
 
-	private static JFrame frame;
+	private static KabasujiFrame frame;
+	private static PanelBackManager backMgr;
 	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		frame = new JFrame();
+		backMgr = new PanelBackManager();
+		frame = new KabasujiFrame(backMgr);
 		frame.setVisible(true);
 		frame.setBounds(KabasujiMain.windowSize);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

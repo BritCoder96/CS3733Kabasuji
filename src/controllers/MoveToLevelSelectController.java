@@ -3,17 +3,16 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
 import views.FileSelect;
+import views.KabasujiFrame;
 import views.LevelSelect;
 import views.Title;
 
 public class MoveToLevelSelectController implements ActionListener {
-	JFrame frame;
+	KabasujiFrame frame;
 	FileSelect fileSelect;
 	
-	public MoveToLevelSelectController(JFrame frame, FileSelect fselect) {
+	public MoveToLevelSelectController(KabasujiFrame frame, FileSelect fselect) {
 		this.frame = frame;
 		this.fileSelect = fselect;
 	}

@@ -3,18 +3,17 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
 import views.FileSelect;
 import views.GameScreen;
+import views.KabasujiFrame;
 import views.LevelSelect;
 import views.Title;
 
 public class MoveToLevelController implements ActionListener {
-	JFrame frame;
+	KabasujiFrame frame;
 	LevelSelect levelSelect;
 	
-	public MoveToLevelController(JFrame frame, LevelSelect levelSelect) {
+	public MoveToLevelController(KabasujiFrame frame, LevelSelect levelSelect) {
 		this.frame = frame;
 		this.levelSelect = levelSelect;
 	}

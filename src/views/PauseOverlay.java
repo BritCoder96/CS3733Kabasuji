@@ -3,7 +3,6 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -12,12 +11,12 @@ import javax.swing.JButton;
 
 public class PauseOverlay extends JPanel {
 
-	private JFrame frame;
+	private KabasujiFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public PauseOverlay(JFrame frame) {
+	public PauseOverlay(KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(100, 100, 250, 350);
 		setBorder(new EmptyBorder(5, 5, 5, 5));

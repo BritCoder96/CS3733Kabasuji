@@ -6,7 +6,6 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -27,12 +26,12 @@ import java.awt.Font;
 
 public class GameScreen extends JPanel {
 
-	private JFrame frame;
+	private KabasujiFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public GameScreen(JFrame frame) {
+	public GameScreen(KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
