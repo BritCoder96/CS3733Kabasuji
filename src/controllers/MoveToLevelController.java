@@ -19,7 +19,6 @@ public class MoveToLevelController implements ActionListener {
 		this.levelSelect = levelSelect;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO add title to some kind of panel backstack for use in the back button controller
 		levelSelect.setVisible(false);

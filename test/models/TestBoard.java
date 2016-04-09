@@ -31,13 +31,14 @@ public class TestBoard extends TestCase {
 		square4.attachToOtherSide(square5, Directions.WEST);
 		square5.attachToOtherSide(square6, Directions.SOUTH);
 		
-		Square[] pieceSquares1 = {square1, square2, square3, square4, square5, square6} 
-		Square[] pieceSquares2 = {square7, square8, square9, square10, square11, square12} 
+		Square[] pieceSquares1 = {square1, square2, square3, square4, square5, square6};
+		Square[] pieceSquares2 = {square7, square8, square9, square10, square11, square12};
 
 		
 		HashSet<Piece> pieces = new HashSet<Piece>();
-		pieces.add(new Piece(pieceSquares1))
-		pieces.add(new Piece(pieceSquares2))
+		Piece piece1 = new Piece(pieceSquares1);
+		pieces.add(piece1);
+		pieces.add(new Piece(pieceSquares2));
 
 		Square square13 = new Square(0, SquareTypes.BOARDSQUARE, null, new Coordinate(0,0));
 		Square square14 = new Square(16777215, SquareTypes.BOARDSQUARE, null, new Coordinate(0,1));
@@ -74,19 +75,19 @@ public class TestBoard extends TestCase {
 		squares3.add(square23);
 		squares3.add(square24);
 		squares3.add(square25);
-		squares3.add(squar26);
+		squares3.add(square26);
 		squares3.add(square27);
 		squares3.add(square28);
 		squares3.add(square29);
 		squares3.add(square30);
 		squares3.add(square31);
 		squares3.add(square32);
-		Board board = new Board(3, 3)
+		Board board = new Board(3, 3);
 		board.setSquares(squares3);
 		board.setPieces(pieces);
 		
-		assertEquals(board.getPieces().contains(piece1));
-		assertEquals(board.getSquares().contains(square32));
+		assertTrue(board.getPieces().contains(piece1));
+		assertTrue(board.getSquares().contains(square32));
 
 	}
 }

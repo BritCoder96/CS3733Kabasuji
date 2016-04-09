@@ -17,7 +17,6 @@ public class MoveToFileSelectController implements ActionListener {
 		this.title = t;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO add title to some kind of panel backstack for use in the back button controller
 		title.setVisible(false);
