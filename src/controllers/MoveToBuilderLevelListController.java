@@ -7,14 +7,15 @@ import javax.swing.JFrame;
 
 import views.BuilderTitle;
 import views.FileSelect;
+import views.KabasujiFrame;
 import views.LevelSelect;
 import views.Title;
 
 public class MoveToBuilderLevelListController implements ActionListener {
-	JFrame frame;
+	KabasujiFrame frame;
 	BuilderTitle buildertitle;
 	
-	public MoveToBuilderLevelListController(JFrame frame, BuilderTitle btitle) {
+	public MoveToBuilderLevelListController(KabasujiFrame frame, BuilderTitle btitle) {
 		this.frame = frame;
 		this.buildertitle = btitle;
 	}

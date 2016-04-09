@@ -39,10 +39,7 @@ public class GameScreen extends JPanel {
 		
 		JButton btnNewButton = new JButton("Quit");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		btnNewButton.addActionListener(new controllers.GoBackOnePanelController(frame));
 		btnNewButton.setBounds(0, 0, 120, 45);
 		add(btnNewButton);
 		

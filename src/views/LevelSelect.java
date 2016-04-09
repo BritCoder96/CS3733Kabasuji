@@ -37,6 +37,7 @@ public class LevelSelect extends JPanel {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(0, 0, 120, 45);
 		add(btnBack);
+		btnBack.addActionListener(new controllers.GoBackOnePanelController(frame));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));

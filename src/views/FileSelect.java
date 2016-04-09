@@ -34,6 +34,7 @@ public class FileSelect extends JPanel {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(0, 0, 120, 45);
 		add(btnBack);
+		btnBack.addActionListener(new controllers.GoBackOnePanelController(frame));
 		
 		JLabel lblSelectFile = new JLabel("Select File");
 		lblSelectFile.setFont(new Font("Tahoma", Font.PLAIN, 30));
