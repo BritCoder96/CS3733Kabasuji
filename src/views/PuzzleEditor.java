@@ -1,3 +1,5 @@
+package views;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -9,42 +11,26 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import main.KabasujiMain;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class PuzzleEditor extends JFrame {
+public class PuzzleEditor extends JPanel {
 
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PuzzleEditor frame = new PuzzleEditor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public PuzzleEditor() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(Title.windowSize);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public PuzzleEditor(JFrame frame) {
+		this.frame = frame;
+		setBounds(KabasujiMain.windowSize);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 		
 		JPanel gameboard = new JPanel();
 		gameboard.setBounds(60, 71, 325, 325);
@@ -61,12 +47,12 @@ public class PuzzleEditor extends JFrame {
 				gameboard.add(square);
 			}
 		}
-		contentPane.add(gameboard);
+		add(gameboard);
 		
 		JPanel bullpen = new JPanel();
 		bullpen.setBorder(new LineBorder(new Color(0, 0, 0)));
 		bullpen.setBounds(412, 14, 350, 455);
-		contentPane.add(bullpen);
+		add(bullpen);
 		bullpen.setLayout(null);
 		
 		int tileSize = gameboard.getHeight() / 6;
@@ -84,32 +70,32 @@ public class PuzzleEditor extends JFrame {
 		JLabel label = new JLabel("7");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		label.setBounds(24, 445, 16, 24);
-		contentPane.add(label);
+		add(label);
 		
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
 		btnIncrease.setBounds(20, 420, 24, 24);
-		contentPane.add(btnIncrease);
+		add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnDecrease.setBounds(20, 472, 24, 24);
-		contentPane.add(btnDecrease);
+		add(btnDecrease);
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDelete.setBounds(30, 551, 120, 45);
-		contentPane.add(btnDelete);
+		add(btnDelete);
 		
 		JButton btnDraw = new JButton("Draw");
 		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDraw.setBounds(180, 551, 120, 45);
-		contentPane.add(btnDraw);
+		add(btnDraw);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSave.setBounds(330, 551, 120, 45);
-		contentPane.add(btnSave);
+		add(btnSave);
 		
 		JButton btnPublish = new JButton("Undo");
 		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -118,27 +104,27 @@ public class PuzzleEditor extends JFrame {
 			}
 		});
 		btnPublish.setBounds(480, 551, 120, 45);
-		contentPane.add(btnPublish);
+		add(btnPublish);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(10, 10, 120, 45);
-		contentPane.add(btnBack);
+		add(btnBack);
 		
 		JButton btnSolveForMe = new JButton("Solve for Me");
 		btnSolveForMe.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSolveForMe.setBounds(71, 436, 159, 46);
-		contentPane.add(btnSolveForMe);
+		add(btnSolveForMe);
 		
 		JButton btnAddPiece = new JButton("Add Piece");
 		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnAddPiece.setBounds(257, 436, 136, 46);
-		contentPane.add(btnAddPiece);
+		add(btnAddPiece);
 		
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(630, 551, 120, 45);
-		contentPane.add(btnRedo);
+		add(btnRedo);
 	}
 
 }

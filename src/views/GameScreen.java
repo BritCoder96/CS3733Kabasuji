@@ -1,3 +1,5 @@
+package views;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,39 +19,24 @@ import java.awt.Insets;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import main.KabasujiMain;
+
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 
-public class GameScreen extends JFrame {
+public class GameScreen extends JPanel {
 
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameScreen frame = new GameScreen();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public GameScreen() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(Title.windowSize);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public GameScreen(JFrame frame) {
+		this.frame = frame;
+		setBounds(KabasujiMain.windowSize);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 		
 		JButton btnNewButton = new JButton("Quit");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -58,7 +45,7 @@ public class GameScreen extends JFrame {
 			}
 		});
 		btnNewButton.setBounds(0, 0, 120, 45);
-		contentPane.add(btnNewButton);
+		add(btnNewButton);
 		
 		JPanel gameboard = new JPanel();
 		gameboard.setBounds(10, 88, 356, 356);
@@ -75,12 +62,12 @@ public class GameScreen extends JFrame {
 				gameboard.add(square);
 			}
 		}
-		contentPane.add(gameboard);
+		add(gameboard);
 		
 		JPanel bullpen = new JPanel();
 		bullpen.setBorder(new LineBorder(new Color(0, 0, 0)));
 		bullpen.setBounds(388, 11, 386, 481);
-		contentPane.add(bullpen);
+		add(bullpen);
 		bullpen.setLayout(null);
 		
 		int tileSize = gameboard.getHeight() / 6;
@@ -98,15 +85,15 @@ public class GameScreen extends JFrame {
 		JLabel lblNewLabel = new JLabel("Score: 6");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setBounds(81, 552, 88, 29);
-		contentPane.add(lblNewLabel);
+		add(lblNewLabel);
 		
 		StarsDisplay starsDisplay = new StarsDisplay();
 		starsDisplay.setBounds(250, 552, 186, 40);
-		contentPane.add(starsDisplay);
+		add(starsDisplay);
 		
 		JLabel lblNewLabel_1 = new JLabel("Moves/Time Left");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_1.setBounds(517, 552, 186, 29);
-		contentPane.add(lblNewLabel_1);
+		add(lblNewLabel_1);
 	}
 }

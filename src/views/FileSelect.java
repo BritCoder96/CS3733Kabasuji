@@ -1,3 +1,5 @@
+package views;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -9,56 +11,41 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+
+import main.KabasujiMain;
+
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class FileSelect extends JFrame {
-
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FileSelect frame = new FileSelect();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+public class FileSelect extends JPanel {
+	
+	JFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public FileSelect() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(Title.windowSize);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public FileSelect(JFrame frame) {
+		this.frame = frame;
+		setBounds(KabasujiMain.windowSize);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(0, 0, 120, 45);
-		contentPane.add(btnBack);
+		add(btnBack);
 		
 		JLabel lblSelectFile = new JLabel("Select File");
 		lblSelectFile.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblSelectFile.setBounds(314, 97, 155, 39);
-		contentPane.add(lblSelectFile);
+		add(lblSelectFile);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(Color.YELLOW);
 		panel.setBounds(142, 168, 500, 60);
-		contentPane.add(panel);
+		add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblFile = new JLabel("File 1");
@@ -85,7 +72,7 @@ public class FileSelect extends JFrame {
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_2.setLayout(null);
 		panel_2.setBounds(142, 316, 500, 60);
-		contentPane.add(panel_2);
+		add(panel_2);
 		
 		JLabel lblNewGame = new JLabel("New Game");
 		lblNewGame.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -95,7 +82,8 @@ public class FileSelect extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPlay.setBounds(215, 411, 120, 45);
-		contentPane.add(btnPlay);
+		add(btnPlay);
+		btnPlay.addActionListener(new controllers.MoveToLevelSelectController(frame, this));
 		
 		JButton btnNewButton = new JButton("Delete");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -104,13 +92,13 @@ public class FileSelect extends JFrame {
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.setBounds(457, 411, 120, 45);
-		contentPane.add(btnNewButton);
+		add(btnNewButton);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1.setBounds(142, 239, 500, 60);
-		contentPane.add(panel_1);
+		add(panel_1);
 		
 		JLabel lblFile_1 = new JLabel("File 2");
 		lblFile_1.setFont(new Font("Tahoma", Font.PLAIN, 24));

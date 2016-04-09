@@ -1,3 +1,5 @@
+package views;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -7,40 +9,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import main.KabasujiMain;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
-public class LightningEditor extends JFrame {
+public class LightningEditor extends JPanel {
 
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LightningEditor frame = new LightningEditor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public LightningEditor() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(Title.windowSize);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public LightningEditor(JFrame frame) {
+		this.frame = frame;
+		setBounds(KabasujiMain.windowSize);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 		
 		JPanel gameboard = new JPanel();
 		gameboard.setBounds(283, 94, 430, 430);
@@ -57,51 +44,51 @@ public class LightningEditor extends JFrame {
 				gameboard.add(square);
 			}
 		}
-		contentPane.add(gameboard);
+		add(gameboard);
 		
 		JLabel label = new JLabel("1:00");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		label.setBounds(99, 141, 63, 34);
-		contentPane.add(label);
+		add(label);
 		
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
 		btnIncrease.setBounds(117, 117, 24, 24);
-		contentPane.add(btnIncrease);
+		add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnDecrease.setBounds(117, 174, 24, 24);
-		contentPane.add(btnDecrease);
+		add(btnDecrease);
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDelete.setBounds(69, 248, 120, 45);
-		contentPane.add(btnDelete);
+		add(btnDelete);
 		
 		JButton btnDraw = new JButton("Draw");
 		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDraw.setBounds(69, 321, 120, 45);
-		contentPane.add(btnDraw);
+		add(btnDraw);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSave.setBounds(69, 391, 120, 45);
-		contentPane.add(btnSave);
+		add(btnSave);
 		
 		JButton btnPublish = new JButton("Undo");
 		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPublish.setBounds(69, 460, 120, 45);
-		contentPane.add(btnPublish);
+		add(btnPublish);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(10, 10, 120, 45);
-		contentPane.add(btnBack);
+		add(btnBack);
 		
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(69, 516, 120, 45);
-		contentPane.add(btnRedo);
+		add(btnRedo);
 	}
 }
