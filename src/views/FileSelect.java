@@ -3,7 +3,6 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -20,12 +19,12 @@ import java.awt.event.ActionEvent;
 
 public class FileSelect extends JPanel {
 	
-	JFrame frame;
+	KabasujiFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public FileSelect(JFrame frame) {
+	public FileSelect(KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -35,6 +34,7 @@ public class FileSelect extends JPanel {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(0, 0, 120, 45);
 		add(btnBack);
+		btnBack.addActionListener(new controllers.GoBackOnePanelController(frame));
 		
 		JLabel lblSelectFile = new JLabel("Select File");
 		lblSelectFile.setFont(new Font("Tahoma", Font.PLAIN, 30));

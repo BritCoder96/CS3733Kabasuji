@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -28,12 +27,12 @@ import javax.swing.DefaultComboBoxModel;
 
 public class ReleaseEditor extends JPanel {
 
-	private JFrame frame;
+	private KabasujiFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public ReleaseEditor(JFrame frame) {
+	public ReleaseEditor(KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));

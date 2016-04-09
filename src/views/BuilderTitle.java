@@ -2,10 +2,10 @@ package views;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controllers.MoveToBuilderLevelListController;
 import main.KabasujiMain;
 
 import javax.swing.JLabel;
@@ -16,12 +16,12 @@ import java.awt.event.ActionEvent;
 
 public class BuilderTitle extends JPanel {
 
-	private JFrame frame;
+	private KabasujiFrame frame;
 	
 	/**
 	 * Create the panel.
 	 */
-	public BuilderTitle(JFrame frame) {
+	public BuilderTitle(KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -41,6 +41,7 @@ public class BuilderTitle extends JPanel {
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(338, 305, 120, 45);
 		add(btnEdit);
+		btnEdit.addActionListener(new MoveToBuilderLevelListController(frame, this));
 
 		
 	}

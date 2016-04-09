@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -20,7 +19,7 @@ import java.awt.Color;
 
 public class NewLevel extends JPanel {
 
-	private JFrame frame;
+	private KabasujiFrame frame;
 	private JTextField txtInsertNameHere;
 	private JTextField textField;
 	private JTextField txtRows;
@@ -29,7 +28,7 @@ public class NewLevel extends JPanel {
 	/**
 	 * Create the frame.
 	 */
-	public NewLevel(JFrame frame) {
+	public NewLevel(KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));

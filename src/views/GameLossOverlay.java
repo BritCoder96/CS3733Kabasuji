@@ -3,7 +3,6 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -12,12 +11,12 @@ import javax.swing.JButton;
 
 public class GameLossOverlay extends JPanel {
 
-	private JFrame frame;
+	private KabasujiFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public GameLossOverlay(JFrame frame) {
+	public GameLossOverlay(KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(100, 100, 300, 250);
 		setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -3,7 +3,6 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -13,6 +12,8 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
+import controllers.NextLevelController;
+import controllers.PreviousLevelController;
 import main.KabasujiMain;
 
 import java.awt.Color;
@@ -21,12 +22,12 @@ import java.awt.event.ActionEvent;
 
 public class LevelSelect extends JPanel {
 	
-	JFrame frame;
+	KabasujiFrame frame;
 
 	/**
 	 * Create the frame.
 	 */
-	public LevelSelect(JFrame frame) {
+	public LevelSelect(KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -36,6 +37,7 @@ public class LevelSelect extends JPanel {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(0, 0, 120, 45);
 		add(btnBack);
+		btnBack.addActionListener(new controllers.GoBackOnePanelController(frame));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -67,10 +69,20 @@ public class LevelSelect extends JPanel {
 		btnPrevious.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPrevious.setBounds(51, 253, 120, 45);
 		add(btnPrevious);
+		btnPrevious.addActionListener(new PreviousLevelController(this));
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNext.setBounds(611, 253, 120, 45);
 		add(btnNext);
+		btnNext.addActionListener(new NextLevelController(this));
+	}
+	
+	public void moveToPreviousLevel() {
+		System.out.println("Previous Level");
+	}
+	
+	public void moveToNextLevel() {
+		System.out.println("Next Level");
 	}
 }

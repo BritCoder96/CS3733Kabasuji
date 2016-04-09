@@ -2,7 +2,6 @@ package views;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.event.ChangeEvent;
@@ -24,12 +23,12 @@ import javax.swing.JSpinner;
 
 public class Title extends JPanel {
 
-	JFrame frame;
+	KabasujiFrame frame;
 
 	/**
 	 * Create the application.
 	 */
-	public Title(JFrame frame) {
+	public Title(KabasujiFrame frame) {
 		this.frame = frame;
 		initialize();
 	}

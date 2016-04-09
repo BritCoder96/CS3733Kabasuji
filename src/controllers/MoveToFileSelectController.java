@@ -3,16 +3,15 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
 import views.FileSelect;
+import views.KabasujiFrame;
 import views.Title;
 
 public class MoveToFileSelectController implements ActionListener {
-	JFrame frame;
+	KabasujiFrame frame;
 	Title title;
 	
-	public MoveToFileSelectController(JFrame frame, Title t) {
+	public MoveToFileSelectController(KabasujiFrame frame, Title t) {
 		this.frame = frame;
 		this.title = t;
 	}
