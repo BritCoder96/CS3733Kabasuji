@@ -3,28 +3,24 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
-import views.BuilderTitle;
-import views.FileSelect;
 import views.KabasujiFrame;
 import views.LevelList;
-import views.Title;
+import views.NewLevel;
 
-public class MoveToBuilderLevelListController implements ActionListener {
+public class CreateNewLevelController implements ActionListener {
 	KabasujiFrame frame;
-	BuilderTitle buildertitle;
+	LevelList levellist;
 	
-	public MoveToBuilderLevelListController(KabasujiFrame frame, BuilderTitle btitle) {
+	public CreateNewLevelController(KabasujiFrame frame, LevelList llist) {
 		this.frame = frame;
-		this.buildertitle = btitle;
+		this.levellist = llist;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO add title to some kind of panel backstack for use in the back button controller
-		buildertitle.setVisible(false);
-		LevelList newPanel = new LevelList(frame);
+		levellist.setVisible(false);
+		NewLevel newPanel = new NewLevel(frame);
 		newPanel.setVisible(true);
 		frame.setContentPane(newPanel);
 	}
