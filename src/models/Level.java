@@ -7,13 +7,15 @@ public class Level {
 	HashSet<Piece> bullpen;
 	int levelNumber;
 	int numberOfStars;
+	LevelType lvlType;
 	ExtraLevelLogic levelLogic;
 	
-	Level (int levelNumber, int numberOfStars, Board board, HashSet<Piece> bullpen, ExtraLevelLogic levelLogic) {
+	public Level (int levelNumber, int numberOfStars, Board board, HashSet<Piece> bullpen, LevelType lvlType, ExtraLevelLogic levelLogic) {
 		this.levelNumber = levelNumber;
 		this.numberOfStars = numberOfStars;
 		this.board = board;
 		this.bullpen = bullpen;
+		this.lvlType = lvlType;
 		this.levelLogic = levelLogic;
 	}
 	
@@ -23,5 +25,13 @@ public class Level {
 	
 	public void flipPiece(Piece piece) {
 		
+	}
+	
+	public int getNumStars() {
+		return numberOfStars;
+	}
+	
+	public LevelType getLevelType() {
+		return lvlType;
 	}
 }

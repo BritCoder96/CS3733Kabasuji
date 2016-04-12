@@ -20,7 +20,7 @@ public class MoveToLevelSelectController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO add title to some kind of panel backstack for use in the back button controller
 		fileSelect.setVisible(false);
-		LevelSelect newPanel = new LevelSelect(frame);
+		LevelSelect newPanel = new LevelSelect(frame, LevelSelect.TEST_LEVELS);
 		newPanel.setVisible(true);
 		frame.setContentPane(newPanel);
 	}

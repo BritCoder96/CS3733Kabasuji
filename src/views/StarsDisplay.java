@@ -12,28 +12,52 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class StarsDisplay extends JPanel {
+	
+	JLabel star1;
+	JLabel star2;
+	JLabel star3;
 
 	/**
 	 * Create the panel.
 	 */
 	public StarsDisplay() {
+		this(2);
+	}
+	
+	public StarsDisplay(int numStarsFilled) {
 		setLayout(null);
 		
-		JLabel star1 = new JLabel("Star1");
+		star1 = new JLabel("Star1");
 		star1.setBounds(30, 0, 28, 28);
-		setFilledStarIcon(star1);
 		add(star1);
 		
-		JLabel star2 = new JLabel("Star2");
+		star2 = new JLabel("Star2");
 		star2.setBounds(79, 0, 28, 28);
-		setFilledStarIcon(star2);
 		add(star2);
 		
-		JLabel star3 = new JLabel("Star3");
+		star3 = new JLabel("Star3");
 		star3.setBounds(128, 0, 28, 28);
-		setEmptyStarIcon(star3);
 		add(star3);
-
+		
+		setNumStarsFilled(numStarsFilled);
+	}
+	
+	public void setNumStarsFilled(int numStarsFilled) {
+		if (numStarsFilled > 0) {
+			setFilledStarIcon(star1);
+		} else {
+			setEmptyStarIcon(star1);
+		}
+		if (numStarsFilled > 1) {
+			setFilledStarIcon(star2);
+		} else {
+			setEmptyStarIcon(star2);
+		}
+		if (numStarsFilled > 2) {
+			setFilledStarIcon(star3);
+		} else {
+			setEmptyStarIcon(star3);
+		}
 	}
 	
 	public static void setFilledStarIcon(JLabel star) {
