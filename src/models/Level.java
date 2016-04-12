@@ -7,14 +7,14 @@ public class Level {
 	HashSet<Piece> bullpen;
 	int levelNumber;
 	int numberOfStars;
-	ExtraLevelLogic extraLevelLogic;
+	ExtraLevelLogic levelLogic;
 	
-	Level (int levelNumber, int numberOfStars, Board board, HashSet<Piece> bullpen, ExtraLevelLogic extraLevelLogic) {
+	Level (int levelNumber, int numberOfStars, Board board, HashSet<Piece> bullpen, ExtraLevelLogic levelLogic) {
 		this.levelNumber = levelNumber;
 		this.numberOfStars = numberOfStars;
 		this.board = board;
 		this.bullpen = bullpen;
-		this.extraLevelLogic = extraLevelLogic;
+		this.levelLogic = levelLogic;
 	}
 	
 	public void rotatePiece(Piece piece) {

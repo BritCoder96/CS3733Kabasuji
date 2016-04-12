@@ -14,8 +14,6 @@ public class Square {
 		this.attachedSquares = new Square[4];
 	}
 	
-	
-	
 	public void attachToOtherSide (Square square, Directions direction) {
 		if (direction == Directions.NORTH) {
 			attachedSquares[0] = square;
