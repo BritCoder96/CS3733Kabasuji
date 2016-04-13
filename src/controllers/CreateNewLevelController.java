@@ -18,7 +18,6 @@ public class CreateNewLevelController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO add title to some kind of panel backstack for use in the back button controller
 		levellist.setVisible(false);
 		NewLevel newPanel = new NewLevel(frame);
 		newPanel.setVisible(true);

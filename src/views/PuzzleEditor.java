@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import controllers.GoBackOnePanelController;
 import main.KabasujiMain;
 
 import java.awt.Font;
@@ -109,6 +110,7 @@ public class PuzzleEditor extends JPanel {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(10, 10, 120, 45);
 		add(btnBack);
+		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
 		JButton btnSolveForMe = new JButton("Solve for Me");
 		btnSolveForMe.setFont(new Font("Tahoma", Font.PLAIN, 20));

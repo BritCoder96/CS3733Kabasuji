@@ -58,7 +58,37 @@ public class Title extends JPanel {
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnExit.setBounds(332, 418, 120, 45);
+		btnExit.setBounds(332, 302, 120, 45);
 		add(btnExit);
+		
+		JLabel lblEuphorbus = new JLabel("Euphorbus");
+		lblEuphorbus.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblEuphorbus.setBounds(315, 404, 155, 39);
+		add(lblEuphorbus);
+		
+		JLabel lblErikCerini = new JLabel("Erik Cerini");
+		lblErikCerini.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblErikCerini.setBounds(347, 499, 90, 27);
+		add(lblErikCerini);
+		
+		JLabel lblBryanBenson = new JLabel("Bryan Benson");
+		lblBryanBenson.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblBryanBenson.setBounds(331, 445, 123, 27);
+		add(lblBryanBenson);
+		
+		JLabel lblJonathanBerry = new JLabel("Jon Berry");
+		lblJonathanBerry.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblJonathanBerry.setBounds(351, 472, 83, 27);
+		add(lblJonathanBerry);
+		
+		JLabel lblBenHuchley = new JLabel("Ben Huchley");
+		lblBenHuchley.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblBenHuchley.setBounds(337, 526, 111, 27);
+		add(lblBenHuchley);
+		
+		JLabel lblStevenHuynh = new JLabel("Steven Huynh");
+		lblStevenHuynh.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblStevenHuynh.setBounds(329, 553, 127, 27);
+		add(lblStevenHuynh);
 	}
 }

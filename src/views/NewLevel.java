@@ -14,7 +14,12 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import controllers.GoBackOnePanelController;
+import controllers.MoveToEditorController;
+import controllers.NewLevelToLightningController;
+import controllers.NewLevelToPuzzleController;
+import controllers.NewLevelToReleaseController;
 import main.KabasujiMain;
+import models.LevelType;
 
 import java.awt.Color;
 
@@ -25,12 +30,24 @@ public class NewLevel extends JPanel {
 	private JTextField textField;
 	private JTextField txtRows;
 	private JTextField txtCols;
+	
+	public LevelType leveltype;
+	
+	private JLabel lblTimeLimit;
+	private JLabel lblMoveLimit;
+	private JButton btnPuzzle;
+	private JButton btnLightning;
+	private JButton btnRelease;
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public NewLevel(KabasujiFrame frame) {
 		this.frame = frame;
+		
+		leveltype = LevelType.PUZZLE;
+		
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
@@ -62,7 +79,7 @@ public class NewLevel extends JPanel {
 		panel.setLayout(null);
 		add(panel);
 		
-		JButton btnPuzzle = new JButton("Puzzle");
+		this.btnPuzzle = new JButton("Puzzle");
 		btnPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPuzzle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -70,18 +87,23 @@ public class NewLevel extends JPanel {
 		});
 		btnPuzzle.setBounds(30, 44, 153, 47);
 		panel.add(btnPuzzle);
-		
-		JButton btnLightning = new JButton("Lightning");
+		btnPuzzle.addActionListener(new NewLevelToPuzzleController(this));
+				
+		this.btnLightning = new JButton("Lightning");
 		btnLightning.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnLightning.setBounds(213, 44, 153, 47);
 		panel.add(btnLightning);
-		
-		JButton btnRelease = new JButton("Release");
+		btnLightning.addActionListener(new NewLevelToLightningController(this));
+
+				
+		this.btnRelease = new JButton("Release");
 		btnRelease.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRelease.setBounds(396, 44, 153, 47);
 		panel.add(btnRelease);
+		btnRelease.addActionListener(new NewLevelToReleaseController(this));
+
 		
-		JLabel lblMoveLimit = new JLabel("Move Limit:");
+		this.lblMoveLimit = new JLabel("Move Limit:");
 		lblMoveLimit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblMoveLimit.setBounds(159, 135, 119, 32);
 		panel.add(lblMoveLimit);
@@ -91,6 +113,11 @@ public class NewLevel extends JPanel {
 		textField.setBounds(290, 140, 116, 22);
 		panel.add(textField);
 		textField.setColumns(10);
+		
+		this.lblTimeLimit = new JLabel("Time Limit:");
+		lblTimeLimit.setBounds(159, 135, 119, 32);
+		lblTimeLimit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel.add(lblTimeLimit);
 		
 		JLabel lblGridSize = new JLabel("Grid Size: ");
 		lblGridSize.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -133,5 +160,46 @@ public class NewLevel extends JPanel {
 		btnGo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnGo.setBounds(405, 451, 118, 45);
 		add(btnGo);
+		btnGo.addActionListener(new MoveToEditorController(this, frame));
+		
+		updateOptionDisplay();
+	}
+	
+	public void setLevelType(LevelType ltype){
+		leveltype = ltype;
+	}
+	
+	public LevelType getLevelType(){
+		return leveltype;
+	}
+	
+	public void updateOptionDisplay(){
+		
+		lblTimeLimit.setVisible(false);
+		lblMoveLimit.setVisible(false);
+		textField.setVisible(false);
+		
+		btnPuzzle.setEnabled(true);
+		btnLightning.setEnabled(true);
+		btnRelease.setEnabled(true);
+		
+		switch(leveltype){
+			case PUZZLE:
+				lblMoveLimit.setVisible(true);
+				textField.setVisible(true);
+				btnPuzzle.setEnabled(false);
+				
+				break;
+			case LIGHTNING:
+				lblTimeLimit.setVisible(true);
+				textField.setVisible(true);
+				btnLightning.setEnabled(false);
+				
+				break;
+			case RELEASE:
+				btnRelease.setEnabled(false);
+				
+				break;
+		}
 	}
 }
