@@ -5954,7 +5954,7 @@
 											"width": 175,
 											"height": 13,
 											"autoResize": false,
-											"underline": false,
+											"underline": true,
 											"text": "~inst: Builder",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
@@ -19171,7 +19171,7 @@
 							},
 							"name": "inst",
 							"visibility": "package",
-							"isStatic": false,
+							"isStatic": true,
 							"isLeaf": false,
 							"type": {
 								"$ref": "AAAAAAFTs+x5FxFeKro="
