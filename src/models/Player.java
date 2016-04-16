@@ -6,7 +6,7 @@ public class Player {
 	// TODO: use some other Level array for the parameter
 	static final Player inst = new Player(new Level[15]);
 	
-	Level[] levels = new Level[15];
+	Level[] levels;
 	
 	Level currentLevel;
 	

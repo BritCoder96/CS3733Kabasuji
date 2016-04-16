@@ -1,7 +1,7 @@
 package models;
 
 public class Piece {
-	Square[] squares;
+	Square[] squares = new Square[6];
 	
 	public Piece(Square square0, Square square1, Square square2, Square square3, Square square4, Square square5) {
 		this.squares[0] = square0;
