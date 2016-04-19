@@ -1,16 +1,15 @@
 package models;
 
-public class ExtraLevelLogic {
+/**
+ * Additional methods for Levels of different types.
+ */
+public interface ExtraLevelLogic {
+	/** Decrements a counter such as a timer. */ 
+	public void decrementCounter();
 	
-	public ExtraLevelLogic () {
-		
-	}
-	
-	public void decrementCounter(){
-		
-	}
-	
-	public void resetAll() {
-		
-	}
+	/**
+	 * Resets a counter such as a timer.
+	 * Also resets other fields.
+	 */
+	public void resetAll();
 }
