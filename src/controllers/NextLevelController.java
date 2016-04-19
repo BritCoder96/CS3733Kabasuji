@@ -7,16 +7,32 @@ import java.util.ArrayList;
 import views.LevelSelect;
 import models.Level;
 
+/**
+ * Controller that brings the Player to an overview of the Level directly after
+ * the currently displayed Level on the Level Select screen
+ * 
+ * @author bhuchley
+ */
 public class NextLevelController implements ActionListener {
-	
 	LevelSelect levelSelect;
 	ArrayList<Level> levels;
 	
+	/**
+	 * The Constructor for a NextLevelController
+	 * 
+	 * @param ls - The level select screen being modified
+	 * @param levels - The list of levels in the current file
+	 */
 	public NextLevelController(LevelSelect ls, ArrayList<Level> levels) {
 		levelSelect = ls;
 		this.levels = levels;
 	}
 
+	/**
+	 * The function that is called when the button is pressed
+	 * 
+	 * @param e - the actual event that calls the function, i.e. the button press.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (levelSelect.getCurrentLevelIndex() < levels.size() - 1) {
