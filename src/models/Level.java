@@ -73,7 +73,20 @@ public class Level {
 	 * @param direction the direction to flip the piece.
 	 */
 	public void flipPiece(Piece piece, Directions direction) {
-		
+		if (direction == Directions.SOUTH || direction == Directions.NORTH ) {
+			for (Square square : piece.squares) {
+				Square temp = square.attachedSquares[0];
+				square.attachedSquares[0] = square.attachedSquares[2];
+				square.attachedSquares[2] = temp;
+			}
+		}
+		else {
+			for (Square square : piece.squares) {
+				Square temp = square.attachedSquares[1];
+				square.attachedSquares[1] = square.attachedSquares[3];
+				square.attachedSquares[3] = temp;
+			}
+		}
 	}
 	
 	/**
