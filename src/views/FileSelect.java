@@ -17,12 +17,18 @@ import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Screen that allows the user to select a save file. Not functional yet
+ * @author bhuchley
+ */
 public class FileSelect extends JPanel {
 	
+	/** The frame that the panel is shown in. */
 	KabasujiFrame frame;
 
 	/**
-	 * Create the frame.
+	 * Parse the saved files and show all of them, and also a New Game option.
+	 * @param frame the frame to show the screen in
 	 */
 	public FileSelect(KabasujiFrame frame) {
 		this.frame = frame;
@@ -85,6 +91,7 @@ public class FileSelect extends JPanel {
 		add(btnPlay);
 		btnPlay.addActionListener(new controllers.MoveToLevelSelectController(frame, this));
 		
+		// TODO this button should do something eventually
 		JButton btnNewButton = new JButton("Delete");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

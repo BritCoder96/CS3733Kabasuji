@@ -22,12 +22,18 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * The screen that shows the list of existing levels and allows you to select one to edit or delete.
+ * @author ejcerini
+ */
 public class LevelList extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
 	/**
-	 * Create the frame.
+	 * Get the existing levels and make the frame to show them.
+	 * @param frame the frame to show the screen in
 	 */
 	public LevelList(KabasujiFrame frame) {
 		this.frame = frame;

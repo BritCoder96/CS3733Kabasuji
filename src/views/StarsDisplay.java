@@ -11,19 +11,30 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+/**
+ * Widget that displays 3 star icons that can be either empty or filled.
+ * @author bhuchley
+ */
 public class StarsDisplay extends JPanel {
 	
+	/** The first star icon */
 	JLabel star1;
+	/** The second star icon */
 	JLabel star2;
+	/** The third star icon */
 	JLabel star3;
 
 	/**
-	 * Create the panel.
+	 * Create the widget, with 2 stars filled and 1 empty (only used for testing).
 	 */
 	public StarsDisplay() {
 		this(2);
 	}
 	
+	/** 
+	 * Create the widget with the specified number of stars filled.
+	 * @param numStarsFilled the number of stars that should start out filled
+	 */
 	public StarsDisplay(int numStarsFilled) {
 		setLayout(null);
 		
@@ -42,6 +53,10 @@ public class StarsDisplay extends JPanel {
 		setNumStarsFilled(numStarsFilled);
 	}
 	
+	/**
+	 * Redraws the widget with the specified number of stars filled.
+	 * @param numStarsFilled number of stars to fill
+	 */
 	public void setNumStarsFilled(int numStarsFilled) {
 		if (numStarsFilled > 0) {
 			setFilledStarIcon(star1);
@@ -60,6 +75,11 @@ public class StarsDisplay extends JPanel {
 		}
 	}
 	
+	/**
+	 * Sets the icon of the specified JLabel to a filled star.
+	 * Works on any JLabel, although it will look strange if its dimensions aren't the same as the star's.
+	 * @param star the label to give a star icon
+	 */
 	public static void setFilledStarIcon(JLabel star) {
 		BufferedImage img = null;
 		try {
@@ -73,6 +93,11 @@ public class StarsDisplay extends JPanel {
 		star.setIcon(icon);
 	}
 	
+	/**
+	 * Sets the icon of the specified JLabel to an empty star.
+	 * Works on any JLabel, although it will look strange if its dimensions aren't the same as the star's.
+	 * @param star the label to give a star icon
+	 */
 	public static void setEmptyStarIcon(JLabel star) {
 		BufferedImage img = null;
 		try {

@@ -11,12 +11,18 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Overlay that shown when the player wins.
+ * @author bhuchley
+ */
 public class GameWinOverlay extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
 	/**
-	 * Create the frame.
+	 * Create the overlay, getting the score of the completed level.
+	 * @param frame the frame to show the screen in
 	 */
 	public GameWinOverlay(KabasujiFrame frame) {
 		this.frame = frame;

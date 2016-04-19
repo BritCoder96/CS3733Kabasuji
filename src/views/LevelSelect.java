@@ -25,9 +25,13 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
+/**
+ * The screen from which the player can select which unlocked level to play.
+ * @author bhuchley
+ */
 public class LevelSelect extends JPanel {
 	
-	// TODO generic set of levels for testing this screen, the only thing that varies is number of stars and level type
+	/** TODO generic set of levels for testing this screen, the only thing that varies is number of stars and level type */
 	public static final ArrayList<Level> TEST_LEVELS = new ArrayList<Level>();
 	static {
 		TEST_LEVELS.add(new Level(0, 3, null, null, LevelType.PUZZLE, new ExtraLevelLogic()));
@@ -38,19 +42,29 @@ public class LevelSelect extends JPanel {
 		}
 	}
 	
+	/** The frame that the panel is shown in. */
 	KabasujiFrame frame;
 	
+	/** The panel that the info for the currently selected level is shown in. */
 	JPanel levelInfoPanel;
+	/** The panel showing the stars earned on the currently selected level. */
 	StarsDisplay starsDisplay;
+	/** The label showing which level is selected, by number. */
 	JLabel currentLevelIndexLabel;
+	/** The label showing what type of level the currently selected level is. */
 	JLabel levelTypeLabel;
+	/** The button that allows the user to play the currently selected level. */
 	JButton btnPlay;
 	
+	/** The levels available to select from. Should include the locked ones. */
 	ArrayList<Level> levels;
+	/** The index of the currently selected level in the list of levels. */
 	int currentLevelIndex;
 
 	/**
-	 * Create the frame.
+	 * Load the first level in the list and create the frame showing that level.
+	 * @param frame the frame to show the screen in
+	 * @param levels the list of levels in the game
 	 */
 	public LevelSelect(KabasujiFrame frame, ArrayList<Level> levels) {
 		this.frame = frame;
@@ -109,6 +123,9 @@ public class LevelSelect extends JPanel {
 		updateLevelDisplay();
 	}
 	
+	/** 
+	 * Load the level given by the current index and refresh the level info display. 
+	 */
 	private void updateLevelDisplay() {
 		Level currentLevel = levels.get(currentLevelIndex);
 		int numStars = currentLevel.getNumStars();

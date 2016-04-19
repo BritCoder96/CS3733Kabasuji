@@ -21,12 +21,18 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
 
+/**
+ * The splash screen for the game.
+ * @author bhuchley
+ */
 public class Title extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	KabasujiFrame frame;
 
 	/**
-	 * Create the application.
+	 * Create the screen.
+	 * @param frame the frame to show the screen in
 	 */
 	public Title(KabasujiFrame frame) {
 		this.frame = frame;
@@ -34,7 +40,7 @@ public class Title extends JPanel {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the contents of the screen.
 	 */
 	private void initialize() {
 		setBounds(KabasujiMain.windowSize);

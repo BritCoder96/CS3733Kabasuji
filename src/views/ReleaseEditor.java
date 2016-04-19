@@ -26,12 +26,18 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * The editor screen for release levels.
+ * @author bhuchley
+ */
 public class ReleaseEditor extends JPanel {
 
-	private KabasujiFrame frame;
+	/** The frame that the panel is shown in. */
+	 KabasujiFrame frame;
 
 	/**
-	 * Create the frame.
+	 * Create the screen, with a rectangular level and no numbers yet.
+	 * @param frame the frame to show the screen in
 	 */
 	public ReleaseEditor(KabasujiFrame frame) {
 		this.frame = frame;

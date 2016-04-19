@@ -16,12 +16,18 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
+/**
+ * The screen that allows the user to edit a lightning level.
+ * @author ejcerini
+ */
 public class LightningEditor extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
 	/**
-	 * Create the frame.
+	 * Create the frame with an rectangular lightning level of the specified size and time.
+	 * @param frame the frame to show the screen in
 	 */
 	public LightningEditor(KabasujiFrame frame) {
 		this.frame = frame;

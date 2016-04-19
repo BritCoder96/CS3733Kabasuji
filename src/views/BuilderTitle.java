@@ -14,12 +14,18 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * The splash screen for the builder.
+ * @author ejcerini
+ */
 public class BuilderTitle extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 	
 	/**
-	 * Create the panel.
+	 * Create the panel. It's just a bunch of labels and a play button.
+	 * @param frame the frame to show the screen in
 	 */
 	public BuilderTitle(KabasujiFrame frame) {
 		this.frame = frame;
