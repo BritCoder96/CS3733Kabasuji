@@ -19,12 +19,18 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * The editor screen for puzzle levels.
+ * @author ejcerini
+ */
 public class PuzzleEditor extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
 	/**
-	 * Create the frame.
+	 * Create the editor screen, with a rectangular level and no pieces.
+	 * @param frame the frame to show the screen in
 	 */
 	public PuzzleEditor(KabasujiFrame frame) {
 		this.frame = frame;

@@ -9,12 +9,18 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 
+/**
+ * Overlay that is shown when the game is paused.
+ * @author bhuchley
+ */
 public class PauseOverlay extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
 	/**
-	 * Create the frame.
+	 * Create the overlay.
+	 * @param frame the frame to show the screen in
 	 */
 	public PauseOverlay(KabasujiFrame frame) {
 		this.frame = frame;

@@ -24,12 +24,19 @@ import main.KabasujiMain;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 
+/**
+ * The screen that the game is shown in. At the moment basically just a mockup
+ * @author bhuchley
+ */
 public class GameScreen extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
 	/**
-	 * Create the frame.
+	 * Load the initial state of the level and set the game board and bullpen to it.
+	 * Presumably it should take a level as a parameter eventually but that doesn't work yet
+	 * @param frame the frame to show the screen in
 	 */
 	public GameScreen(KabasujiFrame frame) {
 		this.frame = frame;

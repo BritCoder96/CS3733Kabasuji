@@ -23,25 +23,42 @@ import models.LevelType;
 
 import java.awt.Color;
 
+/**
+ * The screen that allows the user to select a level type and size for a new level.
+ * Also allows the user to select the number of moves or amount of time for puzzle and lightning levels.
+ * @author ejcerini
+ */
 public class NewLevel extends JPanel {
 
+	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
+	/** The text field that the name of the level is typed in to. */
 	private JTextField txtInsertNameHere;
+	/** The text field used for either the number of moves or the time remaining. */
 	private JTextField textField;
+	/** The text field for the number of rows. */
 	private JTextField txtRows;
+	/** The text field for the number of columns. */
 	private JTextField txtCols;
 	
+	/** The type of the level at the moment. */
 	public LevelType leveltype;
 	
+	/** The label indicating that the moves/time field is used for time (when the level is lightning). */
 	private JLabel lblTimeLimit;
+	/** The label indicating that the moves/time field is used for moves (when the level is puzzle). */
 	private JLabel lblMoveLimit;
+	/** The button that changes the level type to puzzle. */
 	private JButton btnPuzzle;
+	/** The button that changes the level type to lightning. */
 	private JButton btnLightning;
+	/** The button that changes the level type to release. */
 	private JButton btnRelease;
 	
 
 	/**
-	 * Create the frame.
+	 * Create the new level screen, defaulting to puzzle.
+	 * @param frame the frame to show the screen in
 	 */
 	public NewLevel(KabasujiFrame frame) {
 		this.frame = frame;
@@ -165,14 +182,25 @@ public class NewLevel extends JPanel {
 		updateOptionDisplay();
 	}
 	
+	/**
+	 * Sets the current level type.
+	 * @param ltype the level type that is desired
+	 */
 	public void setLevelType(LevelType ltype){
 		leveltype = ltype;
 	}
 	
+	/**
+	 * Gets the current level type.
+	 * @return the current level type
+	 */
 	public LevelType getLevelType(){
 		return leveltype;
 	}
 	
+	/** 
+	 * Updates the screen to reflect which type of level is currently under construction.
+	 */
 	public void updateOptionDisplay(){
 		
 		lblTimeLimit.setVisible(false);
