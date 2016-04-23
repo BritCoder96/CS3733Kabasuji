@@ -8,8 +8,7 @@ public interface ExtraLevelLogic {
 	public void decrementCounter();
 	
 	/**
-	 * Resets a counter such as a timer.
-	 * Also resets other fields.
+	 * Resets a counter or counters such as a timer.
 	 */
 	public void resetAll();
 }
