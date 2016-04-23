@@ -35,11 +35,9 @@ public class LevelSelect extends JPanel {
 	public static final ArrayList<Level> TEST_LEVELS = new ArrayList<Level>();
 	static {
 		ExtraLevelLogic testLogic = new ExtraLevelLogic() {
-			@Override
 			public void resetAll() {
 				// TODO Auto-generated method stub
 			}
-			@Override
 			public void decrementCounter() {
 				// TODO Auto-generated method stub	
 			}

@@ -17,12 +17,10 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 		numberOfUnmarkedBoardSquares--;
 	}
 	
-	@Override
 	public void decrementCounter() {
 		remainingSeconds--;
 	}
-
-	@Override
+	
 	public void resetAll() {
 		numberOfUnmarkedBoardSquares = numberOfBoardSquares;
 		remainingSeconds = allottedSeconds;

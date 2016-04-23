@@ -17,12 +17,10 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 		remainingPieces--;
 	}
 	
-	@Override
 	public void decrementCounter() {
 		remainingMoves--;
 	}
 
-	@Override
 	public void resetAll() {
 		remainingPieces = allottedPieces;
 		remainingMoves = allottedMoves;

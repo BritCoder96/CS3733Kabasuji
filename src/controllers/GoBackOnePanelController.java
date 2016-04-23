@@ -28,7 +28,6 @@ public class GoBackOnePanelController implements ActionListener {
 	 * 
 	 * @param e - The performed action, i.e. the button press.
 	 */
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		frame.returnToLastContentPane();
 	}

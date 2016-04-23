@@ -36,7 +36,6 @@ public class CreateNewLevelController implements ActionListener {
 	 * 
 	 * @param e - The performed action, i.e. the button press.
 	 */
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		//Turn off the view for the level list
