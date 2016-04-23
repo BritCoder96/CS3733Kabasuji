@@ -44,7 +44,7 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	}
 	
 	/**
-	 * Resets all counter variables (unmarkedBoardSquares and remainingSeconds) to their original values.
+	 * Resets all counter fields (unmarkedBoardSquares and remainingSeconds) to their original values.
 	 */
 	public void resetAll() {
 		unmarkedBoardSquares = totalBoardSquares;

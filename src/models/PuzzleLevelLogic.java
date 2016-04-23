@@ -51,7 +51,7 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 	}
 
 	/**
-	 * Resets all counter variables (remainingPieces and remainingMoves) to their original values.
+	 * Resets all counter fields (remainingPieces and remainingMoves) to their original values.
 	 */
 	public void resetAll() {
 		remainingPieces = allottedPieces;
