@@ -36,7 +36,12 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 		remainingPieces--;
 	}
 	
-	// TODO: add incrementRemainingPieces()
+	/**
+	 * Increments the number of pieces that have not been placed on the level board by one.
+	 */
+	public void incrementRemainingPieces() {
+		remainingPieces++;
+	}
 	
 	/**
 	 * Decrements the number of moves remaining by one.
