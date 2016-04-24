@@ -46,15 +46,7 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 	/**
 	 * Decrements the number of moves remaining by one.
 	 */
-	public void decrementCounter() {
+	public void decrementRemainingMoves() {
 		remainingMoves--;
-	}
-
-	/**
-	 * Resets all counter fields (remainingPieces and remainingMoves) to their original values.
-	 */
-	public void resetAll() {
-		remainingPieces = allottedPieces;
-		remainingMoves = allottedMoves;
 	}
 }

@@ -39,15 +39,7 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	/**
 	 * Decrements the number of seconds remaining by one.
 	 */
-	public void decrementCounter() {
+	public void decrementRemainingSeconds() {
 		remainingSeconds--;
-	}
-	
-	/**
-	 * Resets all counter fields (unmarkedBoardSquares and remainingSeconds) to their original values.
-	 */
-	public void resetAll() {
-		unmarkedBoardSquares = totalBoardSquares;
-		remainingSeconds = allottedSeconds;
 	}
 }

@@ -20,14 +20,7 @@ public class ReleaseLevelLogic implements ExtraLevelLogic{
 	/**
 	 * Decrements the number of unreleased sets by one.
 	 */
-	public void decrementCounter() {
+	public void decrementNumberOfUnreleasedSets() {
 		numberOfUnreleasedSets--;
-	}
-
-	/**
-	 * Resets all counter fields (numberOfUnreleasedSets) to their original values.
-	 */
-	public void resetAll() {
-		numberOfUnreleasedSets = 3;
 	}
 }
