@@ -17,7 +17,7 @@ public class Square {
 	/** The coordinates of the square */
 	Coordinate coordinates;
 	/** The square logic of the square */
-	ExtraSquareLogic squareLogic;
+	ExtraBoardSquareLogic squareLogic;
 	
 	/**
 	 * The constructor for the square
@@ -27,7 +27,7 @@ public class Square {
 	 * @param squareLogic The coordinates of the square
 	 * @param coordinate The square logic of the square
 	 */
-	public Square (int color, SquareTypes type, ExtraSquareLogic squareLogic, Coordinate coordinate) {
+	public Square (int color, SquareTypes type, ExtraBoardSquareLogic squareLogic, Coordinate coordinate) {
 		this.color = color;
 		this.type = type;
 		this.squareLogic = squareLogic;
