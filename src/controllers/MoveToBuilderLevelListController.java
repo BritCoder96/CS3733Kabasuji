@@ -37,7 +37,6 @@ public class MoveToBuilderLevelListController implements ActionListener {
 	 * 
 	 * @param e - the actual event that calls the function, i.e. the button press.
 	 */
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Hide the previous screen.
 		buildertitle.setVisible(false);

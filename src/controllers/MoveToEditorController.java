@@ -40,7 +40,6 @@ public class MoveToEditorController implements ActionListener{
 	 * 
 	 * @param e - The performed action, i.e. the button press.
 	 */
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		//Receives the type of level the user wishes to create

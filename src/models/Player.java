@@ -29,24 +29,30 @@ public class Player {
 	 * 
 	 * @return The only instance of the Player class.
 	 */
-	public Player instance() {
+	public static Player instance() {
 		return inst;
 	}
 	
 	/**
-	 * Executes a Level that is determined from its associated number.
+	 * Gets a Level that is determined from its associated number.
 	 * 
 	 * @param levelNumber A number that is associated with a Level from levels.
 	 */
-	public void playLevel(int levelNumber) {
+	public Level getLevel(int levelNumber) {
 		for(Level i : levels) {
 			if(i.levelNumber == levelNumber){
 				currentLevel = i;
-				// TODO: more stuff?
-				return;
+				return currentLevel;
 			}
 		}
 		// must play a level that exists
 		throw new IllegalArgumentException();
+	}
+	
+	/**
+	 * Gets the Level that is currently being played.
+	 */
+	public Level getCurrentLevel() {
+		return currentLevel;
 	}
 }

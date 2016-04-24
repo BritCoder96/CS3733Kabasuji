@@ -30,7 +30,6 @@ public class NewLevelToLightningController implements ActionListener {
 	 * 
 	 * @param e - the event, i.e. the button press.
 	 */
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Change the level type to Lightning
 		nlevel.setLevelType(LevelType.LIGHTNING);
