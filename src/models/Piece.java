@@ -47,4 +47,49 @@ public class Piece {
 	public Square[] getSquares() {
 		return this.squares;
 	}
+	/**
+	 * Rotates the piece.
+	 * 
+	 * @param direction the direction to rotate the piece.
+	 */
+	public void rotatePiece(Directions direction) {
+		if (direction == Directions.SOUTH || direction == Directions.WEST) {
+			for (Square square : squares) {
+				Square last = square.attachedSquares[square.attachedSquares.length-1];
+				System.arraycopy(square.attachedSquares, 0, square.attachedSquares, 1, square.attachedSquares.length-1 );
+				squares[0] = last;
+			}
+		}
+	
+		else {
+			for (Square square : squares) {
+				Square start = squares[0];
+			    System.arraycopy(square.attachedSquares, 1, square.attachedSquares, 0, square.attachedSquares.length - 1);
+			    squares[square.attachedSquares.length - 1] = start;
+			}
+		}
+	}
+	
+	/**
+	 * Flip the piece.
+	 * 
+	 * @param piece The piece to flip.
+	 * @param direction the direction to flip the piece.
+	 */
+	public void flipPiece(Directions direction) {
+		if (direction == Directions.SOUTH || direction == Directions.NORTH ) {
+			for (Square square : squares) {
+				Square temp = square.attachedSquares[0];
+				square.attachedSquares[0] = square.attachedSquares[2];
+				square.attachedSquares[2] = temp;
+			}
+		}
+		else {
+			for (Square square : squares) {
+				Square temp = square.attachedSquares[1];
+				square.attachedSquares[1] = square.attachedSquares[3];
+				square.attachedSquares[3] = temp;
+			}
+		}
+	}
 }

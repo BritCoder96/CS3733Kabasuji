@@ -43,53 +43,6 @@ public class Level {
 	}
 	
 	/**
-	 * Rotates the piece.
-	 * 
-	 * @param piece The piece to rotate.
-	 * @param direction the direction to rotate the piece.
-	 */
-	public void rotatePiece(Piece piece, Directions direction) {
-		if (direction == Directions.SOUTH || direction == Directions.WEST) {
-			for (Square square : piece.squares) {
-				Square last = square.attachedSquares[square.attachedSquares.length-1];
-				System.arraycopy(square.attachedSquares, 0, square.attachedSquares, 1, square.attachedSquares.length-1 );
-				piece.squares[0] = last;
-			}
-		}
-	
-		else {
-			for (Square square : piece.squares) {
-				Square start = piece.squares[0];
-			    System.arraycopy(square.attachedSquares, 1, square.attachedSquares, 0, square.attachedSquares.length - 1);
-			    piece.squares[square.attachedSquares.length - 1] = start;
-			}
-		}
-	}
-	
-	/**
-	 * Flip the piece.
-	 * 
-	 * @param piece The piece to flip.
-	 * @param direction the direction to flip the piece.
-	 */
-	public void flipPiece(Piece piece, Directions direction) {
-		if (direction == Directions.SOUTH || direction == Directions.NORTH ) {
-			for (Square square : piece.squares) {
-				Square temp = square.attachedSquares[0];
-				square.attachedSquares[0] = square.attachedSquares[2];
-				square.attachedSquares[2] = temp;
-			}
-		}
-		else {
-			for (Square square : piece.squares) {
-				Square temp = square.attachedSquares[1];
-				square.attachedSquares[1] = square.attachedSquares[3];
-				square.attachedSquares[3] = temp;
-			}
-		}
-	}
-	
-	/**
 	 * Gets the number of stars that the player received in the level.
 	 * 
 	 * @return the number of stars that the player received in the level.
