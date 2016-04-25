@@ -27,4 +27,20 @@ public class ReleaseBoardSquareLogic extends ExtraBoardSquareLogic {
 		this.number = number;
 		this.colorOfNumber = colorOfNumber;
 	}
+	
+	/** Get the number of the square
+	 * 
+	 * @return the number of the square
+	 */
+	public int getNumber() {
+		return number;
+	}
+	
+	/** Get the number of the square
+	 * 
+	 * @return the number of the square
+	 */
+	public int getColorOfNumber() {
+		return colorOfNumber;
+	}
 }

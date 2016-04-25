@@ -9,9 +9,9 @@ package models;
 public class Coordinate {
 	
 	/** the row of the coordinate */
-	int row;
+	private int row;
 	/** the column of the coordinate */
-	int col;
+	private int col;
 	
 	/** 
 	 * Default Constructor
@@ -20,7 +20,23 @@ public class Coordinate {
 	 * @param col
 	 */
 	public Coordinate (int row, int col) {
-		this.row = row;
+		this.setRow(row);
+		this.setCol(col);
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
 		this.col = col;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
 	}
 }

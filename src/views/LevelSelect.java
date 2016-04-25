@@ -42,11 +42,11 @@ public class LevelSelect extends JPanel {
 				// TODO Auto-generated method stub	
 			}
 		};
-		TEST_LEVELS.add(new Level(0, 3, null, null, LevelType.PUZZLE, testLogic));
-		TEST_LEVELS.add(new Level(1, 2, null, null, LevelType.LIGHTNING, testLogic));
-		TEST_LEVELS.add(new Level(2, 1, null, null, LevelType.RELEASE, testLogic));
+		TEST_LEVELS.add(new Level(0, 3, null, null, LevelType.PUZZLE, testLogic, "Level 1"));
+		TEST_LEVELS.add(new Level(1, 2, null, null, LevelType.LIGHTNING, testLogic, "Level 2"));
+		TEST_LEVELS.add(new Level(2, 1, null, null, LevelType.RELEASE, testLogic, "Level 3"));
 		for (int i = 3; i < 15; i++) {
-			TEST_LEVELS.add(new Level(i, 0, null, null, LevelType.PUZZLE, testLogic));
+			TEST_LEVELS.add(new Level(i, 0, null, null, LevelType.PUZZLE, testLogic, "Level 4"));
 		}
 	}
 	

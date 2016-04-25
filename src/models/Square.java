@@ -15,9 +15,9 @@ public class Square {
 	/** The squares attached to this square */
 	public Square[] attachedSquares;
 	/** The coordinates of the square */
-	Coordinate coordinates;
+	private Coordinate coordinates;
 	/** The square logic of the square */
-	ExtraBoardSquareLogic squareLogic;
+	private ExtraBoardSquareLogic squareLogic;
 	
 	/**
 	 * The constructor for the square
@@ -30,8 +30,8 @@ public class Square {
 	public Square (int color, SquareTypes type, ExtraBoardSquareLogic squareLogic, Coordinate coordinate) {
 		this.color = color;
 		this.type = type;
-		this.squareLogic = squareLogic;
-		this.coordinates = coordinate;
+		this.setSquareLogic(squareLogic);
+		this.setCoordinates(coordinate);
 		this.attachedSquares = new Square[4];
 	}
 	
@@ -54,5 +54,21 @@ public class Square {
 		else {
 			attachedSquares[3] = square;
 		}
+	}
+
+	public Coordinate getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(Coordinate coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	public ExtraBoardSquareLogic getSquareLogic() {
+		return squareLogic;
+	}
+
+	public void setSquareLogic(ExtraBoardSquareLogic squareLogic) {
+		this.squareLogic = squareLogic;
 	}
 }

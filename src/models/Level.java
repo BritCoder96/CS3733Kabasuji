@@ -12,34 +12,38 @@ import java.util.HashSet;
  */
 public class Level {
 	/** The board for the level*/
-	Board board;
+	private Board board;
 	/** The bullpen for the level*/
-	HashSet<Piece> bullpen;
+	private HashSet<Piece> bullpen;
 	/** The number of the level*/
 	int levelNumber;
 	/** The number of stars the player received for this level.*/
-	int numberOfStars;
+	private int numberOfStars;
 	/** The type of the level: Lightning, Release, and Puzzle.*/
-	LevelType lvlType;
+	private LevelType lvlType;
 	/** The level logic for the level. */
-	ExtraLevelLogic levelLogic;
+	private ExtraLevelLogic levelLogic;
+	/** The level name for the level. */
+	String levelName;
 	
 	/**
 	 * 
 	 * @param levelNumber The number of the level
 	 * @param numberOfStar The number of stars the player received for this level.
 	 * @param board The board for the level
-	 * @param bullpen The bullpen for the level
+	 * @param bullpen The bullpen for the leve
 	 * @param lvlType The type of the level: Lightning, Release, and Puzzle
 	 * @param levelLogic The level logic for the level.
 	 */
-	public Level (int levelNumber, int numberOfStars, Board board, HashSet<Piece> bullpen, LevelType lvlType, ExtraLevelLogic levelLogic) {
+	public Level (int levelNumber, int numberOfStars, Board board, HashSet<Piece> bullpen, LevelType lvlType, ExtraLevelLogic levelLogic, String levelName ) {
 		this.levelNumber = levelNumber;
-		this.numberOfStars = numberOfStars;
-		this.board = board;
-		this.bullpen = bullpen;
-		this.lvlType = lvlType;
-		this.levelLogic = levelLogic;
+		this.setNumberOfStars(numberOfStars);
+		this.setBoard(board);
+		this.setBullpen(bullpen);
+		this.setLvlType(lvlType);
+		this.setLevelLogic(levelLogic);
+		this.levelName = levelName;
+
 	}
 	
 	/**
@@ -48,7 +52,7 @@ public class Level {
 	 * @return the number of stars that the player received in the level.
 	 */
 	public int getNumStars() {
-		return numberOfStars;
+		return getNumberOfStars();
 	}
 	
 	/**
@@ -57,6 +61,55 @@ public class Level {
 	 * @return the type of the level
 	 */
 	public LevelType getLevelType() {
+		return getLvlType();
+	}
+	
+	/**
+	 * Gets the name of the level.
+	 * 
+	 * @return the name of the level
+	 */
+	public String getLevelName() {
+		return levelName;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public LevelType getLvlType() {
 		return lvlType;
+	}
+
+	public void setLvlType(LevelType lvlType) {
+		this.lvlType = lvlType;
+	}
+
+	public HashSet<Piece> getBullpen() {
+		return bullpen;
+	}
+
+	public void setBullpen(HashSet<Piece> bullpen) {
+		this.bullpen = bullpen;
+	}
+
+	public ExtraLevelLogic getLevelLogic() {
+		return levelLogic;
+	}
+
+	public void setLevelLogic(ExtraLevelLogic levelLogic) {
+		this.levelLogic = levelLogic;
+	}
+
+	public int getNumberOfStars() {
+		return numberOfStars;
+	}
+
+	public void setNumberOfStars(int numberOfStars) {
+		this.numberOfStars = numberOfStars;
 	}
 }

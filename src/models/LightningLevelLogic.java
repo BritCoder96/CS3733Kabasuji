@@ -11,7 +11,7 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	int unmarkedBoardSquares;
 	
 	/** Number of seconds allotted to complete the level. */
-	int allottedSeconds;
+	private int allottedSeconds;
 	
 	/** Number of seconds remaining to complete the level. */
 	int remainingSeconds;
@@ -25,7 +25,7 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	public LightningLevelLogic(int numberOfBoardSquares, int allottedSeconds) {
 		this.totalBoardSquares = numberOfBoardSquares;
 		this.unmarkedBoardSquares = numberOfBoardSquares;
-		this.allottedSeconds = allottedSeconds;
+		this.setAllottedSeconds(allottedSeconds);
 		this.remainingSeconds = allottedSeconds;
 	}
 	
@@ -41,5 +41,13 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	 */
 	public void decrementRemainingSeconds() {
 		remainingSeconds--;
+	}
+
+	public int getAllottedSeconds() {
+		return allottedSeconds;
+	}
+
+	public void setAllottedSeconds(int allottedSeconds) {
+		this.allottedSeconds = allottedSeconds;
 	}
 }

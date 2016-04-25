@@ -41,8 +41,24 @@ public class Board {
 	 * 
 	 * @return the squares on the board
 	 */
-	HashSet<Square> getSquares() {
+	public HashSet<Square> getSquares() {
 		return squares;
+	}
+	
+	/** Get the number of the board's rows
+	 * 
+	 * @return the number of the board's rows on the board
+	 */
+	public int getRows() {
+		return rows;
+	}
+	
+	/** Get the number of the board's columns
+	 * 
+	 * @return the number of the board's columns on the board
+	 */
+	public int getColumns() {
+		return columns;
 	}
 	
 	/** 

@@ -10,8 +10,10 @@ package models;
  */
 public class Piece {
 	
-	/** The squares that make up the piece */
+	/** The squares that make up the piece. */
 	Square[] squares = new Square[6];
+	/** The number of the piece.*/
+	int pieceNumber;
 	
 	/**
 	 * The constructor for the piece that passes in all the squares for the piece separately.
@@ -22,8 +24,10 @@ public class Piece {
 	 * @param square3
 	 * @param square4
 	 * @param square5
+	 * 	@param pieceNumber
 	 */
-	public Piece(Square square0, Square square1, Square square2, Square square3, Square square4, Square square5) {
+	public Piece(Square square0, Square square1, Square square2, Square square3, Square square4, Square square5, int pieceNumber) {
+		this.pieceNumber = pieceNumber;
 		this.squares[0] = square0;
 		this.squares[1] = square1;
 		this.squares[2] = square2;
@@ -39,6 +43,16 @@ public class Piece {
 	public Piece(Square[] squares) {
 		this.squares = squares;
 	}
+	
+	/**
+	 * Gets the squares of the piece
+	 * 
+	 * @return the squares of the piece
+	 */
+	public int getPieceNumber() {
+		return this.pieceNumber;
+	}
+	
 	/**
 	 * Gets the squares of the piece
 	 * 
@@ -47,6 +61,7 @@ public class Piece {
 	public Square[] getSquares() {
 		return this.squares;
 	}
+	
 	/**
 	 * Rotates the piece.
 	 * 
