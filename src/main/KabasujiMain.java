@@ -22,5 +22,6 @@ public class KabasujiMain {
 		frame.setBounds(KabasujiMain.windowSize);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(new views.Title(frame));
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	}
 }

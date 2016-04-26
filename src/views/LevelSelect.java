@@ -34,19 +34,12 @@ public class LevelSelect extends JPanel {
 	/** TODO generic set of levels for testing this screen, the only thing that varies is number of stars and level type */
 	public static final ArrayList<Level> TEST_LEVELS = new ArrayList<Level>();
 	static {
-		ExtraLevelLogic testLogic = new ExtraLevelLogic() {
-			public void resetAll() {
-				// TODO Auto-generated method stub
-			}
-			public void decrementCounter() {
-				// TODO Auto-generated method stub	
-			}
-		};
-		TEST_LEVELS.add(new Level(0, 3, null, null, LevelType.PUZZLE, testLogic, "Level 1"));
-		TEST_LEVELS.add(new Level(1, 2, null, null, LevelType.LIGHTNING, testLogic, "Level 2"));
-		TEST_LEVELS.add(new Level(2, 1, null, null, LevelType.RELEASE, testLogic, "Level 3"));
+		ExtraLevelLogic testLogic = new ExtraLevelLogic() {};
+		TEST_LEVELS.add(new Level(1, 6, 0, 3, LevelType.PUZZLE, testLogic, "Level 1"));
+		TEST_LEVELS.add(new Level(2, 3, 1, 2, LevelType.LIGHTNING, testLogic, "Level 2"));
+		TEST_LEVELS.add(new Level(3, 2, 2, 1, LevelType.RELEASE, testLogic, "Level 3"));
 		for (int i = 3; i < 15; i++) {
-			TEST_LEVELS.add(new Level(i, 0, null, null, LevelType.PUZZLE, testLogic, "Level 4"));
+			TEST_LEVELS.add(new Level(6, 1, i, 0, LevelType.PUZZLE, testLogic, "Level " + (i + 1)));
 		}
 	}
 	

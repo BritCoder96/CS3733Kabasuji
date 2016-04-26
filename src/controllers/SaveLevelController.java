@@ -3,6 +3,10 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 import java.io.*;
 
 import models.Level;
@@ -102,6 +106,14 @@ public class SaveLevelController implements ActionListener {
 		
 		data = data + level.getNumberOfStars();
 		
+		Path file = Paths.get("~/" + level.getLevelName() + ".txt");
+		try {
+			Files.write(file, data.getBytes("UTF_8"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		/*
 		try {
 			File file = new File("./" + level.getLevelName() + ".txt");
 			if (!file.exists()) {	// TODO: checking for the file's existence is apparently redundant according to Java docs
@@ -116,5 +128,6 @@ public class SaveLevelController implements ActionListener {
 		catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		*/
 	}
 }
