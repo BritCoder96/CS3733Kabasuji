@@ -82,7 +82,7 @@ public class TestBoard extends TestCase {
 		squares3.add(square30);
 		squares3.add(square31);
 		squares3.add(square32);
-		Board board = new Board(3, 3);
+		Board board = new Board(3, 3, LevelType.PUZZLE);
 		board.setSquares(squares3);
 		board.setPieces(pieces);
 		

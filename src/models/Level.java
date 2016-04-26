@@ -14,7 +14,7 @@ public class Level {
 	/** The board for the level*/
 	private Board board;
 	/** The bullpen for the level*/
-	private HashSet<Piece> bullpen;
+	private Bullpen bullpen;
 	/** The number of the level*/
 	int levelNumber;
 	/** The number of stars the player received for this level.*/
@@ -27,19 +27,21 @@ public class Level {
 	String levelName;
 	
 	/**
+	 * Level constructor.
 	 * 
-	 * @param levelNumber The number of the level
-	 * @param numberOfStar The number of stars the player received for this level.
-	 * @param board The board for the level
-	 * @param bullpen The bullpen for the leve
-	 * @param lvlType The type of the level: Lightning, Release, and Puzzle
+	 * @param numberOfBoardRows	The initial number of rows in the board.
+	 * @param numberOfBoardCols	The initial number of columns in the board.
+	 * @param levelNumber The number of the level.
+	 * @param numberOfStars The number of stars the player received for this level.
+	 * @param lvlType The type of the level: Lightning, Release, and Puzzle.
 	 * @param levelLogic The level logic for the level.
+	 * @param levelName The name of the level.
 	 */
-	public Level (int levelNumber, int numberOfStars, Board board, HashSet<Piece> bullpen, LevelType lvlType, ExtraLevelLogic levelLogic, String levelName ) {
+	public Level (int numberOfBoardRows, int numberOfBoardCols, int levelNumber, int numberOfStars, LevelType lvlType, ExtraLevelLogic levelLogic, String levelName) {
 		this.levelNumber = levelNumber;
 		this.setNumberOfStars(numberOfStars);
-		this.setBoard(board);
-		this.setBullpen(bullpen);
+		this.setBoard(new Board(numberOfBoardRows, numberOfBoardCols, lvlType));
+		this.setBullpen(new Bullpen());
 		this.setLvlType(lvlType);
 		this.setLevelLogic(levelLogic);
 		this.levelName = levelName;
@@ -89,11 +91,11 @@ public class Level {
 		this.lvlType = lvlType;
 	}
 
-	public HashSet<Piece> getBullpen() {
+	public Bullpen getBullpen() {
 		return bullpen;
 	}
 
-	public void setBullpen(HashSet<Piece> bullpen) {
+	public void setBullpen(Bullpen bullpen) {
 		this.bullpen = bullpen;
 	}
 

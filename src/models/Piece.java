@@ -45,9 +45,9 @@ public class Piece {
 	}
 	
 	/**
-	 * Gets the squares of the piece
+	 * Gets the associated number of the piece
 	 * 
-	 * @return the squares of the piece
+	 * @return the associated number of the piece
 	 */
 	public int getPieceNumber() {
 		return this.pieceNumber;
