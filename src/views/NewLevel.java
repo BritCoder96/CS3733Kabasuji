@@ -27,6 +27,7 @@ import java.awt.Color;
  * The screen that allows the user to select a level type and size for a new level.
  * Also allows the user to select the number of moves or amount of time for puzzle and lightning levels.
  * @author ejcerini
+ * @author bhuchley
  */
 public class NewLevel extends JPanel {
 
@@ -71,10 +72,6 @@ public class NewLevel extends JPanel {
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnBack.setBounds(0, 0, 120, 45);
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
@@ -98,10 +95,6 @@ public class NewLevel extends JPanel {
 		
 		this.btnPuzzle = new JButton("Puzzle");
 		btnPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnPuzzle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnPuzzle.setBounds(30, 44, 153, 47);
 		panel.add(btnPuzzle);
 		btnPuzzle.addActionListener(new NewLevelToPuzzleController(this));
@@ -142,7 +135,7 @@ public class NewLevel extends JPanel {
 		add(lblGridSize);
 		
 		txtRows = new JTextField();
-		txtRows.setText("Rows");
+		txtRows.setText("6");
 		txtRows.setBounds(339, 368, 44, 22);
 		add(txtRows);
 		txtRows.setColumns(10);
@@ -162,7 +155,7 @@ public class NewLevel extends JPanel {
 		add(lblColumns);
 		
 		txtCols = new JTextField();
-		txtCols.setText("Cols");
+		txtCols.setText("6");
 		txtCols.setBounds(479, 368, 44, 22);
 		add(txtCols);
 		txtCols.setColumns(10);
@@ -229,5 +222,21 @@ public class NewLevel extends JPanel {
 				
 				break;
 		}
+	}
+	
+	public int getRows() {
+		return Integer.parseInt(txtRows.getText());
+	}
+	
+	public int getCols() {
+		return Integer.parseInt(txtCols.getText());
+	}
+	
+	public String getName() {
+		return txtInsertNameHere.getText();
+	}
+	
+	public int getTimeLimit() {
+		return Integer.parseInt(textField.getText());
 	}
 }

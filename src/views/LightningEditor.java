@@ -7,10 +7,18 @@ import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import controllers.DecrementTimeLimitController;
 import controllers.GoBackOnePanelController;
+import controllers.IncrementTimeLimitController;
+import controllers.SaveLevelController;
 import main.KabasujiMain;
+import models.Board;
+import models.Level;
+import models.LevelType;
+import models.LightningLevelLogic;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -24,47 +32,56 @@ public class LightningEditor extends JPanel {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
+	
+	/** The level under construction */
+	Level level;
+	/** The extra level logic for the level. The number of squares isn't used for saving the level,
+	 * so only the time limit is actually updated
+	 */
+	LightningLevelLogic ell;
+	/** The board for the level */
+	Board board;
+	
+	/** The label that shows the time limit */
+	JLabel timeLimitLabel;
 
 	/**
 	 * Create the frame with an rectangular lightning level of the specified size and time.
 	 * @param frame the frame to show the screen in
 	 */
-	public LightningEditor(KabasujiFrame frame) {
+	public LightningEditor(KabasujiFrame frame, String levelName, int boardRows, int boardCols, int timeLimit) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		JPanel gameboard = new JPanel();
+		board = new Board(boardRows, boardCols, LevelType.LIGHTNING);
+		board.fillWithSquares();
+		
+		ell = new LightningLevelLogic(boardRows * boardCols, timeLimit * 60);
+		
+		level = new Level(0, 0, board, null, LevelType.LIGHTNING, ell, levelName);
+		
+		JPanel gameboard = new EditorBoardView(this, board);
 		gameboard.setBounds(283, 94, 430, 430);
-		gameboard.setLayout(new GridLayout(6, 6, 0, 0));
-		// TODO hack add 36 JLabels with alternating backgrounds
-		Color lighterGray = new Color(230, 230, 230);
-		Color darkerGray = new Color(200, 200, 200);
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 6; j++) {
-				JLabel square = new JLabel();
-				Color squareBackground = (((i+j)%2)==0) ? lighterGray : darkerGray;
-				square.setOpaque(true);
-				square.setBackground(squareBackground);
-				gameboard.add(square);
-			}
-		}
 		add(gameboard);
 		
-		JLabel label = new JLabel("1:00");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label.setBounds(99, 141, 63, 34);
-		add(label);
+		timeLimitLabel = new JLabel(timeLimit + ":00");
+		timeLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		timeLimitLabel.setBounds(90, 141, 81, 34);
+		timeLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		add(timeLimitLabel);
 		
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
 		btnIncrease.setBounds(117, 117, 24, 24);
+		btnIncrease.addActionListener(new IncrementTimeLimitController(this, ell));
 		add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnDecrease.setBounds(117, 174, 24, 24);
+		btnDecrease.addActionListener(new DecrementTimeLimitController(this, ell));
 		add(btnDecrease);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -80,6 +97,7 @@ public class LightningEditor extends JPanel {
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSave.setBounds(69, 391, 120, 45);
+		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
 		JButton btnPublish = new JButton("Undo");
@@ -97,5 +115,16 @@ public class LightningEditor extends JPanel {
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(69, 516, 120, 45);
 		add(btnRedo);
+	}
+	
+	public void updateTimeLimit() {
+		int allottedSeconds = ell.getAllottedSeconds();
+		int minutes = allottedSeconds / 60;
+		int seconds = allottedSeconds % 60;
+		String connector = ":";
+		if (seconds < 10) {
+			connector = connector + "0";
+		}
+		timeLimitLabel.setText(minutes + connector + seconds);
 	}
 }

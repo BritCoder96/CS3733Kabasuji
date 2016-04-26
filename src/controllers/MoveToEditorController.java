@@ -62,7 +62,8 @@ public class MoveToEditorController implements ActionListener{
 			case LIGHTNING:
 				//Hide this screen
 				newlevel.setVisible(false);
-				LightningEditor lightningPanel = new LightningEditor(frame);
+				LightningEditor lightningPanel = new LightningEditor(frame, newlevel.getName(), 
+						newlevel.getRows(), newlevel.getCols(), newlevel.getTimeLimit());
 				lightningPanel.setVisible(true);
 				//Load the lightning editor
 				frame.setContentPane(lightningPanel);

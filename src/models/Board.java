@@ -2,11 +2,11 @@ package models;
 import java.util.HashSet;
 
 /**
- * The generic board for all levels.s
+ * The generic board for all levels.
  * 
  * @author bjbenson
  * @author jberry
- * 
+ * @author bhuchley
  */
 public class Board {
 	/** The number of rows in the board */
@@ -14,34 +14,51 @@ public class Board {
 	/** The number of columns in the board */
 	int columns;
 	/** The squares that make up the board */
-	HashSet<Square> squares;
+	Square[][] squares;
 	/** The pieces that are on the board */
 	HashSet<Piece> pieces;
+	/** The type of the level that the board is used for */
+	LevelType levelType;
 	
 	
 	/**
-	 * Board Constructor
+	 * Initialize a new Board with the given size and no squares
 	 * 
-	 * @param rows
-	 * @param columns
+	 * @param rows the number of rows for the board to have
+	 * @param columns the number of columns for the board to have
+	 * @param levelType the type of level the board will be used for (used for creating square logic)
 	 */
-	Board (int rows, int columns) {
+	public Board (int rows, int columns, LevelType levelType) {
 		this.rows = rows;
 		this.columns = columns;
+		squares = new Square[rows][columns];
+		this.levelType = levelType;
+	}
+	
+	/**
+	 * Create a new square for every position on the board, with the correct extra level logic,
+	 * and fill the board with them.
+	 */
+	public void fillWithSquares() {
+		for (int r = 0; r < rows; r++) {
+			for (int c = 0; c < columns; c++) {
+				addSquareAt(r, c);
+			}
+		}
 	}
 	
 	/** Get the board's pieces
 	 * 
 	 * @return the pieces on the board
 	 * */
-	HashSet<Piece> getPieces() {
+	public HashSet<Piece> getPieces() {
 		return pieces;
 	}
-	/** Get the board's squares
-	 * 
+	/** Get the board's squares, in the form of a 2d array. If there's no square at a certain point
+	 * the array will be null there
 	 * @return the squares on the board
 	 */
-	public HashSet<Square> getSquares() {
+	public Square[][] getSquares() {
 		return squares;
 	}
 	
@@ -62,12 +79,83 @@ public class Board {
 	}
 	
 	/** 
-	 * Set the board's squares
-	 * 
-	 * @param squares
+	 * Set the board's squares to the given 2d array of squares. If the array doesn't match
+	 * the size of the board, then it will fail and return false.
+	 * @param squares the array of squares to set the board's squares to
+	 * @return whether or not it worked
 	 */
-	void setSquares(HashSet<Square> squares) {
-		this.squares = squares;
+	public boolean setSquares(Square[][] squares) {
+		if (squares.length == rows && squares[0].length == columns) {
+			this.squares = squares;
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Generates a square with the correct square type and level logic and adds it at the given location
+	 * @param row the row to add the square at
+	 * @param col the column to add the square at
+	 * @return whether or not the square was added (which will be if the location was valid and unoccupied)
+	 */
+	public boolean addSquareAt(int row, int col) {
+		SquareTypes squareType;
+		ExtraBoardSquareLogic squareLogic;
+		switch(levelType) {
+		case PUZZLE:
+			squareType = SquareTypes.PUZZLEBOARDSQUARE;
+			squareLogic = new PuzzleBoardSquareLogic();
+			break;
+		case LIGHTNING:
+			squareType = SquareTypes.LIGHTNINGBOARDSQUARE;
+			squareLogic = new LightningBoardSquareLogic();
+			break;
+		case RELEASE:
+			squareType = SquareTypes.RELEASEBOARDSQUARE;
+			squareLogic = null; // Squares in release boards only have logic if they have numbers on them
+			break;
+		default:
+			// Should never happen
+			throw new IllegalStateException("Unknown levelType " + levelType);
+		}
+		Square s = new Square(0, squareType, squareLogic, new Coordinate(row, col));
+		return addSquare(s);
+	}
+	
+	/**
+	 * Add a square to the board, if that square is within the board's bounds and there is not
+	 * already another square there. If it's out of bounds or the spot is occupied, it will return false
+	 * and nothing will happen.
+	 * @param square the square to add
+	 * @return whether or not it worked
+	 */
+	public boolean addSquare(Square square) {
+		int row = square.getCoordinates().getRow();
+		int col = square.getCoordinates().getCol();
+		if (row >= 0 && col >= 0 && row < rows && col < columns) {
+			if (squares[row][col] == null) {
+				squares[row][col] = square;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Remove a square at the given coordinates from the board, if it exists. If a square was
+	 * removed this way, it returns true, otherwise it returns false and nothing happens.
+	 * @param row the row of the square to remove
+	 * @param col the column of the square to remove
+	 * @return 
+	 */
+	public boolean removeSquare(int row, int col) {
+		if (row >= 0 && col >= 0 && row < rows && col < columns) {
+			if (squares[row][col] != null) {
+				squares[row][col] = null;
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -75,7 +163,15 @@ public class Board {
 	 * 
 	 * @param pieces
 	 */
-	void setPieces(HashSet<Piece> pieces) {
+	public void setPieces(HashSet<Piece> pieces) {
 		this.pieces = pieces;
+	}
+	
+	/**
+	 * Gets the level type of the board
+	 * @return the level type the board is being used for
+	 */
+	public LevelType getLevelType() {
+		return levelType;
 	}
 }

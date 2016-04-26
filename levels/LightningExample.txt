@@ -1,0 +1,12 @@
+LightningExample
+LIGHTNING
+
+x,x,x,x,x,x
+x,x,x,x,x,x
+x,x, , ,x,x
+x,x, , ,x,x
+x,x,x,x,x,x
+x,x,x,x,x,x
+
+90
+0
