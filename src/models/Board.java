@@ -9,16 +9,17 @@ import java.util.HashSet;
  * @author bhuchley
  */
 public class Board {
-	/** The number of rows in the board */
+	/** The number of rows in the board. */
 	int rows;
-	/** The number of columns in the board */
+	/** The number of columns in the board. */
 	int columns;
 	/** The squares that make up the board */
 	Square[][] squares;
 	/** The pieces that are on the board */
-	HashSet<Piece> pieces;
-	/** The type of the level that the board is used for */
+	/** The type of level the board is associated with. */
 	LevelType levelType;
+	/** The pieces that are on the board. */
+	HashSet<Piece> pieces;
 	
 	
 	/**
@@ -47,7 +48,8 @@ public class Board {
 		}
 	}
 	
-	/** Get the board's pieces
+	/**
+	 * Get the board's pieces.
 	 * 
 	 * @return the pieces on the board
 	 * */
@@ -56,29 +58,31 @@ public class Board {
 	}
 	/** Get the board's squares, in the form of a 2d array. If there's no square at a certain point
 	 * the array will be null there
-	 * @return the squares on the board
+	 * @return The squares on the board.
 	 */
 	public Square[][] getSquares() {
 		return squares;
 	}
 	
-	/** Get the number of the board's rows
+	/**
+	 * Get the number of the board's rows.
 	 * 
-	 * @return the number of the board's rows on the board
+	 * @return The number of the board's rows on the board.
 	 */
 	public int getRows() {
 		return rows;
 	}
 	
-	/** Get the number of the board's columns
+	/**
+	 * Get the number of the board's columns.
 	 * 
-	 * @return the number of the board's columns on the board
+	 * @return The number of the board's columns on the board.
 	 */
 	public int getColumns() {
 		return columns;
 	}
 	
-	/** 
+	/**
 	 * Set the board's squares to the given 2d array of squares. If the array doesn't match
 	 * the size of the board, then it will fail and return false.
 	 * @param squares the array of squares to set the board's squares to
@@ -157,9 +161,10 @@ public class Board {
 		}
 		return false;
 	}
-	
+
+	// TODO: remove? pieces are added and removed one at a time
 	/**
-	 * Set the board's pieces
+	 * Set the board's pieces.
 	 * 
 	 * @param pieces
 	 */

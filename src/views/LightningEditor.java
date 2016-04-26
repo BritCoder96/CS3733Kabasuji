@@ -60,7 +60,8 @@ public class LightningEditor extends JPanel {
 		
 		ell = new LightningLevelLogic(boardRows * boardCols, timeLimit * 60);
 		
-		level = new Level(0, 0, board, null, LevelType.LIGHTNING, ell, levelName);
+		level = new Level(boardRows, boardCols, 0, 0, LevelType.LIGHTNING, ell, levelName);
+		level.setBoard(board);
 		
 		JPanel gameboard = new EditorBoardView(this, board);
 		gameboard.setBounds(283, 94, 430, 430);

@@ -3,12 +3,12 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static java.nio.file.StandardOpenOption.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
-import java.nio.file.*;
 import java.io.*;
 
-import views.LevelSelect;
 import models.Level;
 import models.LevelType;
 import models.LightningLevelLogic;
@@ -44,17 +44,14 @@ public class SaveLevelController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String data = serializeLevel(level);
+		File file = new File("levels/" + level.getLevelName() + ".txt");
 		try {
-			File file = new File("levels/" + level.getLevelName() + ".txt");
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(data);
 			bw.close();
 		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -100,7 +97,7 @@ public class SaveLevelController implements ActionListener {
 	    	data = data + ((LightningLevelLogic)level.getLevelLogic()).getAllottedSeconds();
 	    }
 	    else {
-	    	for (Piece piece : level.getBullpen()) {
+	    	for (Piece piece : level.getBullpen().getPieces()) {
 	    		data = data + piece.getPieceNumber() + ",";
 	    	}
 	    	if (level.getLevelType() == LevelType.PUZZLE) {
@@ -111,8 +108,7 @@ public class SaveLevelController implements ActionListener {
 	    
 	    data = data + "\n";
 	    data = data + level.getNumberOfStars();
-	    System.out.print(data + "\n");
+	    System.out.print(data);
 		return data;
 	}
-
 }
