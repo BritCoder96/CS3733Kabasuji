@@ -13,7 +13,7 @@ import models.SquareTypes;
 import models.Piece;
 
 /**
- * Controller that saves a level into a txt file in the builder
+ * Controller that loads a level from a txt file
  * 
  * @author bjbenson
  * @author bhuchley
@@ -23,7 +23,7 @@ public class LoadLevelController implements ActionListener {
 	File file;
 
 	/**
-	 * The Constructor for a SaveLevelController
+	 * The Constructor for a LoadLevelController
 	 * 
 	 * @param ls - The level select screen being modified
 	 * @param levels - The list of levels in the current file
@@ -34,7 +34,7 @@ public class LoadLevelController implements ActionListener {
 	
 	@Override
 	/**
-	 * Write the serialized level to a file
+	 * Read the serialized level from a file
 	 * 
 	 * @param e - the actual event that calls the function, i.e. the button press.
 	 */
@@ -56,7 +56,7 @@ public class LoadLevelController implements ActionListener {
 	}
 	
 	/**
-	 * Get the string representation of the level as it would be written in a text file
+	 * Parse the string representation of the level as it would be written in a text file
 	 * @param level the level to serialize
 	 * @return the serialized form of the level
 	 */
