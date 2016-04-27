@@ -185,7 +185,7 @@ public class Piece {
 				// Add squares for each x found this way
 				for (int index = 0; index < 6; index++) {
 					if (line1.charAt(index) == 'x') {
-						Square s = new Square(0, SquareTypes.PIECESQUARE, null, new Coordinate(0, index));
+						Square s = new Square(0, SquareTypes.PIECESQUARE, 0, index);
 						grid[0][index] = s;
 						if (index > 0 && grid[0][index-1] != null) {
 							Square left = grid[0][index-1];
@@ -195,7 +195,7 @@ public class Piece {
 						squares.add(s);
 					}
 					if (line2.charAt(index) == 'x') {
-						Square s = new Square(0, SquareTypes.PIECESQUARE, null, new Coordinate(1, index));
+						Square s = new Square(0, SquareTypes.PIECESQUARE, 1, index);
 						grid[1][index] = s;
 						if (index > 0 && grid[1][index-1] != null) {
 							Square left = grid[1][index-1];
@@ -210,7 +210,7 @@ public class Piece {
 						squares.add(s);
 					}
 					if (line3.charAt(index) == 'x') {
-						Square s = new Square(0, SquareTypes.PIECESQUARE, null, new Coordinate(2, index));
+						Square s = new Square(0, SquareTypes.PIECESQUARE, 2, index);
 						grid[2][index] = s;
 						if (index > 0 && grid[2][index-1] != null) {
 							Square left = grid[2][index-1];
