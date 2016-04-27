@@ -2,6 +2,8 @@ package models;
 
 import java.util.HashSet;
 
+import views.KabasujiFrame;
+
 /**
  * 
  * The main Level class represents a level and all of it's attributes. 
@@ -25,6 +27,8 @@ public class Level {
 	private ExtraLevelLogic levelLogic;
 	/** The level name for the level. */
 	String levelName;
+	/** The Frame for the game */
+	private KabasujiFrame kframe;
 	
 	/**
 	 * Level constructor.
@@ -37,7 +41,7 @@ public class Level {
 	 * @param levelLogic The level logic for the level.
 	 * @param levelName The name of the level.
 	 */
-	public Level (int numberOfBoardRows, int numberOfBoardCols, int levelNumber, int numberOfStars, LevelType lvlType, ExtraLevelLogic levelLogic, String levelName) {
+	public Level (int numberOfBoardRows, int numberOfBoardCols, int levelNumber, int numberOfStars, LevelType lvlType, ExtraLevelLogic levelLogic, String levelName, KabasujiFrame kframe) {
 		this.levelNumber = levelNumber;
 		this.setNumberOfStars(numberOfStars);
 		this.setBoard(new Board(numberOfBoardRows, numberOfBoardCols, lvlType));
@@ -45,6 +49,7 @@ public class Level {
 		this.setLvlType(lvlType);
 		this.setLevelLogic(levelLogic);
 		this.levelName = levelName;
+		this.kframe = kframe;
 
 	}
 	
@@ -113,5 +118,9 @@ public class Level {
 
 	public void setNumberOfStars(int numberOfStars) {
 		this.numberOfStars = numberOfStars;
+	}
+
+	public KabasujiFrame getFrame() {
+		return kframe;
 	}
 }

@@ -22,8 +22,9 @@ public class FlipPieceMove implements Move {
 		return bullpen.isMember(piece);
 	}
 
-	public void undo() {
+	public boolean undo() {
 		piece.flipPiece(Directions.WEST);
+		return true;
 	}
 
 }

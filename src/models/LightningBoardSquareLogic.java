@@ -16,8 +16,9 @@ public class LightningBoardSquareLogic extends ExtraBoardSquareLogic {
 	
 	/**
 	 * Indicates that the lightning board square has been marked.
+	 * @param b 
 	 */
-	public void setMarked() {
-		isMarked = true;
+	public void setMarked(boolean b) {
+		isMarked = b;
 	}
 }

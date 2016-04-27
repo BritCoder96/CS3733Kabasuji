@@ -70,7 +70,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener {
 		
 		ell = new PuzzleLevelLogic(0, moveLimit);
 		
-		level = new Level(boardRows, boardCols, 0, 0, LevelType.PUZZLE, ell, levelName);
+		level = new Level(boardRows, boardCols, 0, 0, LevelType.PUZZLE, ell, levelName, frame);
 		level.setBoard(board);
 		
 		JPanel gameboard = new EditorBoardView(this, board);

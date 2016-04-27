@@ -57,4 +57,8 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 	public void setAllottedMoves(int allottedMoves) {
 		this.allottedMoves = allottedMoves;
 	}
+
+	public void incrementRemainingMoves() {
+		remainingMoves++;
+	}
 }

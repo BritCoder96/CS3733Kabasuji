@@ -17,7 +17,7 @@ public abstract class ExtraBoardSquareLogic {
 	/**
 	 * Indicate that the board square is covered by a piece.
 	 */
-	public void setCovered() {
-		isCovered = true;
+	public void setCovered(boolean covered) {
+		isCovered = covered;
 	}
 }

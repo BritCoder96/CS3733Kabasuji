@@ -20,6 +20,7 @@ public interface Move {
 	
 	/**
 	 * Reverse executed changes.
+	 * @return 
 	 */
-	public void undo();
+	public boolean undo();
 }

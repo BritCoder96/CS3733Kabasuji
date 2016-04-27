@@ -48,6 +48,11 @@ public class Piece {
 		squares[4] = square4;
 		squares[5] = square5;
 	}
+	
+	public Piece(){
+		
+	}
+	
 	/**
 	 * The constructor for the piece that passes in all the squares for the piece together as an array.
 	 * 

@@ -8,7 +8,7 @@ import java.util.HashSet;
  * @author jberry
  * @author bhuchley
  */
-public class Board {
+public class Board extends PieceSet{
 	/** The number of rows in the board. */
 	int rows;
 	/** The number of columns in the board. */
@@ -30,6 +30,8 @@ public class Board {
 	 * @param levelType the type of level the board will be used for (used for creating square logic)
 	 */
 	public Board (int rows, int columns, LevelType levelType) {
+		super();
+		
 		this.rows = rows;
 		this.columns = columns;
 		squares = new Square[rows][columns];
@@ -167,6 +169,14 @@ public class Board {
 	 */
 	public void setPieces(HashSet<Piece> pieces) {
 		this.pieces = pieces;
+	}
+	
+	public boolean addPiece(Piece p){
+		return this.pieces.add(p);
+	}
+	
+	public boolean removePiece(Piece p){
+		return this.pieces.remove(p);
 	}
 	
 	/**

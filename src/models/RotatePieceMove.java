@@ -21,8 +21,9 @@ public class RotatePieceMove implements Move {
 		return bullpen.isMember(piece);
 	}
 
-	public void undo() {
+	public boolean undo() {
 		piece.rotatePiece(Directions.WEST);
+		return true;
 	}
 
 }

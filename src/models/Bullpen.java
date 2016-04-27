@@ -8,11 +8,13 @@ import java.util.ArrayList;
  * @author sthuynh
  *
  */
-public class Bullpen {
+public class Bullpen extends PieceSet {
 	ArrayList<Piece> pieces;	// TODO: change date structure; capacity may increase above 35 as pieces are added to the end of the ArrayList
 	int numberOfPieces;
 	
 	public Bullpen() {
+		super();
+		
 		pieces = new ArrayList<Piece>(35);
 		numberOfPieces = 0;
 	}
