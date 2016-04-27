@@ -74,7 +74,8 @@ public class MoveToEditorController implements ActionListener{
 			case RELEASE:
 				//Hide this screen
 				newlevel.setVisible(false);
-				ReleaseEditor releasePanel = new ReleaseEditor(frame);
+				ReleaseEditor releasePanel = new ReleaseEditor(frame, newlevel.getName(), 
+						newlevel.getRows(), newlevel.getCols());
 				releasePanel.setVisible(true);
 				//Load the release editor.
 				frame.setContentPane(releasePanel);

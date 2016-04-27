@@ -10,6 +10,7 @@ import models.Level;
 import models.LevelType;
 import models.Square;
 import models.SquareTypes;
+import views.KabasujiFrame;
 import models.Piece;
 
 /**
@@ -21,6 +22,7 @@ import models.Piece;
  */	
 public class LoadLevelController implements ActionListener {
 	File file;
+	KabasujiFrame kframe;
 
 	/**
 	 * The Constructor for a LoadLevelController
@@ -28,8 +30,9 @@ public class LoadLevelController implements ActionListener {
 	 * @param ls - The level select screen being modified
 	 * @param levels - The list of levels in the current file
 	 */
-	public LoadLevelController(File file) {
+	public LoadLevelController(File file, KabasujiFrame kframe) {
 		this.file = file;
+		this.kframe = kframe;
 	}
 	
 	@Override
@@ -128,8 +131,8 @@ public class LoadLevelController implements ActionListener {
         // get number of stars
         numberOfStars = Integer.parseInt(dataTokens[0]);
 
-        // TODO: make bullpen, conditionals for level type
-		return new Level(numberOfBoardCols, numberOfBoardCols, levelNumber, numberOfStars, lvlType, new ExtraLevelLogic, levelName);
+        // TODO: make bullpen, conditionals for level type, find a way to pass along the kframe? (You need it to actually play the game)
+		return new Level(numberOfBoardCols, numberOfBoardCols, levelNumber, numberOfStars, lvlType, new ExtraLevelLogic, levelName, kframe);
 	}
 
     static String concatArray(String[] array, int startingIndex) {

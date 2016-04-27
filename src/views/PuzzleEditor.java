@@ -87,35 +87,39 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		
 		moveLimitLabel = new JLabel(String.valueOf(moveLimit));
 		moveLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		moveLimitLabel.setBounds(10, 445, 44, 24);
+		moveLimitLabel.setBounds(10, 220, 44, 24);
 		moveLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(moveLimitLabel);
 		
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
-		btnIncrease.setBounds(20, 420, 24, 24);
+		btnIncrease.setBounds(20, 195, 24, 24);
 		btnIncrease.addActionListener(new IncrementMoveLimitController(this, this));
 		add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
-		btnDecrease.setBounds(20, 472, 24, 24);
+		btnDecrease.setBounds(20, 247, 24, 24);
 		btnDecrease.addActionListener(new DecrementMoveLimitController(this, this));
 		add(btnDecrease);
 		
-		JButton btnDelete = new JButton("Delete");
-		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDelete.setBounds(30, 551, 120, 45);
-		add(btnDelete);
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnEdit.setBounds(60, 472, 120, 45);
+		add(btnEdit);
 		
-		JButton btnDraw = new JButton("Draw");
-		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDraw.setBounds(180, 551, 120, 45);
-		add(btnDraw);
+		JButton btnMove = new JButton("Move");
+		btnMove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnMove.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnMove.setBounds(192, 520, 120, 45);
+		add(btnMove);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSave.setBounds(330, 551, 120, 45);
+		btnSave.setBounds(456, 472, 120, 45);
 		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
@@ -123,7 +127,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnUndo.addActionListener(undoController);
-		btnUndo.setBounds(480, 551, 120, 45);
+		btnUndo.setBounds(324, 472, 120, 45);
 		add(btnUndo);
 		
 		JButton btnBack = new JButton("Back");
@@ -132,20 +136,15 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
-		JButton btnSolveForMe = new JButton("Solve for Me");
-		btnSolveForMe.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSolveForMe.setBounds(71, 436, 159, 46);
-		add(btnSolveForMe);
-		
 		JButton btnAddPiece = new JButton("Add Piece");
 		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnAddPiece.setBounds(257, 436, 136, 46);
+		btnAddPiece.setBounds(192, 472, 120, 46);
 		btnAddPiece.addActionListener(new AddPieceController(frame, this, this));
 		add(btnAddPiece);
 		
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnRedo.setBounds(630, 551, 120, 45);
+		btnRedo.setBounds(324, 520, 120, 45);
 		add(btnRedo);
 	}
 	
