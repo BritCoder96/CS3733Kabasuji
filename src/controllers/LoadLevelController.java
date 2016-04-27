@@ -61,16 +61,20 @@ public class LoadLevelController implements ActionListener {
 	 * @return the serialized form of the level
 	 */
 	public static Level parseData(String data) {
+        // TODO: you have to recombine tokens before spliting them
 		// get level name and type
 		String[] dataTokens = data.split("\n");
 		String levelName = dataTokens[0];
 		String lvlType = dataTokens[1];
 		
 		// other variables that we maybe need
-		
+		int allottedSeconds;
+        int[] pieceNumbers;
+        int allottedMoves;
+        int numberOfStars;
 		
 		// keep relevant data
-		data = dataTokens[3];
+		data = concatArray(dataTokens, 3);
 		dataTokens = data.split("\n");
 		
 		// get number of board rows, columns, and squares
@@ -93,10 +97,45 @@ public class LoadLevelController implements ActionListener {
 		}
 		
 		// keep relevant data
-		data = dataTokens[numberOfBoardRows + 1];
+		data = concatArray(dataTokens, numberOfBoardRows + 1);
 		dataTokens = data.split("\n");
 
-		// TODO: detect number of stars, pieces, extra level logic depending on level type
-		return new Level(numberOfBoardCols, numberOfBoardCols, numberOfBoardCols, numberOfBoardCols, null, null, lvlType);
+        // get allotted seconds if lighting level
+        if (lvlType.equals("LIGHTNING")) {
+            allottedSeconds = Integer.parseInt(dataTokens[0]);
+        }
+        else { // get pieces
+            String[] pieceEntries = dataTokens[0].split(",");
+            pieceNumbers = new int[pieceEntries.length];
+            for (int i = 0; i < pieceEntries.length; i++) {
+                pieceNumbers[i] = Integer.parseInt(pieceEntries[i]);
+            }
+        }
+
+		// keep relevant data
+		data = concatArray(dataTokens, 1);
+		dataTokens = data.split("\n");
+
+        // get alotted moves if necessary
+        if (lvlType.equals("PUZZLE")) {
+            allottedMoves = Integer.parseInt(dataTokens[0]);
+        }
+
+		// keep relevant data
+		data = concatArray(dataTokens, 1);
+		dataTokens = data.split("\n");
+
+        // get number of stars
+        numberOfStars = Integer.parseInt(dataTokens[0]);
+
+        // TODO: make bullpen, conditionals for level type
+		return new Level(numberOfBoardCols, numberOfBoardCols, levelNumber, numberOfStars, lvlType, new ExtraLevelLogic, levelName);
 	}
+
+    static String concatArray(String[] array, int startingIndex) {
+        for (; startingIndex < array.length - 1; startingIndex++) {
+            array[startingIndex].concat(array[startingIndex + 1]);
+        }
+        return array[array.length - 1];
+    }
 }
