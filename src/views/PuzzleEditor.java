@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 
 import controllers.AddPieceController;
 import controllers.DecrementMoveLimitController;
+import controllers.EditorLevelUndoController;
 import controllers.GoBackOnePanelController;
 import controllers.IncrementMoveLimitController;
 import controllers.SaveLevelController;
@@ -36,7 +37,7 @@ import java.awt.event.ActionEvent;
  * @author ejcerini
  * @author bhuchley
  */
-public class PuzzleEditor extends JPanel implements AddPieceListener {
+public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
@@ -49,6 +50,10 @@ public class PuzzleEditor extends JPanel implements AddPieceListener {
 	PuzzleLevelLogic ell;
 	/** The board for the level */
 	Board board;
+	/** The panel that shows the board */
+	EditorBoardView gameboard;
+	/** The undo controller, which maintains the back stack of levels */
+	EditorLevelUndoController undoController; 
 	
 	/** The label showing the move limit */
 	JLabel moveLimitLabel;
@@ -73,7 +78,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener {
 		level = new Level(boardRows, boardCols, 0, 0, LevelType.PUZZLE, ell, levelName);
 		level.setBoard(board);
 		
-		JPanel gameboard = new EditorBoardView(this, board);
+		gameboard = new EditorBoardView(this, board, this);
 		gameboard.setBounds(60, 71, 325, 325);
 		add(gameboard);
 		
@@ -89,13 +94,13 @@ public class PuzzleEditor extends JPanel implements AddPieceListener {
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
 		btnIncrease.setBounds(20, 420, 24, 24);
-		btnIncrease.addActionListener(new IncrementMoveLimitController(this, ell));
+		btnIncrease.addActionListener(new IncrementMoveLimitController(this, this));
 		add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnDecrease.setBounds(20, 472, 24, 24);
-		btnDecrease.addActionListener(new DecrementMoveLimitController(this, ell));
+		btnDecrease.addActionListener(new DecrementMoveLimitController(this, this));
 		add(btnDecrease);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -114,14 +119,12 @@ public class PuzzleEditor extends JPanel implements AddPieceListener {
 		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
-		JButton btnPublish = new JButton("Undo");
-		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnPublish.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnPublish.setBounds(480, 551, 120, 45);
-		add(btnPublish);
+		undoController = new EditorLevelUndoController(this);
+		JButton btnUndo = new JButton("Undo");
+		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnUndo.addActionListener(undoController);
+		btnUndo.setBounds(480, 551, 120, 45);
+		add(btnUndo);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -145,6 +148,14 @@ public class PuzzleEditor extends JPanel implements AddPieceListener {
 		btnRedo.setBounds(630, 551, 120, 45);
 		add(btnRedo);
 	}
+	
+	/**
+	 * Gets the level currently under construction in the editor.
+	 * @return the level under construction
+	 */
+	public Level getLevel() {
+		return level;
+	}
 
 	@Override
 	public void addPiece(Piece p) {
@@ -155,8 +166,33 @@ public class PuzzleEditor extends JPanel implements AddPieceListener {
 	/**
 	 * Update the move limit display
 	 */
-	public void updateMoveLimit() {
+	public void updateMoveLimitDisplay() {
 		moveLimitLabel.setText(String.valueOf(ell.getAllottedMoves()));
+	}
+
+	@Override
+	public void onLevelChanged() {
+		pushBackStack();
+	}
+	
+	/**
+	 * Pushes a clone of the current level to the back stack.
+	 */
+	private void pushBackStack() {
+		undoController.pushLevel(level);
+	}
+
+	@Override
+	public void setLevel(Level level) {
+		this.level = level;
+		ell = (PuzzleLevelLogic) level.getLevelLogic();
+		board = level.getBoard();
+		updateMoveLimitDisplay();
+		gameboard.setVisibleBoard(board);
+		bullpen.clearPieces();
+		for (Piece p : level.getBullpen().getPieces()) {
+			bullpen.addPiece(p);
+		}
 	}
 
 }

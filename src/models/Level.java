@@ -114,4 +114,42 @@ public class Level {
 	public void setNumberOfStars(int numberOfStars) {
 		this.numberOfStars = numberOfStars;
 	}
+	
+	/**
+	 * Make a copy of the level, with entirely new objects, that is unrelated to the original.
+	 * @return a level that is identical to, but completely unrelated to, this one
+	 */
+	public Level deepClone() {
+		// Copy the level logic
+		ExtraLevelLogic lvlLogicCopy;
+		switch(lvlType) {
+		case PUZZLE:
+			PuzzleLevelLogic ellp = (PuzzleLevelLogic) levelLogic;
+			lvlLogicCopy = new PuzzleLevelLogic(ellp.getAllottedPieces(), ellp.getAllottedMoves());
+			break;
+		case LIGHTNING:
+			LightningLevelLogic elll = (LightningLevelLogic) levelLogic;
+			lvlLogicCopy = new LightningLevelLogic(elll.getTotalSquares(), elll.getAllottedSeconds());
+			break;
+		case RELEASE:
+			lvlLogicCopy = new ReleaseLevelLogic();
+			break;
+		default:
+			throw new IllegalStateException("level has unknown type " + lvlType);
+		}
+		Level copy = new Level(board.getRows(), board.getColumns(), levelNumber, numberOfStars, lvlType, lvlLogicCopy, levelName);
+		// Copy the board and the bullpen into the copy as well
+		for (Piece p : bullpen.getPieces()) {
+			copy.getBullpen().addPiece(p);
+		}
+		// To be totally safe, add each square individually where there's a square in the existing board
+		for (int r = 0; r < board.getRows(); r++) {
+			for (int c = 0; c < board.getColumns(); c++) {
+				if (board.getSquares()[r][c] != null) {
+					copy.getBoard().addSquareAt(r, c);
+				}
+			}
+		}
+		return copy;
+	}
 }

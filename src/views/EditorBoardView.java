@@ -25,11 +25,12 @@ public class EditorBoardView extends JPanel {
 	int cols;
 	JPanel parent;
 	JLabel[][] squares;
+	ToggleBoardSquareController[][] squareControllers;
 
 	/**
 	 * Create the view and add the controllers to each square in it.
 	 */
-	public EditorBoardView(JPanel parent, Board initialBoard) {
+	public EditorBoardView(JPanel parent, Board initialBoard, LevelModifiedListener listener) {
 		// Make a whole bunch of squares and store them in an array, and set visibility
 		// depending on whether or not the square exists.
 		// Then add controllers to all of them. If the parent is not release, use generic controller.
@@ -39,6 +40,7 @@ public class EditorBoardView extends JPanel {
 		cols = initialBoard.getColumns();
 		setLayout(new GridLayout(rows, cols, 0, 0));
 		squares = new JLabel[rows][cols];
+		squareControllers = new ToggleBoardSquareController[rows][cols];
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				JLabel square = new JLabel();
@@ -48,11 +50,21 @@ public class EditorBoardView extends JPanel {
 				}
 				square.setBackground(squareBackground);
 				// Set on click listener to toggle the square
-				square.addMouseListener(new ToggleBoardSquareController(square, initialBoard, r, c));
+				squareControllers[r][c] = new ToggleBoardSquareController(square, initialBoard, r, c, listener);
+				square.addMouseListener(squareControllers[r][c]);
 				squares[r][c] = square;
 				add(square);
 			}
 		}
 	}
 
+	public void setVisibleBoard(Board board) {
+		for (int r = 0; r < rows; r++) {
+			for (int c = 0; c < cols; c++) {
+				squares[r][c].setOpaque(board.getSquares()[r][c] != null);
+				squares[r][c].repaint();
+				squareControllers[r][c].setBoard(board);
+			}
+		}
+	}
 }

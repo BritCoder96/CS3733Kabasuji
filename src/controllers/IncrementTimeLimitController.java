@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import models.LightningLevelLogic;
+import views.LevelModifiedListener;
 import views.LightningEditor;
 
 /**
@@ -15,16 +16,16 @@ public class IncrementTimeLimitController implements ActionListener {
 	
 	/** The editor that this is being used from */
 	LightningEditor levelEditor;
-	/** The lightning level logic keeping track of the time being updated */
-	LightningLevelLogic ell;
+	/** The listener that detects if the level was changed */
+	LevelModifiedListener listener;
 	
 	/**
 	 * Make a new IncrementTimeLimitController with the given level editor.
 	 * @param editor the level editor containing the time limit to change
 	 */
-	public IncrementTimeLimitController(LightningEditor editor, LightningLevelLogic ell) {
+	public IncrementTimeLimitController(LightningEditor editor, LevelModifiedListener listener) {
 		levelEditor = editor;
-		this.ell = ell;
+		this.listener = listener;
 	}
 
 	/** 
@@ -32,8 +33,10 @@ public class IncrementTimeLimitController implements ActionListener {
 	 * @param arg0 the action event that triggered this
 	 */
 	public void actionPerformed(ActionEvent arg0) {
+		listener.onLevelChanged();
+		LightningLevelLogic ell = (LightningLevelLogic) levelEditor.getLevel().getLevelLogic();
 		ell.setAllottedSeconds(ell.getAllottedSeconds() + 1);
-		levelEditor.updateTimeLimit();
+		levelEditor.updateTimeLimitDisplay();
 	}
 
 }

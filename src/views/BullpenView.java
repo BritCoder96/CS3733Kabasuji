@@ -81,4 +81,18 @@ public class BullpenView extends JPanel {
 		scrollingPanel.setPreferredSize(new Dimension(scrollingPanel.getWidth(), scrollingPanel.getHeight()));
 		return pv;
 	}
+	
+	/**
+	 * Clear the bullpen view.
+	 */
+	public void clearPieces() {
+		for (PieceView pv : pieceViews) {
+			scrollingPanel.remove(pv);
+		}
+		pieceViews.clear();
+		pieces.clear();
+		// Set the height of the scrolling panel to 0
+		scrollingPanel.setBounds(scrollingPanel.getX(), scrollingPanel.getY(), scrollingPanel.getWidth(), 0);
+		scrollingPanel.setPreferredSize(new Dimension(scrollingPanel.getWidth(), 0));
+	}
 }

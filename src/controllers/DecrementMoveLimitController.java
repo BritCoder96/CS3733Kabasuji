@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import models.LightningLevelLogic;
 import models.PuzzleLevelLogic;
+import views.LevelModifiedListener;
 import views.LightningEditor;
 import views.PuzzleEditor;
 
@@ -17,16 +18,16 @@ public class DecrementMoveLimitController implements ActionListener {
 	
 	/** The editor that this is being used from */
 	PuzzleEditor levelEditor;
-	/** The puzzle level logic keeping track of the move limit being updated */
-	PuzzleLevelLogic ell;
+	/** The listener that detects if the level was changed */
+	LevelModifiedListener listener;
 	
 	/**
 	 * Make a new DecrementMoveLimitController with the given level editor.
 	 * @param editor the level editor containing the move limit to change
 	 */
-	public DecrementMoveLimitController(PuzzleEditor editor, PuzzleLevelLogic ell) {
+	public DecrementMoveLimitController(PuzzleEditor editor, LevelModifiedListener listener) {
 		levelEditor = editor;
-		this.ell = ell;
+		this.listener = listener;
 	}
 
 	/** 
@@ -34,10 +35,12 @@ public class DecrementMoveLimitController implements ActionListener {
 	 * @param arg0 the action event that triggered this
 	 */
 	public void actionPerformed(ActionEvent arg0) {
+		PuzzleLevelLogic ell = (PuzzleLevelLogic) levelEditor.getLevel().getLevelLogic();
 		if (ell.getAllottedMoves() > 1) {
+			listener.onLevelChanged();
 			ell.setAllottedMoves(ell.getAllottedMoves() - 1);
+			levelEditor.updateMoveLimitDisplay();
 		}
-		levelEditor.updateMoveLimit();
 	}
 
 }
