@@ -30,10 +30,26 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	}
 	
 	/**
+	 * Gets the total number of squares on the board
+	 * @return the total number of squares on the board
+	 */
+	public int getTotalSquares() {
+		return totalBoardSquares;
+	}
+	
+	/**
 	 * Decrements the number of unmarked board squares by one.
 	 */
 	public void decrementUnmarkedSquares() {
 		unmarkedBoardSquares--;
+	}
+	
+	/**
+	 * Gets the current number of unmarked squares on the board.
+	 * @return the current number of unmarked squares on the board
+	 */
+	public int getUnmarkedSquares() {
+		return unmarkedBoardSquares;
 	}
 	
 	/**

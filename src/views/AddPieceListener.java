@@ -7,7 +7,7 @@ import models.Piece;
  * @author bhuchley
  *
  */
-public interface AddPieceListener {
+public interface AddPieceListener extends LevelModifiedListener {
 	/**
 	 * Add the given piece to this. For instance, if this is implemented by a puzzle editor, add it to
 	 * the puzzle level.

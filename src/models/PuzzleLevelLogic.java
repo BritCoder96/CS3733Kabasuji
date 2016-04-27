@@ -44,6 +44,14 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 	}
 	
 	/**
+	 * Gets the number of pieces currently in the level.
+	 * @return the number of pieces in the level
+	 */
+	public int getAllottedPieces() {
+		return allottedPieces;
+	}
+	
+	/**
 	 * Decrements the number of moves remaining by one.
 	 */
 	public void decrementRemainingMoves() {

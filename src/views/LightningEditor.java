@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controllers.DecrementTimeLimitController;
+import controllers.EditorLevelUndoController;
 import controllers.GoBackOnePanelController;
 import controllers.IncrementTimeLimitController;
 import controllers.SaveLevelController;
@@ -26,9 +27,10 @@ import javax.swing.ImageIcon;
 
 /**
  * The screen that allows the user to edit a lightning level.
+ * @author bhuchley
  * @author ejcerini
  */
-public class LightningEditor extends JPanel {
+public class LightningEditor extends JPanel implements LevelModifiedListener, LevelSetListener {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
@@ -41,9 +43,13 @@ public class LightningEditor extends JPanel {
 	LightningLevelLogic ell;
 	/** The board for the level */
 	Board board;
+	/** The undo controller, which maintains the back stack of levels */
+	EditorLevelUndoController undoController; 
 	
 	/** The label that shows the time limit */
 	JLabel timeLimitLabel;
+	/** The panel that shows the board */
+	EditorBoardView gameboard;
 
 	/**
 	 * Create the frame with an rectangular lightning level of the specified size and time.
@@ -63,27 +69,20 @@ public class LightningEditor extends JPanel {
 		level = new Level(boardRows, boardCols, 0, 0, LevelType.LIGHTNING, ell, levelName, frame);
 		level.setBoard(board);
 		
-		JPanel gameboard = new EditorBoardView(this, board);
+		gameboard = new EditorBoardView(this, board, this);
 		gameboard.setBounds(283, 94, 430, 430);
 		add(gameboard);
-		
-		timeLimitLabel = new JLabel();
-		timeLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		timeLimitLabel.setBounds(90, 141, 81, 34);
-		timeLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(timeLimitLabel);
-		updateTimeLimit();
 		
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
 		btnIncrease.setBounds(117, 117, 24, 24);
-		btnIncrease.addActionListener(new IncrementTimeLimitController(this, ell));
+		btnIncrease.addActionListener(new IncrementTimeLimitController(this, this));
 		add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnDecrease.setBounds(117, 174, 24, 24);
-		btnDecrease.addActionListener(new DecrementTimeLimitController(this, ell));
+		btnDecrease.addActionListener(new DecrementTimeLimitController(this, this));
 		add(btnDecrease);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -102,10 +101,12 @@ public class LightningEditor extends JPanel {
 		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
-		JButton btnPublish = new JButton("Undo");
-		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnPublish.setBounds(69, 460, 120, 45);
-		add(btnPublish);
+		undoController = new EditorLevelUndoController(this);
+		JButton btnUndo = new JButton("Undo");
+		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnUndo.setBounds(69, 460, 120, 45);
+		btnUndo.addActionListener(undoController);
+		add(btnUndo);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -117,9 +118,27 @@ public class LightningEditor extends JPanel {
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(69, 516, 120, 45);
 		add(btnRedo);
+		
+		timeLimitLabel = new JLabel();
+		timeLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		timeLimitLabel.setBounds(90, 141, 81, 34);
+		timeLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		add(timeLimitLabel);
+		updateTimeLimitDisplay();
 	}
 	
-	public void updateTimeLimit() {
+	/**
+	 * Gets the level currently under construction in the editor.
+	 * @return the level under construction
+	 */
+	public Level getLevel() {
+		return level;
+	}
+	
+	/**
+	 * Redraws the time limit display.
+	 */
+	public void updateTimeLimitDisplay() {
 		int allottedSeconds = ell.getAllottedSeconds();
 		int minutes = allottedSeconds / 60;
 		int seconds = allottedSeconds % 60;
@@ -128,5 +147,26 @@ public class LightningEditor extends JPanel {
 			connector = connector + "0";
 		}
 		timeLimitLabel.setText(minutes + connector + seconds);
+	}
+
+	@Override
+	public void onLevelChanged() {
+		pushBackStack();
+	}
+	
+	/**
+	 * Pushes a clone of the current level to the back stack.
+	 */
+	private void pushBackStack() {
+		undoController.pushLevel(level);
+	}
+
+	@Override
+	public void setLevel(Level level) {
+		this.level = level;
+		ell = (LightningLevelLogic) level.getLevelLogic();
+		board = level.getBoard();
+		updateTimeLimitDisplay();
+		gameboard.setVisibleBoard(board);
 	}
 }
