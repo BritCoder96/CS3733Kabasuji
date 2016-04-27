@@ -11,18 +11,18 @@ import junit.framework.TestCase;
  */
 public class TestBoard extends TestCase {
 	public void testBoard () {
-		Square square1 = new Square(255, SquareTypes.PIECESQUARE, null, new Coordinate(0,0));
-		Square square2 = new Square(16711680, SquareTypes.PIECESQUARE, null, new Coordinate(0,1));
-		Square square3 = new Square(255, SquareTypes.PIECESQUARE, null, new Coordinate(1,1));
-		Square square4 = new Square(16711680, SquareTypes.PIECESQUARE, null, new Coordinate(1,2));
-		Square square5 = new Square(255, SquareTypes.PIECESQUARE, null, new Coordinate(1,3));
-		Square square6 = new Square(16711680, SquareTypes.PIECESQUARE, null, new Coordinate(2,3));
-		Square square7 = new Square(255, SquareTypes.PIECESQUARE, null, new Coordinate(-1, 0));
-		Square square8 = new Square(16711680, SquareTypes.PIECESQUARE, null, new Coordinate(-1,-1));
-		Square square9 = new Square(255, SquareTypes.PIECESQUARE, null, new Coordinate(-2,-1));
-		Square square10 = new Square(16711680, SquareTypes.PIECESQUARE, null, new Coordinate(-2,-2));
-		Square square11 = new Square(255, SquareTypes.PIECESQUARE, null, new Coordinate(-3,-2));
-		Square square12 = new Square(16711680, SquareTypes.PIECESQUARE, null, new Coordinate(-3,-3));
+		Square square1 = new Square(255, SquareTypes.PIECESQUARE, 0, 0);
+		Square square2 = new Square(16711680, SquareTypes.PIECESQUARE, 0,1);
+		Square square3 = new Square(255, SquareTypes.PIECESQUARE, 1,1);
+		Square square4 = new Square(16711680, SquareTypes.PIECESQUARE, 1,2);
+		Square square5 = new Square(255, SquareTypes.PIECESQUARE, 1,3);
+		Square square6 = new Square(16711680, SquareTypes.PIECESQUARE, 2,3);
+		Square square7 = new Square(255, SquareTypes.PIECESQUARE, -1, 0);
+		Square square8 = new Square(16711680, SquareTypes.PIECESQUARE, -1,-1);
+		Square square9 = new Square(255, SquareTypes.PIECESQUARE, -2,-1);
+		Square square10 = new Square(16711680, SquareTypes.PIECESQUARE, -2,-2);
+		Square square11 = new Square(255, SquareTypes.PIECESQUARE, -3,-2);
+		Square square12 = new Square(16711680, SquareTypes.PIECESQUARE, -3,-3);
 		
 		square1.attachToOtherSide(square2, Directions.NORTH);
 		square2.attachToOtherSide(square3, Directions.EAST);
@@ -45,26 +45,26 @@ public class TestBoard extends TestCase {
 		pieces.add(piece1);
 		pieces.add(new Piece(pieceSquares2));
 
-		Square square13 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(0,0));
-		Square square14 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(0,1));
-		Square square15 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(0,2));
-		Square square16 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(1,2));
-		Square square17 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(2,2));
-		Square square18 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(1,1));
-		Square square19 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(1, 3));
-		Square square20 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(2,3));
-		Square square21 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(3,3));
-		Square square22 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(4,0));
-		Square square23 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(0,4));
-		Square square24 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(4,4));
-		Square square25 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(4,5));
-		Square square26 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(4,5));
-		Square square27 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(5,5));
-		Square square28 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(6, 6));
-		Square square29 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(4,6));
-		Square square30 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(6,4));
-		Square square31 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(5,6));
-		Square square32 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, null, new Coordinate(6,5));
+		Square square13 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 0,0);
+		Square square14 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 0,1);
+		Square square15 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 0,2);
+		Square square16 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 1,2);
+		Square square17 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 2,2);
+		Square square18 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 1,1);
+		Square square19 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 1, 3);
+		Square square20 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 2,3);
+		Square square21 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 3,3);
+		Square square22 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 4,0);
+		Square square23 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 0,4);
+		Square square24 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 4,4);
+		Square square25 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 4,5);
+		Square square26 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 4,5);
+		Square square27 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 5,5);
+		Square square28 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 6, 6);
+		Square square29 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 4,6);
+		Square square30 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 6,4);
+		Square square31 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 5,6);
+		Square square32 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 6,5);
 
 		Board board = new Board(6, 6, LevelType.PUZZLE);
 		assertTrue(board.addSquare(square13));

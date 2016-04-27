@@ -96,6 +96,7 @@ public class Board {
 		return false;
 	}
 	
+	// TODO: color?
 	/**
 	 * Generates a square with the correct square type and level logic and adds it at the given location
 	 * @param row the row to add the square at
@@ -104,25 +105,21 @@ public class Board {
 	 */
 	public boolean addSquareAt(int row, int col) {
 		SquareTypes squareType;
-		ExtraBoardSquareLogic squareLogic;
 		switch(levelType) {
 		case PUZZLE:
 			squareType = SquareTypes.PUZZLEBOARDSQUARE;
-			squareLogic = new PuzzleBoardSquareLogic();
 			break;
 		case LIGHTNING:
 			squareType = SquareTypes.LIGHTNINGBOARDSQUARE;
-			squareLogic = new LightningBoardSquareLogic();
 			break;
 		case RELEASE:
 			squareType = SquareTypes.RELEASEBOARDSQUARE;
-			squareLogic = null; // Squares in release boards only have logic if they have numbers on them
 			break;
 		default:
 			// Should never happen
 			throw new IllegalStateException("Unknown levelType " + levelType);
 		}
-		Square s = new Square(0, squareType, squareLogic, new Coordinate(row, col));
+		Square s = new Square(0, squareType, row, col);
 		return addSquare(s);
 	}
 	

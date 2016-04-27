@@ -1,38 +1,51 @@
 package models;
 
 /**
- * Represents the squares that make up both pieces and boards
+ * Represents the squares that make up both pieces and boards.
  * 
  * @author bjbenson
  * @author jberry
  *
  */
 public class Square {
-	/** The color of the square	 */
+	/** The color of the square. */
 	int color;
-	/** The type of the square (Piece or Board) */
+	/** The type of the square (piece, puzzle board, etc.). */
 	SquareTypes type;
-	/** The squares attached to this square */
+	/** The squares attached to this square. */
 	public Square[] attachedSquares;
-	/** The coordinates of the square */
+	/** The coordinates of the square. */
 	private Coordinate coordinates;
-	/** The square logic of the square */
+	/** The square logic of the square. */
 	private ExtraBoardSquareLogic squareLogic;
 	
 	/**
-	 * The constructor for the square
+	 * The constructor for the square.
 	 * 
-	 * @param color The color of the square
-	 * @param type The type of the square (Piece or Board)
-	 * @param squareLogic The coordinates of the square
-	 * @param coordinate The square logic of the square
+	 * @param color The color of the square.
+	 * @param type The square logic of the square
+	 * @param row	Row for the square's coordinates.
+	 * @param col	Column for the square's coordinates.
 	 */
-	public Square (int color, SquareTypes type, ExtraBoardSquareLogic squareLogic, Coordinate coordinate) {
+	public Square (int color, SquareTypes type, int row, int col) {
 		this.color = color;
 		this.type = type;
-		this.setSquareLogic(squareLogic);
-		this.setCoordinates(coordinate);
-		this.attachedSquares = new Square[4];
+		setCoordinates(new Coordinate(row, col));
+		
+		attachedSquares = new Square[4];
+		switch (type) {
+		case PUZZLEBOARDSQUARE:
+			squareLogic = new PuzzleBoardSquareLogic();
+			break;
+		case LIGHTNINGBOARDSQUARE:
+			squareLogic = new LightningBoardSquareLogic();
+			break;
+		case RELEASEBOARDSQUARE:
+			squareLogic = new ReleaseBoardSquareLogic();
+			break;
+		default:
+			squareLogic = null;
+		}
 	}
 	
 	/**
