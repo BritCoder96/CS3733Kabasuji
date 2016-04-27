@@ -19,28 +19,45 @@ public class ReleaseBoardSquareLogic extends ExtraBoardSquareLogic {
 	
 	/**
 	 * Constructor to initialize ReleaseBoardSquareLogic fields.
-	 * 
-	 * @param number		Number to associate with the square.
-	 * @param colorOfNumber	Color hex to associate with the square.
 	 */
-	public ReleaseBoardSquareLogic(int number, int colorOfNumber) {
-		this.number = number;
-		this.colorOfNumber = colorOfNumber;
+	public ReleaseBoardSquareLogic() {
+		this.number = -1;
+		this.colorOfNumber = -1;
 	}
 	
-	/** Get the number of the square
+	/**
+	 * Get the number of the square.
 	 * 
-	 * @return the number of the square
+	 * @return The associated number of the square.
 	 */
 	public int getNumber() {
 		return number;
 	}
 	
-	/** Get the number of the square
+	/**
+	 * Get the associated color hex of the square.
 	 * 
-	 * @return the number of the square
+	 * @return The associated color hex of the square.
 	 */
 	public int getColorOfNumber() {
 		return colorOfNumber;
+	}
+	
+	/**
+	 * Set the number of the square.
+	 * 
+	 * @param number	Number to associate with the square.
+	 */
+	void setNumber(int number) {
+		this.number = number;
+	}
+	
+	/**
+	 * Set the associated color hex of the square.
+	 * 
+	 * @param colorOfNumber	Color hex to associate with the square.
+	 */
+	void setColorOfNumber(int colorOfNumber) {
+		this.colorOfNumber = colorOfNumber;
 	}
 }
