@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import controllers.MoveToBuilderLevelListController;
 import main.KabasujiMain;
+import models.Piece;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -79,6 +80,7 @@ public class BuilderTitle extends JPanel {
 		label_5.setBounds(335, 582, 127, 27);
 		add(label_5);
 
-		
+		// Doing this here so that it's only done once on startup
+		Piece.initializeValidPieces();
 	}
 }

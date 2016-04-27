@@ -236,7 +236,17 @@ public class NewLevel extends JPanel {
 		return txtInsertNameHere.getText();
 	}
 	
+	/**
+	 * @return The time limit currently set for the level. It's taken from the type-specific text field
+	 */
 	public int getTimeLimit() {
+		return Integer.parseInt(textField.getText());
+	}
+	
+	/**
+	 * @return The move limit currently set for the level. It's taken from the type-specific text field
+	 */
+	public int getMoveLimit() {
 		return Integer.parseInt(textField.getText());
 	}
 }

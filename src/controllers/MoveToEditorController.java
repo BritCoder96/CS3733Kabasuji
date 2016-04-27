@@ -52,7 +52,8 @@ public class MoveToEditorController implements ActionListener{
 			case PUZZLE:
 				//Hide this screen
 				newlevel.setVisible(false);
-				PuzzleEditor puzzlePanel = new PuzzleEditor(frame);
+				PuzzleEditor puzzlePanel = new PuzzleEditor(frame, newlevel.getName(), 
+						newlevel.getRows(), newlevel.getCols(), newlevel.getMoveLimit());
 				puzzlePanel.setVisible(true);
 				//Load the puzzle editor
 				frame.setContentPane(puzzlePanel);

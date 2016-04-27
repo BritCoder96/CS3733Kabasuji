@@ -58,7 +58,7 @@ public class LightningEditor extends JPanel {
 		board = new Board(boardRows, boardCols, LevelType.LIGHTNING);
 		board.fillWithSquares();
 		
-		ell = new LightningLevelLogic(boardRows * boardCols, timeLimit * 60);
+		ell = new LightningLevelLogic(boardRows * boardCols, timeLimit);
 		
 		level = new Level(boardRows, boardCols, 0, 0, LevelType.LIGHTNING, ell, levelName);
 		level.setBoard(board);
@@ -67,11 +67,12 @@ public class LightningEditor extends JPanel {
 		gameboard.setBounds(283, 94, 430, 430);
 		add(gameboard);
 		
-		timeLimitLabel = new JLabel(timeLimit + ":00");
+		timeLimitLabel = new JLabel();
 		timeLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		timeLimitLabel.setBounds(90, 141, 81, 34);
 		timeLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(timeLimitLabel);
+		updateTimeLimit();
 		
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));

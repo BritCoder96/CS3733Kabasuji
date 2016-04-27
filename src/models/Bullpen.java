@@ -2,6 +2,12 @@ package models;
 
 import java.util.ArrayList;
 
+/**
+ * Class to hold a set of pieces with a fancy name.
+ * @author bhuchley
+ * @author sthuynh
+ *
+ */
 public class Bullpen {
 	ArrayList<Piece> pieces;	// TODO: change date structure; capacity may increase above 35 as pieces are added to the end of the ArrayList
 	int numberOfPieces;
@@ -15,12 +21,12 @@ public class Bullpen {
 		return pieces;
 	}
 	
-	void addPiece(Piece piece) {
+	public void addPiece(Piece piece) {
 		pieces.add(piece);
 		numberOfPieces = pieces.size();
 	}
 	
-	void removePiece(Piece piece) {
+	public void removePiece(Piece piece) {
 		pieces.remove(piece);
 		numberOfPieces = pieces.size();
 	}

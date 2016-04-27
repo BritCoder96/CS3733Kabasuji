@@ -4,14 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import controllers.AddPieceController;
+import controllers.DecrementMoveLimitController;
 import controllers.GoBackOnePanelController;
+import controllers.IncrementMoveLimitController;
+import controllers.SaveLevelController;
 import main.KabasujiMain;
+import models.Board;
+import models.Level;
+import models.LevelType;
+import models.LightningLevelLogic;
+import models.Piece;
+import models.PuzzleLevelLogic;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -22,70 +34,68 @@ import java.awt.event.ActionEvent;
 /**
  * The editor screen for puzzle levels.
  * @author ejcerini
+ * @author bhuchley
  */
-public class PuzzleEditor extends JPanel {
+public class PuzzleEditor extends JPanel implements AddPieceListener {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
+	
+	/** The level under construction */
+	Level level;
+	/** The extra level logic for the level. The number of pieces isn't used for saving the level,
+	 * so only the move limit is actually updated
+	 */
+	PuzzleLevelLogic ell;
+	/** The board for the level */
+	Board board;
+	
+	/** The label showing the move limit */
+	JLabel moveLimitLabel;
+	/** The bullpen view */
+	BullpenView bullpen;
 
 	/**
 	 * Create the editor screen, with a rectangular level and no pieces.
 	 * @param frame the frame to show the screen in
 	 */
-	public PuzzleEditor(KabasujiFrame frame) {
+	public PuzzleEditor(KabasujiFrame frame, String levelName, int boardRows, int boardCols, int moveLimit) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		JPanel gameboard = new JPanel();
+		board = new Board(boardRows, boardCols, LevelType.PUZZLE);
+		board.fillWithSquares();
+		
+		ell = new PuzzleLevelLogic(0, moveLimit);
+		
+		level = new Level(boardRows, boardCols, 0, 0, LevelType.PUZZLE, ell, levelName);
+		level.setBoard(board);
+		
+		JPanel gameboard = new EditorBoardView(this, board);
 		gameboard.setBounds(60, 71, 325, 325);
-		gameboard.setLayout(new GridLayout(6, 6, 0, 0));
-		// TODO hack add 36 JLabels with alternating backgrounds
-		Color lighterGray = new Color(230, 230, 230);
-		Color darkerGray = new Color(200, 200, 200);
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 6; j++) {
-				JLabel square = new JLabel();
-				Color squareBackground = (((i+j)%2)==0) ? lighterGray : darkerGray;
-				square.setOpaque(true);
-				square.setBackground(squareBackground);
-				gameboard.add(square);
-			}
-		}
 		add(gameboard);
 		
-		JPanel bullpen = new JPanel();
-		bullpen.setBorder(new LineBorder(new Color(0, 0, 0)));
-		bullpen.setBounds(412, 14, 350, 455);
+		bullpen = new BullpenView(gameboard.getWidth() / boardCols, new Rectangle(412, 14, 350, 455));
 		add(bullpen);
-		bullpen.setLayout(null);
 		
-		int tileSize = gameboard.getHeight() / 6;
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < (3-i); j++) {
-				JLabel lblBox = new JLabel();
-				lblBox.setBackground(new Color(128, 128, 128));
-				lblBox.setBounds(10 + (tileSize * i), 10 + (tileSize * j), tileSize, tileSize);
-				lblBox.setBorder(new LineBorder(Color.BLACK));
-				lblBox.setOpaque(true);
-				bullpen.add(lblBox);
-			}
-		}
-		
-		JLabel label = new JLabel("7");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label.setBounds(24, 445, 16, 24);
-		add(label);
+		moveLimitLabel = new JLabel(String.valueOf(moveLimit));
+		moveLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		moveLimitLabel.setBounds(10, 445, 44, 24);
+		moveLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		add(moveLimitLabel);
 		
 		JButton btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
 		btnIncrease.setBounds(20, 420, 24, 24);
+		btnIncrease.addActionListener(new IncrementMoveLimitController(this, ell));
 		add(btnIncrease);
 		
 		JButton btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnDecrease.setBounds(20, 472, 24, 24);
+		btnDecrease.addActionListener(new DecrementMoveLimitController(this, ell));
 		add(btnDecrease);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -101,6 +111,7 @@ public class PuzzleEditor extends JPanel {
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSave.setBounds(330, 551, 120, 45);
+		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
 		JButton btnPublish = new JButton("Undo");
@@ -126,12 +137,26 @@ public class PuzzleEditor extends JPanel {
 		JButton btnAddPiece = new JButton("Add Piece");
 		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnAddPiece.setBounds(257, 436, 136, 46);
+		btnAddPiece.addActionListener(new AddPieceController(frame, this, this));
 		add(btnAddPiece);
 		
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(630, 551, 120, 45);
 		add(btnRedo);
+	}
+
+	@Override
+	public void addPiece(Piece p) {
+		level.getBullpen().addPiece(p);
+		bullpen.addPiece(p);
+	}
+	
+	/**
+	 * Update the move limit display
+	 */
+	public void updateMoveLimit() {
+		moveLimitLabel.setText(String.valueOf(ell.getAllottedMoves()));
 	}
 
 }
