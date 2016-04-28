@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  */
 public class Bullpen extends PieceSet {
-	ArrayList<Piece> pieces;	// TODO: change date structure; capacity may increase above 35 as pieces are added to the end of the ArrayList
+	ArrayList<Piece> pieces;	// TODO: enact pieces.trimToSize() occasionally 
 	int numberOfPieces;
 	
 	public Bullpen() {

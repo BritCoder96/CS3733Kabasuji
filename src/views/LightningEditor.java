@@ -66,7 +66,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		
 		ell = new LightningLevelLogic(boardRows * boardCols, timeLimit);
 		
-		level = new Level(boardRows, boardCols, 0, 0, LevelType.LIGHTNING, ell, levelName, frame);
+		level = new Level(boardRows, boardCols, 0, LevelType.LIGHTNING, levelName);
 		level.setBoard(board);
 		
 		gameboard = new EditorBoardView(this, board, this);

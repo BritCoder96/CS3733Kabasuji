@@ -30,8 +30,9 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	}
 	
 	/**
-	 * Gets the total number of squares on the board
-	 * @return the total number of squares on the board
+	 * Gets the total number of squares on the board.
+	 * 
+	 * @return The total number of squares on the board.
 	 */
 	public int getTotalSquares() {
 		return totalBoardSquares;
@@ -46,7 +47,8 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	
 	/**
 	 * Gets the current number of unmarked squares on the board.
-	 * @return the current number of unmarked squares on the board
+	 * 
+	 * @return The current number of unmarked squares on the board.
 	 */
 	public int getUnmarkedSquares() {
 		return unmarkedBoardSquares;
@@ -58,11 +60,21 @@ public class LightningLevelLogic implements ExtraLevelLogic{
 	public void decrementRemainingSeconds() {
 		remainingSeconds--;
 	}
-
+	
+	/**
+	 * Gets the number of allotted seconds.
+	 * 
+	 * @return The number of allotted seconds.
+	 */
 	public int getAllottedSeconds() {
 		return allottedSeconds;
 	}
 
+	/**
+	 * Sets the number of allotted seconds to the specified value.
+	 * 
+	 * @param allottedSeconds	The value the number of allotted seconds will be set to.
+	 */
 	public void setAllottedSeconds(int allottedSeconds) {
 		this.allottedSeconds = allottedSeconds;
 	}

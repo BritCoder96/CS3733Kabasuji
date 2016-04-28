@@ -28,7 +28,7 @@ public class BoardToBoardMove implements Move {
 		for(int i = 0; i < newSquares.length; i++){
 			if(!isInSquares(oldSquares[i], newSquares))
 				oldSquares[i].getSquareLogic().setCovered(false);
-			switch(level.getLevelType()){
+			switch(level.getLvlType()){
 			case LIGHTNING:
 				break;
 			case PUZZLE:
@@ -51,7 +51,7 @@ public class BoardToBoardMove implements Move {
 
 	@Override
 	public boolean isValid() {
-		if(level.getLvlType() == LevelType.LIGHTNING || level.getLevelType() == LevelType.RELEASE)
+		if(level.getLvlType() == LevelType.LIGHTNING || level.getLvlType() == LevelType.RELEASE)
 			return false;
 		
 		int curx = startSquare.getCoordinates().getCol();
@@ -100,7 +100,7 @@ public class BoardToBoardMove implements Move {
 		for(int i = 0; i < oldSquares.length; i++){
 			if(!isInSquares(newSquares[i], oldSquares))
 				oldSquares[i].getSquareLogic().setCovered(false);
-			switch(level.getLevelType()){
+			switch(level.getLvlType()){
 			case LIGHTNING:
 				break;
 			case PUZZLE:

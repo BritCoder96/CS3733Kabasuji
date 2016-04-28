@@ -28,7 +28,7 @@ public class BullpenToBoardMove implements Move {
 		boolean decremented = false;
 		
 		for(int i = 0; i < squares.length; i++){
-			switch(level.getLevelType()){
+			switch(level.getLvlType()){
 			case LIGHTNING:
 				currentSquare = (LightningBoardSquareLogic) squares[i].getSquareLogic();
 				((LightningBoardSquareLogic) currentSquare).setMarked(true);
@@ -102,7 +102,7 @@ public class BullpenToBoardMove implements Move {
 		boolean incremented = false;
 		
 		for(int i = 0; i < squares.length; i++){
-			switch(level.getLevelType()){
+			switch(level.getLvlType()){
 			case LIGHTNING:
 				currentSquare = (LightningBoardSquareLogic) squares[i].getSquareLogic();
 				((LightningBoardSquareLogic) currentSquare).setMarked(false);

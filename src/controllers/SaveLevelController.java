@@ -90,14 +90,14 @@ public class SaveLevelController implements ActionListener {
 	    	}
 	    }
 	    data = data + "\n";
-	    if (level.getLevelType() == LevelType.LIGHTNING) {
+	    if (level.getLvlType() == LevelType.LIGHTNING) {
 	    	data = data + ((LightningLevelLogic)level.getLevelLogic()).getAllottedSeconds();
 	    }
 	    else {
 	    	for (Piece piece : level.getBullpen().getPieces()) {
 	    		data = data + piece.getPieceNumber() + ",";
 	    	}
-	    	if (level.getLevelType() == LevelType.PUZZLE) {
+	    	if (level.getLvlType() == LevelType.PUZZLE) {
 	    		data = data + "\n";
 		    	data = data + ((PuzzleLevelLogic)level.getLevelLogic()).getAllottedMoves();
 		    }

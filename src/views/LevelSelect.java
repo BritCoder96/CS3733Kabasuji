@@ -67,13 +67,16 @@ public class LevelSelect extends JPanel {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		ExtraLevelLogic testLogic = new ExtraLevelLogic() {};
-			TEST_LEVELS.add(new Level(1, 6, 0, 3, LevelType.PUZZLE, testLogic, "Level 1", frame));
-			TEST_LEVELS.add(new Level(2, 3, 1, 2, LevelType.LIGHTNING, testLogic, "Level 2", frame));
-			TEST_LEVELS.add(new Level(3, 2, 2, 1, LevelType.RELEASE, testLogic, "Level 3", frame));
-			for (int i = 3; i < 15; i++) {
-				TEST_LEVELS.add(new Level(6, 1, i, 0, LevelType.PUZZLE, testLogic, "Level " + (i + 1), frame));
-			}
+		TEST_LEVELS.add(new Level(1, 6, 0, LevelType.PUZZLE, "Level 1"));
+		TEST_LEVELS.get(0).setNumberOfStars(3);
+		TEST_LEVELS.add(new Level(2, 3, 1, LevelType.LIGHTNING, "Level 2"));
+		TEST_LEVELS.get(1).setNumberOfStars(2);
+		TEST_LEVELS.add(new Level(3, 2, 2, LevelType.RELEASE, "Level 3"));
+		TEST_LEVELS.get(2).setNumberOfStars(1);
+		for (int i = 3; i < 15; i++) {
+			TEST_LEVELS.add(new Level(6, 1, i, LevelType.PUZZLE, "Level " + (i + 1)));
+			TEST_LEVELS.get(i).setNumberOfStars(0);
+		}
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -129,14 +132,14 @@ public class LevelSelect extends JPanel {
 	 */
 	private void updateLevelDisplay() {
 		Level currentLevel = levels.get(currentLevelIndex);
-		int numStars = currentLevel.getNumStars();
-		LevelType lvlType = currentLevel.getLevelType();
+		int numStars = currentLevel.getNumberOfStars();
+		LevelType lvlType = currentLevel.getLvlType();
 		currentLevelIndexLabel.setText("Level " + (currentLevelIndex + 1));
 		starsDisplay.setNumStarsFilled(numStars);
 		levelTypeLabel.setText(lvlType.name()); // TODO should be lowercased?
 		boolean currentLvlComplete = numStars > 0;
 		boolean isFirstLevel = currentLevelIndex == 0;
-		boolean previousLevelComplete = isFirstLevel || (levels.get(currentLevelIndex - 1).getNumStars() > 0);
+		boolean previousLevelComplete = isFirstLevel || (levels.get(currentLevelIndex - 1).getNumberOfStars() > 0);
 		boolean currentLevelIsUnlocked = lvlType == LevelType.PUZZLE && (currentLvlComplete || previousLevelComplete);
 		btnPlay.setText(currentLevelIsUnlocked ? "Play" : "Locked");
 		btnPlay.setEnabled(currentLevelIsUnlocked);

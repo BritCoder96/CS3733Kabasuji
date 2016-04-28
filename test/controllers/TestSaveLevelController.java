@@ -13,7 +13,7 @@ public class TestSaveLevelController extends TestCase {
 	}
 	
 	public void testSaveLevelController() {
-		Level level = new Level(2, 3, 4, 1, LevelType.PUZZLE, new PuzzleLevelLogic(3, 2), "test");
+		Level level = new Level(2, 3, 4, LevelType.PUZZLE, "test");
 		SaveLevelController saveLevel = new SaveLevelController(level);
 		saveLevel.actionPerformed(new ActionEvent(null, 0, null));
 	}
