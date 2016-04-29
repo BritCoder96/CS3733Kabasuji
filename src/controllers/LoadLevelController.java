@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 import models.Level;
 import models.LevelType;
-import models.LightningLevelLogic;
 import models.Square;
 import models.SquareTypes;
 import models.Board;
 import models.Bullpen;
 import models.Piece;
 import models.PuzzleLevelLogic;
+import models.LightningLevelLogic;
 import models.ReleaseLevelLogic;
 import views.KabasujiFrame;
 
