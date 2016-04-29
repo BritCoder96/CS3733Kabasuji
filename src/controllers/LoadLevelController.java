@@ -8,11 +8,13 @@ import java.util.ArrayList;
 
 import models.Level;
 import models.LevelType;
+import models.LightningLevelLogic;
 import models.Square;
 import models.SquareTypes;
 import models.Board;
 import models.Bullpen;
 import models.Piece;
+import models.PuzzleLevelLogic;
 import models.ReleaseLevelLogic;
 import views.KabasujiFrame;
 
@@ -90,9 +92,9 @@ public class LoadLevelController implements ActionListener {
 		}
 		
 		// other variables that we maybe need
-		int allottedSeconds;
+		int allottedSeconds = 0;
         int[] pieceNumbers;
-        int allottedMoves;
+        int allottedMoves = 0;
         int numberOfStars;
 		
 		// keep relevant data
@@ -160,10 +162,19 @@ public class LoadLevelController implements ActionListener {
         // get number of stars
         numberOfStars = Integer.parseInt(dataTokens[0]);
         
-        // TODO: make extra level logic
-        
+        // make extra level logic, return level
         // TODO: get level number
-		return new Level(board, bullpen, -1, numberOfStars, new ReleaseLevelLogic(), levelName);
+        int levelNumber = -1;
+		switch (lvlType) {
+		case PUZZLE:
+			return new Level(board, bullpen, levelNumber, numberOfStars, new PuzzleLevelLogic(bullpen.getNumberOfPieces(), allottedMoves), levelName);
+		case LIGHTNING:
+			return new Level(board, bullpen, levelNumber, numberOfStars, new LightningLevelLogic(board.getNumberOfSquares(), allottedSeconds), levelName);
+		case RELEASE:
+			return new Level(board, bullpen, levelNumber, numberOfStars, new ReleaseLevelLogic(), levelName);
+		default:
+			throw new IllegalArgumentException();
+		}
 	}
 
     static String concatArray(String[] array, int startingIndex) {

@@ -8,16 +8,17 @@ import java.util.HashSet;
  * @author jberry
  * @author bhuchley
  */
-public class Board extends PieceSet{
+public class Board extends PieceSet {
 	/** The number of rows in the board. */
 	int rows;
 	/** The number of columns in the board. */
 	int columns;
-	/** The squares that make up the board */
-	Square[][] squares;
-	/** The pieces that are on the board */
 	/** The type of level the board is associated with. */
 	LevelType levelType;
+	/** The squares that make up the board. */
+	Square[][] squares;
+	/** The number of squares that make up the board. */
+	int numberOfSquares;
 	/** The pieces that are on the board. */
 	HashSet<Piece> pieces;
 	
@@ -93,6 +94,10 @@ public class Board extends PieceSet{
 	public boolean setSquares(Square[][] squares) {
 		if (squares.length == rows && squares[0].length == columns) {
 			this.squares = squares;
+			numberOfSquares = 0;
+			for (Square[] i : squares) {
+				numberOfSquares += i.length;
+			}
 			return true;
 		}
 		return false;
@@ -138,6 +143,7 @@ public class Board extends PieceSet{
 		if (row >= 0 && col >= 0 && row < rows && col < columns) {
 			if (squares[row][col] == null) {
 				squares[row][col] = square;
+				numberOfSquares++;
 				return true;
 			}
 		}
@@ -155,6 +161,7 @@ public class Board extends PieceSet{
 		if (row >= 0 && col >= 0 && row < rows && col < columns) {
 			if (squares[row][col] != null) {
 				squares[row][col] = null;
+				numberOfSquares--;
 				return true;
 			}
 		}
@@ -185,5 +192,9 @@ public class Board extends PieceSet{
 	 */
 	public LevelType getLevelType() {
 		return levelType;
+	}
+	
+	public int getNumberOfSquares() {
+		return numberOfSquares;
 	}
 }

@@ -41,4 +41,8 @@ public class Bullpen extends PieceSet {
 		}
 		return false;
 	}
+	
+	public int getNumberOfPieces() {
+		return numberOfPieces;
+	}
 }
