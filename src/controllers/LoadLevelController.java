@@ -10,8 +10,11 @@ import models.Level;
 import models.LevelType;
 import models.Square;
 import models.SquareTypes;
-import views.KabasujiFrame;
+import models.Board;
+import models.Bullpen;
 import models.Piece;
+import models.ReleaseLevelLogic;
+import views.KabasujiFrame;
 
 /**
  * Controller that loads a level from a txt file
@@ -65,10 +68,26 @@ public class LoadLevelController implements ActionListener {
 	 */
 	public static Level parseData(String data) {
         // TODO: you have to recombine tokens before spliting them
-		// get level name and type
 		String[] dataTokens = data.split("\n");
+		
+		// get level name
 		String levelName = dataTokens[0];
-		String lvlType = dataTokens[1];
+		
+		// get levelType
+		LevelType lvlType;
+		switch (dataTokens[1]) {
+		case "PUZZLE":
+			lvlType = LevelType.PUZZLE;
+			break;
+		case "LIGHTNING":
+			lvlType = LevelType.LIGHTNING;
+			break;
+		case "RELEASE":
+			lvlType = LevelType.RELEASE;
+			break;
+		default:
+			throw new IllegalArgumentException();
+		}
 		
 		// other variables that we maybe need
 		int allottedSeconds;
@@ -91,7 +110,7 @@ public class LoadLevelController implements ActionListener {
 				}
 				// TODO: alternating colors, this can probably be more concise
 				else if (rowEntries[numberOfBoardCols].equals("x")) {
-					squares.add(new Square(0x808080, lvlType.equals("LIGHTNING") ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols));
+					squares.add(new Square(0x808080, lvlType == LevelType.LIGHTNING ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols));
 				}
 				else {
 					squares.add(new Square(0x808080, SquareTypes.RELEASEBOARDSQUARE, numberOfBoardRows, numberOfBoardCols));
@@ -99,12 +118,19 @@ public class LoadLevelController implements ActionListener {
 			}
 		}
 		
+        // make board
+        Board board = new Board(numberOfBoardRows, numberOfBoardCols, lvlType);
+        for (Square i : squares) {
+        	board.addSquare(i);
+        }
+        
 		// keep relevant data
 		data = concatArray(dataTokens, numberOfBoardRows + 1);
 		dataTokens = data.split("\n");
 
+        Bullpen bullpen = new Bullpen();
         // get allotted seconds if lighting level
-        if (lvlType.equals("LIGHTNING")) {
+        if (lvlType == LevelType.LIGHTNING) {
             allottedSeconds = Integer.parseInt(dataTokens[0]);
         }
         else { // get pieces
@@ -113,6 +139,9 @@ public class LoadLevelController implements ActionListener {
             for (int i = 0; i < pieceEntries.length; i++) {
                 pieceNumbers[i] = Integer.parseInt(pieceEntries[i]);
             }
+            for (int i : pieceNumbers) {
+            	bullpen.addPiece(Piece.allValidPieces[i]);
+            }
         }
 
 		// keep relevant data
@@ -120,7 +149,7 @@ public class LoadLevelController implements ActionListener {
 		dataTokens = data.split("\n");
 
         // get alotted moves if necessary
-        if (lvlType.equals("PUZZLE")) {
+        if (lvlType == LevelType.PUZZLE) {
             allottedMoves = Integer.parseInt(dataTokens[0]);
         }
 
@@ -130,9 +159,11 @@ public class LoadLevelController implements ActionListener {
 
         // get number of stars
         numberOfStars = Integer.parseInt(dataTokens[0]);
-
-        // TODO: make bullpen, conditionals for level type, find a way to pass along the kframe? (You need it to actually play the game)
-		return new Level(numberOfBoardCols, numberOfBoardCols, levelNumber, numberOfStars, lvlType, new ExtraLevelLogic, levelName, kframe);
+        
+        // TODO: make extra level logic
+        
+        // TODO: get level number
+		return new Level(board, bullpen, -1, numberOfStars, new ReleaseLevelLogic(), levelName);
 	}
 
     static String concatArray(String[] array, int startingIndex) {
