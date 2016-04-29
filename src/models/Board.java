@@ -186,6 +186,10 @@ public class Board extends PieceSet {
 		return this.pieces.remove(p);
 	}
 	
+	public boolean containsPiece(Piece p){
+		return this.pieces.contains(p);
+	}
+	
 	/**
 	 * Gets the level type of the board
 	 * @return the level type the board is being used for

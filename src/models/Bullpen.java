@@ -45,4 +45,8 @@ public class Bullpen extends PieceSet {
 	public int getNumberOfPieces() {
 		return numberOfPieces;
 	}
+
+	public boolean containsPiece(Piece p) {
+		return pieces.contains(p);
+	}
 }

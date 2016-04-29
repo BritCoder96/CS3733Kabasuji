@@ -18,6 +18,9 @@ import java.awt.GridLayout;
 public class PieceView extends JPanel {
 	
 	public static final Color pieceSquareColor = new Color(128, 128, 128);
+	
+	protected boolean beingDragged = false; 
+	protected Piece piece;
 
 	/**
 	 * Create the panel with the given piece and the given size for the squares, with the given upper left corner.
@@ -25,6 +28,7 @@ public class PieceView extends JPanel {
 	 * and determining the width and height depending on the square size and the shape of the piece.
 	 */
 	public PieceView(Piece piece, int squareSize, int topLeftX, int topLeftY) {
+		this.piece = piece;
 		int rows = piece.getNumRows();
 		int cols = piece.getNumCols();
 		setLayout(new GridLayout(rows, cols, 0, 0));
@@ -44,4 +48,18 @@ public class PieceView extends JPanel {
 		}
 	}
 
+	public PieceView() {
+	}
+
+	public boolean isBeingDragged(){
+		return beingDragged;
+	}
+	
+	public void setBeingDragged(boolean drag){
+		beingDragged = drag;
+	}
+	
+	public Piece getPiece(){
+		return piece;
+	}
 }

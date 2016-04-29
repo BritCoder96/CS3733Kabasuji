@@ -99,4 +99,8 @@ public class GameScreen extends JPanel {
 		lblNewLabel_1.setBounds(517, 552, 186, 29);
 		add(lblNewLabel_1);
 	}
+	
+	public KabasujiFrame getFrame(){
+		return frame;
+	}
 }

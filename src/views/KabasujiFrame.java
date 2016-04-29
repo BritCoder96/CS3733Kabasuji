@@ -20,7 +20,7 @@ public class KabasujiFrame extends JFrame {
 	/** The back stack of panels that the back button uses. */
 	PanelBackManager backMgr;
 	
-	protected Piece draggingPiece;
+	protected PieceView draggingPiece;
 	protected Point draggingAnchor;
 	protected Level level;
 	
@@ -55,7 +55,7 @@ public class KabasujiFrame extends JFrame {
 		getContentPane().setVisible(true);
 	}
 	
-	public Piece getActiveDraggingPiece(){
+	public PieceView getActiveDraggingPiece(){
 		return draggingPiece;
 	}
 	
@@ -68,14 +68,14 @@ public class KabasujiFrame extends JFrame {
 	}
 	
 	public void releaseDraggingPiece(){
-		setDraggingPiece(new Piece(), null);
+		setDraggingPiece(new PieceView(), null);
 		
 		dragging = false;
 		
 		dragSource = null;
 	}
 	
-	public void setDraggingPiece(Piece newDraggingPiece, java.awt.event.MouseMotionAdapter me){
+	public void setDraggingPiece(PieceView newDraggingPiece, java.awt.event.MouseEvent me){
 		draggingPiece = newDraggingPiece;
 		
 		if(me == null){

@@ -10,43 +10,53 @@ import models.Move;
 import models.Piece;
 import models.PieceSet;
 import models.Square;
+import views.GameScreen;
 import views.KabasujiFrame;
+import views.PieceView;
 
+/**
+ * 
+ * @author ejcerini
+ *
+ */
 public class PlayerBoardController extends java.awt.event.MouseAdapter {
-	protected Level level;
+	protected GameScreen gamescreen;
 	protected Square square;
+	protected Level level;
 		
-	public PlayerBoardController(Level level, Square square){
-		this.level = level;
+	public PlayerBoardController(GameScreen gamescreen, Level level, Square square){
+		this.gamescreen = gamescreen;
 		this.square = square;
+		this.level = level;
 	}
 	
 	public void mouseReleased(java.awt.event.MouseEvent me){
 		
-		KabasujiFrame k = level.getFrame();
+		KabasujiFrame k = gamescreen.getFrame();
 		
 		Board b  = level.getBoard();
-		Piece p = k.getActiveDraggingPiece();
+		PieceView p = k.getActiveDraggingPiece();
 		PieceSet src = k.getDragSource();
 		
-		if (p == new Piece())
+		if (p.getPiece() == new Piece())
 			return;
 		
 		Move m = null;
 		
-		boolean successfulMove = false;
 
 		if(src.equals(level.getBullpen())){
-			m = new BullpenToBoardMove(level, p, square);
+			m = new BullpenToBoardMove(level, p.getPiece(), square);
 			if(m.execute()){
-				successfulMove = true;
+				
 			}
 		}
 		else if(src.equals(b)){
-			m = new BoardToBoardMove(level, p, square, k.getOldSquareLocations());
+			m = new BoardToBoardMove(level, p.getPiece(), square, k.getOldSquareLocations());
 			if(m.execute()){
-				successfulMove = true;
+				
 			}
 		}
 	}
+	
+	
 }
