@@ -131,7 +131,7 @@ public class LevelSelect extends JPanel {
 	 * Load the level given by the current index and refresh the level info display. 
 	 */
 	private void updateLevelDisplay() {
-		Level currentLevel = SaveFile.instance().getLevels().get(currentLevelIndex);
+		Level currentLevel = SaveFile.instance().getLevel(currentLevelIndex);
 		int numStars = currentLevel.getNumberOfStars();
 		LevelType lvlType = currentLevel.getLvlType();
 		currentLevelIndexLabel.setText("Level " + (currentLevelIndex + 1));
@@ -139,7 +139,7 @@ public class LevelSelect extends JPanel {
 		levelTypeLabel.setText(lvlType.name()); // TODO should be lowercased?
 		boolean currentLvlComplete = numStars > 0;
 		boolean isFirstLevel = currentLevelIndex == 0;
-		boolean previousLevelComplete = isFirstLevel || (SaveFile.instance().getLevels().get(currentLevelIndex - 1).getNumberOfStars() > 0);
+		boolean previousLevelComplete = isFirstLevel || (SaveFile.instance().getLevel(currentLevelIndex - 1).getNumberOfStars() > 0);
 		boolean currentLevelIsUnlocked = previousLevelComplete;
 		btnPlay.setText(currentLevelIsUnlocked ? "Play" : "Locked");
 		btnPlay.setEnabled(currentLevelIsUnlocked);

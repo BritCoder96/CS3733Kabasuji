@@ -61,7 +61,7 @@ public class SaveFile {
 				return i;
 			}
 		}
-		// must play a level that exists
+		// must get a level that exists
 		throw new IllegalArgumentException("Unknown level number " + levelNumber);
 	}
 	
