@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
+import models.SaveFile;
 import models.Level;
 import models.LevelType;
 import models.Square;
@@ -26,6 +27,7 @@ import views.KabasujiFrame;
  *
  */	
 public class LoadLevelsController implements ActionListener {
+	SaveFile saveFile;
 	KabasujiFrame kframe;
 	String pathToLevelsFolder;
 
@@ -34,7 +36,7 @@ public class LoadLevelsController implements ActionListener {
 	 * 
 	 * @param kframe
 	 */
-	public LoadLevelsController(KabasujiFrame kframe) {
+	public LoadLevelsController(SaveFile saveFile, KabasujiFrame kframe) {
 		this.kframe = kframe;
 		pathToLevelsFolder = "levels/";
 	}
@@ -53,7 +55,7 @@ public class LoadLevelsController implements ActionListener {
 			levels.add(parseData(loadLevel(i)));
 		}
 		
-		// TODO: pass levels to something
+		saveFile.setLevels(levels);
 	}
 	
 	/**

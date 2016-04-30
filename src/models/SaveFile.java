@@ -73,6 +73,10 @@ public class SaveFile {
 		return fileName;
 	}
 	
+	public void setLevels(ArrayList<Level> levels) {
+		this.levels = levels;
+	}
+	
 	public void loadFile(String fileName) {
 		// Do a thing
 	}
