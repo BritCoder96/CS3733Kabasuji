@@ -60,7 +60,7 @@ public class Title extends JPanel {
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPlay.setBounds(332, 244, 120, 45);
 		add(btnPlay);
-		btnPlay.addActionListener(new controllers.MoveToFileSelectController(frame, this));
+		btnPlay.addActionListener(new controllers.MoveToLevelSelectController(frame, this));
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));

@@ -9,21 +9,21 @@ import views.Title;
 
 /**
  * A controller to move from the Player Title to the
- * File Select Screen.
+ * Level Select Screen.
  * 
  * @author bhuchley
  */
-public class MoveToFileSelectController implements ActionListener {
+public class MoveToLevelSelectController implements ActionListener {
 	KabasujiFrame frame;
 	Title title;
 	
 	/**
-	 * The Constructor for the MoveToFileSelectController
+	 * The Constructor for the MoveToLevelSelectController
 	 * 
 	 * @param frame - The static frame that's being passed throughout the application
 	 * @param t - the previous screen, in this case, the Player Title Screen.
 	 */
-	public MoveToFileSelectController(KabasujiFrame frame, Title t) {
+	public MoveToLevelSelectController(KabasujiFrame frame, Title t) {
 		this.frame = frame;
 		this.title = t;
 	}
