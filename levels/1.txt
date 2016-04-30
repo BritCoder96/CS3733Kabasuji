@@ -1,4 +1,4 @@
-PuzzleExample
+1
 PUZZLE
 
 x,x,x,x,x,x
@@ -8,6 +8,6 @@ x,x, ,x,x,x
 x,x, ,x,x,x
 x,x,x,x,x,x
 
-1,11,26,28,7,
-7
-0
+0,1,2,
+2
+2

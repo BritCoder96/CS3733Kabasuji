@@ -41,7 +41,7 @@ public class SaveLevelController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String data = serializeLevel(level);
-		File file = new File("levels/" + level.getLevelName() + ".txt");
+		File file = new File("levels/" + level.getLevelNumber() + ".txt");
 		try {
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -59,7 +59,7 @@ public class SaveLevelController implements ActionListener {
 	 * @return the serialized form of the level
 	 */
 	public static String serializeLevel(Level level) {
-	    String data = level.getLevelName() + "\n" + level.getLvlType() + "\n\n";
+	    String data = level.getLevelNumber() + "\n" + level.getLvlType() + "\n\n";
 	    int numRows = level.getBoard().getRows();
 	    int numCols = level.getBoard().getColumns();
 	    String[][] board = new String[numRows][numCols];

@@ -1,5 +1,7 @@
 package views;
 
+import models.SaveFile;
+
 import java.awt.EventQueue;
 
 import javax.swing.JTextField;

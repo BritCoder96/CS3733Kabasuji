@@ -28,9 +28,8 @@ public class SaveFile {
 	 * @param levels	The Level array
 	 */
 	SaveFile() {
-		// TODO this should be the commented line when not using test levels
-		//this.levels = new ArrayList<Level>(15);
-		this.levels = LevelSelect.TEST_LEVELS;
+		this.levels = new ArrayList<Level>(15);
+		//this.levels = LevelSelect.TEST_LEVELS;
 		fileName = null;
 	}
 	
@@ -47,7 +46,7 @@ public class SaveFile {
 	 * Gets the list of levels.
 	 * @return the list of levels
 	 */
-	public ArrayList<Level> getSaveFile() {
+	public ArrayList<Level> getLevels() {
 		return levels;
 	}
 	
