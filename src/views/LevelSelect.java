@@ -12,13 +12,14 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
-import controllers.NextLevelController;
-import controllers.PreviousLevelController;
 import main.KabasujiMain;
 import models.ExtraLevelLogic;
 import models.Level;
 import models.LevelType;
 import models.SaveFile;
+import controllers.MoveToLevelController;
+import controllers.PreviousLevelController;
+import controllers.NextLevelController;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -49,6 +50,9 @@ public class LevelSelect extends JPanel {
 	JLabel levelTypeLabel;
 	/** The button that allows the user to play the currently selected level. */
 	JButton btnPlay;
+	
+	/** The controller for btnPlay. */
+	MoveToLevelController moveToLevelController;
 	
 	/** The index of the currently selected level in the list of levels. */
 	int currentLevelIndex;
@@ -110,7 +114,8 @@ public class LevelSelect extends JPanel {
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPlay.setBounds(332, 467, 120, 45);
 		add(btnPlay);
-		btnPlay.addActionListener(new controllers.MoveToLevelController(frame, this));
+		moveToLevelController = new MoveToLevelController(SaveFile.instance().getLevel(currentLevelIndex), frame, this);
+		btnPlay.addActionListener(moveToLevelController);
 		
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -143,6 +148,10 @@ public class LevelSelect extends JPanel {
 		boolean currentLevelIsUnlocked = previousLevelComplete;
 		btnPlay.setText(currentLevelIsUnlocked ? "Play" : "Locked");
 		btnPlay.setEnabled(currentLevelIsUnlocked);
+		
+		btnPlay.removeActionListener(moveToLevelController);
+		moveToLevelController = new MoveToLevelController(SaveFile.instance().getLevel(currentLevelIndex), frame, this);
+		btnPlay.addActionListener(moveToLevelController);
 	}
 	
 	public int getCurrentLevelIndex() {

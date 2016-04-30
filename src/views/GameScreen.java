@@ -1,5 +1,7 @@
 package views;
 
+import models.Level;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -29,7 +31,9 @@ import java.awt.Font;
  * @author bhuchley
  */
 public class GameScreen extends JPanel {
-
+	/** The level that the panel will display */
+	private Level level;
+	
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
@@ -38,7 +42,8 @@ public class GameScreen extends JPanel {
 	 * Presumably it should take a level as a parameter eventually but that doesn't work yet
 	 * @param frame the frame to show the screen in
 	 */
-	public GameScreen(KabasujiFrame frame) {
+	public GameScreen(Level level, KabasujiFrame frame) {
+		this.level = level;
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,6 +55,11 @@ public class GameScreen extends JPanel {
 		btnNewButton.setBounds(0, 0, 120, 45);
 		add(btnNewButton);
 		
+		GameBoardView gameboard = new GameBoardView(this, level.getBoard());
+		gameboard.setBounds(10, 88, 356, 356);
+		add(gameboard);
+		
+		/*
 		JPanel gameboard = new JPanel();
 		gameboard.setBounds(10, 88, 356, 356);
 		gameboard.setLayout(new GridLayout(6, 6, 0, 0));
@@ -66,6 +76,7 @@ public class GameScreen extends JPanel {
 			}
 		}
 		add(gameboard);
+		*/
 		
 		JPanel bullpen = new JPanel();
 		bullpen.setBorder(new LineBorder(new Color(0, 0, 0)));
