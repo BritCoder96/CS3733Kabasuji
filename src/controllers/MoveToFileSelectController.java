@@ -3,8 +3,8 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import views.FileSelect;
 import views.KabasujiFrame;
+import views.LevelSelect;
 import views.Title;
 
 /**
@@ -38,7 +38,7 @@ public class MoveToFileSelectController implements ActionListener {
 		title.setVisible(false);
 		
 		//Pass the frame to the new screen
-		FileSelect newPanel = new FileSelect(frame);
+		LevelSelect newPanel = new LevelSelect(frame);
 		
 		//Load the new screen
 		newPanel.setVisible(true);

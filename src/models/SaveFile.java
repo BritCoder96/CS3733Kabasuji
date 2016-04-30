@@ -2,6 +2,8 @@ package models;
 
 import java.util.ArrayList;
 
+import views.LevelSelect;
+
 /**
  * Overarching model class for the Kabasuji game application.
  * 
@@ -26,7 +28,9 @@ public class SaveFile {
 	 * @param levels	The Level array
 	 */
 	SaveFile() {
-		this.levels = new ArrayList<Level>(15);
+		// TODO this should be the commented line when not using test levels
+		//this.levels = new ArrayList<Level>(15);
+		this.levels = LevelSelect.TEST_LEVELS;
 		fileName = null;
 	}
 	
@@ -37,6 +41,14 @@ public class SaveFile {
 	 */
 	public static SaveFile instance() {
 		return inst;
+	}
+	
+	/**
+	 * Gets the list of levels.
+	 * @return the list of levels
+	 */
+	public ArrayList<Level> getSaveFile() {
+		return levels;
 	}
 	
 	/**

@@ -18,6 +18,7 @@ import main.KabasujiMain;
 import models.ExtraLevelLogic;
 import models.Level;
 import models.LevelType;
+import models.SaveFile;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -49,8 +50,6 @@ public class LevelSelect extends JPanel {
 	/** The button that allows the user to play the currently selected level. */
 	JButton btnPlay;
 	
-	/** The levels available to select from. Should include the locked ones. */
-	ArrayList<Level> levels;
 	/** The index of the currently selected level in the list of levels. */
 	int currentLevelIndex;
 
@@ -59,9 +58,8 @@ public class LevelSelect extends JPanel {
 	 * @param frame the frame to show the screen in
 	 * @param levels the list of levels in the game
 	 */
-	public LevelSelect(KabasujiFrame frame, ArrayList<Level> levels) {
+	public LevelSelect(KabasujiFrame frame) {
 		this.frame = frame;
-		this.levels = levels;
 		currentLevelIndex = 0;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -116,13 +114,13 @@ public class LevelSelect extends JPanel {
 		btnPrevious.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPrevious.setBounds(51, 253, 120, 45);
 		add(btnPrevious);
-		btnPrevious.addActionListener(new PreviousLevelController(this, levels));
+		btnPrevious.addActionListener(new PreviousLevelController(this, SaveFile.instance().getSaveFile()));
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNext.setBounds(611, 253, 120, 45);
 		add(btnNext);
-		btnNext.addActionListener(new NextLevelController(this, levels));
+		btnNext.addActionListener(new NextLevelController(this, SaveFile.instance().getSaveFile()));
 		
 		updateLevelDisplay();
 	}
@@ -131,7 +129,7 @@ public class LevelSelect extends JPanel {
 	 * Load the level given by the current index and refresh the level info display. 
 	 */
 	private void updateLevelDisplay() {
-		Level currentLevel = levels.get(currentLevelIndex);
+		Level currentLevel = SaveFile.instance().getSaveFile().get(currentLevelIndex);
 		int numStars = currentLevel.getNumberOfStars();
 		LevelType lvlType = currentLevel.getLvlType();
 		currentLevelIndexLabel.setText("Level " + (currentLevelIndex + 1));
@@ -139,7 +137,7 @@ public class LevelSelect extends JPanel {
 		levelTypeLabel.setText(lvlType.name()); // TODO should be lowercased?
 		boolean currentLvlComplete = numStars > 0;
 		boolean isFirstLevel = currentLevelIndex == 0;
-		boolean previousLevelComplete = isFirstLevel || (levels.get(currentLevelIndex - 1).getNumberOfStars() > 0);
+		boolean previousLevelComplete = isFirstLevel || (SaveFile.instance().getSaveFile().get(currentLevelIndex - 1).getNumberOfStars() > 0);
 		boolean currentLevelIsUnlocked = lvlType == LevelType.PUZZLE && (currentLvlComplete || previousLevelComplete);
 		btnPlay.setText(currentLevelIsUnlocked ? "Play" : "Locked");
 		btnPlay.setEnabled(currentLevelIsUnlocked);
