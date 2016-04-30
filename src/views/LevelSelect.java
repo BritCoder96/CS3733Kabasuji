@@ -65,15 +65,18 @@ public class LevelSelect extends JPanel {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		TEST_LEVELS.add(new Level(1, 6, 0, LevelType.PUZZLE, "Level 1"));
+		TEST_LEVELS.add(new Level(6, 6, 0, LevelType.PUZZLE, "Level 1"));
 		TEST_LEVELS.get(0).setNumberOfStars(3);
-		TEST_LEVELS.add(new Level(2, 3, 1, LevelType.LIGHTNING, "Level 2"));
+		TEST_LEVELS.add(new Level(6, 6, 1, LevelType.LIGHTNING, "Level 2"));
 		TEST_LEVELS.get(1).setNumberOfStars(2);
-		TEST_LEVELS.add(new Level(3, 2, 2, LevelType.RELEASE, "Level 3"));
+		TEST_LEVELS.add(new Level(6, 6, 1, LevelType.RELEASE, "Level 3"));
 		TEST_LEVELS.get(2).setNumberOfStars(1);
 		for (int i = 3; i < 15; i++) {
-			TEST_LEVELS.add(new Level(6, 1, i, LevelType.PUZZLE, "Level " + (i + 1)));
+			TEST_LEVELS.add(new Level(6, 6, i, LevelType.PUZZLE, "Level " + (i + 1)));
 			TEST_LEVELS.get(i).setNumberOfStars(0);
+		}
+		for (int i = 0; i < 15; i++) {
+			TEST_LEVELS.get(i).getBoard().fillWithSquares();
 		}
 		
 		JButton btnBack = new JButton("Back");

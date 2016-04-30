@@ -8,6 +8,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import main.KabasujiMain;
+import models.Piece;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -96,5 +97,8 @@ public class Title extends JPanel {
 		lblStevenHuynh.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblStevenHuynh.setBounds(329, 553, 127, 27);
 		add(lblStevenHuynh);
+
+		// Doing this here so that it's only done once on startup
+		Piece.initializeValidPieces();
 	}
 }

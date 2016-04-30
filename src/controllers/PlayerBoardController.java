@@ -17,7 +17,7 @@ import views.PieceView;
 /**
  * 
  * @author ejcerini
- *
+ * @author bhuchley
  */
 public class PlayerBoardController extends java.awt.event.MouseAdapter {
 	protected GameScreen gamescreen;
@@ -30,30 +30,25 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 		this.level = level;
 	}
 	
-	public void mouseReleased(java.awt.event.MouseEvent me){
-		
-		KabasujiFrame k = gamescreen.getFrame();
+	public void mouseClicked(java.awt.event.MouseEvent me){
 		
 		Board b  = level.getBoard();
-		PieceView p = k.getActiveDraggingPiece();
-		PieceSet src = k.getDragSource();
+		PieceView p = gamescreen.getActiveDraggingWidget();
 		
-		if (p.getPiece() == new Piece())
-			return;
-		
-		Move m = null;
-		
-
-		if(src.equals(level.getBullpen())){
-			m = new BullpenToBoardMove(level, p.getPiece(), square);
-			if(m.execute()){
-				
+		// If no dragging piece, check and see if there's a piece at this point on the board.
+		// If so, start dragging that piece.
+		if (p == null) {
+			Piece coveringPiece = b.getPieceAt(square.getCoordinates().getCol(), square.getCoordinates().getRow());
+			if (coveringPiece == null) {
+				return;
+			} else {
+				b.removePiece(coveringPiece);
+				gamescreen.setActiveDraggingPiece(coveringPiece);
 			}
-		}
-		else if(src.equals(b)){
-			m = new BoardToBoardMove(level, p.getPiece(), square, k.getOldSquareLocations());
-			if(m.execute()){
-				
+		} else {
+			// Place the piece if it's valid. If it worked, tell the game screen to release the widget
+			if (level.getBoard().addPiece(gamescreen.getActiveDraggingWidget().getPiece(), square.getCoordinates())) {
+				gamescreen.releaseActiveDraggingWidget();
 			}
 		}
 	}

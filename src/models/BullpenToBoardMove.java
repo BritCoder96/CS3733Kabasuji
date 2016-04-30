@@ -23,7 +23,7 @@ public class BullpenToBoardMove implements Move {
 			return false;
 		
 		bullpen.removePiece(piece);
-		board.addPiece(piece);
+		board.addPiece(piece, startSquare.getCoordinates());
 		ExtraBoardSquareLogic currentSquare;
 		boolean decremented = false;
 		

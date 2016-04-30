@@ -39,7 +39,7 @@ public class MoveToLevelController implements ActionListener {
 		levelSelect.setVisible(false);
 		
 		//Pass the frame to the next screen
-		GameScreen newPanel = new GameScreen(frame);
+		GameScreen newPanel = new GameScreen(frame, LevelSelect.TEST_LEVELS.get(levelSelect.getCurrentLevelIndex()));
 		
 		//Set the new screen to visible
 		newPanel.setVisible(true);
