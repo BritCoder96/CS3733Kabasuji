@@ -69,7 +69,7 @@ public class SaveLevelController implements ActionListener {
 	    		if (square != null) {
 	    			if (square.getSquareLogic() instanceof ReleaseBoardSquareLogic) {
 	    				board[r][c] = "" + (((ReleaseBoardSquareLogic) square.getSquareLogic()).getNumber()
-	    						+ ((ReleaseBoardSquareLogic) square.getSquareLogic()).getColorOfNumber());
+	    						+ ((ReleaseBoardSquareLogic) square.getSquareLogic()).getColorOfNumber().toString());
 	    			}
 	    			else {
 	    				board[r][c] = "x";

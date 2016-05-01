@@ -1,4 +1,5 @@
 package models;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import junit.framework.TestCase;
@@ -39,12 +40,9 @@ public class TestBoard extends TestCase {
 		Square[] pieceSquares1 = {square1, square2, square3, square4, square5, square6};
 		Square[] pieceSquares2 = {square7, square8, square9, square10, square11, square12};
 
-		
-		HashSet<Piece> pieces = new HashSet<Piece>();
 		Piece piece1 = new Piece(pieceSquares1);
-		pieces.add(piece1);
-		pieces.add(new Piece(pieceSquares2));
-
+		Piece piece2 = new Piece(pieceSquares2);
+		
 		Square square13 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 0,0);
 		Square square14 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 0,1);
 		Square square15 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 0,2);
@@ -58,13 +56,6 @@ public class TestBoard extends TestCase {
 		Square square23 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 0,4);
 		Square square24 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 4,4);
 		Square square25 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 4,5);
-		Square square26 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 4,5);
-		Square square27 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 5,5);
-		Square square28 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 6, 6);
-		Square square29 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 4,6);
-		Square square30 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 6,4);
-		Square square31 = new Square(16777215, SquareTypes.PUZZLEBOARDSQUARE, 5,6);
-		Square square32 = new Square(0, SquareTypes.PUZZLEBOARDSQUARE, 6,5);
 
 		Board board = new Board(6, 6, LevelType.PUZZLE);
 		assertTrue(board.addSquare(square13));
@@ -80,22 +71,15 @@ public class TestBoard extends TestCase {
 		assertTrue(board.addSquare(square23));
 		assertTrue(board.addSquare(square24));
 		assertTrue(board.addSquare(square25));
-		assertTrue(board.addSquare(square26));
-		assertTrue(board.addSquare(square27));
-		assertTrue(board.addSquare(square28));
-		assertTrue(board.addSquare(square29));
-		assertTrue(board.addSquare(square30));
-		assertTrue(board.addSquare(square31));
-		assertTrue(board.addSquare(square32));
-		assertFalse(board.addSquare(square32));
-		board.setPieces(pieces);
+		board.addPiece(piece1, piece1.squares[0].getCoordinates());
+		board.addPiece(piece2, piece2.squares[0].getCoordinates());
+
+		assertTrue(board.getPieces().containsKey(piece1));
+		assertEquals(square25, board.getSquares()[4][5]);
 		
-		assertTrue(board.getPieces().contains(piece1));
-		assertTrue(board.getSquares()[6][5] == square32);
-		
-		assertTrue(board.removeSquare(6, 5));
-		assertTrue(board.getSquares()[6][5] == null);
-		assertFalse(board.removeSquare(6, 5));
+		assertTrue(board.removeSquare(4, 5));
+		assertTrue(board.getSquares()[4][5] == null);
+		assertFalse(board.removeSquare(4, 5));
 
 	}
 }

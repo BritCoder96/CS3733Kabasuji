@@ -1,18 +1,24 @@
 package controllers;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import models.Board;
 import models.BoardToBoardMove;
 import models.Bullpen;
 import models.BullpenToBoardMove;
 import models.ExtraBoardSquareLogic;
 import models.Level;
+import models.LevelType;
 import models.Move;
 import models.Piece;
 import models.PieceSet;
 import models.Square;
 import views.GameScreen;
 import views.KabasujiFrame;
+import views.LevelSelect;
 import views.PieceView;
+import views.Title;
 
 /**
  * 
@@ -49,6 +55,21 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 			// Place the piece if it's valid. If it worked, tell the game screen to release the widget
 			if (level.getBoard().addPiece(gamescreen.getActiveDraggingWidget().getPiece(), square.getCoordinates())) {
 				gamescreen.releaseActiveDraggingWidget();
+				if(level.getLvlType() == LevelType.PUZZLE) {
+					int squaresFilled = 0;
+					for (Piece piece : level.getBoard().getPieces().keySet()) {
+						squaresFilled += piece.getSquares().length;
+					}
+					if (squaresFilled == level.getBoard().getNumberOfSquares() / 3) {
+						level.setNumberOfStars(1);
+					}
+					else if (squaresFilled == level.getBoard().getNumberOfSquares() / 2) {
+						level.setNumberOfStars(2);
+					}
+					else if (squaresFilled == level.getBoard().getNumberOfSquares() / 3) {
+						level.setNumberOfStars(3);
+					}
+				}
 			}
 		}
 	}
