@@ -60,6 +60,10 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 /** The bullpen view */
 	 BullpenView bullpen;
 	 
+	 JComboBox releaseColor;
+	 
+	 JComboBox releaseNumber;
+	 
 	/**
 	 * Create the screen, with a rectangular level and no numbers yet.
 	 * @param frame the frame to show the screen in
@@ -88,17 +92,17 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		
 		JButton btnDelete = new JButton("Edit");
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDelete.setBounds(60, 495, 120, 45);
+		btnDelete.setBounds(46, 495, 127, 45);
 		add(btnDelete);
 		
 		JButton btnDraw = new JButton("Numbers");
 		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDraw.setBounds(192, 552, 120, 45);
+		btnDraw.setBounds(185, 552, 127, 45);
 		add(btnDraw);
 		
 		JButton btnSave = new JButton("Move");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSave.setBounds(324, 552, 120, 45);
+		btnSave.setBounds(324, 552, 127, 45);
 		add(btnSave);
 		
 		JButton btnPublish = new JButton("Save");
@@ -107,7 +111,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPublish.setBounds(588, 495, 120, 45);
+		btnPublish.setBounds(602, 495, 127, 45);
 		add(btnPublish);
 		
 		JButton btnBack = new JButton("Back");
@@ -119,30 +123,30 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		
 		JButton btnAddPiece = new JButton("Add Piece");
 		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnAddPiece.setBounds(324, 494, 120, 46);
+		btnAddPiece.setBounds(324, 495, 127, 45);
 		btnAddPiece.addActionListener(new AddPieceController(frame, this, this));
 		add(btnAddPiece);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Red", "Green", "Yellow"}));
-		comboBox.setBounds(192, 495, 120, 22);
-		add(comboBox);
+		releaseColor = new JComboBox();
+		releaseColor.setModel(new DefaultComboBoxModel(new String[] {"Red", "Green", "Yellow"}));
+		releaseColor.setBounds(185, 495, 127, 22);
+		add(releaseColor);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6"}));
-		comboBox_1.setBounds(192, 518, 120, 22);
-		add(comboBox_1);
+		releaseNumber = new JComboBox();
+		releaseNumber.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6"}));
+		releaseNumber.setBounds(185, 518, 127, 22);
+		add(releaseNumber);
 		
 		undoController = new EditorLevelUndoController(this);
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnUndo.addActionListener(undoController);
-		btnUndo.setBounds(456, 495, 120, 45);
+		btnUndo.setBounds(463, 495, 127, 45);
 		add(btnUndo);
 		
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnRedo.setBounds(456, 552, 120, 45);
+		btnRedo.setBounds(463, 552, 127, 45);
 		add(btnRedo);
 		
 	}

@@ -105,7 +105,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnEdit.setBounds(60, 472, 120, 45);
+		btnEdit.setBounds(46, 472, 127, 45);
 		add(btnEdit);
 		
 		JButton btnMove = new JButton("Move");
@@ -114,12 +114,12 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 			}
 		});
 		btnMove.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnMove.setBounds(192, 520, 120, 45);
+		btnMove.setBounds(185, 520, 127, 45);
 		add(btnMove);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSave.setBounds(456, 472, 120, 45);
+		btnSave.setBounds(463, 472, 127, 45);
 		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
@@ -127,7 +127,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnUndo.addActionListener(undoController);
-		btnUndo.setBounds(324, 472, 120, 45);
+		btnUndo.setBounds(324, 472, 127, 45);
 		add(btnUndo);
 		
 		JButton btnBack = new JButton("Back");
@@ -138,13 +138,13 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		
 		JButton btnAddPiece = new JButton("Add Piece");
 		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnAddPiece.setBounds(192, 472, 120, 46);
+		btnAddPiece.setBounds(185, 471, 127, 45);
 		btnAddPiece.addActionListener(new AddPieceController(frame, this, this));
 		add(btnAddPiece);
 		
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnRedo.setBounds(324, 520, 120, 45);
+		btnRedo.setBounds(324, 520, 127, 45);
 		add(btnRedo);
 	}
 	
