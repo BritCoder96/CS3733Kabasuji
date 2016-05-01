@@ -11,6 +11,8 @@ import models.ExtraBoardSquareLogic;
 import models.Level;
 import models.LevelType;
 import models.LightningLevelLogic;
+import models.PuzzleLevelLogic;
+import models.ReleaseLevelLogic;
 import models.Move;
 import models.Piece;
 import models.PieceSet;
@@ -25,6 +27,7 @@ import views.Title;
  * 
  * @author ejcerini
  * @author bhuchley
+ * @author bjbenson
  */
 public class PlayerBoardController extends java.awt.event.MouseAdapter {
 	protected GameScreen gamescreen;
@@ -58,27 +61,32 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 				gamescreen.releaseActiveDraggingWidget();
 				if(level.getLvlType() == LevelType.LIGHTNING) {
 					int squaresFilled = 0;
+					int numberOfBoaredSquares = level.getBoard().getNumberOfSquares();
 					if (((LightningLevelLogic) level.getLevelLogic()).getRemainingSeconds() > 0) {
 						for (Piece piece : level.getBoard().getPieces().keySet()) {
 							squaresFilled += piece.getSquares().length;
 						}
 					}
 					else {
-						if (squaresFilled == level.getBoard().getNumberOfSquares()) {
+						if (squaresFilled == numberOfBoaredSquares) {
 							level.setNumberOfStars(3);
 							doWin(level);
 						}
-						else if (squaresFilled >= level.getBoard().getNumberOfSquares() - 6 && squaresFilled < level.getBoard().getNumberOfSquares()) {
+						else if (squaresFilled >= numberOfBoaredSquares - 6 && squaresFilled < numberOfBoaredSquares) {
 							level.setNumberOfStars(2);
 							doWin(level);							
 						}
-						else if (squaresFilled >= level.getBoard().getNumberOfSquares() - 12 && squaresFilled  < level.getBoard().getNumberOfSquares() - 6) {
+						else if (squaresFilled >= numberOfBoaredSquares - 12 && squaresFilled  < numberOfBoaredSquares - 6) {
 							level.setNumberOfStars(1);
 							doWin(level);
 						}
 					}
 				}
 				else if(level.getLvlType() == LevelType.PUZZLE) {
+					PuzzleLevelLogic logic = ((PuzzleLevelLogic) level.getLevelLogic());
+					if (logic.getRemainingMoves() > 0) {
+						logic.decrementRemainingMoves();
+					}
 					int totalNumPieces = level.getBullpen().getNumberOfPieces() + level.getBoard().getPieces().size();
 					if (level.getBoard().getPieces().size() == totalNumPieces) {
 						level.setNumberOfStars(3);
@@ -89,6 +97,22 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						doWin(level);
 					}
 					else if (level.getBoard().getPieces().size() == totalNumPieces - 2) {
+						level.setNumberOfStars(1);
+						doWin(level);
+					}
+				}
+				else if(level.getLvlType() == LevelType.RELEASE) {
+					ReleaseLevelLogic logic = ((ReleaseLevelLogic)level.getLevelLogic());
+					int  numUnreleasedSets = logic.getNumberOfUnreleasedSets();
+					if (numUnreleasedSets == 0) {
+						level.setNumberOfStars(3);
+						doWin(level);
+					}
+					else if (numUnreleasedSets == 1) {
+						level.setNumberOfStars(2);
+						doWin(level);
+					}
+					else if (numUnreleasedSets == 2) {
 						level.setNumberOfStars(1);
 						doWin(level);
 					}

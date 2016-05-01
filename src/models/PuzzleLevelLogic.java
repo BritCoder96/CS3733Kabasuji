@@ -14,7 +14,7 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 	private int allottedMoves;
 	
 	/** Number of moves remaining to complete the level. */
-	int remainingMoves;
+	private int remainingMoves;
 	
 	/**
 	 * Constructor to initialize PuzzleLevelLogic fields.
@@ -26,7 +26,7 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 		this.allottedPieces = allottedPieces;
 		this.remainingPieces = allottedPieces;
 		this.setAllottedMoves(allottedMoves);
-		this.remainingMoves = allottedMoves;
+		this.setRemainingMoves(allottedMoves);
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 	 * Decrements the number of moves remaining by one.
 	 */
 	public void decrementRemainingMoves() {
-		remainingMoves--;
+		setRemainingMoves(getRemainingMoves() - 1);
 	}
 
 	public int getAllottedMoves() {
@@ -67,6 +67,14 @@ public class PuzzleLevelLogic implements ExtraLevelLogic{
 	}
 
 	public void incrementRemainingMoves() {
-		remainingMoves++;
+		setRemainingMoves(getRemainingMoves() + 1);
+	}
+
+	public int getRemainingMoves() {
+		return remainingMoves;
+	}
+
+	public void setRemainingMoves(int remainingMoves) {
+		this.remainingMoves = remainingMoves;
 	}
 }
