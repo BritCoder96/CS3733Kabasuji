@@ -40,6 +40,13 @@ public class SaveLevelController implements ActionListener {
 	 * @param e - the actual event that calls the function, i.e. the button press.
 	 */
 	public void actionPerformed(ActionEvent e) {
+		saveLevel();
+	}
+	
+	/**
+	 * Saves a level to a txt file
+	 */
+	public void saveLevel() {
 		String data = serializeLevel(level);
 		File file = new File("levels/" + level.getLevelNumber() + ".txt");
 		try {

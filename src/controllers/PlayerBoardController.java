@@ -66,15 +66,15 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 					else {
 						if (squaresFilled == level.getBoard().getNumberOfSquares()) {
 							level.setNumberOfStars(3);
-							level.setHasWon(true);
+							doWin(level);
 						}
 						else if (squaresFilled >= level.getBoard().getNumberOfSquares() - 6 && squaresFilled < level.getBoard().getNumberOfSquares()) {
 							level.setNumberOfStars(2);
-							level.setHasWon(true);
+							doWin(level);							
 						}
 						else if (squaresFilled >= level.getBoard().getNumberOfSquares() - 12 && squaresFilled  < level.getBoard().getNumberOfSquares() - 6) {
 							level.setNumberOfStars(1);
-							level.setHasWon(true);
+							doWin(level);
 						}
 					}
 				}
@@ -82,20 +82,24 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 					int totalNumPieces = level.getBullpen().getNumberOfPieces() + level.getBoard().getPieces().size();
 					if (level.getBoard().getPieces().size() == totalNumPieces) {
 						level.setNumberOfStars(3);
-						level.setHasWon(true);
+						doWin(level);
 					}
 					else if (level.getBoard().getPieces().size() == totalNumPieces - 1) {
 						level.setNumberOfStars(2);
-						level.setHasWon(true);
+						doWin(level);
 					}
 					else if (level.getBoard().getPieces().size() == totalNumPieces - 2) {
 						level.setNumberOfStars(1);
-						level.setHasWon(true);
+						doWin(level);
 					}
 				}
 			}
 		}
 	}
-	
-	
+
+	private void doWin(Level level) {
+		level.setHasWon(true);
+		SaveLevelController saveLevelController = new SaveLevelController(level);
+		saveLevelController.saveLevel();
+	}
 }
