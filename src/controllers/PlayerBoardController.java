@@ -10,6 +10,7 @@ import models.BullpenToBoardMove;
 import models.ExtraBoardSquareLogic;
 import models.Level;
 import models.LevelType;
+import models.LightningLevelLogic;
 import models.Move;
 import models.Piece;
 import models.PieceSet;
@@ -55,19 +56,41 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 			// Place the piece if it's valid. If it worked, tell the game screen to release the widget
 			if (level.getBoard().addPiece(gamescreen.getActiveDraggingWidget().getPiece(), square.getCoordinates())) {
 				gamescreen.releaseActiveDraggingWidget();
-				if(level.getLvlType() == LevelType.PUZZLE) {
+				if(level.getLvlType() == LevelType.LIGHTNING) {
 					int squaresFilled = 0;
-					for (Piece piece : level.getBoard().getPieces().keySet()) {
-						squaresFilled += piece.getSquares().length;
+					if (((LightningLevelLogic) level.getLevelLogic()).getRemainingSeconds() > 0) {
+						for (Piece piece : level.getBoard().getPieces().keySet()) {
+							squaresFilled += piece.getSquares().length;
+						}
 					}
-					if (squaresFilled == level.getBoard().getNumberOfSquares() / 3) {
-						level.setNumberOfStars(1);
+					else {
+						if (squaresFilled == level.getBoard().getNumberOfSquares()) {
+							level.setNumberOfStars(3);
+							level.setHasWon(true);
+						}
+						else if (squaresFilled >= level.getBoard().getNumberOfSquares() - 6 && squaresFilled < level.getBoard().getNumberOfSquares()) {
+							level.setNumberOfStars(2);
+							level.setHasWon(true);
+						}
+						else if (squaresFilled >= level.getBoard().getNumberOfSquares() - 12 && squaresFilled  < level.getBoard().getNumberOfSquares() - 6) {
+							level.setNumberOfStars(1);
+							level.setHasWon(true);
+						}
 					}
-					else if (squaresFilled == level.getBoard().getNumberOfSquares() / 2) {
-						level.setNumberOfStars(2);
-					}
-					else if (squaresFilled == level.getBoard().getNumberOfSquares() / 3) {
+				}
+				else if(level.getLvlType() == LevelType.PUZZLE) {
+					int totalNumPieces = level.getBullpen().getNumberOfPieces() + level.getBoard().getPieces().size();
+					if (level.getBoard().getPieces().size() == totalNumPieces) {
 						level.setNumberOfStars(3);
+						level.setHasWon(true);
+					}
+					else if (level.getBoard().getPieces().size() == totalNumPieces - 1) {
+						level.setNumberOfStars(2);
+						level.setHasWon(true);
+					}
+					else if (level.getBoard().getPieces().size() == totalNumPieces - 2) {
+						level.setNumberOfStars(1);
+						level.setHasWon(true);
 					}
 				}
 			}

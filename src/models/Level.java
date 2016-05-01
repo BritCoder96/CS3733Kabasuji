@@ -27,6 +27,8 @@ public class Level {
 	private ExtraLevelLogic levelLogic;
 	/** The level name for the level. */
 	String levelName;
+	/** Whether the current player has won that level. */
+	private boolean hasWon;
 	
 	/**
 	 * Constructor for a Level. Used to make a new level in the builder.
@@ -43,6 +45,7 @@ public class Level {
 		setNumberOfStars(0);
 		this.lvlType = lvlType;
 		setLevelName(levelName);
+		setHasWon(false);
 		
 		switch (lvlType) {
 		case PUZZLE:
@@ -246,5 +249,13 @@ public class Level {
 			}
 		}
 		return copy;
+	}
+
+	public boolean isHasWon() {
+		return hasWon;
+	}
+
+	public void setHasWon(boolean hasWon) {
+		this.hasWon = hasWon;
 	}
 }
