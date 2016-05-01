@@ -179,15 +179,15 @@ public class Board extends PieceSet {
 	 * @return whether or not the piece was added (whether or not the placement was valid)
 	 */
 	public boolean addPiece(Piece p, Coordinate c){
-		if (isValidPiecePlacement(p, c.getCol(), c.getRow())) {
+		if (isValidPiecePlacement(p, c.getRow(), c.getCol())) {
 			// Don't actually add the piece in lightning mode
 			if (levelType == LevelType.PUZZLE || levelType == LevelType.RELEASE) {
 				this.pieces.put(p, c);
 			}
 			// Set the squares in the piece to covered/marked
 			for (Square s : p.squares) {
-				int squareX = c.getCol() + s.getCoordinates().getCol();
-				int squareY = c.getRow() + s.getCoordinates().getRow();
+				int squareX = c.getRow() + s.getCoordinates().getRow();
+				int squareY = c.getCol() + s.getCoordinates().getCol();
 				// Set if square to covered in puzzle and release cases, marked in lighting case
 				switch(levelType) {
 				case PUZZLE:
@@ -224,8 +224,8 @@ public class Board extends PieceSet {
 		Coordinate c = pieces.get(p);
 		// Set the squares to uncovered
 		for (Square s : p.squares) {
-			int squareX = c.getCol() + s.getCoordinates().getCol();
-			int squareY = c.getRow() + s.getCoordinates().getRow();
+			int squareX = c.getRow() + s.getCoordinates().getRow();
+			int squareY = c.getCol() + s.getCoordinates().getCol();
 			switch(levelType) {
 			case PUZZLE:
 				PuzzleBoardSquareLogic pbsl = (PuzzleBoardSquareLogic) squares[squareX][squareY].getSquareLogic();
@@ -262,13 +262,14 @@ public class Board extends PieceSet {
 	public boolean isValidPiecePlacement(Piece p, int x, int y) {
 		// For each square, test whether or not that square is valid and unoccupied
 		for (Square s : p.getSquares()) {
-			int squareX = s.getCoordinates().getCol() + x;
-			int squareY = s.getCoordinates().getRow() + y;
+			int squareX = s.getCoordinates().getRow() + x;
+			int squareY = s.getCoordinates().getCol() + y;
 			// Test to see if the square exists
 			if ((squareX < 0) || (squareX >= columns) || (squareY < 0) || (squareY >= rows)) {
 				return false;
 			}
 			if (squares[squareX][squareY] == null) {
+				System.out.println("hole at squareX or squareY");
 				return false;
 			}
 			// Test if square is covered in puzzle and release cases
@@ -316,10 +317,10 @@ public class Board extends PieceSet {
 	 */
 	public Piece getPieceAt(int x, int y) {
 		for (Piece p : pieces.keySet()) {
-			int baseX = pieces.get(p).getCol();
-			int baseY = pieces.get(p).getRow();
+			int baseX = pieces.get(p).getRow();
+			int baseY = pieces.get(p).getCol();
 			for (Square s : p.getSquares()) {
-				if ((s.getCoordinates().getCol() + baseX == x) && (s.getCoordinates().getRow() + baseY == y)) {
+				if ((s.getCoordinates().getRow() + baseX == x) && (s.getCoordinates().getCol() + baseY == y)) {
 					return p;
 				}
 			}

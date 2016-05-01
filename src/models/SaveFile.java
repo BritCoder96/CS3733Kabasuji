@@ -28,9 +28,8 @@ public class SaveFile {
 	 * @param levels	The Level array
 	 */
 	SaveFile() {
-		// TODO this should be the commented line when not using test levels
-		//this.levels = new ArrayList<Level>(15);
-		this.levels = LevelSelect.TEST_LEVELS;
+		this.levels = new ArrayList<Level>(15);
+		//this.levels = LevelSelect.TEST_LEVELS;
 		fileName = null;
 	}
 	
@@ -47,7 +46,7 @@ public class SaveFile {
 	 * Gets the list of levels.
 	 * @return the list of levels
 	 */
-	public ArrayList<Level> getSaveFile() {
+	public ArrayList<Level> getLevels() {
 		return levels;
 	}
 	
@@ -62,7 +61,7 @@ public class SaveFile {
 				return i;
 			}
 		}
-		// must play a level that exists
+		// must get a level that exists
 		throw new IllegalArgumentException("Unknown level number " + levelNumber);
 	}
 	
@@ -71,6 +70,10 @@ public class SaveFile {
 	 */
 	public String getFileName() {
 		return fileName;
+	}
+	
+	public void setLevels(ArrayList<Level> levels) {
+		this.levels = levels;
 	}
 	
 	public void loadFile(String fileName) {

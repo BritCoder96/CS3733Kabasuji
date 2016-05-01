@@ -12,6 +12,7 @@ import controllers.GameSquareDragListener;
 import controllers.MoveDraggingPieceController;
 import controllers.PlayerBoardController;
 import models.Board;
+import models.Square;
 
 /**
  * The view of the board for use in the game. It allows squares to be clicked to drop the
@@ -22,6 +23,8 @@ import models.Board;
  *
  */
 public class GameBoardView extends JPanel {
+	public static final Color lighterGray = new Color(230, 230, 230);
+	public static final Color darkerGray = new Color(200, 200, 200);
 	
 	int rows;
 	int cols;
@@ -38,6 +41,7 @@ public class GameBoardView extends JPanel {
 		// Then add controllers to all of them. If the parent is not release, use generic controller.
 		// Otherwise, use special release controller that checks to see what's selected in the release editor view.
 		this.parent = parent;
+		GameScreen gameScreen = (GameScreen) parent;
 		rows = initialBoard.getRows();
 		cols = initialBoard.getColumns();
 		setLayout(new GridLayout(rows, cols, 0, 0));
@@ -46,15 +50,14 @@ public class GameBoardView extends JPanel {
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				JLabel square = new JLabel();
-				Color squareBackground = (((r+c)%2)==0) ? EditorBoardView.lighterGray : EditorBoardView.darkerGray;
+				Color squareBackground = (((r+c)%2)==0) ? lighterGray : darkerGray;
 				if (initialBoard.getSquares()[r][c] != null) {
 					square.setOpaque(true);
+					// Set on click listener to deal with placing pieces on the square
+					squareControllers[r][c] = new PlayerBoardController(gameScreen, gameScreen.getLevel(), initialBoard.getSquares()[r][c]);
+					square.addMouseListener(squareControllers[r][c]);
 				}
 				square.setBackground(squareBackground);
-				// Set on click listener to deal with placing pieces on the square
-				GameScreen gameScreen = (GameScreen) parent;
-				squareControllers[r][c] = new PlayerBoardController(gameScreen, gameScreen.getLevel(), initialBoard.getSquares()[r][c]);
-				square.addMouseListener(squareControllers[r][c]);
 				square.addMouseMotionListener(new GameSquareDragListener(this, square, gameScreen));
 				squares[r][c] = square;
 				add(square);
@@ -79,6 +82,5 @@ public class GameBoardView extends JPanel {
 				squareControllers[r][c].setBoard(board);
 			}
 		}
-	}
-	*/
+	} */
 }

@@ -1,5 +1,7 @@
 package views;
 
+import models.Level;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -38,7 +40,7 @@ import java.awt.Font;
  * @author bhuchley
  */
 public class GameScreen extends JPanel {
-
+	
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 	
@@ -58,7 +60,7 @@ public class GameScreen extends JPanel {
 	 * Presumably it should take a level as a parameter eventually but that doesn't work yet
 	 * @param frame the frame to show the screen in
 	 */
-	public GameScreen(KabasujiFrame frame, Level l) {
+	public GameScreen(Level level, KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,8 +69,8 @@ public class GameScreen extends JPanel {
 		// Due to the fact that the level is used to keep track of the pieces on the board,
 		// we need to clone the level for this screen.
 		// To score it, we need to use originalLevel.
-		level = l.deepClone();
-		originalLevel = l;
+		this.level = level.deepClone();
+		originalLevel = level;
 		viewsForLevelPiecesOnBoard = new HashMap<Piece, PieceView>();
 		
 		// Add listener for the entire screen to catch mouse movement that's not on a subwidget
@@ -80,11 +82,6 @@ public class GameScreen extends JPanel {
 		GameBoardView boardView = new GameBoardView(this, level.getBoard());
 		boardView.setBounds(10, 88, 356, 356);
 		
-		// TODO put dragging piece in at start for testing, remove later
-		draggingWidget = new PieceView(Piece.allValidPieces[21], boardView.getSquareSize(), 0, 0);
-		add(draggingWidget);
-		viewsForLevelPiecesOnBoard.put(Piece.allValidPieces[21], draggingWidget);
-		
 		add(boardView);
 		
 		JButton btnNewButton = new JButton("Quit");
@@ -94,35 +91,12 @@ public class GameScreen extends JPanel {
 		btnNewButton.addMouseMotionListener(new MoveDraggingPieceController(this));
 		add(btnNewButton);
 		
-		/*JPanel bullpen = new JPanel();
-		bullpen.setBorder(new LineBorder(new Color(0, 0, 0)));
-		bullpen.setBounds(388, 11, 386, 481);
-		add(bullpen);
-		bullpen.setLayout(null);
-		
-		int tileSize = boardView.getHeight() / 6;
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < (3-i); j++) {
-				JLabel lblBox = new JLabel();
-				lblBox.setBackground(new Color(128, 128, 128));
-				lblBox.setBounds(10 + (tileSize * i), 10 + (tileSize * j), tileSize, tileSize);
-				lblBox.setBorder(new LineBorder(Color.BLACK));
-				lblBox.setOpaque(true);
-				bullpen.add(lblBox);
-			}
-		} */
-		
 		Rectangle bullpenBounds = new Rectangle(388, 11, 386, 481);
 		BullpenView bullpen = new BullpenView(boardView.getSquareSize(), bullpenBounds);
 		add(bullpen);
-		bullpen.addPiece(Piece.allValidPieces[18]);
-		bullpen.addPiece(Piece.allValidPieces[13]);
-		bullpen.addPiece(Piece.allValidPieces[22]);
-		bullpen.addPiece(Piece.allValidPieces[6]);
-		level.getBullpen().addPiece(Piece.allValidPieces[18]);
-		level.getBullpen().addPiece(Piece.allValidPieces[13]);
-		level.getBullpen().addPiece(Piece.allValidPieces[22]);
-		level.getBullpen().addPiece(Piece.allValidPieces[6]);
+		for (Piece p : level.getBullpen().getPieces()) {
+			bullpen.addPiece(p);
+		}
 		BullpenGameController bullpenController = new BullpenGameController(bullpen, this);
 		bullpen.addMouseListener(bullpenController);
 		bullpen.addMouseMotionListener(bullpenController);
@@ -169,12 +143,17 @@ public class GameScreen extends JPanel {
 	
 	public void setActiveDraggingPiece(Piece p) {
 		draggingWidget = viewsForLevelPiecesOnBoard.get(p);
+		setComponentZOrder(draggingWidget, 0);
 	}
 	
 	public void setActiveDraggingPiece(PieceView pv) {
 		draggingWidget = pv;
 		viewsForLevelPiecesOnBoard.put(pv.getPiece(), pv);
 		add(pv);
-		setComponentZOrder(pv, 1);
+		setComponentZOrder(pv, 0);
+	}
+	
+	public boolean isOptimizedDrawingEnabled() {
+		return false;
 	}
 }

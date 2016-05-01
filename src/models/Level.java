@@ -13,15 +13,15 @@ import views.KabasujiFrame;
  *
  */
 public class Level {
-	/** The board for the level*/
+	/** The board for the level. */
 	private Board board;
-	/** The bullpen for the level*/
+	/** The bullpen for the level. */
 	private Bullpen bullpen;
-	/** The number of the level*/
+	/** The number of the level. Is a non-negative number. */
 	int levelNumber;
-	/** The number of stars the player received for this level.*/
+	/** The number of stars the player received for this level. */
 	private int numberOfStars;
-	/** The type of the level: Lightning, Release, and Puzzle.*/
+	/** The type of the level: Lightning, Release, and Puzzle. */
 	private LevelType lvlType;
 	/** The level logic for the level. */
 	private ExtraLevelLogic levelLogic;
