@@ -56,65 +56,66 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 				gamescreen.setActiveDraggingPiece(coveringPiece);
 			}
 		} else {
+			Level originalLevel = gamescreen.getOriginalLevel();
 			// Place the piece if it's valid. If it worked, tell the game screen to release the widget
 			if (level.getBoard().addPiece(gamescreen.getActiveDraggingWidget().getPiece(), square.getCoordinates())) {
 				gamescreen.releaseActiveDraggingWidget();
 				if(level.getLvlType() == LevelType.LIGHTNING) {
 					int squaresFilled = 0;
-					int numberOfBoaredSquares = level.getBoard().getNumberOfSquares();
-					if (((LightningLevelLogic) level.getLevelLogic()).getRemainingSeconds() > 0) {
-						for (Piece piece : level.getBoard().getPieces().keySet()) {
+					int numberOfBoaredSquares = originalLevel.getBoard().getNumberOfSquares();
+					if (((LightningLevelLogic) originalLevel.getLevelLogic()).getRemainingSeconds() > 0) {
+						for (Piece piece : originalLevel.getBoard().getPieces().keySet()) {
 							squaresFilled += piece.getSquares().length;
 						}
 					}
 					else {
 						if (squaresFilled == numberOfBoaredSquares) {
-							level.setNumberOfStars(3);
-							doWin(level);
+							originalLevel.setNumberOfStars(3);
+							doWin(originalLevel);
 						}
 						else if (squaresFilled >= numberOfBoaredSquares - 6 && squaresFilled < numberOfBoaredSquares) {
-							level.setNumberOfStars(2);
-							doWin(level);							
+							originalLevel.setNumberOfStars(2);
+							doWin(originalLevel);							
 						}
 						else if (squaresFilled >= numberOfBoaredSquares - 12 && squaresFilled  < numberOfBoaredSquares - 6) {
-							level.setNumberOfStars(1);
-							doWin(level);
+							originalLevel.setNumberOfStars(1);
+							doWin(originalLevel);
 						}
 					}
 				}
-				else if(level.getLvlType() == LevelType.PUZZLE) {
-					PuzzleLevelLogic logic = ((PuzzleLevelLogic) level.getLevelLogic());
+				else if(originalLevel.getLvlType() == LevelType.PUZZLE) {
+					PuzzleLevelLogic logic = ((PuzzleLevelLogic) originalLevel.getLevelLogic());
 					if (logic.getRemainingMoves() > 0) {
 						logic.decrementRemainingMoves();
 					}
-					int totalNumPieces = level.getBullpen().getNumberOfPieces() + level.getBoard().getPieces().size();
-					if (level.getBoard().getPieces().size() == totalNumPieces) {
-						level.setNumberOfStars(3);
-						doWin(level);
+					int totalNumPieces = originalLevel.getBullpen().getNumberOfPieces() + originalLevel.getBoard().getPieces().size();
+					if (originalLevel.getBoard().getPieces().size() == totalNumPieces) {
+						originalLevel.setNumberOfStars(3);
+						doWin(originalLevel);
 					}
-					else if (level.getBoard().getPieces().size() == totalNumPieces - 1) {
-						level.setNumberOfStars(2);
-						doWin(level);
+					else if (originalLevel.getBoard().getPieces().size() == totalNumPieces - 1) {
+						originalLevel.setNumberOfStars(2);
+						doWin(originalLevel);
 					}
-					else if (level.getBoard().getPieces().size() == totalNumPieces - 2) {
-						level.setNumberOfStars(1);
-						doWin(level);
+					else if (originalLevel.getBoard().getPieces().size() == totalNumPieces - 2) {
+						originalLevel.setNumberOfStars(1);
+						doWin(originalLevel);
 					}
 				}
-				else if(level.getLvlType() == LevelType.RELEASE) {
-					ReleaseLevelLogic logic = ((ReleaseLevelLogic)level.getLevelLogic());
+				else if(originalLevel.getLvlType() == LevelType.RELEASE) {
+					ReleaseLevelLogic logic = ((ReleaseLevelLogic)originalLevel.getLevelLogic());
 					int  numUnreleasedSets = logic.getNumberOfUnreleasedSets();
 					if (numUnreleasedSets == 0) {
-						level.setNumberOfStars(3);
-						doWin(level);
+						originalLevel.setNumberOfStars(3);
+						doWin(originalLevel);
 					}
 					else if (numUnreleasedSets == 1) {
-						level.setNumberOfStars(2);
-						doWin(level);
+						originalLevel.setNumberOfStars(2);
+						doWin(originalLevel);
 					}
 					else if (numUnreleasedSets == 2) {
-						level.setNumberOfStars(1);
-						doWin(level);
+						originalLevel.setNumberOfStars(1);
+						doWin(originalLevel);
 					}
 				}
 			}

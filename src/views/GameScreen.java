@@ -12,13 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
+
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
@@ -30,9 +35,13 @@ import controllers.BullpenGameController;
 import controllers.MoveDraggingPieceController;
 import main.KabasujiMain;
 import models.Level;
+import models.LevelType;
+import models.LightningLevelLogic;
 import models.Piece;
+import models.PuzzleLevelLogic;
 
 import javax.swing.border.LineBorder;
+
 import java.awt.Font;
 
 /**
@@ -47,7 +56,7 @@ public class GameScreen extends JPanel {
 	/** The level currently being played */
 	Level level;
 	/** The original model object for the level being played (that we modify when saving score) */
-	Level originalLevel;
+	private Level originalLevel;
 	
 	/** The PieceView currently being dragged, or null if none */
 	PieceView draggingWidget;
@@ -70,7 +79,7 @@ public class GameScreen extends JPanel {
 		// we need to clone the level for this screen.
 		// To score it, we need to use originalLevel.
 		this.level = level.deepClone();
-		originalLevel = level;
+		setOriginalLevel(level);
 		viewsForLevelPiecesOnBoard = new HashMap<Piece, PieceView>();
 		
 		// Add listener for the entire screen to catch mouse movement that's not on a subwidget
@@ -104,12 +113,56 @@ public class GameScreen extends JPanel {
 		StarsDisplay starsDisplay = new StarsDisplay();
 		starsDisplay.setBounds(250, 552, 186, 40);
 		add(starsDisplay);
-		
-		JLabel lblNewLabel_1 = new JLabel("Moves/Time Left");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel_1.setBounds(517, 552, 186, 29);
-		add(lblNewLabel_1);
+		if (level.getLvlType() == LevelType.LIGHTNING) {
+			LightningLevelLogic logic = ((LightningLevelLogic)level.getLevelLogic());
+			JLabel lblNewLabel_1 = new JLabel("Time Left: " + logic.getAllottedSeconds());
+			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+			lblNewLabel_1.setBounds(517, 552, 186, 29);
+			add(lblNewLabel_1);
+		    Timer timer = new Timer();
+			timer.schedule(new DecrementTimer(lblNewLabel_1, logic), 0, 1 * 1000);
+		}
+		else if (level.getLvlType() == LevelType.PUZZLE) {
+			PuzzleLevelLogic logic = ((PuzzleLevelLogic)level.getLevelLogic());
+			JLabel lblNewLabel_1 = new JLabel("Moves Left: " + logic.getRemainingMoves());
+			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+			lblNewLabel_1.setBounds(517, 552, 186, 29);
+			add(lblNewLabel_1);
+			Timer timer = new Timer();
+			timer.schedule(new DecrementMoves(lblNewLabel_1, logic), 0, 1 * 1000);
+		}
 	}
+	
+	 class DecrementTimer extends TimerTask {
+	 	JLabel timeLeftLabel;
+	 	LightningLevelLogic logic;
+	 	DecrementTimer(JLabel timeLeftLabel, LightningLevelLogic logic) {
+	 		this.timeLeftLabel = timeLeftLabel;
+	 		this.logic = logic;
+	 	}
+	 	
+	 	public void run() {
+	 		if (logic.getRemainingSeconds() > 0) {
+	 			logic.decrementRemainingSeconds();
+	 		}
+ 			timeLeftLabel.setText("Time Left " + logic.getRemainingSeconds());
+	 	}
+	}
+	 
+	 class DecrementMoves extends TimerTask {
+		 	JLabel movesLeftLabel;
+		 	PuzzleLevelLogic logic;
+		 	DecrementMoves(JLabel movesLeftLabel, PuzzleLevelLogic logic) {
+		 		this.movesLeftLabel = movesLeftLabel;
+		 		this.logic = logic;
+		 	}
+		 	
+		 	public void run() {
+		 		if (logic.getRemainingMoves() >= 0) {
+		 			movesLeftLabel.setText("Moves Left " + logic.getRemainingMoves());
+		 		}
+		 	}
+		}
 	
 	public KabasujiFrame getFrame(){
 		return frame;
@@ -155,5 +208,13 @@ public class GameScreen extends JPanel {
 	
 	public boolean isOptimizedDrawingEnabled() {
 		return false;
+	}
+
+	public Level getOriginalLevel() {
+		return originalLevel;
+	}
+
+	public void setOriginalLevel(Level originalLevel) {
+		this.originalLevel = originalLevel;
 	}
 }
