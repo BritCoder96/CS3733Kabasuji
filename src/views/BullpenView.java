@@ -12,6 +12,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 /**
  * A view that shows a list of pieces in a bullpen.
@@ -94,5 +96,42 @@ public class BullpenView extends JPanel {
 		// Set the height of the scrolling panel to 0
 		scrollingPanel.setBounds(scrollingPanel.getX(), scrollingPanel.getY(), scrollingPanel.getWidth(), 0);
 		scrollingPanel.setPreferredSize(new Dimension(scrollingPanel.getWidth(), 0));
+	}
+	
+	/**
+	 * Since pieces are stored in a vertical line, this gets the piece at the given y coordinate, if it exists.
+	 * @param y the y coordinate to test
+	 * @return the piece view that covers y, if any. null if none
+	 */
+	public PieceView getPieceAtY(int y) {
+		for (PieceView pv : pieceViews) {
+			int top = pv.getY();
+			int bottom = top + pv.getHeight();
+			if ((top <= y) && (bottom >= y)) {
+				return pv;
+			}
+		}
+		return null;
+	}
+	
+	// For some reason addMouseListener / MouseMotionListener doesn't work without this, probably because
+	// the scroll pane is eating the mouse events.
+	// But this moves the mouse listener to the correct level.
+	
+	// Add the mouse listener to the scrolling panel, as that one is intended to use the scrolled position
+	public void addMouseListener(MouseListener listener) {
+		scrollingPanel.addMouseListener(listener);
+	}
+	// Add the mouse motion listener to the scroll pane, as that one is intended to use the unscrolled position
+	public void addMouseMotionListener(MouseMotionListener listener) {
+		scrollingPanel.addMouseMotionListener(listener);
+	}
+	
+	/**
+	 * Gets the amount by which the scrolling panel is offset from the top.
+	 * @return how far the scrolling panel is offset
+	 */
+	public int getScrollOffset() {
+		return scrollingPanel.getY();
 	}
 }

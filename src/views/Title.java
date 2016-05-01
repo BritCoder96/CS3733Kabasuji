@@ -1,5 +1,7 @@
 package views;
 
+import models.SaveFile;
+
 import java.awt.EventQueue;
 
 import javax.swing.JTextField;
@@ -8,6 +10,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import main.KabasujiMain;
+import models.Piece;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -60,7 +63,7 @@ public class Title extends JPanel {
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPlay.setBounds(332, 244, 120, 45);
 		add(btnPlay);
-		btnPlay.addActionListener(new controllers.MoveToFileSelectController(frame, this));
+		btnPlay.addActionListener(new controllers.MoveToLevelSelectController(frame, this));
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -96,5 +99,8 @@ public class Title extends JPanel {
 		lblStevenHuynh.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblStevenHuynh.setBounds(329, 553, 127, 27);
 		add(lblStevenHuynh);
+
+		// Doing this here so that it's only done once on startup
+		Piece.initializeValidPieces();
 	}
 }

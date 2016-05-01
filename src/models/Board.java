@@ -1,4 +1,5 @@
 package models;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -19,8 +20,8 @@ public class Board extends PieceSet {
 	Square[][] squares;
 	/** The number of squares that make up the board. */
 	int numberOfSquares;
-	/** The pieces that are on the board. */
-	HashSet<Piece> pieces;
+	/** A map of the pieces that are on the board to the locations of their anchor squares. */
+	HashMap<Piece, Coordinate> pieces;
 	
 	
 	/**
@@ -37,6 +38,7 @@ public class Board extends PieceSet {
 		this.columns = columns;
 		squares = new Square[rows][columns];
 		this.levelType = levelType;
+		pieces = new HashMap<Piece, Coordinate>();
 	}
 	
 	/**
@@ -52,11 +54,11 @@ public class Board extends PieceSet {
 	}
 	
 	/**
-	 * Get the board's pieces.
+	 * Get the board's pieces and their associated locations.
 	 * 
-	 * @return the pieces on the board
+	 * @return a map of the pieces on the board to the locations of their anchor squares
 	 * */
-	public HashSet<Piece> getPieces() {
+	public HashMap<Piece, Coordinate> getPieces() {
 		return pieces;
 	}
 	/** Get the board's squares, in the form of a 2d array. If there's no square at a certain point
@@ -167,38 +169,166 @@ public class Board extends PieceSet {
 		}
 		return false;
 	}
-
-	// TODO: remove? pieces are added and removed one at a time
+	
 	/**
-	 * Set the board's pieces.
-	 * 
-	 * @param pieces
+	 * Adds a piece to the board at the given point, if possible. For Puzzle and Release, it adds it to the list of pieces
+	 * on the board and covers all the squares that the piece covers. For Lightning, it just
+	 * marks all the squares the piece covers.
+	 * @param p the piece to add
+	 * @param c the coordinates to add it at
+	 * @return whether or not the piece was added (whether or not the placement was valid)
 	 */
-	public void setPieces(HashSet<Piece> pieces) {
-		this.pieces = pieces;
-	}
-	
-	public boolean addPiece(Piece p){
-		return this.pieces.add(p);
-	}
-	
-	public boolean removePiece(Piece p){
-		return this.pieces.remove(p);
-	}
-	
-	public boolean containsPiece(Piece p){
-		return this.pieces.contains(p);
+	public boolean addPiece(Piece p, Coordinate c){
+		if (isValidPiecePlacement(p, c.getRow(), c.getCol())) {
+			// Don't actually add the piece in lightning mode
+			if (levelType == LevelType.PUZZLE || levelType == LevelType.RELEASE) {
+				this.pieces.put(p, c);
+			}
+			// Set the squares in the piece to covered/marked
+			for (Square s : p.squares) {
+				int squareX = c.getRow() + s.getCoordinates().getRow();
+				int squareY = c.getCol() + s.getCoordinates().getCol();
+				// Set if square to covered in puzzle and release cases, marked in lighting case
+				switch(levelType) {
+				case PUZZLE:
+					PuzzleBoardSquareLogic pbsl = (PuzzleBoardSquareLogic) squares[squareX][squareY].getSquareLogic();
+					pbsl.setCovered(true);
+					break;
+				case RELEASE:
+					ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) squares[squareX][squareY].getSquareLogic();
+					rbsl.setCovered(true);
+					break;
+				case LIGHTNING:
+					LightningBoardSquareLogic lbsl = (LightningBoardSquareLogic) squares[squareX][squareY].getSquareLogic();
+					lbsl.setMarked(true);
+					break;
+				default:
+					break;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	/**
-	 * Gets the level type of the board
+	 * Removes a piece from the list of pieces on the board and uncovers the squares that were covered
+	 * by it. Only works in Puzzle and Release, as it's meaningless in Lightning.
+	 * @param p the piece to remove
+	 * @return whether or not the piece was removed (whether or not it was there)
+	 */
+	public boolean removePiece(Piece p){
+		if (! pieces.containsKey(p)) {
+			return false;
+		}
+		Coordinate c = pieces.get(p);
+		// Set the squares to uncovered
+		for (Square s : p.squares) {
+			int squareX = c.getRow() + s.getCoordinates().getRow();
+			int squareY = c.getCol() + s.getCoordinates().getCol();
+			switch(levelType) {
+			case PUZZLE:
+				PuzzleBoardSquareLogic pbsl = (PuzzleBoardSquareLogic) squares[squareX][squareY].getSquareLogic();
+				pbsl.setCovered(false);
+				break;
+			case RELEASE:
+				ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) squares[squareX][squareY].getSquareLogic();
+				rbsl.setCovered(false);
+				break;
+			default:
+				break;
+			}
+		}
+		pieces.remove(p);
+		return true;
+	}
+	
+	/**
+	 * Gets whether or not a specific piece is on the board.
+	 * @param p the piece to check for
+	 * @return whether or not p is on this board
+	 */
+	public boolean containsPiece(Piece p){
+		return this.pieces.containsKey(p);
+	}
+	
+	/**
+	 * Checks whether or not it is valid to place the given piece with the anchor at the given coordinates.
+	 * @param p the piece to check
+	 * @param x the x coordinate to place the anchor of the piece at
+	 * @param y the y coordinate to place the anchor of the piece at
+	 * @return whether or not the space the piece would take up is valid and unoccupied
+	 */
+	public boolean isValidPiecePlacement(Piece p, int x, int y) {
+		// For each square, test whether or not that square is valid and unoccupied
+		for (Square s : p.getSquares()) {
+			int squareX = s.getCoordinates().getRow() + x;
+			int squareY = s.getCoordinates().getCol() + y;
+			// Test to see if the square exists
+			if ((squareX < 0) || (squareX >= columns) || (squareY < 0) || (squareY >= rows)) {
+				return false;
+			}
+			if (squares[squareX][squareY] == null) {
+				System.out.println("hole at squareX or squareY");
+				return false;
+			}
+			// Test if square is covered in puzzle and release cases
+			switch(levelType) {
+			case PUZZLE:
+				PuzzleBoardSquareLogic pbsl = (PuzzleBoardSquareLogic) squares[squareX][squareY].getSquareLogic();
+				if (pbsl.isCovered) {
+					return false;
+				}
+				break;
+			case RELEASE:
+				ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) squares[squareX][squareY].getSquareLogic();
+				if (rbsl.isCovered) {
+					return false;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Gets the level type of the board.
 	 * @return the level type the board is being used for
 	 */
 	public LevelType getLevelType() {
 		return levelType;
 	}
 	
+	/**
+	 * Get the number of squares on the board.
+	 * @return the number of squares in the board
+	 */
 	public int getNumberOfSquares() {
 		return numberOfSquares;
+	}
+	
+	/**
+	 * Gets the piece covering the given location, or null if there isn't one.
+	 * @param x the x coordinate to check
+	 * @param y the y coordinate to check
+	 * @return the piece that covers (x,y), or null if (x,y) is uncovered
+	 */
+	public Piece getPieceAt(int x, int y) {
+		for (Piece p : pieces.keySet()) {
+			int baseX = pieces.get(p).getRow();
+			int baseY = pieces.get(p).getCol();
+			for (Square s : p.getSquares()) {
+				if ((s.getCoordinates().getRow() + baseX == x) && (s.getCoordinates().getCol() + baseY == y)) {
+					return p;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public Square getSquareAt(int row, int col){
+		return squares[row][col];
 	}
 }

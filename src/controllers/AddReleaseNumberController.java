@@ -1,11 +1,14 @@
 package controllers;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
 import models.Board;
+import models.ReleaseBoardSquareLogic;
+import models.Square;
 import views.LevelModifiedListener;
 import views.ReleaseEditor;
 
@@ -33,16 +36,38 @@ public class AddReleaseNumberController implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		editor.onLevelChanged();
-		boolean wasOff = board.getSquares()[row][col] == null;
-		// Set the square label to be opaque if it exists now, otherwise transparent
-		squareLabel.setOpaque(wasOff);
+		String currentText = squareLabel.getText();
+		
+		String newText = editor.getNumber();
+		Color newColor = editor.getColor();
+		
+		ReleaseBoardSquareLogic thisSquare;
+		
+		boolean hasText = currentText != "";
+		
 		// If the square didn't exist, make a new one in that spot. Otherwise delete the existing one.
-		if (wasOff) {
-			board.addSquareAt(row, col);
-		} else {
-			board.removeSquare(row, col);
+		if(squareLabel.isOpaque()){
+			if (hasText) {
+				squareLabel.setText("");
+				squareLabel.setForeground(Color.BLACK);
+				thisSquare = (ReleaseBoardSquareLogic) board.getSquareAt(row, col).getSquareLogic();
+				thisSquare.setNumber(-1);
+				thisSquare.setColorOfNumber(Color.BLACK);
+				
+			} else {
+				squareLabel.setText(newText);
+				squareLabel.setForeground(newColor);
+				thisSquare = (ReleaseBoardSquareLogic) board.getSquareAt(row, col).getSquareLogic();
+				
+				Character numberData = new Character(newText.charAt(0));
+				int theNumber = Character.getNumericValue(numberData);
+				
+				
+				thisSquare.setNumber(theNumber);
+				thisSquare.setColorOfNumber(newColor);
+			}
+			squareLabel.repaint();
 		}
-		squareLabel.repaint();
 		
 	}
 

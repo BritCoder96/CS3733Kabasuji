@@ -33,6 +33,8 @@ public class PieceView extends JPanel {
 		int cols = piece.getNumCols();
 		setLayout(new GridLayout(rows, cols, 0, 0));
 		setBounds(topLeftX, topLeftY, squareSize * cols, squareSize * rows);
+		setOpaque(false); // so that it doesn't draw a background for the entire pieceview
+							// and only shows the squares we want it to
 		
 		JLabel[][] squareViews = new JLabel[rows][cols];
 		for (int r = 0; r < rows; r++) {
@@ -40,11 +42,14 @@ public class PieceView extends JPanel {
 				JLabel square = new JLabel();
 				square.setBackground(pieceSquareColor);
 				squareViews[r][c] = square;
+				square.setOpaque(false);
+				square.setVisible(false);
 				add(square);
 			}
 		}
 		for (Square s : piece.getSquares()) {
 			squareViews[s.getCoordinates().getRow()][s.getCoordinates().getCol()].setOpaque(true);
+			squareViews[s.getCoordinates().getRow()][s.getCoordinates().getCol()].setVisible(true);
 		}
 	}
 

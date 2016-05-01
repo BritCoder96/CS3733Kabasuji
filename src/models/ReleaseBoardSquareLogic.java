@@ -1,5 +1,7 @@
 package models;
 
+import java.awt.Color;
+
 /**
  * Extra square logic exclusive to squares for a lightning level's board.
  */
@@ -15,14 +17,14 @@ public class ReleaseBoardSquareLogic extends ExtraBoardSquareLogic {
 	 * Associated color hex.
 	 * -1 means that the square doesn't have an associated color.
 	 */
-	int colorOfNumber;
+	Color colorOfNumber;
 	
 	/**
 	 * Constructor to initialize ReleaseBoardSquareLogic fields.
 	 */
 	public ReleaseBoardSquareLogic() {
 		this.number = -1;
-		this.colorOfNumber = -1;
+		this.colorOfNumber = Color.BLACK;
 	}
 	
 	/**
@@ -39,7 +41,7 @@ public class ReleaseBoardSquareLogic extends ExtraBoardSquareLogic {
 	 * 
 	 * @return The associated color hex of the square.
 	 */
-	public int getColorOfNumber() {
+	public Color getColorOfNumber() {
 		return colorOfNumber;
 	}
 	
@@ -48,7 +50,7 @@ public class ReleaseBoardSquareLogic extends ExtraBoardSquareLogic {
 	 * 
 	 * @param number	Number to associate with the square.
 	 */
-	void setNumber(int number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 	
@@ -57,7 +59,7 @@ public class ReleaseBoardSquareLogic extends ExtraBoardSquareLogic {
 	 * 
 	 * @param colorOfNumber	Color hex to associate with the square.
 	 */
-	void setColorOfNumber(int colorOfNumber) {
+	public void setColorOfNumber(Color colorOfNumber) {
 		this.colorOfNumber = colorOfNumber;
 	}
 }

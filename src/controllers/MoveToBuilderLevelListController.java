@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import views.BuilderTitle;
-import views.FileSelect;
 import views.KabasujiFrame;
 import views.LevelList;
 import views.Title;

@@ -3,7 +3,8 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import views.FileSelect;
+import models.Level;
+
 import views.GameScreen;
 import views.KabasujiFrame;
 import views.LevelSelect;
@@ -16,6 +17,7 @@ import views.Title;
  * @author bhuchley
  */
 public class MoveToLevelController implements ActionListener {
+	Level level;
 	KabasujiFrame frame;
 	LevelSelect levelSelect;
 	
@@ -25,7 +27,8 @@ public class MoveToLevelController implements ActionListener {
 	 * @param frame - the static frame that is passed along throughout the application
 	 * @param levelSelect - the previous screen, in this case, the level select screen.
 	 */
-	public MoveToLevelController(KabasujiFrame frame, LevelSelect levelSelect) {
+	public MoveToLevelController(Level level, KabasujiFrame frame, LevelSelect levelSelect) {
+		this.level = level;
 		this.frame = frame;
 		this.levelSelect = levelSelect;
 	}
@@ -40,7 +43,7 @@ public class MoveToLevelController implements ActionListener {
 		levelSelect.setVisible(false);
 		
 		//Pass the frame to the next screen
-		GameScreen newPanel = new GameScreen(frame);
+		GameScreen newPanel = new GameScreen(level, frame);
 		
 		//Set the new screen to visible
 		newPanel.setVisible(true);

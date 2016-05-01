@@ -79,7 +79,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		
 		ell = new ReleaseLevelLogic();
 		
-		level = new Level(boardRows, boardCols, 0, LevelType.RELEASE, levelName);
+		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.RELEASE, levelName);
 		level.setBoard(board);
 		
 		gameboard = new EditorBoardView(this, board, this);
@@ -187,5 +187,24 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		for (Piece p : level.getBullpen().getPieces()) {
 			bullpen.addPiece(p);
 		}
+	}
+
+	public String getNumber() {
+		return (String) releaseNumber.getSelectedItem();
+	}
+
+	public Color getColor() {
+		Color c = Color.BLACK;
+		
+		String color = (String) releaseColor.getSelectedItem();
+		
+		if(color == "Red")
+			c = Color.RED;
+		if(color == "Green")
+			c = Color.GREEN;
+		if(color == "Yellow")
+			c = Color.YELLOW;
+		
+		return c;
 	}
 }

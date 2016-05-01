@@ -20,14 +20,6 @@ public class KabasujiFrame extends JFrame {
 	/** The back stack of panels that the back button uses. */
 	PanelBackManager backMgr;
 	
-	protected PieceView draggingPiece;
-	protected Point draggingAnchor;
-	protected Level level;
-	
-	protected PieceSet dragSource;
-	protected boolean dragging;
-	protected Square[] oldSquareLocations = new Square[6];
-	
 	/**
 	 * Construct a new KabasujiFrame with the given back manager.
 	 * @param backMgr the back manager to use (should be empty)
@@ -53,56 +45,5 @@ public class KabasujiFrame extends JFrame {
 	public void returnToLastContentPane() {
 		super.setContentPane(backMgr.popContainerAndPeek());
 		getContentPane().setVisible(true);
-	}
-	
-	public PieceView getActiveDraggingPiece(){
-		return draggingPiece;
-	}
-	
-	public Point getDraggingAnchor(){
-		return draggingAnchor;
-	}
-	
-	public PieceSet getDragSource() {
-		return dragSource;
-	}
-	
-	public void releaseDraggingPiece(){
-		setDraggingPiece(new PieceView(), null);
-		
-		dragging = false;
-		
-		dragSource = null;
-	}
-	
-	public void setDraggingPiece(PieceView newDraggingPiece, java.awt.event.MouseEvent me){
-		draggingPiece = newDraggingPiece;
-		
-		if(me == null){
-			setDraggingAnchor(null);
-			return;
-		}
-		
-		Point p = new Point(0, 0);
-		setDraggingAnchor(p);
-	}
-
-	private void setDraggingAnchor(Point newDraggingAnchor) {
-		draggingAnchor = newDraggingAnchor;
-	}
-	
-	public void setDragSource(PieceSet newDragSource){
-		if(newDragSource == null)
-			releaseDraggingPiece();
-		else
-			dragSource = newDragSource;
-	}
-	
-	public Square[] getOldSquareLocations(){
-		return this.oldSquareLocations;
-	}
-	
-	public void setOldSquareLocations(Square[] s){
-		oldSquareLocations = s;
 	}
 }
