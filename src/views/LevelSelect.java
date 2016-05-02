@@ -61,6 +61,9 @@ public class LevelSelect extends JPanel {
 	
 	/** The index of the currently selected level in the list of levels. */
 	int currentLevelIndex;
+	
+	/** The index of the last unlocked level in the list of levels. */
+	int lastUnlockedLevelIndex;
 
 	/**
 	 * Load the first level in the list and create the frame showing that level.
@@ -69,6 +72,7 @@ public class LevelSelect extends JPanel {
 	public LevelSelect(KabasujiFrame frame) {
 		this.frame = frame;
 		currentLevelIndex = 0;
+		lastUnlockedLevelIndex = 0;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
@@ -135,6 +139,9 @@ public class LevelSelect extends JPanel {
 		Level currentLevel = SaveFile.instance().getLevel(currentLevelIndex);
 		int numStars = currentLevel.getNumberOfStars();
 		LevelType lvlType = currentLevel.getLvlType();
+		if (numStars > 0 && lastUnlockedLevelIndex < currentLevelIndex + 1) {
+			lastUnlockedLevelIndex = currentLevelIndex + 1;
+		}
 
         // display level info
 		currentLevelIndexLabel.setText("Level " + (currentLevelIndex + 1));
@@ -144,8 +151,9 @@ public class LevelSelect extends JPanel {
         // enable or disable Play button
 		boolean currentLvlComplete = numStars > 0;
 		boolean isFirstLevel = currentLevelIndex == 0;
-		boolean previousLevelComplete = isFirstLevel || (SaveFile.instance().getLevel(currentLevelIndex - 1).getNumberOfStars() > 0);
-		boolean currentLevelIsUnlocked = previousLevelComplete;
+		//boolean previousLevelComplete = isFirstLevel || (SaveFile.instance().getLevel(currentLevelIndex - 1).getNumberOfStars() > 0);
+		//boolean currentLevelIsUnlocked = previousLevelComplete;
+		boolean currentLevelIsUnlocked = currentLevelIndex <= lastUnlockedLevelIndex;
 		btnPlay.setText(currentLevelIsUnlocked ? "Play" : "Locked");
 		btnPlay.setEnabled(currentLevelIsUnlocked);
 		
