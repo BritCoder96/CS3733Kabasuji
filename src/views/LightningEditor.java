@@ -17,6 +17,7 @@ import controllers.IncrementTimeLimitController;
 import controllers.SaveLevelController;
 import main.KabasujiMain;
 import models.Board;
+import models.EditorMode;
 import models.Level;
 import models.LevelType;
 import models.LightningLevelLogic;
@@ -30,7 +31,7 @@ import javax.swing.ImageIcon;
  * @author bhuchley
  * @author ejcerini
  */
-public class LightningEditor extends JPanel implements LevelModifiedListener, LevelSetListener {
+public class LightningEditor extends JPanel implements LevelModifiedListener, LevelSetListener, LevelEditor {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
@@ -69,7 +70,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.LIGHTNING, levelName);
 		level.setBoard(board);
 		
-		gameboard = new EditorBoardView(this, board, this);
+		gameboard = new EditorBoardView(this, board, this, EditorMode.EDIT);
 		gameboard.setBounds(283, 94, 430, 430);
 		add(gameboard);
 		
@@ -168,5 +169,16 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		board = level.getBoard();
 		updateTimeLimitDisplay();
 		gameboard.setVisibleBoard(board);
+	}
+
+	@Override
+	public void setGameBoard(EditorBoardView ebv) {
+		this.gameboard = ebv;
+	}
+
+	@Override
+	public void updateOptionsDisplay(EditorMode em) {
+		// TODO Auto-generated method stub
+		
 	}
 }

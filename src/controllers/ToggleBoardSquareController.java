@@ -19,7 +19,7 @@ import views.LevelModifiedListener;
  * whether or not the square actually exists in the board.
  * @author bhuchley
  */
-public class ToggleBoardSquareController implements MouseListener {
+public class ToggleBoardSquareController implements EditorSquareController {
 	/** The board the square is on */
 	Board board;
 	/** The row of the square */
@@ -79,11 +79,7 @@ public class ToggleBoardSquareController implements MouseListener {
 		// do nothing, we only want to toggle the thing once in mouseClicked
 	}
 	
-	/**
-	 * Set the board that the square is on. Used when the board that is being displayed is reset
-	 * but the views aren't deleted and recreated.
-	 * @param b the board the square is now on
-	 */
+	@Override
 	public void setBoard(Board b) {
 		board = b;
 	}

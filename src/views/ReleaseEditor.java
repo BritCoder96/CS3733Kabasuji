@@ -18,9 +18,11 @@ import javax.swing.border.LineBorder;
 
 import controllers.AddPieceController;
 import controllers.EditorLevelUndoController;
+import controllers.EditorModeController;
 import controllers.GoBackOnePanelController;
 import main.KabasujiMain;
 import models.Board;
+import models.EditorMode;
 import models.Level;
 import models.LevelType;
 import models.Piece;
@@ -39,7 +41,7 @@ import javax.swing.DefaultComboBoxModel;
  * The editor screen for release levels.
  * @author bhuchley
  */
-public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener{
+public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener, LevelEditor{
 
 	/** The frame that the panel is shown in. */
 	 private KabasujiFrame frame;
@@ -82,7 +84,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.RELEASE, levelName);
 		level.setBoard(board);
 		
-		gameboard = new EditorBoardView(this, board, this);
+		gameboard = new EditorBoardView(this, board, this, EditorMode.EDIT);
 		gameboard.setBounds(60, 71, 325, 325);
 		add(gameboard);
 		
@@ -90,29 +92,30 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		add(bullpen);
 		
 		
-		JButton btnDelete = new JButton("Edit");
-		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDelete.setBounds(46, 495, 127, 45);
-		add(btnDelete);
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnEdit.setBounds(46, 495, 127, 45);
+		add(btnEdit);
 		
-		JButton btnDraw = new JButton("Numbers");
-		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDraw.setBounds(185, 552, 127, 45);
-		add(btnDraw);
+		JButton btnNum = new JButton("Numbers");
+		btnNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNum.setBounds(185, 552, 127, 45);
+		btnNum.addActionListener(new EditorModeController(this, this, board, EditorMode.NUMBER));
+		add(btnNum);
 		
-		JButton btnSave = new JButton("Move");
+		JButton btnMove = new JButton("Move");
+		btnMove.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnMove.setBounds(324, 552, 127, 45);
+		add(btnMove);
+		
+		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSave.setBounds(324, 552, 127, 45);
-		add(btnSave);
-		
-		JButton btnPublish = new JButton("Save");
-		btnPublish.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnPublish.addActionListener(new ActionListener() {
+		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPublish.setBounds(602, 495, 127, 45);
-		add(btnPublish);
+		btnSave.setBounds(602, 495, 127, 45);
+		add(btnSave);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -206,5 +209,16 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 			c = Color.YELLOW;
 		
 		return c;
+	}
+	
+	@Override
+	public void setGameBoard(EditorBoardView ebv){
+		this.gameboard = ebv;
+	}
+
+	@Override
+	public void updateOptionsDisplay(EditorMode em) {
+		// TODO Make this do a thing
+		
 	}
 }

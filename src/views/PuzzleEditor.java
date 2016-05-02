@@ -20,6 +20,7 @@ import controllers.IncrementMoveLimitController;
 import controllers.SaveLevelController;
 import main.KabasujiMain;
 import models.Board;
+import models.EditorMode;
 import models.Level;
 import models.LevelType;
 import models.LightningLevelLogic;
@@ -37,7 +38,7 @@ import java.awt.event.ActionEvent;
  * @author ejcerini
  * @author bhuchley
  */
-public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener {
+public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener, LevelEditor {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
@@ -78,7 +79,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.PUZZLE, levelName);
 		level.setBoard(board);
 		
-		gameboard = new EditorBoardView(this, board, this);
+		gameboard = new EditorBoardView(this, board, this, EditorMode.EDIT);
 		gameboard.setBounds(60, 71, 325, 325);
 		add(gameboard);
 		
@@ -192,6 +193,18 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		for (Piece p : level.getBullpen().getPieces()) {
 			bullpen.addPiece(p);
 		}
+	}
+
+	@Override
+	public void setGameBoard(EditorBoardView ebv) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateOptionsDisplay(EditorMode em) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

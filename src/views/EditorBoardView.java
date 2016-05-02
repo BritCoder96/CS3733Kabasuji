@@ -2,12 +2,16 @@ package views;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controllers.AddReleaseNumberController;
+import controllers.EditorSquareController;
 import controllers.ToggleBoardSquareController;
 import models.Board;
+import models.EditorMode;
 
 /**
  * The view of the board for use in the editor. It allows squares to be clicked to toggle 
@@ -25,12 +29,13 @@ public class EditorBoardView extends JPanel {
 	int cols;
 	JPanel parent;
 	JLabel[][] squares;
-	ToggleBoardSquareController[][] squareControllers;
+	EditorSquareController[][] squareControllers;
 
 	/**
 	 * Create the view and add the controllers to each square in it.
+	 * @param em 
 	 */
-	public EditorBoardView(JPanel parent, Board initialBoard, LevelModifiedListener listener) {
+	public EditorBoardView(JPanel parent, Board initialBoard, LevelModifiedListener listener, EditorMode em) {
 		// Make a whole bunch of squares and store them in an array, and set visibility
 		// depending on whether or not the square exists.
 		// Then add controllers to all of them. If the parent is not release, use generic controller.
@@ -40,7 +45,7 @@ public class EditorBoardView extends JPanel {
 		cols = initialBoard.getColumns();
 		setLayout(new GridLayout(rows, cols, 0, 0));
 		squares = new JLabel[rows][cols];
-		squareControllers = new ToggleBoardSquareController[rows][cols];
+		squareControllers = initArray(em);
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				JLabel square = new JLabel();
@@ -50,7 +55,7 @@ public class EditorBoardView extends JPanel {
 				}
 				square.setBackground(squareBackground);
 				// Set on click listener to toggle the square
-				squareControllers[r][c] = new ToggleBoardSquareController(square, initialBoard, r, c, listener);
+				squareControllers[r][c] = setSquareListener(square, initialBoard, r, c, listener, em);
 				square.addMouseListener(squareControllers[r][c]);
 				squares[r][c] = square;
 				add(square);
@@ -67,4 +72,39 @@ public class EditorBoardView extends JPanel {
 			}
 		}
 	}
+	
+	private EditorSquareController[][] initArray(EditorMode em){
+		switch (em){
+		case EDIT:
+			return new ToggleBoardSquareController[rows][cols];
+		case HINT:
+			break;
+		case MOVE:
+			break;
+		case NUMBER:
+			return new AddReleaseNumberController[rows][cols];
+		
+		}
+		
+		return null;
+		
+	}
+	
+	private EditorSquareController setSquareListener(JLabel square, Board initialBoard, int r, int c, LevelModifiedListener listener, EditorMode em){
+		switch(em){
+		case EDIT:
+			return new ToggleBoardSquareController(square, initialBoard, r, c, listener);
+		case HINT:
+			break;
+		case MOVE:
+			break;
+		case NUMBER:
+			return new AddReleaseNumberController(initialBoard, r, c, square, (ReleaseEditor) listener);
+		}
+		
+		
+		return null;
+		
+	}
 }
+
