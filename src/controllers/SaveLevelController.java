@@ -112,7 +112,6 @@ public class SaveLevelController implements ActionListener {
 	    
 	    data = data + "\n";
 	    data = data + level.getNumberOfStars();
-	    System.out.print(data);
 		return data;
 	}
 }

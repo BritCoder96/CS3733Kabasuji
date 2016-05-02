@@ -63,13 +63,15 @@ public class GameScreen extends JPanel {
 	/** The map of pieces on the board to their respective views so that they can be picked up.
 	 * Pieces being dragged around or in the bullpen might show up in this, but they're never going to be used. */
 	HashMap<Piece, PieceView> viewsForLevelPiecesOnBoard;
+	/** The JLabel showing how many moves are left */
+	JLabel movesLeftDisplay;
 
 	/**
 	 * Load the initial state of the level and set the game board and bullpen to it.
 	 * Presumably it should take a level as a parameter eventually but that doesn't work yet
 	 * @param frame the frame to show the screen in
 	 */
-	public GameScreen(Level level, KabasujiFrame frame) {
+	public GameScreen(Level lvl, KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,8 +80,8 @@ public class GameScreen extends JPanel {
 		// Due to the fact that the level is used to keep track of the pieces on the board,
 		// we need to clone the level for this screen.
 		// To score it, we need to use originalLevel.
-		this.level = level.deepClone();
-		setOriginalLevel(level);
+		this.level = lvl.deepClone();
+		setOriginalLevel(lvl);
 		viewsForLevelPiecesOnBoard = new HashMap<Piece, PieceView>();
 		
 		// Add listener for the entire screen to catch mouse movement that's not on a subwidget
@@ -88,7 +90,7 @@ public class GameScreen extends JPanel {
 		setEnabled(true);
 		this.addMouseMotionListener(new MoveDraggingPieceController(this));
 		
-		GameBoardView boardView = new GameBoardView(this, level.getBoard());
+		GameBoardView boardView = new GameBoardView(this, this.level.getBoard());
 		boardView.setBounds(10, 88, 356, 356);
 		
 		add(boardView);
@@ -124,12 +126,10 @@ public class GameScreen extends JPanel {
 		}
 		else if (level.getLvlType() == LevelType.PUZZLE) {
 			PuzzleLevelLogic logic = ((PuzzleLevelLogic)level.getLevelLogic());
-			JLabel lblNewLabel_1 = new JLabel("Moves Left: " + logic.getRemainingMoves());
-			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			lblNewLabel_1.setBounds(517, 552, 186, 29);
-			add(lblNewLabel_1);
-			Timer timer = new Timer();
-			timer.schedule(new DecrementMoves(lblNewLabel_1, logic), 0, 1 * 1000);
+			movesLeftDisplay = new JLabel("Moves Left: " + logic.getRemainingMoves());
+			movesLeftDisplay.setFont(new Font("Tahoma", Font.PLAIN, 24));
+			movesLeftDisplay.setBounds(517, 552, 186, 29);
+			add(movesLeftDisplay);
 		}
 	}
 	
@@ -144,25 +144,12 @@ public class GameScreen extends JPanel {
 	 	public void run() {
 	 		if (logic.getRemainingSeconds() > 0) {
 	 			logic.decrementRemainingSeconds();
+	 		} else {
+				endGame();
 	 		}
  			timeLeftLabel.setText("Time Left " + logic.getRemainingSeconds());
 	 	}
 	}
-	 
-	 class DecrementMoves extends TimerTask {
-		 	JLabel movesLeftLabel;
-		 	PuzzleLevelLogic logic;
-		 	DecrementMoves(JLabel movesLeftLabel, PuzzleLevelLogic logic) {
-		 		this.movesLeftLabel = movesLeftLabel;
-		 		this.logic = logic;
-		 	}
-		 	
-		 	public void run() {
-		 		if (logic.getRemainingMoves() >= 0) {
-		 			movesLeftLabel.setText("Moves Left " + logic.getRemainingMoves());
-		 		}
-		 	}
-		}
 	
 	public KabasujiFrame getFrame(){
 		return frame;
@@ -216,5 +203,18 @@ public class GameScreen extends JPanel {
 
 	public void setOriginalLevel(Level originalLevel) {
 		this.originalLevel = originalLevel;
+	}
+	
+	/**
+	 * Update the moves display label.
+	 * Will cause an error if that label doesn't exist (i.e. in lightning levels)
+	 */
+	public void updateMovesDisplay() {
+		movesLeftDisplay.setText("Moves Left: " + ((PuzzleLevelLogic)level.getLevelLogic()).getRemainingMoves());
+	}
+	
+	public void endGame() {
+		// TODO show game win overlay if won, game loss overlay if lost. can get from originalLevel.getNumStars
+		System.out.println("Ending Game");
 	}
 }

@@ -269,7 +269,6 @@ public class Board extends PieceSet {
 				return false;
 			}
 			if (squares[squareX][squareY] == null) {
-				System.out.println("hole at squareX or squareY");
 				return false;
 			}
 			// Test if square is covered in puzzle and release cases

@@ -120,11 +120,14 @@ public class Level {
 	
 	/**
 	 * Sets the number of stars that the player received in the level.
+	 * If it's set to a number lower than the number of stars the player
+	 * already has, nothing will happen.
 	 * 
 	 * @param numberOfStars	The number of stars that the player received in the level.
 	 */
 	public void setNumberOfStars(int numberOfStars) {
-		this.numberOfStars = numberOfStars;
+		// Number of stars can only go up
+		this.numberOfStars = Math.max(this.numberOfStars,numberOfStars);
 	}
 	
 	/**
