@@ -33,7 +33,7 @@ import views.Title;
 public class MoveToLevelSelectController implements ActionListener {
 	KabasujiFrame frame;
 	Title title;
-	String pathToLevelsFolder;
+	public static String pathToLevelsFolder = "levels/";
 	
 	/**
 	 * The Constructor for the MoveToLevelSelectController
@@ -44,7 +44,6 @@ public class MoveToLevelSelectController implements ActionListener {
 	public MoveToLevelSelectController(KabasujiFrame frame, Title t) {
 		this.frame = frame;
 		this.title = t;
-		pathToLevelsFolder = "levels/";
 	}
 
 	/**

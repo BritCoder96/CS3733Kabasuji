@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
  * The overlay that appears in the builder when adding another piece to a puzzle or release level.
  * @author ejcerini
  * @author bhuchley
+ * @author bjbenson
  */
 public class AddPieceOverlay extends JPanel {
 
@@ -32,6 +33,7 @@ public class AddPieceOverlay extends JPanel {
 	
 	/** The listener that the selected piece should be added to */
 	private AddPieceListener thingToAddTo;
+	private BullpenView bpView;
 
 	/**
 	 * Create the frame. Right now it just makes a blank window with a header, no pieces appear yet.
@@ -56,7 +58,7 @@ public class AddPieceOverlay extends JPanel {
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
-		BullpenView bpView = new BullpenView(this.getWidth() / 8, new Rectangle(0, 75, 700, 500));
+		bpView = new BullpenView(this.getWidth() / 8, new Rectangle(0, 75, 700, 500));
 		add(bpView);
 		
 		for (Piece p : Piece.allValidPieces) {
@@ -66,6 +68,14 @@ public class AddPieceOverlay extends JPanel {
 		}
 		bpView.repaint();
 
+	}
+	
+	/**
+	 * Gets the BullpenView
+	 * @return the BullpenView
+	 */
+	public BullpenView getBullpenView() {
+		return bpView;
 	}
 
 }
