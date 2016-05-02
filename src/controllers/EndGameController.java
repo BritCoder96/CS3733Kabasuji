@@ -14,7 +14,7 @@ public class EndGameController {
 		
 		if (level.getHasWon()) {
 			//Pass the frame to the new screen
-			GameWinOverlay newPanel = new GameWinOverlay(frame);
+			GameWinOverlay newPanel = new GameWinOverlay(level.getNumberOfStars(), frame);
 			//Load the new screen
 			newPanel.setVisible(true);
 			

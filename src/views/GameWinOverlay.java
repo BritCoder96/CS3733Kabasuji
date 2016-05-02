@@ -16,7 +16,9 @@ import java.awt.event.ActionEvent;
  * @author bhuchley
  */
 public class GameWinOverlay extends JPanel {
-
+	/** The number of stars to display. */
+	int numberOfStars;
+	
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
@@ -24,13 +26,14 @@ public class GameWinOverlay extends JPanel {
 	 * Create the overlay, getting the score of the completed level.
 	 * @param frame the frame to show the screen in
 	 */
-	public GameWinOverlay(KabasujiFrame frame) {
+	public GameWinOverlay(int numberOfStars, KabasujiFrame frame) {
+		this.numberOfStars = numberOfStars;
 		this.frame = frame;
 		setBounds(100, 100, 300, 250);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		StarsDisplay starsDisplay = new StarsDisplay();
+		StarsDisplay starsDisplay = new StarsDisplay(numberOfStars);
 		starsDisplay.setBounds(49, 66, 186, 40);
 		add(starsDisplay);
 		
@@ -44,9 +47,10 @@ public class GameWinOverlay extends JPanel {
 		lblScore.setBounds(104, 112, 76, 27);
 		add(lblScore);
 		
-		JButton btnLevelSelct = new JButton("Level Select");
-		btnLevelSelct.setBounds(35, 177, 109, 23);
-		add(btnLevelSelct);
+		JButton btnLevelSelect = new JButton("Level Select");
+		btnLevelSelect.addActionListener(new returnToLevelSelectController());
+		btnLevelSelect.setBounds(35, 177, 109, 23);
+		add(btnLevelSelect);
 		
 		JButton btnReplay = new JButton("Replay");
 		btnReplay.addActionListener(new ActionListener() {
@@ -63,5 +67,14 @@ public class GameWinOverlay extends JPanel {
 		});
 		btnNextLevel.setBounds(91, 150, 102, 23);
 		add(btnNextLevel);
+	}
+	
+	class returnToLevelSelectController implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			frame.returnToLastContentPane();
+			frame.returnToLastContentPane();
+		}
+		
 	}
 }

@@ -115,8 +115,12 @@ public class LevelSelect extends JPanel {
 		btnNext.setBounds(611, 253, 120, 45);
 		add(btnNext);
 		btnNext.addActionListener(new NextLevelController(this, SaveFile.instance().getLevels()));
-		
+	}
+	
+	@Override
+	public void setVisible(boolean aFlag) {
 		updateLevelDisplay();
+		super.setVisible(aFlag);
 	}
 	
 	/** 
