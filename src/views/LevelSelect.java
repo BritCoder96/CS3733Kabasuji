@@ -180,4 +180,12 @@ public class LevelSelect extends JPanel {
 	public JButton getBtnPlay() {
 		return btnPlay;
 	}
+	
+	/**
+	 * gets the next btn for the next level
+	 * @return the next btn
+	 */
+	public JButton getBtnNext() {
+		return btnNext;
+	}
 }

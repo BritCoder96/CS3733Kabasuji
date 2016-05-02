@@ -37,6 +37,7 @@ import java.awt.event.ActionEvent;
  * The editor screen for puzzle levels.
  * @author ejcerini
  * @author bhuchley
+ * @author bjbenson
  */
 public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener, LevelEditor {
 
@@ -62,6 +63,8 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	BullpenView bullpen;
 	/** the button to go back to the new level screen */
 	private JButton btnBack;
+	/** the button to open the piece overlay to add a piece */
+	private JButton btnAddPiece;
 
 	/**
 	 * Create the editor screen, with a rectangular level and no pieces.
@@ -139,7 +142,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
-		JButton btnAddPiece = new JButton("Add Piece");
+		btnAddPiece = new JButton("Add Piece");
 		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnAddPiece.setBounds(185, 471, 127, 45);
 		btnAddPiece.addActionListener(new AddPieceController(frame, this, this));
@@ -215,6 +218,13 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	 */
 	public JButton getBtnBack() {
 		return btnBack;
+	}
+	/**
+	 * Gets the add Piece button
+	 * @return the add Piece button
+	 */
+	public JButton getBtnAddPiece() {
+		return btnAddPiece;
 	}
 
 }
