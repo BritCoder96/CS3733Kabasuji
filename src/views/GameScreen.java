@@ -33,6 +33,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controllers.BullpenGameController;
+import controllers.EndGameController;
 import controllers.MoveDraggingPieceController;
 import main.KabasujiMain;
 import models.Level;
@@ -223,9 +224,8 @@ public class GameScreen extends JPanel {
 	}
 	
 	public void endGame() {
-		// TODO show game win overlay if won, game loss overlay if lost. can get from originalLevel.getNumStars
-		System.out.println("Ending Game");
-  }
+		new EndGameController(originalLevel, frame, this);
+	}
 
 	public BullpenView getBullpen() {
 		return bullpen;

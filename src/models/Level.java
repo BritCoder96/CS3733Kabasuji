@@ -187,6 +187,15 @@ public class Level {
 	}
 	
 	/**
+	 * Gets whether or not the player has won the level.
+	 * 
+	 * @return whether or not the player has won the level.
+	 */
+	public boolean getHasWon() {
+		return hasWon;
+	}
+	
+	/**
 	 * Sets the bullpen associated with the level.
 	 * 
 	 * @param bullpen	The bullpen to be associated with the level.

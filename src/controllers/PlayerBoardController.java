@@ -11,7 +11,9 @@ import models.BullpenToBoardMove;
 import models.ExtraBoardSquareLogic;
 import models.Level;
 import models.LevelType;
+import models.LightningBoardSquareLogic;
 import models.LightningLevelLogic;
+import models.PuzzleBoardSquareLogic;
 import models.PuzzleLevelLogic;
 import models.ReleaseLevelLogic;
 import models.Move;
@@ -57,32 +59,42 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 				gamescreen.setActiveDraggingPiece(coveringPiece);
 			}
 		} else {
+			int markedSquares = 0;
 			// Place the piece if it's valid. If it worked, tell the game screen to release the widget
+			if(level.getLvlType() == LevelType.LIGHTNING) {
+				for (Square s : p.getPiece().getSquares()) {
+					int squareX = square.getCoordinates().getRow() + s.getCoordinates().getRow();
+					int squareY = square.getCoordinates().getCol() + s.getCoordinates().getCol();
+					LightningBoardSquareLogic lsbl = (LightningBoardSquareLogic)level.getBoard().getSquareAt(squareX, squareY).getSquareLogic();
+					if (!lsbl.getMarked()) {
+						markedSquares++;
+					}
+				}
+			}
 			if (level.getBoard().addPiece(gamescreen.getActiveDraggingWidget().getPiece(), square.getCoordinates())) {
 				Level originalLevel = gamescreen.getOriginalLevel(); // in case level was won
 				gamescreen.releaseActiveDraggingWidget();
 				if(level.getLvlType() == LevelType.LIGHTNING) {
-					int squaresFilled = 0;
 					Random rand = new Random();
 					Piece[] pieces = Piece.allValidPieces;
 					gamescreen.getBullpen().addPiece(pieces[rand.nextInt(pieces.length -1)]);
 					LightningLevelLogic logic = ((LightningLevelLogic) originalLevel.getLevelLogic());
-					if (logic.getRemainingSeconds() > 0) {
+					for (int i = 0; i < markedSquares; i++) {
 						logic.decrementUnmarkedSquares();
-						System.out.println(logic.getUnmarkedSquares());
-						if (logic.getUnmarkedSquares() == 0) {
-							originalLevel.setNumberOfStars(3);
-							saveStars(originalLevel);
-							gamescreen.endGame();
-						}
-						else if (logic.getUnmarkedSquares() <= 6 && logic.getUnmarkedSquares() > 12) {
-							originalLevel.setNumberOfStars(2);
-							saveStars(originalLevel);							
-						}
-						else if (logic.getUnmarkedSquares() <= 12 && logic.getUnmarkedSquares() > 6) {
-							originalLevel.setNumberOfStars(1);
-							saveStars(originalLevel);
-						}
+					}
+					System.out.println(logic.getUnmarkedSquares());
+					if (logic.getUnmarkedSquares() == 0) {
+						originalLevel.setNumberOfStars(3);
+						saveStars(originalLevel);
+						gamescreen.endGame();
+					}
+					else if (logic.getUnmarkedSquares() <= 6 && logic.getUnmarkedSquares() > 0) {
+						originalLevel.setNumberOfStars(2);
+						saveStars(originalLevel);							
+					}
+					else if (logic.getUnmarkedSquares() <= 12 && logic.getUnmarkedSquares() > 6) {
+						originalLevel.setNumberOfStars(1);
+						saveStars(originalLevel);
 					}
 				}
 				else if(level.getLvlType() == LevelType.PUZZLE) {
