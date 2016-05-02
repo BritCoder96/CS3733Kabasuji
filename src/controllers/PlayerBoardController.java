@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 import models.Board;
 import models.BoardToBoardMove;
@@ -62,23 +63,23 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 				gamescreen.releaseActiveDraggingWidget();
 				if(level.getLvlType() == LevelType.LIGHTNING) {
 					int squaresFilled = 0;
-					int numberOfBoaredSquares = level.getBoard().getNumberOfSquares();
-					if (((LightningLevelLogic) level.getLevelLogic()).getRemainingSeconds() > 0) {
-						for (Piece piece : level.getBoard().getPieces().keySet()) {
-							squaresFilled += piece.getSquares().length;
-						}
-					}
-					else {
-						if (squaresFilled == numberOfBoaredSquares) {
+					Random rand = new Random();
+					Piece[] pieces = Piece.allValidPieces;
+					gamescreen.getBullpen().addPiece(pieces[rand.nextInt(pieces.length -1)]);
+					LightningLevelLogic logic = ((LightningLevelLogic) originalLevel.getLevelLogic());
+					if (logic.getRemainingSeconds() > 0) {
+						logic.decrementUnmarkedSquares();
+						System.out.println(logic.getUnmarkedSquares());
+						if (logic.getUnmarkedSquares() == 0) {
 							originalLevel.setNumberOfStars(3);
 							saveStars(originalLevel);
 							gamescreen.endGame();
 						}
-						else if (squaresFilled >= numberOfBoaredSquares - 6 && squaresFilled < numberOfBoaredSquares) {
+						else if (logic.getUnmarkedSquares() <= 6 && logic.getUnmarkedSquares() > 12) {
 							originalLevel.setNumberOfStars(2);
 							saveStars(originalLevel);							
 						}
-						else if (squaresFilled >= numberOfBoaredSquares - 12 && squaresFilled  < numberOfBoaredSquares - 6) {
+						else if (logic.getUnmarkedSquares() <= 12 && logic.getUnmarkedSquares() > 6) {
 							originalLevel.setNumberOfStars(1);
 							saveStars(originalLevel);
 						}

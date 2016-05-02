@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.ActionEvent;
@@ -52,7 +53,7 @@ public class GameScreen extends JPanel {
 	
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
-	
+	private BullpenView bullpen;
 	/** The level currently being played */
 	Level level;
 	/** The original model object for the level being played (that we modify when saving score) */
@@ -103,10 +104,17 @@ public class GameScreen extends JPanel {
 		add(btnNewButton);
 		
 		Rectangle bullpenBounds = new Rectangle(388, 11, 386, 481);
-		BullpenView bullpen = new BullpenView(boardView.getSquareSize(), bullpenBounds);
+		bullpen = new BullpenView(boardView.getSquareSize(), bullpenBounds);
 		add(bullpen);
 		for (Piece p : level.getBullpen().getPieces()) {
 			bullpen.addPiece(p);
+		}
+		if (level.getLvlType() == LevelType.LIGHTNING) {
+			Random rand = new Random();
+			Piece[] pieces = Piece.allValidPieces;
+			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
+			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
+			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
 		}
 		BullpenGameController bullpenController = new BullpenGameController(bullpen, this);
 		bullpen.addMouseListener(bullpenController);
@@ -117,6 +125,7 @@ public class GameScreen extends JPanel {
 		add(starsDisplay);
 		if (level.getLvlType() == LevelType.LIGHTNING) {
 			LightningLevelLogic logic = ((LightningLevelLogic)level.getLevelLogic());
+			logic.setRemainingSeconds(logic.getAllottedSeconds());
 			JLabel lblNewLabel_1 = new JLabel("Time Left: " + logic.getAllottedSeconds());
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			lblNewLabel_1.setBounds(517, 552, 186, 29);
@@ -216,5 +225,9 @@ public class GameScreen extends JPanel {
 	public void endGame() {
 		// TODO show game win overlay if won, game loss overlay if lost. can get from originalLevel.getNumStars
 		System.out.println("Ending Game");
+  }
+
+	public BullpenView getBullpen() {
+		return bullpen;
 	}
 }
