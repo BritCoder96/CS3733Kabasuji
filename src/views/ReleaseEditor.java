@@ -218,7 +218,12 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	
 	@Override
 	public void setGameBoard(EditorBoardView ebv){
+		remove(this.gameboard);
 		this.gameboard = ebv;
+		gameboard.setBounds(60, 71, 325, 325);
+		add(gameboard);
+		revalidate();
+		repaint();
 	}
 
 	@Override

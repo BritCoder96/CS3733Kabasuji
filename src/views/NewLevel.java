@@ -86,7 +86,7 @@ public class NewLevel extends JPanel {
 		add(lblLevelName);
 		
 		txtInsertNameHere = new JTextField();
-		txtInsertNameHere.setText("Insert Name Here");
+		txtInsertNameHere.setText("0");
 		txtInsertNameHere.setBounds(339, 95, 156, 22);
 		add(txtInsertNameHere);
 		txtInsertNameHere.setColumns(10);

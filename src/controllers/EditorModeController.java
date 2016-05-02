@@ -25,12 +25,11 @@ public class EditorModeController implements ActionListener {
 		this.em = em;
 		this.board = board;
 	}
-	
+
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.print(em);
 		((LevelEditor) listener).setGameBoard(new EditorBoardView(gamescreen, board, listener, em));
 		((LevelEditor) listener).updateOptionsDisplay(em);
 	}

@@ -59,10 +59,10 @@ public class AddReleaseNumberController implements EditorSquareController{
 	public void mouseClicked(MouseEvent e) {
 		//Record the current state of the level
 		editor.onLevelChanged();
-		
+				
 		//Gets the value currently showing on the label 
 		String currentText = squareLabel.getText();
-		
+				
 		//Get the number and color to be added
 		String newText = editor.getNumber();
 		Color newColor = editor.getColor();
@@ -72,14 +72,14 @@ public class AddReleaseNumberController implements EditorSquareController{
 		thisSquare = (ReleaseBoardSquareLogic) board.getSquareAt(row, col).getSquareLogic();
 		
 		//Checks whether or not the Jlabel currently has text.
-		boolean hasText = currentText != null;
+		boolean hasText = currentText != "";
 		
 		//If we're dealing with an active square
 		if(squareLabel.isOpaque()){
 			//And the JLabel /has/ text
 			if (hasText) {
 				//Get rid of the text. We don't want it.
-				squareLabel.setText(null);
+				squareLabel.setText("");
 				squareLabel.setForeground(Color.black);
 				
 				//Set the information of the square to reflect the fact that it no longer has a number
