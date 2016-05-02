@@ -32,6 +32,8 @@ public class Title extends JPanel {
 
 	/** The frame that the panel is shown in. */
 	KabasujiFrame frame;
+	JButton btnPlay;
+	
 
 	/**
 	 * Create the screen.
@@ -59,7 +61,7 @@ public class Title extends JPanel {
 		lblATileLaying.setBounds(265, 163, 253, 39);
 		add(lblATileLaying);
 		
-		JButton btnPlay = new JButton("Play");
+		btnPlay = new JButton("Play");
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPlay.setBounds(332, 244, 120, 45);
 		add(btnPlay);
@@ -102,5 +104,13 @@ public class Title extends JPanel {
 
 		// Doing this here so that it's only done once on startup
 		Piece.initializeValidPieces();
+	}
+	
+	/**
+	 * gets the play btn for testing
+	 * @return the play btn
+	 */
+	public JButton getBtnPlay() {
+		return btnPlay;
 	}
 }

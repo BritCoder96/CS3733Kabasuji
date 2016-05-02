@@ -82,7 +82,6 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 					for (int i = 0; i < markedSquares; i++) {
 						logic.decrementUnmarkedSquares();
 					}
-					System.out.println(logic.getUnmarkedSquares());
 					if (logic.getUnmarkedSquares() == 0) {
 						originalLevel.setNumberOfStars(3);
 						saveStars(originalLevel);

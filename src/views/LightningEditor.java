@@ -30,6 +30,7 @@ import javax.swing.ImageIcon;
  * The screen that allows the user to edit a lightning level.
  * @author bhuchley
  * @author ejcerini
+ * @author bjbenson
  */
 public class LightningEditor extends JPanel implements LevelModifiedListener, LevelSetListener, LevelEditor {
 
@@ -51,6 +52,8 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	JLabel timeLimitLabel;
 	/** The panel that shows the board */
 	EditorBoardView gameboard;
+	/** the button to go back to the new level screen */
+	private JButton btnBack;
 
 	/**
 	 * Create the frame with an rectangular lightning level of the specified size and time.
@@ -109,7 +112,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		btnUndo.addActionListener(undoController);
 		add(btnUndo);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(10, 10, 120, 45);
 		add(btnBack);
@@ -180,5 +183,13 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	public void updateOptionsDisplay(EditorMode em) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/**
+	 * Gets the back button
+	 * @return the back button
+	 */
+	public JButton getBtnBack() {
+		return btnBack;
 	}
 }

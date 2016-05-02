@@ -15,22 +15,26 @@ import controllers.GoBackOnePanelController;
 import controllers.MoveToBuilderLevelListController;
 import main.KabasujiMain;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JScrollBar;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
  * The screen that shows the list of existing levels and allows you to select one to edit or delete.
  * @author ejcerini
+ * @author bjbenson
  */
 public class LevelList extends JPanel {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
+	private JButton btnNew;
 	/**
 	 * Get the existing levels and make the frame to show them.
 	 * @param frame the frame to show the screen in
@@ -143,7 +147,7 @@ public class LevelList extends JPanel {
 		lblPuzzle_1.setBounds(221, 0, 232, 50);
 		panel_5.add(lblPuzzle_1);
 		
-		JButton btnNew = new JButton("New");
+		btnNew = new JButton("New");
 		btnNew.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNew.setBounds(504, 480, 120, 45);
 		add(btnNew);
@@ -162,5 +166,13 @@ public class LevelList extends JPanel {
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDelete.setBounds(332, 480, 120, 45);
 		add(btnDelete);
+	}
+	
+	/**
+	 * Gets the new level button
+	 * @return the btn
+	 */
+	public JButton getBtnNew() {
+		return btnNew;
 	}
 }

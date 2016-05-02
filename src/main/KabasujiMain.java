@@ -31,4 +31,13 @@ public class KabasujiMain {
 		frame.setBounds(KabasujiMain.windowSize);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	/**
+	 * returns the frame of the game.
+	 * 
+	 * @return the frame of the game
+	 */
+	public KabasujiFrame getFrame() {
+		return frame;
+	}
 }

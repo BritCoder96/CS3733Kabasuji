@@ -26,4 +26,12 @@ public class KabuildsujiMain {
 		frame.setBounds(KabuildsujiMain.windowSize);
 		frame.setDefaultCloseOperation(KabasujiFrame.EXIT_ON_CLOSE);		
 	}
+
+	/** gets the frame
+	 * 
+	 * @return the frame
+	 */
+	public KabasujiFrame getFrame() {
+		return frame;
+	}
 }

@@ -40,6 +40,7 @@ import javax.swing.DefaultComboBoxModel;
 /**
  * The editor screen for release levels.
  * @author bhuchley
+ * @author bjbenson
  */
 public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener, LevelEditor{
 
@@ -65,6 +66,10 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 JComboBox releaseColor;
 	 
 	 JComboBox releaseNumber;
+	/** the button to go back to the new level screen */
+	private JButton btnBack;
+	/** the button to save the level */
+	private JButton btnSave;
 	 
 	/**
 	 * Create the screen, with a rectangular level and no numbers yet.
@@ -108,7 +113,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		btnMove.setBounds(324, 552, 127, 45);
 		add(btnMove);
 		
-		JButton btnSave = new JButton("Save");
+		btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,7 +122,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		btnSave.setBounds(602, 495, 127, 45);
 		add(btnSave);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBack.setBounds(10, 10, 120, 45);
 		add(btnBack);
@@ -220,5 +225,21 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	public void updateOptionsDisplay(EditorMode em) {
 		// TODO Make this do a thing
 		
+	}
+	
+	/**
+	 * Gets the back button
+	 * @return the back button
+	 */
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+	
+	/**
+	 * Gets the save button
+	 * @return the save button
+	 */
+	public JButton getBtnSave() {
+		return btnSave;
 	}
 }

@@ -30,6 +30,7 @@ import javax.swing.SwingConstants;
 /**
  * The screen from which the player can select which unlocked level to play.
  * @author bhuchley
+ * @author bjbenson
  */
 public class LevelSelect extends JPanel {
 	
@@ -157,5 +158,13 @@ public class LevelSelect extends JPanel {
 	public void moveToNextLevel() {
 		currentLevelIndex++;
 		updateLevelDisplay();
+	}
+	
+	/**
+	 * gets the play btn for testing
+	 * @return the play btn
+	 */
+	public JButton getBtnPlay() {
+		return btnPlay;
 	}
 }

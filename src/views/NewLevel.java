@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -28,6 +29,7 @@ import java.awt.Color;
  * Also allows the user to select the number of moves or amount of time for puzzle and lightning levels.
  * @author ejcerini
  * @author bhuchley
+ * @author bjbenson
  */
 public class NewLevel extends JPanel {
 
@@ -55,6 +57,8 @@ public class NewLevel extends JPanel {
 	private JButton btnLightning;
 	/** The button that changes the level type to release. */
 	private JButton btnRelease;
+	/** The button that starts the editor */
+	private JButton btnGo;
 	
 
 	/**
@@ -166,7 +170,7 @@ public class NewLevel extends JPanel {
 		add(btnCancel);
 		btnCancel.addActionListener(new GoBackOnePanelController(frame));
 		
-		JButton btnGo = new JButton("Go!");
+		btnGo = new JButton("Go!");
 		btnGo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnGo.setBounds(405, 451, 118, 45);
 		add(btnGo);
@@ -248,5 +252,37 @@ public class NewLevel extends JPanel {
 	 */
 	public int getMoveLimit() {
 		return Integer.parseInt(textField.getText());
+	}
+
+	/**
+	 * Gets the go button
+	 * @return the button
+	 */
+	public JButton getBtnGo() {
+		return btnGo;
+	}
+	
+	/**
+	 * Gets the Lightning button
+	 * @return the button
+	 */
+	public JButton getLightningBtn() {
+		return btnLightning;
+	}
+	
+	/**
+	 * Gets the Release button
+	 * @return the button
+	 */
+	public JButton getReleaseBtn() {
+		return btnRelease;
+	}
+	
+	/**
+	 * Gets the name text field
+	 * @return the field
+	 */
+	public JTextField getNameField() {
+		return 	txtInsertNameHere;
 	}
 }

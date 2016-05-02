@@ -2,6 +2,7 @@ package views;
 
 import java.awt.EventQueue;
 
+import javax.swing.AbstractButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -10,8 +11,11 @@ import main.KabasujiMain;
 import models.Piece;
 
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -23,6 +27,9 @@ public class BuilderTitle extends JPanel {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
+	
+	/** the edit button to enter the builder */
+	JButton btnEdit;
 	
 	/**
 	 * Create the panel. It's just a bunch of labels and a play button.
@@ -44,7 +51,7 @@ public class BuilderTitle extends JPanel {
 		lblALevelEditor.setBounds(214, 166, 368, 50);
 		add(lblALevelEditor);
 		
-		JButton btnEdit = new JButton("Edit");
+		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(338, 305, 120, 45);
 		add(btnEdit);
@@ -82,5 +89,13 @@ public class BuilderTitle extends JPanel {
 
 		// Doing this here so that it's only done once on startup
 		Piece.initializeValidPieces();
+	}
+
+	/** Gets the edit btn to enter the builder
+	 * 
+	 * @return the btn
+	 */
+	public JButton getBtnEdit() {
+		return btnEdit;
 	}
 }
