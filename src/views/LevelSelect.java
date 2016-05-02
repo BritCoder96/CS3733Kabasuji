@@ -51,7 +51,11 @@ public class LevelSelect extends JPanel {
 	JLabel levelTypeLabel;
 	/** The button that allows the user to play the currently selected level. */
 	JButton btnPlay;
-	
+    /** The button that allows the user to navigate to a previous level. */
+    JButton btnPrevious;
+    /** The button that allows the user to navigate to a succeeding level. */
+    JButton btnNext;
+
 	/** The controller for btnPlay. */
 	MoveToLevelController moveToLevelController;
 	
@@ -61,7 +65,6 @@ public class LevelSelect extends JPanel {
 	/**
 	 * Load the first level in the list and create the frame showing that level.
 	 * @param frame the frame to show the screen in
-	 * @param levels the list of levels in the game
 	 */
 	public LevelSelect(KabasujiFrame frame) {
 		this.frame = frame;
@@ -105,17 +108,17 @@ public class LevelSelect extends JPanel {
 		moveToLevelController = new MoveToLevelController(SaveFile.instance().getLevel(currentLevelIndex), frame, this);
 		btnPlay.addActionListener(moveToLevelController);
 		
-		JButton btnPrevious = new JButton("Previous");
+		btnPrevious = new JButton("Previous");
 		btnPrevious.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPrevious.setBounds(51, 253, 120, 45);
 		add(btnPrevious);
-		btnPrevious.addActionListener(new PreviousLevelController(this, SaveFile.instance().getLevels()));
+		btnPrevious.addActionListener(new PreviousLevelController(this));
 		
-		JButton btnNext = new JButton("Next");
+		btnNext = new JButton("Next");
 		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNext.setBounds(611, 253, 120, 45);
 		add(btnNext);
-		btnNext.addActionListener(new NextLevelController(this, SaveFile.instance().getLevels()));
+		btnNext.addActionListener(new NextLevelController(this, SaveFile.instance().getNumberOfLevels()));
 	}
 	
 	@Override
@@ -128,12 +131,17 @@ public class LevelSelect extends JPanel {
 	 * Load the level given by the current index and refresh the level info display. 
 	 */
 	private void updateLevelDisplay() {
+        // get current level info
 		Level currentLevel = SaveFile.instance().getLevel(currentLevelIndex);
 		int numStars = currentLevel.getNumberOfStars();
 		LevelType lvlType = currentLevel.getLvlType();
+
+        // display level info
 		currentLevelIndexLabel.setText("Level " + (currentLevelIndex + 1));
 		starsDisplay.setNumStarsFilled(numStars);
 		levelTypeLabel.setText(lvlType.name()); // TODO should be lowercased?
+
+        // enable or disable Play button
 		boolean currentLvlComplete = numStars > 0;
 		boolean isFirstLevel = currentLevelIndex == 0;
 		boolean previousLevelComplete = isFirstLevel || (SaveFile.instance().getLevel(currentLevelIndex - 1).getNumberOfStars() > 0);
@@ -141,6 +149,11 @@ public class LevelSelect extends JPanel {
 		btnPlay.setText(currentLevelIsUnlocked ? "Play" : "Locked");
 		btnPlay.setEnabled(currentLevelIsUnlocked);
 		
+        // enable or disable Previous and Next buttons
+        btnPrevious.setEnabled(!isFirstLevel);
+        btnNext.setEnabled(currentLevelIndex < SaveFile.instance().getNumberOfLevels() - 1);
+
+        // point Play button to the current level
 		btnPlay.removeActionListener(moveToLevelController);
 		moveToLevelController = new MoveToLevelController(SaveFile.instance().getLevel(currentLevelIndex), frame, this);
 		btnPlay.addActionListener(moveToLevelController);

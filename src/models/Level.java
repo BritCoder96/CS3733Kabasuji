@@ -89,6 +89,8 @@ public class Level {
 		else if (levelLogic instanceof ReleaseLevelLogic) {
 			this.lvlType = LevelType.RELEASE;
 		}
+        
+        hasWon = numberOfStars > 0 ? true : false;
 	}
 	
 	/**
