@@ -1,5 +1,6 @@
 package views;
 
+import controllers.SaveLevelController;
 import main.KabuildsujiMain;
 import junit.framework.TestCase;
 
@@ -42,9 +43,9 @@ public class TestBuilderViews extends TestCase {
 	    level.getReleaseBtn().doClick();
 	    Thread.sleep(500);
 	    ReleaseEditor rEditor = new ReleaseEditor(frame, level.getName(), level.getRows(), level.getCols());
-	    rEditor.getBtnSave().doClick();
 	    rEditor.getBtnBack().doClick();
-	    Thread.sleep(500);
-	    
+	    SaveLevelController slc = new SaveLevelController(rEditor.getLevel());
+	    slc.serializeLevel(rEditor.getLevel());
+	    Thread.sleep(500);	    
 	  }
 }
