@@ -106,5 +106,15 @@ public class EditorBoardView extends JPanel {
 		return null;
 		
 	}
+	
+	/**
+	 *  gets the square at the given row and column
+	 * @param row the row the square is at 
+	 * @param col the column the square is at 
+	 * @return the square at those coordinates
+	 */
+	public JLabel getSquareAt(int row, int col) {
+		return squares[row][col];
+	}
 }
 

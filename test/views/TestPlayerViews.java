@@ -26,12 +26,18 @@ public class TestPlayerViews extends TestCase {
 
 	    // Simulate a mouse click using reflection.
 		// click the play on the title screen.
-	    Title title = new Title(frame);
+	    Title title = (Title)frame.getContentPane();
 	    title.getBtnPlay().doClick();;
 	    // click select on level select screen
-	    LevelSelect lvlSelect = new LevelSelect(frame);
+	    LevelSelect lvlSelect = (LevelSelect)frame.getContentPane();
 	    lvlSelect.getBtnNext().doClick();
 	    lvlSelect.getBtnPlay().doClick();
-	    Thread.sleep(1500);
+	    GameScreen gameScreen = (GameScreen)frame.getContentPane();
+	    MouseEvent me = new MouseEvent(gameScreen.getBullpen().scrollingPanel, MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 111, 94, 1, false, MouseEvent.BUTTON1);
+	    gameScreen.getBullpen().scrollingPanel.dispatchEvent(me);
+	    me = new MouseEvent(gameScreen, MouseEvent.MOUSE_MOVED, 0, 0, 200, 200, 0, false, 0);
+	    gameScreen.dispatchEvent(me);me = new MouseEvent(gameScreen.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_MOVED, 0, 0, 10, 10, 0, false, 0);
+	    gameScreen.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
+	    me = new MouseEvent(gameScreen.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, 0, 10, 10, 1, false, MouseEvent.BUTTON1);
 	  }
 }

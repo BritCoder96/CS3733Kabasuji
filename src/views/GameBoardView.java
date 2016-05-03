@@ -73,14 +73,13 @@ public class GameBoardView extends JPanel {
 		return getWidth() / cols;
 	}
 
-	/*
-	public void setVisibleBoard(Board board) {
-		for (int r = 0; r < rows; r++) {
-			for (int c = 0; c < cols; c++) {
-				squares[r][c].setOpaque(board.getSquares()[r][c] != null);
-				squares[r][c].repaint();
-				squareControllers[r][c].setBoard(board);
-			}
-		}
-	} */
+	/**
+	 *  gets the square at the given row and column
+	 * @param row the row the square is at 
+	 * @param col the column the square is at 
+	 * @return the square at those coordinates
+	 */
+	public JLabel getSquareAt(int row, int col) {
+		return squares[row][col];
+	}
 }

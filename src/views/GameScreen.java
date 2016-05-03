@@ -49,12 +49,14 @@ import java.awt.Font;
 /**
  * The screen that the game is shown in. At the moment basically just a mockup
  * @author bhuchley
+ * @author bjbenson
  */
 public class GameScreen extends JPanel {
 	
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 	private BullpenView bullpen;
+	private GameBoardView boardView; 
 	/** The level currently being played */
 	Level level;
 	/** The original model object for the level being played (that we modify when saving score) */
@@ -92,7 +94,7 @@ public class GameScreen extends JPanel {
 		setEnabled(true);
 		this.addMouseMotionListener(new MoveDraggingPieceController(this));
 		
-		GameBoardView boardView = new GameBoardView(this, this.level.getBoard());
+		boardView = new GameBoardView(this, this.level.getBoard());
 		boardView.setBounds(10, 88, 356, 356);
 		
 		add(boardView);
@@ -223,11 +225,24 @@ public class GameScreen extends JPanel {
 		movesLeftDisplay.setText("Moves Left: " + ((PuzzleLevelLogic)level.getLevelLogic()).getRemainingMoves());
 	}
 	
+	/** Ends the level */
 	public void endGame() {
 		new EndGameController(originalLevel, frame, this);
 	}
-
+	
+	/**
+	 * gets the bullpenview
+	 * @return the bullpenview
+	 */
 	public BullpenView getBullpen() {
 		return bullpen;
+	}
+	
+	/**
+	 * gets the boardview
+	 * @return the boardview
+	 */
+	public GameBoardView getBoardView() {
+		return boardView;
 	}
 }

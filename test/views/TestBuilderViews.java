@@ -19,33 +19,33 @@ public class TestBuilderViews extends TestCase {
 
 	    // Simulate a mouse click using reflection.
 		// click the play on the title screen.
-	    BuilderTitle title = new BuilderTitle(frame);
+	    BuilderTitle title = (BuilderTitle) frame.getContentPane();
 	    title.getBtnEdit().doClick();;
 	    // click new level on level list screen
-	    LevelList lvlSelect = new LevelList(frame);
+	    LevelList lvlSelect = (LevelList) frame.getContentPane();
 	    lvlSelect.getBtnNew().doClick();
 	    // click to make a new Puzzle level on level list screen
-	    NewLevel level = new NewLevel(frame);
+	    NewLevel level = (NewLevel) frame.getContentPane();
 	    level.getNameField().setText("3");
 	    level.getBtnGo().doClick();
-	    PuzzleEditor pEditor = new PuzzleEditor(frame, level.getName(), level.getRows(), level.getCols(), level.getMoveLimit());
-	    pEditor.getBtnBack().doClick();
+	    PuzzleEditor pEditor = (PuzzleEditor) frame.getContentPane();
 	    pEditor.getBtnAddPiece().doClick();
-	    AddPieceOverlay apo = new AddPieceOverlay(frame, pEditor);
-	    apo.getBullpenView().dispatchEvent(new MouseEvent(apo, 0, 0, 100, 40, 0, 1, false, 0));
+	    AddPieceOverlay apo = (AddPieceOverlay) frame.getContentPane();
+	    MouseEvent me = new MouseEvent(apo.getBullpenView().getPieceAtY(40), MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 100, 10, 1, false, MouseEvent.BUTTON1);
+	    apo.getBullpenView().getPieceAtY(40).dispatchEvent(me);
+	    pEditor.getBtnBack().doClick();
 	    level.getNameField().setText("4");
 	    level.getLightningBtn().doClick();
 	    level.getBtnGo().doClick();
-	    LightningEditor lEditor = new LightningEditor(frame, level.getName(), level.getRows(), level.getCols(), level.getTimeLimit());
+	    LightningEditor lEditor = (LightningEditor) frame.getContentPane();
 	    lEditor.getBtnBack().doClick();
 	    level.getNameField().setText("5");
 	    level.getReleaseBtn().doClick();
 	    level.getBtnGo().doClick();
-	    ReleaseEditor rEditor = new ReleaseEditor(frame, level.getName(), level.getRows(), level.getCols());
+	    ReleaseEditor rEditor = (ReleaseEditor) frame.getContentPane();
 	    rEditor.getBtnNum().doClick();
-	    rEditor.getBoardView().dispatchEvent(new MouseEvent(rEditor.getBoardView(), 0, 0, 100, 100, 0, 1, false, 0));
-	    Thread.sleep(4000);
-
+	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 100, 10, 1, false, MouseEvent.BUTTON1);
+	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	    SaveLevelController.serializeLevel(rEditor.getLevel());
 	    rEditor.getBtnBack().doClick();
 	   
