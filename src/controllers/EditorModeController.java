@@ -31,7 +31,8 @@ public class EditorModeController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		((LevelEditor) listener).setGameBoard(new EditorBoardView(gamescreen, board, listener, em));
-		((LevelEditor) listener).updateOptionsDisplay(em);
+		((LevelEditor) listener).setEditorMode(em);
+		((LevelEditor) listener).updateOptionsDisplay();
 	}
 	
 	

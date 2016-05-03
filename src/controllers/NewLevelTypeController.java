@@ -7,22 +7,23 @@ import models.LevelType;
 import views.NewLevel;
 
 /**
- * The controller that changes the level type of a new level to
- * Release
+ * The controller that changes the level type of a new level.
  * 
  * @author ejcerini
  */
-public class NewLevelToReleaseController implements ActionListener {
+public class NewLevelTypeController implements ActionListener {
 
 	NewLevel nlevel;
+	LevelType ltype;
 	
 	/**
 	 * Constructor for a NewLevelToReleaseController
 	 *  
 	 * @param nlevel - the New Level screen
 	 */
-	public NewLevelToReleaseController(NewLevel nlevel){
+	public NewLevelTypeController(NewLevel nlevel, LevelType ltype){
 		this.nlevel = nlevel;
+		this.ltype = ltype;
 	}
 	
 	/**
@@ -32,7 +33,7 @@ public class NewLevelToReleaseController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		//Change the level type to Lightning
-		nlevel.setLevelType(LevelType.RELEASE);
+		nlevel.setLevelType(ltype);
 		
 		//Update the display
 		nlevel.updateOptionDisplay();

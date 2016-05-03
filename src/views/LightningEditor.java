@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import controllers.DecrementTimeLimitController;
 import controllers.EditorLevelUndoController;
+import controllers.EditorModeController;
 import controllers.GoBackOnePanelController;
 import controllers.IncrementTimeLimitController;
 import controllers.SaveLevelController;
@@ -47,13 +48,18 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	Board board;
 	/** The undo controller, which maintains the back stack of levels */
 	EditorLevelUndoController undoController; 
-	
+	/** The mode that the Editor is in */
+	private EditorMode editMode;
 	/** The label that shows the time limit */
 	JLabel timeLimitLabel;
 	/** The panel that shows the board */
 	EditorBoardView gameboard;
 	/** the button to go back to the new level screen */
 	private JButton btnBack;
+	/** the button to switch into Hint Mode */
+	private JButton btnHint;
+	/** the button to switch into Edit Mode */
+	private JButton btnEdit;
 
 	/**
 	 * Create the frame with an rectangular lightning level of the specified size and time.
@@ -89,26 +95,22 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		btnDecrease.addActionListener(new DecrementTimeLimitController(this, this));
 		add(btnDecrease);
 		
-		JButton btnDelete = new JButton("Delete");
-		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDelete.setBounds(69, 248, 120, 45);
-		add(btnDelete);
-		
-		JButton btnDraw = new JButton("Draw");
-		btnDraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDraw.setBounds(69, 321, 120, 45);
-		add(btnDraw);
+		btnEdit = new JButton("Edit");
+		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnEdit.setBounds(69, 247, 120, 45);
+		btnEdit.addActionListener(new EditorModeController(this, this, board, EditorMode.EDIT));
+		add(btnEdit);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSave.setBounds(69, 391, 120, 45);
+		btnSave.setBounds(69, 479, 120, 45);
 		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
 		undoController = new EditorLevelUndoController(this);
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnUndo.setBounds(69, 460, 120, 45);
+		btnUndo.setBounds(69, 363, 120, 45);
 		btnUndo.addActionListener(undoController);
 		add(btnUndo);
 		
@@ -120,7 +122,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnRedo.setBounds(69, 516, 120, 45);
+		btnRedo.setBounds(69, 421, 120, 45);
 		add(btnRedo);
 		
 		timeLimitLabel = new JLabel();
@@ -128,7 +130,16 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		timeLimitLabel.setBounds(90, 141, 81, 34);
 		timeLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(timeLimitLabel);
+		
+		btnHint = new JButton("Hint");
+		btnHint.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnHint.setBounds(69, 305, 120, 45);
+		btnHint.addActionListener(new EditorModeController(this, this, board, EditorMode.HINT));
+		add(btnHint);
 		updateTimeLimitDisplay();
+		
+		editMode = EditorMode.EDIT;
+		updateOptionsDisplay();
 	}
 	
 	/**
@@ -178,12 +189,6 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	public void setGameBoard(EditorBoardView ebv) {
 		this.gameboard = ebv;
 	}
-
-	@Override
-	public void updateOptionsDisplay(EditorMode em) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	/**
 	 * Gets the back button
@@ -191,5 +196,27 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	 */
 	public JButton getBtnBack() {
 		return btnBack;
+	}
+
+	@Override
+	public void setEditorMode(EditorMode em) {
+		this.editMode = em;
+	}
+
+	@Override
+	public void updateOptionsDisplay() {
+		btnHint.setEnabled(true);
+		btnEdit.setEnabled(true);
+		
+		switch(editMode){
+		case EDIT:
+			btnEdit.setEnabled(false);
+			break;
+		case HINT:
+			btnHint.setEnabled(false);
+			break;
+		case NUMBER:
+			break;
+		}		
 	}
 }

@@ -79,8 +79,6 @@ public class EditorBoardView extends JPanel {
 			return new ToggleBoardSquareController[rows][cols];
 		case HINT:
 			break;
-		case MOVE:
-			break;
 		case NUMBER:
 			return new AddReleaseNumberController[rows][cols];
 		
@@ -95,8 +93,6 @@ public class EditorBoardView extends JPanel {
 		case EDIT:
 			return new ToggleBoardSquareController(square, initialBoard, r, c, listener);
 		case HINT:
-			break;
-		case MOVE:
 			break;
 		case NUMBER:
 			return new AddReleaseNumberController(initialBoard, r, c, square, (ReleaseEditor) listener);

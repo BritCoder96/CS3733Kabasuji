@@ -19,9 +19,15 @@ public interface LevelEditor {
 	public void setGameBoard(EditorBoardView ebv);
 	
 	/**
-	 * Tells the editor to modify the Options Display for itself.
+	 * Tells the editor to shift the mode to em.
 	 * 
 	 * @param em - The mode to shift the editor into.
 	 */
-	public void updateOptionsDisplay(EditorMode em);
+	public void setEditorMode(EditorMode em);
+	
+	/**
+	 * Tells the editor to update the options display.
+	 */
+	public void updateOptionsDisplay();
+	
 }

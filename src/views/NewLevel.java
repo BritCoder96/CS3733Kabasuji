@@ -1,12 +1,8 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.AbstractButton;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,9 +12,7 @@ import javax.swing.border.LineBorder;
 
 import controllers.GoBackOnePanelController;
 import controllers.MoveToEditorController;
-import controllers.NewLevelToLightningController;
-import controllers.NewLevelToPuzzleController;
-import controllers.NewLevelToReleaseController;
+import controllers.NewLevelTypeController;
 import main.KabasujiMain;
 import models.LevelType;
 
@@ -101,20 +95,20 @@ public class NewLevel extends JPanel {
 		btnPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPuzzle.setBounds(30, 44, 153, 47);
 		panel.add(btnPuzzle);
-		btnPuzzle.addActionListener(new NewLevelToPuzzleController(this));
+		btnPuzzle.addActionListener(new NewLevelTypeController(this, LevelType.PUZZLE));
 				
 		this.btnLightning = new JButton("Lightning");
 		btnLightning.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnLightning.setBounds(213, 44, 153, 47);
 		panel.add(btnLightning);
-		btnLightning.addActionListener(new NewLevelToLightningController(this));
+		btnLightning.addActionListener(new NewLevelTypeController(this, LevelType.LIGHTNING));
 
 				
 		this.btnRelease = new JButton("Release");
 		btnRelease.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRelease.setBounds(396, 44, 153, 47);
 		panel.add(btnRelease);
-		btnRelease.addActionListener(new NewLevelToReleaseController(this));
+		btnRelease.addActionListener(new NewLevelTypeController(this, LevelType.RELEASE));
 
 		
 		this.lblMoveLimit = new JLabel("Move Limit:");

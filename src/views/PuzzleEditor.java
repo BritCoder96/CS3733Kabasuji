@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 import controllers.AddPieceController;
 import controllers.DecrementMoveLimitController;
 import controllers.EditorLevelUndoController;
+import controllers.EditorModeController;
 import controllers.GoBackOnePanelController;
 import controllers.IncrementMoveLimitController;
 import controllers.SaveLevelController;
@@ -56,15 +57,20 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	EditorBoardView gameboard;
 	/** The undo controller, which maintains the back stack of levels */
 	EditorLevelUndoController undoController; 
-	
 	/** The label showing the move limit */
 	JLabel moveLimitLabel;
 	/** The bullpen view */
 	BullpenView bullpen;
+	/** The mode that the Editor is in */
+	private EditorMode editMode;
 	/** the button to go back to the new level screen */
 	private JButton btnBack;
 	/** the button to open the piece overlay to add a piece */
 	private JButton btnAddPiece;
+	/** the button to switch into Hint Mode */
+	private JButton btnHint;
+	/** the button to switch into Edit Mode */
+	private JButton btnEdit;
 
 	/**
 	 * Create the editor screen, with a rectangular level and no pieces.
@@ -91,6 +97,9 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		bullpen = new BullpenView(gameboard.getWidth() / boardCols, new Rectangle(412, 14, 350, 455));
 		add(bullpen);
 		
+		editMode = EditorMode.EDIT;
+		updateOptionsDisplay();
+		
 		moveLimitLabel = new JLabel(String.valueOf(moveLimit));
 		moveLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		moveLimitLabel.setBounds(10, 220, 44, 24);
@@ -109,19 +118,17 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		btnDecrease.addActionListener(new DecrementMoveLimitController(this, this));
 		add(btnDecrease);
 		
-		JButton btnEdit = new JButton("Edit");
+		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(46, 472, 127, 45);
+		btnEdit.addActionListener(new EditorModeController(this, this, board, EditorMode.EDIT));
 		add(btnEdit);
 		
-		JButton btnMove = new JButton("Move");
-		btnMove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnMove.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnMove.setBounds(185, 520, 127, 45);
-		add(btnMove);
+		btnHint = new JButton("Hint");
+		btnHint.addActionListener(new EditorModeController(this, this, board, EditorMode.HINT));
+		btnHint.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnHint.setBounds(46, 520, 127, 45);
+		add(btnHint);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -144,7 +151,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		
 		btnAddPiece = new JButton("Add Piece");
 		btnAddPiece.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnAddPiece.setBounds(185, 471, 127, 45);
+		btnAddPiece.setBounds(185, 472, 127, 45);
 		btnAddPiece.addActionListener(new AddPieceController(frame, this, this));
 		add(btnAddPiece);
 		
@@ -152,8 +159,11 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(324, 520, 127, 45);
 		add(btnRedo);
+		
+		editMode = EditorMode.EDIT;
+		updateOptionsDisplay();
 	}
-	
+
 	/**
 	 * Gets the level currently under construction in the editor.
 	 * @return the level under construction
@@ -202,14 +212,30 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 
 	@Override
 	public void setGameBoard(EditorBoardView ebv) {
-		// TODO Auto-generated method stub
-		
+		remove(this.gameboard);
+		this.gameboard = ebv;
+		gameboard.setBounds(60, 71, 325, 325);
+		add(gameboard);
+		revalidate();
+		repaint();		
 	}
 
 	@Override
-	public void updateOptionsDisplay(EditorMode em) {
-		// TODO Auto-generated method stub
+	public void updateOptionsDisplay() {
 		
+		btnHint.setEnabled(true);
+		btnEdit.setEnabled(true);
+		
+		switch(editMode){
+		case EDIT:
+			btnEdit.setEnabled(false);
+			break;
+		case HINT:
+			btnHint.setEnabled(false);
+			break;
+		case NUMBER:
+			break;
+		}
 	}
 	
 	/**
@@ -225,6 +251,11 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	 */
 	public JButton getBtnAddPiece() {
 		return btnAddPiece;
+	}
+
+	@Override
+	public void setEditorMode(EditorMode em) {
+		this.editMode = em;
 	}
 
 }

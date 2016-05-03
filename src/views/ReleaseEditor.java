@@ -1,20 +1,14 @@
 package views;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.Font; 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import controllers.AddPieceController;
 import controllers.EditorLevelUndoController;
@@ -26,14 +20,8 @@ import models.EditorMode;
 import models.Level;
 import models.LevelType;
 import models.Piece;
-import models.PuzzleLevelLogic;
 import models.ReleaseLevelLogic;
 
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -41,6 +29,7 @@ import javax.swing.DefaultComboBoxModel;
  * The editor screen for release levels.
  * @author bhuchley
  * @author bjbenson
+ * @author ejcerini
  */
 public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener, LevelEditor{
 
@@ -59,7 +48,8 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 EditorBoardView gameboard;
 	 /** The undo controller, which maintains the back stack of levels */
 	 EditorLevelUndoController undoController; 
-		
+	 /** The mode that the editor is currently in */
+	 EditorMode editMode;
 	 /** The bullpen view */
 	 BullpenView bullpen;
 	 
@@ -70,6 +60,12 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	private JButton btnBack;
 	/** the button to save the level */
 	private JButton btnSave;
+	/** the button to switch the editor to Edit mode */
+	private JButton btnEdit;
+	/** the button to switch the editor to Hint mode */
+	private JButton btnHint;
+	/** the button to switch the editor to Number mode */
+	private JButton btnNum;
 	 
 	/**
 	 * Create the screen, with a rectangular level and no numbers yet.
@@ -96,22 +92,23 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		bullpen = new BullpenView(gameboard.getWidth() / boardCols, new Rectangle(412, 14, 350, 455));
 		add(bullpen);
 		
-		
-		JButton btnEdit = new JButton("Edit");
+		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(46, 495, 127, 45);
+		btnEdit.addActionListener(new EditorModeController(this, this, board, EditorMode.EDIT));
 		add(btnEdit);
 		
-		JButton btnNum = new JButton("Numbers");
+		btnNum = new JButton("Numbers");
 		btnNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNum.setBounds(185, 552, 127, 45);
 		btnNum.addActionListener(new EditorModeController(this, this, board, EditorMode.NUMBER));
 		add(btnNum);
 		
-		JButton btnMove = new JButton("Move");
-		btnMove.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnMove.setBounds(324, 552, 127, 45);
-		add(btnMove);
+		btnHint = new JButton("Hint");
+		btnHint.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnHint.setBounds(324, 552, 127, 45);
+		btnHint.addActionListener(new EditorModeController(this, this, board, EditorMode.HINT));
+		add(btnHint);
 		
 		btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -157,6 +154,8 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		btnRedo.setBounds(463, 552, 127, 45);
 		add(btnRedo);
 		
+		editMode = EditorMode.EDIT;
+		updateOptionsDisplay();
 	}
 
 	/**
@@ -227,9 +226,22 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	}
 
 	@Override
-	public void updateOptionsDisplay(EditorMode em) {
-		// TODO Make this do a thing
+	public void updateOptionsDisplay() {
+		btnHint.setEnabled(true);
+		btnEdit.setEnabled(true);
+		btnNum.setEnabled(true);
 		
+		switch(editMode){
+		case EDIT:
+			btnEdit.setEnabled(false);
+			break;
+		case HINT:
+			btnHint.setEnabled(false);
+			break;
+		case NUMBER:
+			btnNum.setEnabled(false);
+			break;
+		}		
 	}
 	
 	/**
@@ -246,5 +258,10 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 */
 	public JButton getBtnSave() {
 		return btnSave;
+	}
+
+	@Override
+	public void setEditorMode(EditorMode em) {
+		this.editMode = em;
 	}
 }
