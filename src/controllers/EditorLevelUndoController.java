@@ -12,18 +12,23 @@ import views.LevelSetListener;
  * levels that have existed, and a call to actionPerformed() pops the stack and sets the editor
  * to show the level popped this way.
  * @author bhuchley
+ * @author ejcerini
  *
  */
 public class EditorLevelUndoController implements ActionListener {
 	
 	/** The stack of levels that can be returned to */
 	Stack<Level> levelBackStack;
+	/** The interactable redo controller */
+	EditorLevelRedoController redo;
 	/** The object that listens for the level to be set by the undo command */
 	LevelSetListener listener;
+
 	
-	public EditorLevelUndoController(LevelSetListener listener) {
+	public EditorLevelUndoController(LevelSetListener listener, EditorLevelRedoController redo) {
 		this.listener = listener;
 		levelBackStack = new Stack<Level>();
+		this.redo = redo;
 	}
 	
 	/**
@@ -40,8 +45,21 @@ public class EditorLevelUndoController implements ActionListener {
 		if ( ! levelBackStack.empty()) {
 			// Pop the level back stack.
 			Level lastLevel = levelBackStack.pop();
+			// Add the popped level to the level forward stack
+			redo.pushLevel(lastLevel);
+			System.out.println("Level Pushed to Redo");
 			listener.setLevel(lastLevel);
 		}
+	}
+	
+	
+	/**
+	 * Creates the redo controller for this undo controller
+	 * 
+	 */
+	public EditorLevelRedoController generateRedoController(){
+		this.redo = new EditorLevelRedoController(listener, this);
+		return redo;
 	}
 
 }

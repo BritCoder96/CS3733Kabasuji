@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import controllers.AddPieceController;
 import controllers.BullpenEditorController;
 import controllers.EditorComponentDragListener;
+import controllers.EditorLevelRedoController;
 import controllers.EditorLevelUndoController;
 import controllers.EditorModeController;
 import controllers.GoBackOnePanelController;
@@ -60,6 +61,8 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 EditorBoardView gameboard;
 	 /** The undo controller, which maintains the back stack of levels */
 	 EditorLevelUndoController undoController; 
+	 /** The redo controller, which maintains the forward stack of levels */
+	 EditorLevelRedoController redoController; 
 	 /** The mode that the editor is currently in */
 	 EditorMode editMode;
 	 /** The bullpen view */
@@ -104,15 +107,11 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		this.addMouseMotionListener(new MoveDraggingPieceEditorController(this));
 		
 		board = level.getBoard();
-		//board = new Board(boardRows, boardCols, LevelType.RELEASE);
-		//board.fillWithSquares();
 		
 		// TODO: probably nothing
 		ell = new ReleaseLevelLogic();
 		
 		this.level = level;
-		//level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.RELEASE, levelName);
-		//level.setBoard(board);
 		
 		boardPieceViews = new HashMap<Piece, PieceView>();
 		
@@ -181,7 +180,10 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		add(releaseNumber);
 		releaseNumber.addMouseMotionListener(new EditorComponentDragListener(this, releaseNumber));
 		
-		undoController = new EditorLevelUndoController(this);
+		undoController = new EditorLevelUndoController(this, redoController);
+		redoController = undoController.generateRedoController();
+
+		
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnUndo.addActionListener(undoController);
@@ -192,6 +194,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(463, 552, 127, 45);
+		btnRedo.addActionListener(redoController);
 		add(btnRedo);
 		btnRedo.addMouseMotionListener(new EditorComponentDragListener(this, btnRedo));
 		
@@ -215,6 +218,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	
 	@Override
 	public void onLevelChanged() {
+		redoController.clearForwardStack();
 		pushBackStack();
 	}
 	
