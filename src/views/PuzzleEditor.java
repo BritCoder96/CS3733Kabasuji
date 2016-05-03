@@ -17,6 +17,7 @@ import controllers.BullpenEditorController;
 import controllers.BullpenGameController;
 import controllers.DecrementMoveLimitController;
 import controllers.EditorComponentDragListener;
+import controllers.EditorLevelRedoController;
 import controllers.EditorLevelUndoController;
 import controllers.EditorModeController;
 import controllers.GoBackOnePanelController;
@@ -62,6 +63,8 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	EditorBoardView gameboard;
 	/** The undo controller, which maintains the back stack of levels */
 	EditorLevelUndoController undoController; 
+	/** The redo controller, which maintains the forward stack of levels */
+	EditorLevelRedoController redoController; 
 	/** The label showing the move limit */
 	JLabel moveLimitLabel;
 	/** The bullpen view */
@@ -162,7 +165,10 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		add(btnSave);
 		btnSave.addMouseMotionListener(new EditorComponentDragListener(this, btnSave));
 		
-		undoController = new EditorLevelUndoController(this);
+		undoController = new EditorLevelUndoController(this, redoController);
+		redoController = undoController.generateRedoController();
+
+
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnUndo.addActionListener(undoController);
@@ -186,6 +192,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnRedo.addActionListener(redoController);
 		btnRedo.setBounds(324, 520, 127, 45);
 		add(btnRedo);
 		
@@ -219,6 +226,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 
 	@Override
 	public void onLevelChanged() {
+		redoController.clearForwardStack();
 		pushBackStack();
 	}
 	

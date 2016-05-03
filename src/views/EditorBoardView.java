@@ -102,9 +102,7 @@ public class EditorBoardView extends JPanel {
 					squares[r][c].setOpaque(board.getSquares()[r][c] != null);
 					if(board.getLevelType() == LevelType.RELEASE){
 						number = ((ReleaseBoardSquareLogic) currentSquareLogic).getNumber();
-						System.out.println(number.toString());
 						color = ((ReleaseBoardSquareLogic) currentSquareLogic).getColorOfNumber();
-						System.out.println(color);
 						if(number < 0){
 							squares[r][c].setText("");
 							squares[r][c].setForeground(Color.BLACK);

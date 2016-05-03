@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,6 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controllers.DecrementTimeLimitController;
+import controllers.EditorLevelRedoController;
 import controllers.EditorLevelUndoController;
 import controllers.EditorModeController;
 import controllers.GoBackOnePanelController;
@@ -49,6 +52,8 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	Board board;
 	/** The undo controller, which maintains the back stack of levels */
 	EditorLevelUndoController undoController; 
+	/** The redo controller, which maintains the forward stack of levels */
+	EditorLevelRedoController redoController; 
 	/** The mode that the Editor is in */
 	private EditorMode editMode;
 	/** The label that shows the time limit */
@@ -108,7 +113,9 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
-		undoController = new EditorLevelUndoController(this);
+		undoController = new EditorLevelUndoController(this, redoController);
+		redoController = undoController.generateRedoController();
+		
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnUndo.setBounds(69, 363, 120, 45);
@@ -124,6 +131,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(69, 421, 120, 45);
+		btnRedo.addActionListener(redoController);
 		add(btnRedo);
 		
 		timeLimitLabel = new JLabel();
@@ -167,6 +175,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 
 	@Override
 	public void onLevelChanged() {
+		redoController.clearForwardStack();
 		pushBackStack();
 	}
 	
