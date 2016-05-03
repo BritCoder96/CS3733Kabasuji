@@ -126,20 +126,20 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(46, 495, 127, 45);
-		btnEdit.addActionListener(new EditorModeController(this, board, EditorMode.EDIT));
+		btnEdit.addActionListener(new EditorModeController(this, EditorMode.EDIT));
 		add(btnEdit);
 		btnEdit.addMouseMotionListener(new EditorComponentDragListener(this, btnEdit));
 		
 		btnNum = new JButton("Numbers");
 		btnNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNum.setBounds(185, 552, 127, 45);
-		btnNum.addActionListener(new EditorModeController(this, board, EditorMode.NUMBER));
+		btnNum.addActionListener(new EditorModeController(this, EditorMode.NUMBER));
 		add(btnNum);
 
 		btnHint = new JButton("Hint");
 		btnHint.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnHint.setBounds(324, 552, 127, 45);
-		btnHint.addActionListener(new EditorModeController(this, board, EditorMode.HINT));
+		btnHint.addActionListener(new EditorModeController(this, EditorMode.HINT));
 		add(btnHint);
 
 		btnNum.addMouseMotionListener(new EditorComponentDragListener(this, btnNum));

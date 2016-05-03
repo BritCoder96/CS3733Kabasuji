@@ -15,21 +15,18 @@ public class EditorModeController implements ActionListener {
 
 	EditorMode em;
 	LevelEditor screen;
-	Board board;
 	
 	
-	public EditorModeController(LevelEditor screen, Board board, EditorMode em){
+	public EditorModeController(LevelEditor screen, EditorMode em){
 		this.screen = screen;
 		this.em = em;
-		this.board = board;
 	}
 
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		screen.setGameBoard(new EditorBoardView(screen, board, em));
+		screen.setGameBoard(new EditorBoardView(screen, screen.getLevel().getBoard(), em));
 		screen.setEditorMode(em);
 		screen.updateOptionsDisplay();
 }

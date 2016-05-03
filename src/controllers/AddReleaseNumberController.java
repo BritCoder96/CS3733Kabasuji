@@ -43,9 +43,9 @@ public class AddReleaseNumberController extends EditorSquareController{
 	 * @param squareLabel - the visible label for the square
 	 * @param editor - the editor screen that holds the color and number info.
 	 */
-	public AddReleaseNumberController(Board board, int row, int col, JLabel squareLabel, ReleaseEditor editor){
-		super(editor, board.getSquareAt(row, col), board);
-		this.board = board;
+	public AddReleaseNumberController(int row, int col, JLabel squareLabel, ReleaseEditor editor){
+		super(editor, editor.getLevel().getBoard().getSquareAt(row, col), editor.getLevel().getBoard());
+		this.board = editor.getLevel().getBoard();
 		this.row = row;
 		this.col = col;
 		this.squareLabel = squareLabel;
@@ -91,7 +91,7 @@ public class AddReleaseNumberController extends EditorSquareController{
 				//Set the information of the square to reflect the fact that it no longer has a number
 				thisSquare.setNumber(-1);
 				thisSquare.setColorOfNumber(null);
-				
+			
 			} else {
 				//Otherwise set the text and color to reflect the new text and color
 				squareLabel.setText(newText);

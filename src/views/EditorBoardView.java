@@ -12,6 +12,10 @@ import controllers.EditorSquareDragListener;
 import controllers.ToggleBoardSquareController;
 import models.Board;
 import models.EditorMode;
+import models.ExtraBoardSquareLogic;
+import models.LevelType;
+import models.ReleaseBoardSquareLogic;
+import models.Square;
 
 /**
  * The view of the board for use in the editor. It allows squares to be clicked to toggle 
@@ -22,8 +26,8 @@ import models.EditorMode;
  *
  */
 public class EditorBoardView extends JPanel {
-	public static final Color lighterGray = new Color(210, 210, 210);
-	public static final Color darkerGray = new Color(170, 170, 170);
+	public static final Color lighterGray = new Color(180, 180, 180);
+	public static final Color darkerGray = new Color(140, 140, 140);
 	
 	int rows;
 	int cols;
@@ -46,12 +50,33 @@ public class EditorBoardView extends JPanel {
 		setLayout(new GridLayout(rows, cols, 0, 0));
 		squares = new JLabel[rows][cols];
 		squareControllers = initArray(em);
+		
+		Square[][] bsquares = initialBoard.getSquares();
+		ExtraBoardSquareLogic currentSquareLogic;
+		Integer number;
+		Color color;
+		
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				JLabel square = new JLabel();
 				Color squareBackground = (((r+c)%2)==0) ? lighterGray : darkerGray;
 				if (initialBoard.getSquares()[r][c] != null) {
 					square.setOpaque(true);
+					
+					currentSquareLogic = bsquares[r][c].getSquareLogic();
+					if(initialBoard.getLevelType() == LevelType.RELEASE){
+						number = ((ReleaseBoardSquareLogic) currentSquareLogic).getNumber();
+						color = ((ReleaseBoardSquareLogic) currentSquareLogic).getColorOfNumber();
+
+						if(number < 0){
+							square.setText("");
+							square.setForeground(Color.BLACK);
+						}
+						else{
+							square.setText(number.toString());
+							square.setForeground(color);
+						}
+					}
 				}
 				square.setBackground(squareBackground);
 				// Set on click listener to toggle the square
@@ -63,13 +88,35 @@ public class EditorBoardView extends JPanel {
 			}
 		}
 	}
-
+	
 	public void setVisibleBoard(Board board) {
+		Square[][] bsquares = board.getSquares();
+		ExtraBoardSquareLogic currentSquareLogic;
+		Integer number;
+		Color color;
+		
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
-				squares[r][c].setOpaque(board.getSquares()[r][c] != null);
-				squares[r][c].repaint();
-				squareControllers[r][c].setBoard(board);
+				if(bsquares[r][c] != null){
+					currentSquareLogic = bsquares[r][c].getSquareLogic();
+					squares[r][c].setOpaque(board.getSquares()[r][c] != null);
+					if(board.getLevelType() == LevelType.RELEASE){
+						number = ((ReleaseBoardSquareLogic) currentSquareLogic).getNumber();
+						System.out.println(number.toString());
+						color = ((ReleaseBoardSquareLogic) currentSquareLogic).getColorOfNumber();
+						System.out.println(color);
+						if(number < 0){
+							squares[r][c].setText("");
+							squares[r][c].setForeground(Color.BLACK);
+						}
+						else{
+							squares[r][c].setText(number.toString());
+							squares[r][c].setForeground(color);
+						}
+					}
+					squares[r][c].repaint();
+					squareControllers[r][c].setBoard(board);
+				}
 			}
 		}
 	}
@@ -96,7 +143,7 @@ public class EditorBoardView extends JPanel {
 		case HINT:
 			break;
 		case NUMBER:
-			return new AddReleaseNumberController(initialBoard, r, c, square, (ReleaseEditor) listener);
+			return new AddReleaseNumberController(r, c, square, (ReleaseEditor) listener);
 		}
 		
 		

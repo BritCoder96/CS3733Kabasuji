@@ -144,11 +144,11 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(46, 472, 127, 45);
-		btnEdit.addActionListener(new EditorModeController(this, board, EditorMode.EDIT));
+		btnEdit.addActionListener(new EditorModeController(this, EditorMode.EDIT));
 		add(btnEdit);
 		
 		btnHint = new JButton("Hint");
-		btnHint.addActionListener(new EditorModeController(this, board, EditorMode.HINT));
+		btnHint.addActionListener(new EditorModeController(this, EditorMode.HINT));
 		btnHint.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnHint.setBounds(46, 520, 127, 45);
 		add(btnHint);
