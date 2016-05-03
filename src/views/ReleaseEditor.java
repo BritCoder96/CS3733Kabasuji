@@ -91,7 +91,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 * Create the screen, with a rectangular level and no numbers yet.
 	 * @param frame the frame to show the screen in
 	 */
-	public ReleaseEditor(KabasujiFrame frame, String levelName, int boardRows, int boardCols) {
+	public ReleaseEditor(KabasujiFrame frame, Level level) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -103,13 +103,16 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		setEnabled(true);
 		this.addMouseMotionListener(new MoveDraggingPieceEditorController(this));
 		
-		board = new Board(boardRows, boardCols, LevelType.RELEASE);
-		board.fillWithSquares();
+		board = level.getBoard();
+		//board = new Board(boardRows, boardCols, LevelType.RELEASE);
+		//board.fillWithSquares();
 		
+		// TODO: probably nothing
 		ell = new ReleaseLevelLogic();
 		
-		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.RELEASE, levelName);
-		level.setBoard(board);
+		this.level = level;
+		//level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.RELEASE, levelName);
+		//level.setBoard(board);
 		
 		boardPieceViews = new HashMap<Piece, PieceView>();
 		
@@ -117,7 +120,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		gameboard.setBounds(60, 71, 325, 325);
 		add(gameboard);
 		
-		bullpen = new BullpenView(gameboard.getWidth() / boardCols, new Rectangle(412, 14, 350, 455));
+		bullpen = new BullpenView(gameboard.getWidth() / board.getColumns(), new Rectangle(412, 14, 350, 455));
 		add(bullpen);
 		BullpenEditorController bullpenController = new BullpenEditorController(bullpen, this);
 		bullpen.addMouseListener(bullpenController);

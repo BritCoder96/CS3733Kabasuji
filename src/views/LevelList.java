@@ -14,6 +14,7 @@ import controllers.CreateNewLevelController;
 import controllers.GoBackOnePanelController;
 import controllers.MoveToBuilderLevelListController;
 import controllers.MoveToLevelController;
+import controllers.MoveToEditorController;
 import controllers.ToggleLevelEntryController;
 import main.KabasujiMain;
 import models.Level;
@@ -54,6 +55,7 @@ public class LevelList extends JPanel {
 	
 	/** The button that creates a new level. */
 	private JButton btnNew;
+	
 	/**
 	 * Get the existing levels and make the frame to show them.
 	 * @param frame the frame to show the screen in
@@ -112,7 +114,7 @@ public class LevelList extends JPanel {
 			LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
 			levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
 			panel.add(levelEntry);
-			levelEntry.addMouseListener(new ToggleLevelEntryController(this, levelEntry));
+			levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
 		}
 	}
 

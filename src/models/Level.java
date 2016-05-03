@@ -40,7 +40,10 @@ public class Level {
 	 * @param levelName	The name of the level.
 	 */
 	public Level (int numberOfBoardRows, int numberOfBoardCols, int levelNumber, LevelType lvlType, String levelName) {
-		setBoard(new Board(numberOfBoardRows, numberOfBoardCols, lvlType));
+		Board board = new Board(numberOfBoardRows, numberOfBoardCols, lvlType);
+		board.fillWithSquares();
+		setBoard(board);
+		
 		setLevelNumber(levelNumber);
 		setNumberOfStars(0);
 		this.lvlType = lvlType;

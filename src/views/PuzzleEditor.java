@@ -28,7 +28,6 @@ import models.Board;
 import models.EditorMode;
 import models.Level;
 import models.LevelType;
-import models.LightningLevelLogic;
 import models.Piece;
 import models.PuzzleLevelLogic;
 
@@ -87,7 +86,10 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	 * Create the editor screen, with a rectangular level and no pieces.
 	 * @param frame the frame to show the screen in
 	 */
-	public PuzzleEditor(KabasujiFrame frame, String levelName, int boardRows, int boardCols, int moveLimit) {
+	public PuzzleEditor(KabasujiFrame frame, Level level) {
+		// TODO: remove
+		int moveLimit = 0;
+		
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,13 +101,15 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		setEnabled(true);
 		this.addMouseMotionListener(new MoveDraggingPieceEditorController(this));
 		
-		board = new Board(boardRows, boardCols, LevelType.PUZZLE);
-		board.fillWithSquares();
+		board = level.getBoard();
+		//board = new Board(boardRows, boardCols, LevelType.PUZZLE);
+		//board.fillWithSquares();
 		
-		ell = new PuzzleLevelLogic(0, moveLimit);
+		ell =((PuzzleLevelLogic) level.getLevelLogic()).getAllottedMoves() < 0 ? new PuzzleLevelLogic(0, moveLimit) : (PuzzleLevelLogic) level.getLevelLogic();
 		
-		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.PUZZLE, levelName);
-		level.setBoard(board);
+		this.level = level;
+		//level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.PUZZLE, levelName);
+		//level.setBoard(board);
 		
 		boardPieceViews = new HashMap<Piece, PieceView>();
 		
@@ -113,7 +117,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		gameboard.setBounds(60, 71, 325, 325);
 		add(gameboard);
 		
-		bullpen = new BullpenView(gameboard.getWidth() / boardCols, new Rectangle(412, 14, 350, 455));
+		bullpen = new BullpenView(gameboard.getWidth() / board.getColumns(), new Rectangle(412, 14, 350, 455));
 		add(bullpen);
 		BullpenEditorController bullpenController = new BullpenEditorController(bullpen, this);
 		bullpen.addMouseListener(bullpenController);
@@ -121,7 +125,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		
 		editMode = EditorMode.EDIT;
 		
-		moveLimitLabel = new JLabel(String.valueOf(moveLimit));
+		moveLimitLabel = new JLabel(String.valueOf(ell.getAllottedMoves()));
 		moveLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		moveLimitLabel.setBounds(10, 220, 44, 24);
 		moveLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);

@@ -66,19 +66,24 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	 * Create the frame with an rectangular lightning level of the specified size and time.
 	 * @param frame the frame to show the screen in
 	 */
-	public LightningEditor(KabasujiFrame frame, String levelName, int boardRows, int boardCols, int timeLimit) {
+	public LightningEditor(KabasujiFrame frame, Level level) {
+		// TODO: remove
+		int timeLimit = 1;
+		
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		board = new Board(boardRows, boardCols, LevelType.LIGHTNING);
-		board.fillWithSquares();
+		board = level.getBoard();
+		//board = new Board(boardRows, boardCols, LevelType.LIGHTNING);
+		//board.fillWithSquares();
 		
-		ell = new LightningLevelLogic(boardRows * boardCols, timeLimit);
+		ell =((LightningLevelLogic) level.getLevelLogic()).getAllottedSeconds() < 0 ? new LightningLevelLogic(board.getNumberOfSquares(), timeLimit) : (LightningLevelLogic) level.getLevelLogic();
 		
-		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.LIGHTNING, levelName);
-		level.setBoard(board);
+		this.level = level;
+		//level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.LIGHTNING, levelName);
+		//level.setBoard(board);
 		
 		gameboard = new EditorBoardView(this, board, EditorMode.EDIT);
 		gameboard.setBounds(283, 94, 430, 430);
