@@ -27,7 +27,6 @@ public class TestBuilderViews extends TestCase {
 	    // click to make a new Puzzle level on level list screen
 	    NewLevel level = (NewLevel) frame.getContentPane();
 	    level.getNameField().setText("3");
-	    System.out.println(level.getBtnGo());
 	    level.getBtnGo().doClick();
 	    PuzzleEditor pEditor = (PuzzleEditor) frame.getContentPane();
 	    pEditor.getBtnAddPiece().doClick();
