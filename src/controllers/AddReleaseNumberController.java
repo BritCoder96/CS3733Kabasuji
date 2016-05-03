@@ -84,6 +84,7 @@ public class AddReleaseNumberController extends EditorSquareController{
 
 			//And the JLabel /has/ text
 			if (hasText) {
+				System.out.println("Removing text");
 				//Get rid of the text. We don't want it.
 				squareLabel.setText("");
 				squareLabel.setForeground(Color.black);
@@ -93,6 +94,7 @@ public class AddReleaseNumberController extends EditorSquareController{
 				thisSquare.setColorOfNumber(null);
 			
 			} else {
+				System.out.println("Adding text");
 				//Otherwise set the text and color to reflect the new text and color
 				squareLabel.setText(newText);
 				squareLabel.setForeground(newColor);

@@ -25,7 +25,9 @@ import models.EditorMode;
 import models.Level;
 import models.LevelType;
 import models.Piece;
+import models.ReleaseBoardSquareLogic;
 import models.ReleaseLevelLogic;
+import models.Square;
 
 import javax.swing.JPopupMenu;
 import java.awt.Component;
@@ -219,6 +221,18 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 * Pushes a clone of the current level to the back stack.
 	 */
 	private void pushBackStack() {
+		for (int i = 0; i < board.getRows(); i++) {
+			for (int j = 0; j < board.getColumns(); j++) {
+				Square s = board.getSquareAt(i, j);
+				String releaseNumText = "";
+				if (s != null && s.getSquareLogic() != null) {
+					ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) s.getSquareLogic();
+					releaseNumText = rbsl.getNumber() + " " + rbsl.getColorOfNumber();
+				}
+				System.out.print(s == null ? " " : (s.getSquareLogic() == null ? "x" : releaseNumText));
+			}
+			System.out.println();
+		}
 		undoController.pushLevel(level);
 	}
 
@@ -227,6 +241,18 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		this.level = level;
 		ell = (ReleaseLevelLogic) level.getLevelLogic();
 		board = level.getBoard();
+		for (int i = 0; i < board.getRows(); i++) {
+			for (int j = 0; j < board.getColumns(); j++) {
+				Square s = board.getSquareAt(i, j);
+				String releaseNumText = "";
+				if (s != null && s.getSquareLogic() != null) {
+					ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) s.getSquareLogic();
+					releaseNumText = rbsl.getNumber() + " " + rbsl.getColorOfNumber();
+				}
+				System.out.print(s == null ? " " : (s.getSquareLogic() == null ? "x" : releaseNumText));
+			}
+			System.out.println();
+		}
 		gameboard.setVisibleBoard(board);
 		bullpen.clearPieces();
 		for (Piece p : level.getBullpen().getPieces()) {

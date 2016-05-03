@@ -242,7 +242,7 @@ public class Level {
 			lvlLogicCopy = new LightningLevelLogic(elll.getTotalSquares(), elll.getAllottedSeconds());
 			break;
 		case RELEASE:
-			lvlLogicCopy = new ReleaseLevelLogic();
+			lvlLogicCopy = new ReleaseLevelLogic(); // nothing needed to copy here
 			break;
 		default:
 			throw new IllegalStateException("level has unknown type " + lvlType);
@@ -253,12 +253,20 @@ public class Level {
 		copy.setLevelLogic(lvlLogicCopy);
 		for (Piece p : bullpen.getPieces()) {
 			copy.getBullpen().addPiece(p);
-		}		
+		}
 		// To be totally safe, add each square individually where there's a square in the existing board
 		for (int r = 0; r < board.getRows(); r++) {
 			for (int c = 0; c < board.getColumns(); c++) {
 				if (board.getSquares()[r][c] != null) {
 					copy.getBoard().addSquareAt(r, c);
+					// If release level, copy numbers
+					if (lvlType == LevelType.RELEASE) {
+						ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) board.getSquareAt(r, c).getSquareLogic();
+						ReleaseBoardSquareLogic rbslCopy = new ReleaseBoardSquareLogic();
+						rbslCopy.setColorOfNumber(rbsl.getColorOfNumber());
+						rbslCopy.setNumber(rbsl.getNumber());
+						copy.getBoard().getSquareAt(r, c).setSquareLogic(rbslCopy);
+					}
 				}
 			}
 		}
