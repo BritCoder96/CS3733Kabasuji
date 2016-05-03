@@ -66,6 +66,8 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 					Random rand = new Random();
 					Piece[] pieces = Piece.allValidPieces;
 					gamescreen.getBullpen().addPiece(pieces[rand.nextInt(pieces.length -1)]);
+					gamescreen.getBullpen().addPiece(pieces[rand.nextInt(pieces.length -1)]);
+					gamescreen.getBullpen().addPiece(pieces[rand.nextInt(pieces.length -1)]);
 					LightningLevelLogic logic = ((LightningLevelLogic) originalLevel.getLevelLogic());
 					for (int i = 0; i < markedSquares; i++) {
 						logic.decrementUnmarkedSquares();
@@ -83,6 +85,13 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						originalLevel.setNumberOfStars(1);
 						saveStars(originalLevel);
 					}
+					else {
+						level.setHasWon(false);
+						originalLevel.setNumberOfStars(0);
+						SaveLevelController saveLevelController = new SaveLevelController(level);
+						saveLevelController.saveLevel();
+					}
+					
 				}
 				else if(level.getLvlType() == LevelType.PUZZLE) {
 					PuzzleLevelLogic logic = ((PuzzleLevelLogic) level.getLevelLogic());
@@ -104,6 +113,12 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						originalLevel.setNumberOfStars(1);
 						saveStars(originalLevel);
 					}
+					else {
+						level.setHasWon(false);
+						originalLevel.setNumberOfStars(0);
+						SaveLevelController saveLevelController = new SaveLevelController(level);
+						saveLevelController.saveLevel();
+					}
 					if (((PuzzleLevelLogic)level.getLevelLogic()).getRemainingMoves() == 0) {
 						gamescreen.endGame();
 					}
@@ -124,6 +139,13 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						originalLevel.setNumberOfStars(1);
 						saveStars(originalLevel);
 					}
+					else {
+						level.setHasWon(false);
+						originalLevel.setNumberOfStars(0);
+						SaveLevelController saveLevelController = new SaveLevelController(level);
+						saveLevelController.saveLevel();
+					}
+					
 				}
 			}
 		}
