@@ -70,14 +70,11 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	 PieceView draggingPiece;
 	/** the button to go back to the new level screen */
 	private JButton btnBack;
-<<<<<<< HEAD
 	
 	/** A map of pieces on the board to their views */
 	HashMap<Piece, PieceView> boardPieceViews;
-=======
 	/** the button to open the piece overlay to add a piece */
 	private JButton btnAddPiece;
->>>>>>> a0df4a604f71db0d1029e153a65797f6e7350416
 
 	/**
 	 * Create the editor screen, with a rectangular level and no pieces.
@@ -247,7 +244,6 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	public JButton getBtnBack() {
 		return btnBack;
 	}
-<<<<<<< HEAD
 	
 	public void setDraggingPiece(Piece p) {
 		setDraggingPiece(boardPieceViews.get(p));
@@ -292,14 +288,13 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		if (draggingPiece != null) {
 			draggingPiece.setBounds(x, y, draggingPiece.getWidth(), draggingPiece.getHeight());
 		}
-=======
+	}
 	/**
 	 * Gets the add Piece button
 	 * @return the add Piece button
 	 */
 	public JButton getBtnAddPiece() {
 		return btnAddPiece;
->>>>>>> a0df4a604f71db0d1029e153a65797f6e7350416
 	}
 
 }
