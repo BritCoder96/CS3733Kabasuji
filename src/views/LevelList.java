@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 /**
  * The screen that shows the list of existing levels and allows you to select one to edit or delete.
@@ -34,6 +35,10 @@ public class LevelList extends JPanel {
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
 
+	/** The panel that holds level entries. */
+	JPanel panel;
+	
+	/** The button that creates a new level. */
 	private JButton btnNew;
 	/**
 	 * Get the existing levels and make the frame to show them.
@@ -50,17 +55,17 @@ public class LevelList extends JPanel {
 		btnBack.setBounds(0, 0, 120, 45);
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(150, 100, 500, 350);
+		add(scrollPane);
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
+		scrollPane.setViewportView(panel);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(150, 100, 500, 350);
-		add(panel);
 		panel.setLayout(null);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(483, 0, 17, 400);
-		panel.add(scrollBar);
-		
+		/*
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1.setBounds(10, 10, 463, 50);
@@ -68,6 +73,7 @@ public class LevelList extends JPanel {
 		panel_1.setLayout(null);
 		
 		JLabel lblLevel_1 = new JLabel("Level 01");
+		lblLevel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblLevel_1.setBounds(10, 0, 232, 50);
 		panel_1.add(lblLevel_1);
 		lblLevel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -146,6 +152,10 @@ public class LevelList extends JPanel {
 		lblPuzzle_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblPuzzle_1.setBounds(221, 0, 232, 50);
 		panel_5.add(lblPuzzle_1);
+		*/
+		for (int i = 1; i <= 5; i++) {
+			addLevelEntry(i, "temp");
+		}
 		
 		btnNew = new JButton("New");
 		btnNew.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -166,6 +176,26 @@ public class LevelList extends JPanel {
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDelete.setBounds(332, 480, 120, 45);
 		add(btnDelete);
+	}
+	
+	void addLevelEntry(int levelNumber, String levelType) {
+		JPanel levelEntry = new JPanel();
+		levelEntry.setBorder(new LineBorder(new Color(0, 0, 0)));
+		levelEntry.setBounds(10, 10 + 70 * (levelNumber - 1), 463, 50);
+		
+		JLabel name = new JLabel("Level " + levelNumber);
+		name.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		name.setBounds(10, 0, 232, 50);
+		levelEntry.add(name);
+		
+		JLabel type = new JLabel(levelType);
+		type.setHorizontalAlignment(SwingConstants.RIGHT);
+		type.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		type.setBounds(221, 0, 232, 50);
+		levelEntry.add(type);
+		
+		panel.add(levelEntry);
+		levelEntry.setLayout(null);
 	}
 	
 	/**
