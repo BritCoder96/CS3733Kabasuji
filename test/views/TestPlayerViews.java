@@ -39,5 +39,6 @@ public class TestPlayerViews extends TestCase {
 	    gameScreen.dispatchEvent(me);me = new MouseEvent(gameScreen.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_MOVED, 0, 0, 10, 10, 0, false, 0);
 	    gameScreen.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	    me = new MouseEvent(gameScreen.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, 0, 10, 10, 1, false, MouseEvent.BUTTON1);
+	    Thread.sleep(3000);
 	  }
 }

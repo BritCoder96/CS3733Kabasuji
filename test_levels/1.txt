@@ -8,5 +8,5 @@ x,x,x,x,x,x
 x,x,x,x,x,x
  ,x,x,x,x, 
 
-10
+2
 2
