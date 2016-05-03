@@ -99,7 +99,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(69, 247, 120, 45);
-		btnEdit.addActionListener(new EditorModeController(this, this, board, EditorMode.EDIT));
+		btnEdit.addActionListener(new EditorModeController(this, board, EditorMode.EDIT));
 		add(btnEdit);
 		
 		JButton btnSave = new JButton("Save");
@@ -135,7 +135,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		btnHint = new JButton("Hint");
 		btnHint.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnHint.setBounds(69, 305, 120, 45);
-		btnHint.addActionListener(new EditorModeController(this, this, board, EditorMode.HINT));
+		btnHint.addActionListener(new EditorModeController(this, board, EditorMode.HINT));
 		add(btnHint);
 		updateTimeLimitDisplay();
 		
@@ -218,7 +218,8 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 			break;
 		case NUMBER:
 			break;
-		}		
+		}	
+	}
 
 	public void setDraggingPiece(PieceView pv) {
 		// Do nothing, no bullpen in lightning levels so no dragged pieces

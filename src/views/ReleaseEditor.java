@@ -27,8 +27,6 @@ import models.LevelType;
 import models.Piece;
 import models.ReleaseLevelLogic;
 
-<<<<<<< HEAD
-=======
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
@@ -36,7 +34,6 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
 import javax.swing.JList;
->>>>>>> 2fc0d1e7ffe2c198a13980845dbc98bcbc7e1575
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -129,7 +126,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(46, 495, 127, 45);
-		btnEdit.addActionListener(new EditorModeController(this, this, board, EditorMode.EDIT));
+		btnEdit.addActionListener(new EditorModeController(this, board, EditorMode.EDIT));
 		add(btnEdit);
 		btnEdit.addMouseMotionListener(new EditorComponentDragListener(this, btnEdit));
 		
@@ -142,7 +139,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		btnHint = new JButton("Hint");
 		btnHint.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnHint.setBounds(324, 552, 127, 45);
-		btnHint.addActionListener(new EditorModeController(this, this, board, EditorMode.HINT));
+		btnHint.addActionListener(new EditorModeController(this, board, EditorMode.HINT));
 		add(btnHint);
 
 		btnNum.addMouseMotionListener(new EditorComponentDragListener(this, btnNum));
@@ -309,6 +306,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	@Override
 	public void setEditorMode(EditorMode em) {
 		this.editMode = em;
+	}
 	
 	public void setDraggingPiece(Piece p) {
 		setDraggingPiece(boardPieceViews.get(p));

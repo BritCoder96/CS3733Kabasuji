@@ -70,7 +70,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	private EditorMode editMode;
 	 /** The piece being dragged, if any */
 	 PieceView draggingPiece;
->>>>>>> 2fc0d1e7ffe2c198a13980845dbc98bcbc7e1575
+
 	/** the button to go back to the new level screen */
 	private JButton btnBack;
 	
@@ -145,16 +145,16 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(46, 472, 127, 45);
-		btnEdit.addActionListener(new EditorModeController(this, this, board, EditorMode.EDIT));
+		btnEdit.addActionListener(new EditorModeController(this, board, EditorMode.EDIT));
 		add(btnEdit);
 		
 		btnHint = new JButton("Hint");
-		btnHint.addActionListener(new EditorModeController(this, this, board, EditorMode.HINT));
+		btnHint.addActionListener(new EditorModeController(this, board, EditorMode.HINT));
 		btnHint.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnHint.setBounds(46, 520, 127, 45);
 		add(btnHint);
 		btnEdit.addMouseMotionListener(new EditorComponentDragListener(this, btnEdit));
->>>>>>> 2fc0d1e7ffe2c198a13980845dbc98bcbc7e1575
+
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
