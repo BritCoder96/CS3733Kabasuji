@@ -14,14 +14,12 @@ import views.LevelModifiedListener;
 public class EditorModeController implements ActionListener {
 
 	EditorMode em;
-	JPanel gamescreen;
-	LevelModifiedListener listener;
+	LevelEditor screen;
 	Board board;
 	
 	
-	public EditorModeController(JPanel gamescreen, LevelModifiedListener listener, Board board, EditorMode em){
-		this.gamescreen = gamescreen;
-		this.listener = listener;
+	public EditorModeController(LevelEditor screen, Board board, EditorMode em){
+		this.screen = screen;
 		this.em = em;
 		this.board = board;
 	}
@@ -30,10 +28,11 @@ public class EditorModeController implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		((LevelEditor) listener).setGameBoard(new EditorBoardView(gamescreen, board, listener, em));
-		((LevelEditor) listener).setEditorMode(em);
-		((LevelEditor) listener).updateOptionsDisplay();
-	}
+
+		screen.setGameBoard(new EditorBoardView(screen, board, em));
+		screen.setEditorMode(em);
+		screen.updateOptionsDisplay();
+}
 	
 	
 	

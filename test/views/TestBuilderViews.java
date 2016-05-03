@@ -32,16 +32,22 @@ public class TestBuilderViews extends TestCase {
 	    pEditor.getBtnBack().doClick();
 	    pEditor.getBtnAddPiece().doClick();
 	    AddPieceOverlay apo = new AddPieceOverlay(frame, pEditor);
-	    apo.getBullpenView().dispatchEvent(new MouseEvent(apo, 0, 0, 100, 40, 0, 0, false, 0));
+	    apo.getBullpenView().dispatchEvent(new MouseEvent(apo, 0, 0, 100, 40, 0, 1, false, 0));
 	    level.getNameField().setText("4");
 	    level.getLightningBtn().doClick();
+	    level.getBtnGo().doClick();
 	    LightningEditor lEditor = new LightningEditor(frame, level.getName(), level.getRows(), level.getCols(), level.getTimeLimit());
 	    lEditor.getBtnBack().doClick();
 	    level.getNameField().setText("5");
 	    level.getReleaseBtn().doClick();
+	    level.getBtnGo().doClick();
 	    ReleaseEditor rEditor = new ReleaseEditor(frame, level.getName(), level.getRows(), level.getCols());
+	    rEditor.getBtnNum().doClick();
+	    rEditor.getBoardView().dispatchEvent(new MouseEvent(rEditor.getBoardView(), 0, 0, 100, 100, 0, 1, false, 0));
+	    Thread.sleep(4000);
+
+	    SaveLevelController.serializeLevel(rEditor.getLevel());
 	    rEditor.getBtnBack().doClick();
-	    SaveLevelController slc = new SaveLevelController(rEditor.getLevel());
-	    slc.serializeLevel(rEditor.getLevel());
+	   
 	  }
 }
