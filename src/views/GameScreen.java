@@ -251,4 +251,13 @@ public class GameScreen extends JPanel {
 	public GameBoardView getBoardView() {
 		return boardView;
 	}
+	
+	/**
+	 * gets the boardview
+	 * @return the boardview
+	 */
+	public HashMap<Piece, PieceView> getPiecesOnBoard() {
+		return viewsForLevelPiecesOnBoard;
+	}
+	
 }

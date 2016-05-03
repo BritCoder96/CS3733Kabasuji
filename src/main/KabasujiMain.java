@@ -12,7 +12,6 @@ import views.KabasujiFrame;
  *
  */
 public class KabasujiMain {
-	static SaveFile Kabasuji;;
 	
 	public static Rectangle windowSize = new Rectangle(100, 100, 800, 650);
 
@@ -23,7 +22,6 @@ public class KabasujiMain {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Kabasuji = SaveFile.instance();
 		backMgr = new PanelBackManager();
 		frame = new KabasujiFrame(backMgr);
 		frame.setContentPane(new views.Title(frame));

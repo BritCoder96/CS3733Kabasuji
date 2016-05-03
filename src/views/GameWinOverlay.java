@@ -61,14 +61,12 @@ public class GameWinOverlay extends JPanel {
 		btnReplay.setBounds(359, 487, 81, 23);
 		add(btnReplay);
 		
-		JButton btnNextLevel = new JButton("Next Level");
-		btnNextLevel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNextLevel.setBounds(484, 487, 102, 23);
-		add(btnNextLevel);
-		btnNextLevel.addActionListener(new ReplaceWithLevelController(SaveFile.instance().getLevel(level.getLevelNumber() + 1), frame, this));
+		if (SaveFile.instance().getNumberOfLevels() > level.getLevelNumber() + 1) {
+			JButton btnNextLevel = new JButton("Next Level");
+			btnNextLevel.addActionListener(new ReplaceWithLevelController(SaveFile.instance().getLevel(level.getLevelNumber() + 1), frame, this));
+			btnNextLevel.setBounds(484, 487, 102, 23);
+			add(btnNextLevel);
+		}
 	}
 	
 	/**

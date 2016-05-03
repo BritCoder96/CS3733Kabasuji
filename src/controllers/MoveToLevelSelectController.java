@@ -53,11 +53,9 @@ public class MoveToLevelSelectController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		File[] levelFiles = new File(pathToLevelsFolder).listFiles();
-		
 		for (File i : levelFiles) {
 			SaveFile.instance().addLevel(parseData(loadLevel(i)));
 		}
-		
 		//Hide the previous screen
 		title.setVisible(false);
 		
