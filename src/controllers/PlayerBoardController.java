@@ -101,7 +101,7 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						logic.decrementRemainingMoves();
 					}
 					gamescreen.updateMovesDisplay();
-					int totalNumPieces = level.getBullpen().getNumberOfPieces() + level.getBoard().getPieces().size();
+					int totalNumPieces = level.getBullpen().getNumberOfPieces() + gamescreen.getPiecesOnBoard().size();
 					if (level.getBoard().getPieces().size() == totalNumPieces) {
 						originalLevel.setNumberOfStars(3);
 						saveStars(originalLevel);
@@ -112,6 +112,7 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						saveStars(originalLevel);
 					}
 					else if (level.getBoard().getPieces().size() == totalNumPieces - 2) {
+						System.out.println(totalNumPieces);
 						originalLevel.setNumberOfStars(1);
 						saveStars(originalLevel);
 					}

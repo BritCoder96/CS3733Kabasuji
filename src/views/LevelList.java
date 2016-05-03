@@ -109,47 +109,11 @@ public class LevelList extends JPanel {
 	 */
 	private void updateLevelEntries() {
 		for (int i = 0, length = SaveFile.instance().getNumberOfLevels(); i < length; i++) {
-			Level level = SaveFile.instance().getLevel(i);
-			
-			String type;
-			switch (level.getLvlType()) {
-			case PUZZLE:
-				type = "Puzzle";
-				break;
-			case LIGHTNING:
-				type = "Lightning";
-				break;
-			case RELEASE:
-				type = "Release";
-				break;
-			default:
-				// TODO: probably should throw an exception instead
-				type = "";
-			}
-			
-			addLevelEntry(level.getLevelNumber() + 1, type);
-		}		
-	}
-	
-	void addLevelEntry(int levelNumber, String levelType) {
-		JPanel levelEntry = new JPanel();
-		levelEntry.setBorder(new LineBorder(new Color(0, 0, 0)));
-		levelEntry.setBounds(10, 10 + 70 * (levelNumber - 1), 463, 50);
-		
-		JLabel name = new JLabel("Level " + levelNumber);
-		name.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		name.setBounds(10, 0, 232, 50);
-		levelEntry.add(name);
-		
-		JLabel type = new JLabel(levelType);
-		type.setHorizontalAlignment(SwingConstants.RIGHT);
-		type.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		type.setBounds(221, 0, 232, 50);
-		levelEntry.add(type);
-		
-		panel.add(levelEntry);
-		levelEntry.setLayout(null);
-		levelEntry.addMouseListener(new ToggleLevelEntryController(this, levelEntry));
+			LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
+			levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
+			panel.add(levelEntry);
+			levelEntry.addMouseListener(new ToggleLevelEntryController(this, levelEntry));
+		}
 	}
 
 	/**

@@ -9,6 +9,7 @@ import views.LevelSelect;
  * 
  * @author sthuynh
  * @author bhuchley
+ * @author bjbenson
  */
 public class SaveFile {
 	// eager implementation of the singleton pattern
@@ -31,6 +32,11 @@ public class SaveFile {
 		this.levels = new ArrayList<Level>(15);
 		//this.levels = LevelSelect.TEST_LEVELS;
 		fileName = null;
+	}
+	
+	/** resets the levels in the savefile*/
+	public void clear() {
+		this.levels = new ArrayList<Level>(15);
 	}
 	
 	/**

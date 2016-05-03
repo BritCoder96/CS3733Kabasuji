@@ -22,9 +22,11 @@ public class ToggleLevelEntryController implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		JPanel toggled = levelList.getToggledLevelEntry();
+		JButton btnEdit = levelList.getBtnEdit();
+		JButton btnDelete = levelList.getBtnDelete();
 		if (toggled == null) {
-			levelList.getBtnEdit().setEnabled(true);
-			levelList.getBtnDelete().setEnabled(true);
+			btnEdit.setEnabled(true);
+			btnDelete.setEnabled(true);
 			levelEntry.setBackground(Color.YELLOW);
 			levelList.setToggledLevelEntry(levelEntry);
 		}
