@@ -14,6 +14,7 @@ import controllers.CreateNewLevelController;
 import controllers.GoBackOnePanelController;
 import controllers.MoveToBuilderLevelListController;
 import controllers.MoveToLevelController;
+import controllers.ToggleLevelEntryController;
 import main.KabasujiMain;
 import models.Level;
 import models.LevelType;
@@ -38,9 +39,18 @@ public class LevelList extends JPanel {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
-
+	
+	/** The toggled level entry */
+	JPanel toggledLevelEntry;
+	
 	/** The panel that holds level entries. */
 	JPanel panel;
+	
+	/** The button that edits an existing level. */
+	JButton btnEdit;
+	
+	/** The button that deletes an existing level. */
+	JButton btnDelete;
 	
 	/** The button that creates a new level. */
 	private JButton btnNew;
@@ -69,102 +79,13 @@ public class LevelList extends JPanel {
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setLayout(null);
 		
-		/*
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(10, 10, 463, 50);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblLevel_1 = new JLabel("Level 01");
-		lblLevel_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblLevel_1.setBounds(10, 0, 232, 50);
-		panel_1.add(lblLevel_1);
-		lblLevel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		
-		JLabel lblLightning = new JLabel("Lightning");
-		lblLightning.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblLightning.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLightning.setBounds(221, 0, 232, 50);
-		panel_1.add(lblLightning);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_2.setBounds(10, 80, 463, 50);
-		panel.add(panel_2);
-		panel_2.setLayout(null);
-		
-		JLabel lblLevel_2 = new JLabel("Level 02");
-		lblLevel_2.setLocation(10, 0);
-		lblLevel_2.setSize(232, 50);
-		panel_2.add(lblLevel_2);
-		lblLevel_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		
-		JLabel lblPuzzle = new JLabel("Puzzle");
-		lblPuzzle.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblPuzzle.setBounds(221, 0, 232, 50);
-		panel_2.add(lblPuzzle);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_3.setBounds(10, 150, 463, 50);
-		panel.add(panel_3);
-		panel_3.setLayout(null);
-		
-		JLabel label = new JLabel("Level 03");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label.setBounds(10, 0, 232, 50);
-		panel_3.add(label);
-		
-		JLabel lblRelease = new JLabel("Release");
-		lblRelease.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblRelease.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblRelease.setBounds(221, 0, 232, 50);
-		panel_3.add(lblRelease);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_4.setBounds(10, 220, 463, 50);
-		panel.add(panel_4);
-		panel_4.setLayout(null);
-		
-		JLabel lblLevel = new JLabel("Level 04");
-		lblLevel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLevel.setBounds(10, 0, 232, 50);
-		panel_4.add(lblLevel);
-		
-		JLabel label_3 = new JLabel("Lightning");
-		label_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_3.setBounds(221, 0, 232, 50);
-		panel_4.add(label_3);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_5.setBounds(10, 290, 463, 50);
-		panel.add(panel_5);
-		panel_5.setLayout(null);
-		
-		JLabel lblLevel_3 = new JLabel("Level 05");
-		lblLevel_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLevel_3.setBounds(10, 0, 232, 50);
-		panel_5.add(lblLevel_3);
-		
-		JLabel lblPuzzle_1 = new JLabel("Puzzle");
-		lblPuzzle_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPuzzle_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblPuzzle_1.setBounds(221, 0, 232, 50);
-		panel_5.add(lblPuzzle_1);
-		*/
-		
 		btnNew = new JButton("New");
 		btnNew.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNew.setBounds(504, 480, 120, 45);
 		add(btnNew);
 		btnNew.addActionListener(new CreateNewLevelController(frame, this));
 		
-		JButton btnEdit = new JButton("Edit");
+		btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -172,11 +93,13 @@ public class LevelList extends JPanel {
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(160, 480, 120, 45);
 		add(btnEdit);
+		btnEdit.setEnabled(false);
 		
-		JButton btnDelete = new JButton("Delete");
+		btnDelete = new JButton("Delete");
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDelete.setBounds(332, 480, 120, 45);
 		add(btnDelete);
+		btnDelete.setEnabled(false);
 		
 		updateLevelEntries();
 	}
@@ -226,6 +149,39 @@ public class LevelList extends JPanel {
 		
 		panel.add(levelEntry);
 		levelEntry.setLayout(null);
+		levelEntry.addMouseListener(new ToggleLevelEntryController(this, levelEntry));
+	}
+
+	/**
+	 * Gets the toggled level entry
+	 * @return the entry
+	 */
+	public JPanel getToggledLevelEntry() {
+		return toggledLevelEntry;
+	}
+	
+	/**
+	 * Sets the toggled level entry
+	 * @param levelEntry the new toggled entry
+	 */
+	public void setToggledLevelEntry(JPanel levelEntry) {
+		toggledLevelEntry = levelEntry;
+	}
+	
+	/**
+	 * Gets the edit level button
+	 * @return the btn
+	 */
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+	
+	/**
+	 * Gets the delete level button
+	 * @return the btn
+	 */
+	public JButton getBtnDelete() {
+		return btnDelete;
 	}
 	
 	/**

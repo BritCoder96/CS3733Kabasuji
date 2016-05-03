@@ -17,7 +17,7 @@ import java.awt.GridLayout;
  */
 public class PieceView extends JPanel {
 	
-	public static final Color pieceSquareColor = new Color(128, 128, 128);
+	public Color pieceSquareColor;
 	
 	protected boolean beingDragged = false; 
 	protected Piece piece;
@@ -35,6 +35,10 @@ public class PieceView extends JPanel {
 		setBounds(topLeftX, topLeftY, squareSize * cols, squareSize * rows);
 		setOpaque(false); // so that it doesn't draw a background for the entire pieceview
 							// and only shows the squares we want it to
+		
+		pieceSquareColor = new Color((new Double(Math.random() * 255).intValue()), 
+				(new Double(Math.random() * 255).intValue()), 
+				(new Double(Math.random() * 255).intValue()));
 		
 		JLabel[][] squareViews = new JLabel[rows][cols];
 		for (int r = 0; r < rows; r++) {

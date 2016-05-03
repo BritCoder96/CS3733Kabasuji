@@ -7,7 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controllers.GoBackOnePanelController;
+import controllers.MoveToLevelController;
+import controllers.ReplaceWithLevelController;
 import main.KabasujiMain;
+import models.Level;
+import models.SaveFile;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -32,24 +36,25 @@ public class GameLossOverlay extends JPanel {
 	 * Create the frame. It should get the score of the level that was failed but that doesn't exist yet
 	 * @param frame the frame to show the screen in
 	 */
-	public GameLossOverlay(KabasujiFrame frame) {
+	public GameLossOverlay(Level level, KabasujiFrame frame) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setLayout(null);
 		
 		JLabel lblOhTooBad = new JLabel("Oh! Too bad!");
 		lblOhTooBad.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblOhTooBad.setBounds(71, 28, 141, 27);
+		lblOhTooBad.setBounds(330, 199, 141, 27);
 		add(lblOhTooBad);
 		
 		btnLevelSelect = new JButton("Level Select");
 		btnLevelSelect.addActionListener(new GoBackOnePanelController(frame));
-		btnLevelSelect.setBounds(30, 162, 109, 23);
+		btnLevelSelect.setBounds(255, 424, 109, 23);
 		add(btnLevelSelect);
 		
 		JButton btnTryAgain = new JButton("Try Again");
-		btnTryAgain.setBounds(149, 162, 98, 23);
+		btnTryAgain.setBounds(427, 424, 98, 23);
 		add(btnTryAgain);
+		btnTryAgain.addActionListener(new ReplaceWithLevelController(SaveFile.instance().getLevel(level.getLevelNumber()), frame, this));
 	}
 	
 	/**
