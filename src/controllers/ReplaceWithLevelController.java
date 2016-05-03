@@ -18,7 +18,7 @@ import views.Title;
  * 
  * @author bhuchley
  */
-public class MoveToLevelController implements ActionListener {
+public class ReplaceWithLevelController implements ActionListener {
 	Level level;
 	KabasujiFrame frame;
 	JPanel priorFrame;
@@ -29,7 +29,7 @@ public class MoveToLevelController implements ActionListener {
 	 * @param frame - the static frame that is passed along throughout the application
 	 * @param priorFrame - the previous screen, in this case, the level select screen.
 	 */
-	public MoveToLevelController(Level level, KabasujiFrame frame, JPanel priorFrame) {
+	public ReplaceWithLevelController(Level level, KabasujiFrame frame, JPanel priorFrame) {
 		this.level = level;
 		this.frame = frame;
 		this.priorFrame = priorFrame;
@@ -41,8 +41,9 @@ public class MoveToLevelController implements ActionListener {
 	 * @param e - The event, i.e. the button press.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		//Hide the current screen
+		//Delete the current screen
 		priorFrame.setVisible(false);
+		frame.returnToLastContentPane();
 		
 		//Pass the frame to the next screen
 		GameScreen newPanel = new GameScreen(level, frame);
