@@ -120,7 +120,6 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		bullpen.addMouseMotionListener(bullpenController);
 		
 		editMode = EditorMode.EDIT;
-		updateOptionsDisplay();
 		
 		moveLimitLabel = new JLabel(String.valueOf(moveLimit));
 		moveLimitLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -193,6 +192,8 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		editMode = EditorMode.EDIT;
 		updateOptionsDisplay();
 		btnRedo.addMouseMotionListener(new EditorComponentDragListener(this, btnRedo));
+		
+		updateOptionsDisplay();
 	}
 
 	/**
