@@ -69,6 +69,9 @@ public class GameScreen extends JPanel {
 	HashMap<Piece, PieceView> viewsForLevelPiecesOnBoard;
 	/** The JLabel showing how many moves are left */
 	JLabel movesLeftDisplay;
+	
+	/** The timer that ticks down the time left in lightning levels */
+	Timer lightningTimer;
 
 	/**
 	 * Load the initial state of the level and set the game board and bullpen to it.
@@ -133,8 +136,8 @@ public class GameScreen extends JPanel {
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			lblNewLabel_1.setBounds(517, 552, 186, 29);
 			add(lblNewLabel_1);
-		    Timer timer = new Timer();
-			timer.schedule(new DecrementTimer(lblNewLabel_1, logic), 0, 1 * 1000);
+		    lightningTimer = new Timer();
+			lightningTimer.schedule(new DecrementTimer(lblNewLabel_1, logic), 0, 1 * 1000);
 		}
 		else if (level.getLvlType() == LevelType.PUZZLE) {
 			PuzzleLevelLogic logic = ((PuzzleLevelLogic)level.getLevelLogic());
@@ -227,7 +230,10 @@ public class GameScreen extends JPanel {
 	
 	/** Ends the level */
 	public void endGame() {
-		new EndGameController(originalLevel, frame, this);
+		if (lightningTimer != null) {
+			lightningTimer.cancel();
+		}
+		new EndGameController(originalLevel, frame);
 	}
 	
 	/**

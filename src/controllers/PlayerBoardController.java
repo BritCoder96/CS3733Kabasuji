@@ -53,9 +53,11 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 				for (Square s : p.getPiece().getSquares()) {
 					int squareX = square.getCoordinates().getRow() + s.getCoordinates().getRow();
 					int squareY = square.getCoordinates().getCol() + s.getCoordinates().getCol();
-					LightningBoardSquareLogic lsbl = (LightningBoardSquareLogic)level.getBoard().getSquareAt(squareX, squareY).getSquareLogic();
-					if (!lsbl.getMarked()) {
-						markedSquares++;
+					if (level.getBoard().getSquareAt(squareX, squareY) != null) {
+						LightningBoardSquareLogic lsbl = (LightningBoardSquareLogic)level.getBoard().getSquareAt(squareX, squareY).getSquareLogic();
+						if (!lsbl.getMarked()) {
+							markedSquares++;
+						}
 					}
 				}
 			}

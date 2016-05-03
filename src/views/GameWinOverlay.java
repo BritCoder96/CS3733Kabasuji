@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controllers.GoBackOnePanelController;
+import main.KabasujiMain;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -29,8 +33,7 @@ public class GameWinOverlay extends JPanel {
 	public GameWinOverlay(int numberOfStars, KabasujiFrame frame) {
 		this.numberOfStars = numberOfStars;
 		this.frame = frame;
-		setBounds(100, 100, 300, 250);
-		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBounds(KabasujiMain.windowSize);
 		setLayout(null);
 		
 		StarsDisplay starsDisplay = new StarsDisplay(numberOfStars);
@@ -42,13 +45,8 @@ public class GameWinOverlay extends JPanel {
 		lblYouDidIt.setBounds(84, 21, 115, 27);
 		add(lblYouDidIt);
 		
-		JLabel lblScore = new JLabel("Score: 25");
-		lblScore.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblScore.setBounds(104, 112, 76, 27);
-		add(lblScore);
-		
 		JButton btnLevelSelect = new JButton("Level Select");
-		btnLevelSelect.addActionListener(new returnToLevelSelectController());
+		btnLevelSelect.addActionListener(new GoBackOnePanelController(frame));
 		btnLevelSelect.setBounds(35, 177, 109, 23);
 		add(btnLevelSelect);
 		
@@ -67,14 +65,5 @@ public class GameWinOverlay extends JPanel {
 		});
 		btnNextLevel.setBounds(91, 150, 102, 23);
 		add(btnNextLevel);
-	}
-	
-	class returnToLevelSelectController implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			frame.returnToLastContentPane();
-			frame.returnToLastContentPane();
-		}
-		
 	}
 }

@@ -6,7 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import views.GameWinOverlay.returnToLevelSelectController;
+import controllers.GoBackOnePanelController;
+import main.KabasujiMain;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -30,8 +31,7 @@ public class GameLossOverlay extends JPanel {
 	 */
 	public GameLossOverlay(KabasujiFrame frame) {
 		this.frame = frame;
-		setBounds(100, 100, 300, 250);
-		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBounds(KabasujiMain.windowSize);
 		setLayout(null);
 		
 		JLabel lblOhTooBad = new JLabel("Oh! Too bad!");
@@ -39,27 +39,13 @@ public class GameLossOverlay extends JPanel {
 		lblOhTooBad.setBounds(71, 28, 141, 27);
 		add(lblOhTooBad);
 		
-		// TODO Once points actually work make this show how many points away you were
-		JLabel lblNewLabel = new JLabel("<html><center>You were 2 points away from the star!</center></html>");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(71, 79, 141, 36);
-		add(lblNewLabel);
-		
 		JButton btnLevelSelect = new JButton("Level Select");
-		btnLevelSelect.addActionListener(new returnToLevelSelectController());
+		btnLevelSelect.addActionListener(new GoBackOnePanelController(frame));
 		btnLevelSelect.setBounds(30, 162, 109, 23);
 		add(btnLevelSelect);
 		
 		JButton btnTryAgain = new JButton("Try Again");
 		btnTryAgain.setBounds(149, 162, 98, 23);
 		add(btnTryAgain);
-	}
-	
-	class returnToLevelSelectController implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			frame.returnToLastContentPane();
-			frame.returnToLastContentPane();
-		}
 	}
 }

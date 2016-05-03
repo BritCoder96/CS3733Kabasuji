@@ -8,9 +8,11 @@ import views.GameWinOverlay;
 import views.KabasujiFrame;
 
 public class EndGameController {
-	public EndGameController(Level level, KabasujiFrame frame, GameScreen gameScreen) {
+	public EndGameController(Level level, KabasujiFrame frame) {
 		//Hide the previous screen
-		gameScreen.setVisible(false);
+		//gameScreen.setVisible(false);
+		frame.returnToLastContentPane();
+		frame.getContentPane().setVisible(false);
 		
 		if (level.getHasWon()) {
 			//Pass the frame to the new screen
