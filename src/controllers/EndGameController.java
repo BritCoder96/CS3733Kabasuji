@@ -22,6 +22,7 @@ public class EndGameController {
 			frame.setContentPane(newPanel);
 		}
 		else {
+			//Pass the frame to the new screen
 			GameLossOverlay newPanel = new GameLossOverlay(frame);
 			//Load the new screen
 			newPanel.setVisible(true);

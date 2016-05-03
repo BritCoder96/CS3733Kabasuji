@@ -31,10 +31,9 @@ import views.Title;
  * @author bhuchley
  */
 public class MoveToLevelSelectController implements ActionListener {
-	SaveFile saveFile;
 	KabasujiFrame frame;
 	Title title;
-	String pathToLevelsFolder;
+	public static String pathToLevelsFolder = "levels/";
 	
 	/**
 	 * The Constructor for the MoveToLevelSelectController
@@ -43,10 +42,8 @@ public class MoveToLevelSelectController implements ActionListener {
 	 * @param t - The previous screen, in this case, the Player Title Screen.
 	 */
 	public MoveToLevelSelectController(KabasujiFrame frame, Title t) {
-		saveFile = SaveFile.instance();
 		this.frame = frame;
 		this.title = t;
-		pathToLevelsFolder = "levels/";
 	}
 
 	/**
@@ -55,14 +52,11 @@ public class MoveToLevelSelectController implements ActionListener {
 	 * @param e - The actual event, i.e. the Button Press.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		ArrayList<Level> levels = new ArrayList<Level>();
 		File[] levelFiles = new File(pathToLevelsFolder).listFiles();
 		
 		for (File i : levelFiles) {
-			levels.add(parseData(loadLevel(i)));
+			SaveFile.instance().addLevel(parseData(loadLevel(i)));
 		}
-		
-		saveFile.setLevels(levels);
 		
 		//Hide the previous screen
 		title.setVisible(false);

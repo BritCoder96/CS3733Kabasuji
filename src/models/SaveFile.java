@@ -42,13 +42,6 @@ public class SaveFile {
 		return inst;
 	}
 	
-	/**
-	 * Gets the list of levels.
-	 * @return the list of levels
-	 */
-	public ArrayList<Level> getLevels() {
-		return levels;
-	}
 	
 	/**
 	 * Gets a Level that is determined from its associated number.
@@ -62,21 +55,31 @@ public class SaveFile {
 			}
 		}
 		// must get a level that exists
-		throw new IllegalArgumentException("Unknown level number " + levelNumber);
+		throw new IllegalArgumentException("Unknown level number: " + levelNumber);
 	}
+    
+    /**
+     * Get the number of levels currently stored in the save file.
+     *
+     * @return The number of levels stored.
+     */
+    public int getNumberOfLevels() {
+        return levels.size();
+    }
+    
+    /**
+     * Stores the passed-in level.
+     *
+     * @param level The level to be stored.
+     */
+    public void addLevel(Level level) {
+        levels.add(level);
+    }
 	
 	/**
 	 * Gets the name of the current save file.
 	 */
 	public String getFileName() {
 		return fileName;
-	}
-	
-	public void setLevels(ArrayList<Level> levels) {
-		this.levels = levels;
-	}
-	
-	public void loadFile(String fileName) {
-		// Do a thing
 	}
 }

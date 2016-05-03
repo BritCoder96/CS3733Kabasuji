@@ -5,8 +5,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import views.GameWinOverlay.returnToLevelSelectController;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 /**
@@ -39,13 +45,21 @@ public class GameLossOverlay extends JPanel {
 		lblNewLabel.setBounds(71, 79, 141, 36);
 		add(lblNewLabel);
 		
-		JButton button = new JButton("Level Select");
-		button.setBounds(30, 162, 109, 23);
-		add(button);
+		JButton btnLevelSelect = new JButton("Level Select");
+		btnLevelSelect.addActionListener(new returnToLevelSelectController());
+		btnLevelSelect.setBounds(30, 162, 109, 23);
+		add(btnLevelSelect);
 		
 		JButton btnTryAgain = new JButton("Try Again");
 		btnTryAgain.setBounds(149, 162, 98, 23);
 		add(btnTryAgain);
 	}
-
+	
+	class returnToLevelSelectController implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			frame.returnToLastContentPane();
+			frame.returnToLastContentPane();
+		}
+	}
 }

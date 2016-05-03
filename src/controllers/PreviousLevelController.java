@@ -15,9 +15,7 @@ import models.Level;
  *
  */
 public class PreviousLevelController implements ActionListener {
-	
 	LevelSelect levelSelect;
-	ArrayList<Level> levels;
 	
 	/**
 	 * The Constructor for a PreviousLevelController
@@ -25,9 +23,8 @@ public class PreviousLevelController implements ActionListener {
 	 * @param ls - The level select screen being modified
 	 * @param levels - The list of levels in the current file
 	 */
-	public PreviousLevelController(LevelSelect ls, ArrayList<Level> levels) {
+	public PreviousLevelController(LevelSelect ls) {
 		levelSelect = ls;
-		this.levels = levels;
 	}
 
 	/**

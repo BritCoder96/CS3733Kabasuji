@@ -76,13 +76,16 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 /** A map of pieces on the board to their views */
 	 HashMap<Piece, PieceView> boardPieceViews;
 	 
+	 /**the trigger to add a release color */
 	 JComboBox releaseColor;
-	 
+	 /**the trigger to add a release number */
 	 JComboBox releaseNumber;
 	/** the button to go back to the new level screen */
 	private JButton btnBack;
 	/** the button to save the level */
 	private JButton btnSave;
+	/** the button to set release numbers */
+	private JButton btnNum;
 	 
 	/**
 	 * Create the screen, with a rectangular level and no numbers yet.
@@ -127,7 +130,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		add(btnEdit);
 		btnEdit.addMouseMotionListener(new EditorComponentDragListener(this, btnEdit));
 		
-		JButton btnNum = new JButton("Numbers");
+		btnNum = new JButton("Numbers");
 		btnNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNum.setBounds(185, 552, 127, 45);
 		btnNum.addActionListener(new EditorModeController(this, board, EditorMode.NUMBER));
@@ -248,7 +251,12 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	
 	@Override
 	public void setGameBoard(EditorBoardView ebv){
+		remove(this.gameboard);
 		this.gameboard = ebv;
+		gameboard.setBounds(60, 71, 325, 325);
+		add(gameboard);
+		revalidate();
+		repaint();
 	}
 
 	@Override
@@ -316,5 +324,20 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		if (draggingPiece != null) {
 			draggingPiece.setBounds(x, y, draggingPiece.getWidth(), draggingPiece.getHeight());
 		}
+	}
+	/**
+	 * Gets the release number button
+	 * @return the release number  button
+	 */
+	public JButton getBtnNum() {
+		return btnNum;
+	}
+	
+	/**
+	 * Gets the board view 
+	 * @return the board view
+	 */
+	public EditorBoardView getBoardView() {
+		return gameboard;
 	}
 }

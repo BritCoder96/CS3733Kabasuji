@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 
 import javax.swing.JButton;
 
+import controllers.MoveToLevelSelectController;
 import main.KabasujiMain;
 import junit.framework.TestCase;
 
@@ -18,20 +19,19 @@ import junit.framework.TestCase;
 public class TestPlayerViews extends TestCase {
 
 	public void testMouseClickTriggersEvent() throws Exception { 
+		MoveToLevelSelectController.pathToLevelsFolder = "test_levels/";
 		KabasujiMain player = new KabasujiMain();
 		player.main(new String [0]);
 		KabasujiFrame frame = player.getFrame();
-	    Thread.sleep(500);
 
 	    // Simulate a mouse click using reflection.
 		// click the play on the title screen.
 	    Title title = new Title(frame);
 	    title.getBtnPlay().doClick();;
-	    Thread.sleep(500);
 	    // click select on level select screen
 	    LevelSelect lvlSelect = new LevelSelect(frame);
+	    lvlSelect.getBtnNext().doClick();
 	    lvlSelect.getBtnPlay().doClick();
-	    Thread.sleep(500);
-
+	    Thread.sleep(1500);
 	  }
 }

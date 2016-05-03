@@ -15,7 +15,7 @@ import models.Level;
  */
 public class NextLevelController implements ActionListener {
 	LevelSelect levelSelect;
-	ArrayList<Level> levels;
+	int numberOfLevels;
 	
 	/**
 	 * The Constructor for a NextLevelController
@@ -23,9 +23,9 @@ public class NextLevelController implements ActionListener {
 	 * @param ls - The level select screen being modified
 	 * @param levels - The list of levels in the current file
 	 */
-	public NextLevelController(LevelSelect ls, ArrayList<Level> levels) {
+	public NextLevelController(LevelSelect ls, int numberOfLevels) {
 		levelSelect = ls;
-		this.levels = levels;
+		this.numberOfLevels = numberOfLevels;
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class NextLevelController implements ActionListener {
 	 * @param e - the actual event that calls the function, i.e. the button press.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		if (levelSelect.getCurrentLevelIndex() < levels.size() - 1) {
+		if (levelSelect.getCurrentLevelIndex() < numberOfLevels - 1) {
 			levelSelect.moveToNextLevel();
 		}
 	}

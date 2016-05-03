@@ -1,0 +1,13 @@
+0
+PUZZLE
+
+x,x,x,x,x,x
+x,x, ,x,x,x
+x, , , ,x,x
+x,x, ,x,x,x
+x,x, ,x,x,x
+x,x,x,x,x,x
+
+0,1,2,
+2
+2
