@@ -20,7 +20,7 @@ import views.ReleaseEditor;
  * @author ejcerini
  */
 
-public class AddReleaseNumberController implements EditorSquareController{
+public class AddReleaseNumberController extends EditorSquareController{
 
 	/** The board the square is on */
 	Board board;
@@ -44,6 +44,7 @@ public class AddReleaseNumberController implements EditorSquareController{
 	 * @param editor - the editor screen that holds the color and number info.
 	 */
 	public AddReleaseNumberController(Board board, int row, int col, JLabel squareLabel, ReleaseEditor editor){
+		super(editor, board.getSquareAt(row, col), board);
 		this.board = board;
 		this.row = row;
 		this.col = col;
@@ -57,6 +58,10 @@ public class AddReleaseNumberController implements EditorSquareController{
 	 * @param e - The mouse event in question
 	 */
 	public void mouseClicked(MouseEvent e) {
+		
+		if (super.checkForPieceDragOnClick(e)) {
+			return;
+		}
 		//If we're dealing with an active square
 		if(squareLabel.isOpaque()){
 			//Record the current state of the level

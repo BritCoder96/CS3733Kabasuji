@@ -8,5 +8,5 @@ package models;
  *
  */
 public enum EditorMode {
-	EDIT, MOVE, NUMBER, HINT;
+	EDIT, NUMBER, HINT;
 }

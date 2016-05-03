@@ -12,6 +12,7 @@ import models.LightningBoardSquareLogic;
 import models.PuzzleBoardSquareLogic;
 import models.Square;
 import models.SquareTypes;
+import views.LevelEditor;
 import views.LevelModifiedListener;
 
 /**
@@ -19,7 +20,7 @@ import views.LevelModifiedListener;
  * whether or not the square actually exists in the board.
  * @author bhuchley
  */
-public class ToggleBoardSquareController implements EditorSquareController {
+public class ToggleBoardSquareController extends EditorSquareController {
 	/** The board the square is on */
 	Board board;
 	/** The row of the square */
@@ -41,7 +42,8 @@ public class ToggleBoardSquareController implements EditorSquareController {
 	 * @param row the row the square is at
 	 * @param col the column the square is at
 	 */
-	public ToggleBoardSquareController(JLabel squareLabel, Board board, int row, int col, LevelModifiedListener listener) {
+	public ToggleBoardSquareController(JLabel squareLabel, Board board, int row, int col, LevelEditor listener) {
+		super(listener, board.getSquareAt(row, col), board);
 		this.squareLabel = squareLabel;
 		this.board = board;
 		this.row = row;
@@ -50,6 +52,11 @@ public class ToggleBoardSquareController implements EditorSquareController {
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
+		
+		if (super.checkForPieceDragOnClick(arg0)) {
+			return;
+		}
+		
 		listener.onLevelChanged();
 		boolean wasOff = board.getSquares()[row][col] == null;
 		// Set the square label to be opaque if it exists now, otherwise transparent
