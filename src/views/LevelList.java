@@ -13,7 +13,11 @@ import javax.swing.border.LineBorder;
 import controllers.CreateNewLevelController;
 import controllers.GoBackOnePanelController;
 import controllers.MoveToBuilderLevelListController;
+import controllers.MoveToLevelController;
 import main.KabasujiMain;
+import models.Level;
+import models.LevelType;
+import models.SaveFile;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
@@ -153,9 +157,6 @@ public class LevelList extends JPanel {
 		lblPuzzle_1.setBounds(221, 0, 232, 50);
 		panel_5.add(lblPuzzle_1);
 		*/
-		for (int i = 1; i <= 5; i++) {
-			addLevelEntry(i, "temp");
-		}
 		
 		btnNew = new JButton("New");
 		btnNew.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -176,6 +177,35 @@ public class LevelList extends JPanel {
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnDelete.setBounds(332, 480, 120, 45);
 		add(btnDelete);
+		
+		updateLevelEntries();
+	}
+	
+	/** 
+	 * Load the level given by the current index and refresh the level info display. 
+	 */
+	private void updateLevelEntries() {
+		for (int i = 0, length = SaveFile.instance().getNumberOfLevels(); i < length; i++) {
+			Level level = SaveFile.instance().getLevel(i);
+			
+			String type;
+			switch (level.getLvlType()) {
+			case PUZZLE:
+				type = "Puzzle";
+				break;
+			case LIGHTNING:
+				type = "Lightning";
+				break;
+			case RELEASE:
+				type = "Release";
+				break;
+			default:
+				// TODO: probably should throw an exception instead
+				type = "";
+			}
+			
+			addLevelEntry(level.getLevelNumber() + 1, type);
+		}		
 	}
 	
 	void addLevelEntry(int levelNumber, String levelType) {
