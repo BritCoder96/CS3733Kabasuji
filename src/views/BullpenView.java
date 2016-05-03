@@ -99,6 +99,23 @@ public class BullpenView extends JPanel {
 	}
 	
 	/**
+	 * Removes a specific piece view from 
+	 * @param pv
+	 */
+	public void removePieceView(PieceView pv) {
+		ArrayList<Piece> piecesCpy = new ArrayList<Piece>();
+		System.out.println(pieces.size());
+		piecesCpy.addAll(pieces);
+		System.out.println(piecesCpy.size());
+		piecesCpy.remove(pv.getPiece());
+		System.out.println(piecesCpy.size());
+		clearPieces();
+		for (Piece p : piecesCpy) {
+			addPiece(p);
+		}
+	}
+	
+	/**
 	 * Since pieces are stored in a vertical line, this gets the piece at the given y coordinate, if it exists.
 	 * @param y the y coordinate to test
 	 * @return the piece view that covers y, if any. null if none

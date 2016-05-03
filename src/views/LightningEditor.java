@@ -21,6 +21,7 @@ import models.EditorMode;
 import models.Level;
 import models.LevelType;
 import models.LightningLevelLogic;
+import models.Piece;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -73,7 +74,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.LIGHTNING, levelName);
 		level.setBoard(board);
 		
-		gameboard = new EditorBoardView(this, board, this, EditorMode.EDIT);
+		gameboard = new EditorBoardView(this, board, EditorMode.EDIT);
 		gameboard.setBounds(283, 94, 430, 430);
 		add(gameboard);
 		
@@ -191,5 +192,36 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	 */
 	public JButton getBtnBack() {
 		return btnBack;
+	}
+
+	@Override
+	public void setDraggingPiece(PieceView pv) {
+		// Do nothing, no bullpen in lightning levels so no dragged pieces
+	}
+
+	@Override
+	public void setDraggingPiece(Piece p) {
+		// Do nothing, no bullpen in lightning levels so no dragged pieces
+	}
+
+	@Override
+	public void addDraggingPiece(PieceView pv) {
+		// Do nothing, no bullpen in lightning levels so no dragged pieces
+	}
+	
+	@Override
+	public void removeDraggingPiece() {
+		// Do nothing, no bullpen in lightning levels so no dragged pieces
+	}
+
+	@Override
+	public PieceView getDraggingPiece() {
+		// There isn't one, no bullpen in lightning levels so no dragged pieces
+		return null;
+	}
+
+	@Override
+	public void moveDraggingWidgetTo(int x, int y) {
+		// Do nothing, no bullpen in lightning levels so no dragged pieces
 	}
 }
