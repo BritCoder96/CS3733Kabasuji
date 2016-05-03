@@ -265,10 +265,6 @@ public class Level {
 		return copy;
 	}
 
-	public boolean isHasWon() {
-		return hasWon;
-	}
-
 	public void setHasWon(boolean hasWon) {
 		this.hasWon = hasWon;
 	}

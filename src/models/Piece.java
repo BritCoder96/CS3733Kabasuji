@@ -28,32 +28,6 @@ public class Piece {
 	int pieceNumber;
 	
 	/**
-	 * The constructor for the piece that passes in all the squares for the piece separately.
-	 * 
-	 * @param square0
-	 * @param square1
-	 * @param square2
-	 * @param square3
-	 * @param square4
-	 * @param square5
-	 * 	@param pieceNumber
-	 */
-	public Piece(Square square0, Square square1, Square square2, Square square3, Square square4, Square square5, int pieceNumber) {
-		this.pieceNumber = pieceNumber;
-		squares = new Square[6];
-		squares[0] = square0;
-		squares[1] = square1;
-		squares[2] = square2;
-		squares[3] = square3;
-		squares[4] = square4;
-		squares[5] = square5;
-	}
-	
-	public Piece(){
-		
-	}
-	
-	/**
 	 * The constructor for the piece that passes in all the squares for the piece together as an array.
 	 * 
 	 * @param squares the squares that make up the piece

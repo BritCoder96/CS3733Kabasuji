@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 /**
  * Overlay that shown when the player wins.
  * @author bhuchley
+ *  @author bjbenson
  */
 public class GameWinOverlay extends JPanel {
 	/** The number of stars to display. */
@@ -25,6 +26,8 @@ public class GameWinOverlay extends JPanel {
 	
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
+	/** the button that goes back to the level select screen. */
+	private JButton btnLevelSelect;
 
 	/**
 	 * Create the overlay, getting the score of the completed level.
@@ -45,7 +48,7 @@ public class GameWinOverlay extends JPanel {
 		lblYouDidIt.setBounds(84, 21, 115, 27);
 		add(lblYouDidIt);
 		
-		JButton btnLevelSelect = new JButton("Level Select");
+		btnLevelSelect = new JButton("Level Select");
 		btnLevelSelect.addActionListener(new GoBackOnePanelController(frame));
 		btnLevelSelect.setBounds(35, 177, 109, 23);
 		add(btnLevelSelect);
@@ -65,5 +68,13 @@ public class GameWinOverlay extends JPanel {
 		});
 		btnNextLevel.setBounds(91, 150, 102, 23);
 		add(btnNextLevel);
+	}
+	
+	/**
+	 * gets the level select button
+	 * @return the level select button
+	 */
+	public JButton getBtnLvlSelect() {
+		return btnLevelSelect;
 	}
 }

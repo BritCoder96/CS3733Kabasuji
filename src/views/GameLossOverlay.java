@@ -19,11 +19,14 @@ import javax.swing.JButton;
 /**
  * Overlay that shows when you lose a level. (If you run out of moves in Puzzle or time in Lightning)
  * @author bhuchley
+ * @author bjbenson
  */
 public class GameLossOverlay extends JPanel {
 
 	/** The frame that the panel is shown in. */
 	private KabasujiFrame frame;
+	/** the button that goes back to the level select screen. */
+	private JButton btnLevelSelect;
 
 	/**
 	 * Create the frame. It should get the score of the level that was failed but that doesn't exist yet
@@ -39,7 +42,7 @@ public class GameLossOverlay extends JPanel {
 		lblOhTooBad.setBounds(71, 28, 141, 27);
 		add(lblOhTooBad);
 		
-		JButton btnLevelSelect = new JButton("Level Select");
+		btnLevelSelect = new JButton("Level Select");
 		btnLevelSelect.addActionListener(new GoBackOnePanelController(frame));
 		btnLevelSelect.setBounds(30, 162, 109, 23);
 		add(btnLevelSelect);
@@ -47,5 +50,13 @@ public class GameLossOverlay extends JPanel {
 		JButton btnTryAgain = new JButton("Try Again");
 		btnTryAgain.setBounds(149, 162, 98, 23);
 		add(btnTryAgain);
+	}
+	
+	/**
+	 * gets the level select button
+	 * @return the level select button
+	 */
+	public JButton getBtnLvlSelect() {
+		return btnLevelSelect;
 	}
 }
