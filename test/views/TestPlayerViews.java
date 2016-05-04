@@ -70,5 +70,7 @@ public class TestPlayerViews extends TestCase {
     	Thread.sleep(3000);
 	    GameLossOverlay winScreen = (GameLossOverlay)frame.getContentPane();
 	    winScreen.getBtnLvlSelect().doClick();
+	    LevelSelect lvlSelect3 = (LevelSelect)frame.getContentPane();
+	    lvlSelect3.getBtnReset().doClick();
 	  }
 }

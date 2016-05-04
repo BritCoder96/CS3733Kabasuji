@@ -40,12 +40,12 @@ public class TestBuilderViews extends TestCase {
 	    level.getNameField().setText("3");
 	    level.getBtnGo().doClick();
 	    PuzzleEditor pEditor = (PuzzleEditor) frame.getContentPane();
-	    pEditor.getBtnAddPiece().doClick();
+	    pEditor.getBtnDecrease().doClick();
+	    pEditor.getBtnIncrease().doClick();
+	     pEditor.getBtnAddPiece().doClick();
 	    AddPieceOverlay apo = (AddPieceOverlay) frame.getContentPane();
 	    me = new MouseEvent(apo.getBullpenView().getPieceAtY(40), MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 100, 10, 1, false, MouseEvent.BUTTON1);
 	    apo.getBullpenView().getPieceAtY(40).dispatchEvent(me);
-	    pEditor.getBtnDecrease().doClick();
-	    pEditor.getBtnIncrease().doClick();
 	    pEditor.getBtnBack().doClick();
 	    level.getNameField().setText("4");
 	    level.getLightningBtn().doClick();
@@ -77,6 +77,9 @@ public class TestBuilderViews extends TestCase {
 	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_MOVED, 0, 0, 10, 10, 0, false, 0);
 	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, 0, 10, 10, 1, false, MouseEvent.BUTTON1);
+	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
+	    rEditor.getBtnHint().doClick();
+	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 10, 10, 1, false, MouseEvent.BUTTON1);
 	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	}
 }

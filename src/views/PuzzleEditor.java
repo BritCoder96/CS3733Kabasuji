@@ -378,6 +378,7 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		return btnIncrease;
 	}
 
+
 	@Override
 	public void setEditorMode(EditorMode em) {
 		this.editMode = em;
