@@ -235,7 +235,7 @@ public class LevelSelect extends JPanel {
 	 *	Loads all of the levels into the ArrayList
 	 */
 	public void loadLevels(){
-		for (int i = 0, length = SaveFile.instance().getMaxLevelNumber(); i < length; i++) {
+		for (int i = 0, length = SaveFile.instance().getMaxLevelNumber() + 1; i < length; i++) {
 			try{
 				Level level = SaveFile.instance().getLevel(i);
 				levels.add(level);
