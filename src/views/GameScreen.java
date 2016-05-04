@@ -118,9 +118,9 @@ public class GameScreen extends JPanel {
 		if (level.getLvlType() == LevelType.LIGHTNING) {
 			Random rand = new Random();
 			Piece[] pieces = Piece.allValidPieces;
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
 		}
 		BullpenGameController bullpenController = new BullpenGameController(bullpen, this);
 		bullpen.addMouseListener(bullpenController);
