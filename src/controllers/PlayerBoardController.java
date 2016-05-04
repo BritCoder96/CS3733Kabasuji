@@ -125,7 +125,9 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 					else if (numUnreleasedSets == 2) {
 						saveStars(1);
 					}
-					
+					if (gamescreen.getBullpen().getNumPieces() == 0) {
+						gamescreen.endGame();
+					}
 				}
 			}
 		}
