@@ -19,6 +19,7 @@ import models.LevelType;
 import models.SaveFile;
 import controllers.MoveToLevelController;
 import controllers.PreviousLevelController;
+import controllers.ToggleLevelEntryController;
 import controllers.NextLevelController;
 
 import java.awt.Color;
@@ -40,6 +41,9 @@ public class LevelSelect extends JPanel {
 	
 	/** The frame that the panel is shown in. */
 	KabasujiFrame frame;
+	
+	/** The levels that exist for play */
+	ArrayList<Level> levels = new ArrayList<Level>();
 	
 	/** The panel that the info for the currently selected level is shown in. */
 	JPanel levelInfoPanel;
@@ -73,6 +77,8 @@ public class LevelSelect extends JPanel {
 		this.frame = frame;
 		currentLevelIndex = 0;
 		lastUnlockedLevelIndex = 0;
+		loadLevels();
+		
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
@@ -109,7 +115,7 @@ public class LevelSelect extends JPanel {
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPlay.setBounds(332, 467, 120, 45);
 		add(btnPlay);
-		moveToLevelController = new MoveToLevelController(SaveFile.instance().getLevel(currentLevelIndex), frame, this);
+		moveToLevelController = new MoveToLevelController(levels.get(currentLevelIndex), frame, this);
 		btnPlay.addActionListener(moveToLevelController);
 		
 		btnPrevious = new JButton("Previous");
@@ -122,7 +128,7 @@ public class LevelSelect extends JPanel {
 		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNext.setBounds(611, 253, 120, 45);
 		add(btnNext);
-		btnNext.addActionListener(new NextLevelController(this, SaveFile.instance().getNumberOfLevels()));
+		btnNext.addActionListener(new NextLevelController(this, levels.size()));
 	}
 	
 	@Override
@@ -136,7 +142,7 @@ public class LevelSelect extends JPanel {
 	 */
 	private void updateLevelDisplay() {
         // get current level info
-		Level currentLevel = SaveFile.instance().getLevel(currentLevelIndex);
+		Level currentLevel = levels.get(currentLevelIndex);
 		int numStars = currentLevel.getNumberOfStars();
 		LevelType lvlType = currentLevel.getLvlType();
 		if (numStars > 0 && lastUnlockedLevelIndex < currentLevelIndex + 1) {
@@ -159,11 +165,11 @@ public class LevelSelect extends JPanel {
 		
         // enable or disable Previous and Next buttons
         btnPrevious.setEnabled(!isFirstLevel);
-        btnNext.setEnabled(currentLevelIndex < SaveFile.instance().getNumberOfLevels() - 1);
+        btnNext.setEnabled(currentLevelIndex < levels.size() - 1);
 
         // point Play button to the current level
 		btnPlay.removeActionListener(moveToLevelController);
-		moveToLevelController = new MoveToLevelController(SaveFile.instance().getLevel(currentLevelIndex), frame, this);
+		moveToLevelController = new MoveToLevelController(levels.get(currentLevelIndex), frame, this);
 		btnPlay.addActionListener(moveToLevelController);
 	}
 	
@@ -195,5 +201,20 @@ public class LevelSelect extends JPanel {
 	 */
 	public JButton getBtnNext() {
 		return btnNext;
+	}
+	
+	/**
+	 *	Loads all of the levels into the ArrayList
+	 */
+	public void loadLevels(){
+		for (int i = 0, length = SaveFile.instance().getMaxLevelNumber(); i < length; i++) {
+			try{
+				Level level = SaveFile.instance().getLevel(i);
+				levels.add(level);
+			}
+			catch(IllegalArgumentException e){
+				
+			}
+		}
 	}
 }

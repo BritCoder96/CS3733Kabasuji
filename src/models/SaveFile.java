@@ -10,6 +10,7 @@ import views.LevelSelect;
  * @author sthuynh
  * @author bhuchley
  * @author bjbenson
+ * @author ejcerini
  */
 public class SaveFile {
 	// eager implementation of the singleton pattern
@@ -111,4 +112,21 @@ public class SaveFile {
 	public String getFileName() {
 		return fileName;
 	}
+	
+    /**
+     * Gets the max number of any level.
+     *
+     * @return The max level number.
+     */
+    public int getMaxLevelNumber() {
+        int result = 0;
+        
+        for(Level i : levels){
+        	if(i.getLevelNumber() > result)
+        		result = i.getLevelNumber();
+        }
+        
+        return result;
+    	
+    }
 }

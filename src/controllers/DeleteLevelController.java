@@ -8,6 +8,14 @@ import models.Level;
 import models.SaveFile;
 import views.LevelList;
 
+/**
+ * 
+ * A controller that annihilates levels
+ * 
+ * @author ejcerini
+ *
+ */
+
 public class DeleteLevelController implements ActionListener{
 
 	Level level;
