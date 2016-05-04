@@ -74,10 +74,9 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	/**
 	 * Create the frame with an rectangular lightning level of the specified size and time.
 	 * @param frame the frame to show the screen in
+	 * @param timeLimit 
 	 */
-	public LightningEditor(KabasujiFrame frame, Level level) {
-		// TODO: remove
-		int timeLimit = 1;
+	public LightningEditor(KabasujiFrame frame, Level level, int timeLimit) {
 		
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
@@ -150,12 +149,23 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		btnHint.setBounds(69, 305, 120, 45);
 		btnHint.addActionListener(new EditorModeController(this, EditorMode.HINT));
 		add(btnHint);
-		updateTimeLimitDisplay();
+		setTimeLimitDisplay();
 		
 		editMode = EditorMode.EDIT;
 		updateOptionsDisplay();
 	}
 	
+	private void setTimeLimitDisplay() {
+		int allottedSeconds = ell.getAllottedSeconds();
+		int minutes = allottedSeconds / 60;
+		int seconds = allottedSeconds % 60;
+		String connector = ":";
+		if (seconds < 10) {
+			connector = connector + "0";
+		}
+		timeLimitLabel.setText(minutes + connector + seconds);
+	}
+
 	/**
 	 * Gets the level currently under construction in the editor.
 	 * @return the level under construction
@@ -167,8 +177,18 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	/**
 	 * Redraws the time limit display.
 	 */
-	public void updateTimeLimitDisplay() {
+	public void updateTimeLimitDisplay(boolean increasing) {
 		int allottedSeconds = ell.getAllottedSeconds();
+		if(increasing){
+			ell.setAllottedSeconds(ell.getAllottedSeconds() + 1);
+			allottedSeconds = ell.getAllottedSeconds();
+		}
+		else{
+			if(ell.getAllottedSeconds() > 0){
+				ell.setAllottedSeconds(ell.getAllottedSeconds() - 1);
+			}
+			allottedSeconds = ell.getAllottedSeconds();
+		}
 		int minutes = allottedSeconds / 60;
 		int seconds = allottedSeconds % 60;
 		String connector = ":";
@@ -196,7 +216,6 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		this.level = level;
 		ell = (LightningLevelLogic) level.getLevelLogic();
 		board = level.getBoard();
-		updateTimeLimitDisplay();
 		gameboard.setVisibleBoard(board);
 	}
 

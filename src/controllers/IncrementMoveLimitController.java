@@ -36,9 +36,7 @@ public class IncrementMoveLimitController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 		listener.onLevelChanged();
-		PuzzleLevelLogic ell = (PuzzleLevelLogic) levelEditor.getLevel().getLevelLogic();
-		ell.setAllottedMoves(ell.getAllottedMoves() + 1);
-		levelEditor.updateMoveLimitDisplay();
+		levelEditor.updateMoveLimitDisplay(true);
 	}
 
 }

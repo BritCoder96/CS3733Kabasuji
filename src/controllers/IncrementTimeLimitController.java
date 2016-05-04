@@ -34,9 +34,7 @@ public class IncrementTimeLimitController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 		listener.onLevelChanged();
-		LightningLevelLogic ell = (LightningLevelLogic) levelEditor.getLevel().getLevelLogic();
-		ell.setAllottedSeconds(ell.getAllottedSeconds() + 1);
-		levelEditor.updateTimeLimitDisplay();
+		levelEditor.updateTimeLimitDisplay(true);
 	}
 
 }

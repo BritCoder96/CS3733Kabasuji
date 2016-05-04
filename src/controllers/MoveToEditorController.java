@@ -55,7 +55,7 @@ public class MoveToEditorController implements ActionListener{
 			case PUZZLE:
 				//Hide this screen
 				previousScreen.setVisible(false);
-				PuzzleEditor puzzlePanel = new PuzzleEditor(frame, level);
+				PuzzleEditor puzzlePanel = new PuzzleEditor(frame, level, ((NewLevel) previousScreen).getMoveLimit());
 				puzzlePanel.setVisible(true);
 				//Load the puzzle editor
 				frame.setContentPane(puzzlePanel);
@@ -65,7 +65,7 @@ public class MoveToEditorController implements ActionListener{
 			case LIGHTNING:
 				//Hide this screen
 				previousScreen.setVisible(false);
-				LightningEditor lightningPanel = new LightningEditor(frame, level);
+				LightningEditor lightningPanel = new LightningEditor(frame, level, ((NewLevel) previousScreen).getMoveLimit());
 				lightningPanel.setVisible(true);
 				//Load the lightning editor
 				frame.setContentPane(lightningPanel);

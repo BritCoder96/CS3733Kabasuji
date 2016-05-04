@@ -260,7 +260,7 @@ public class NewLevel extends JPanel {
 	}
 
 	public void invokeNextScreen() {
-		MoveToEditorController go =new MoveToEditorController(new Level(getRows(), Integer.parseInt(getName()), getLevelType(), getName(), true), this, frame);
+		MoveToEditorController go = new MoveToEditorController(new Level(getRows(), Integer.parseInt(getName()), getLevelType(), getName(), true), this, frame);
 		
 		go.actionPerformed(null);
 	}

@@ -95,10 +95,10 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	/**
 	 * Create the editor screen, with a rectangular level and no pieces.
 	 * @param frame the frame to show the screen in
+	 * @param moveLimit 
 	 */
-	public PuzzleEditor(KabasujiFrame frame, Level level) {
-		// TODO: remove
-		int moveLimit = 0;
+	public PuzzleEditor(KabasujiFrame frame, Level level, int moveLimit) {
+
 		
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
@@ -233,9 +233,19 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	
 	/**
 	 * Update the move limit display
+	 * @param increasing 
+	 * @param i 
 	 */
-	public void updateMoveLimitDisplay() {
+	public void updateMoveLimitDisplay(boolean increasing) {
+		if(increasing){
+			ell.setAllottedMoves(ell.getAllottedMoves() + 1);
+		}
+		else{
+			if(ell.getAllottedMoves() > 0)
+				ell.setAllottedMoves(ell.getAllottedMoves() - 1);
+		}
 		moveLimitLabel.setText(String.valueOf(ell.getAllottedMoves()));
+		repaint();
 	}
 
 	@Override
@@ -256,7 +266,6 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		this.level = level;
 		ell = (PuzzleLevelLogic) level.getLevelLogic();
 		board = level.getBoard();
-		updateMoveLimitDisplay();
 		gameboard.setVisibleBoard(board);
 		bullpen.clearPieces();
 		for (Piece p : level.getBullpen().getPieces()) {

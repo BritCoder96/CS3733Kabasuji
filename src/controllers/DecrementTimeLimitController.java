@@ -33,12 +33,8 @@ public class DecrementTimeLimitController implements ActionListener {
 	 * @param arg0 the action event that triggered this
 	 */
 	public void actionPerformed(ActionEvent arg0) {
-		LightningLevelLogic ell = (LightningLevelLogic) levelEditor.getLevel().getLevelLogic();
-		if (ell.getAllottedSeconds() > 1) {
-			listener.onLevelChanged();
-			ell.setAllottedSeconds(ell.getAllottedSeconds() - 1);
-			levelEditor.updateTimeLimitDisplay();
-		}
+		listener.onLevelChanged();
+		levelEditor.updateTimeLimitDisplay(false);
 	}
 
 }
