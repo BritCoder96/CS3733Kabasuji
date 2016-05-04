@@ -130,9 +130,9 @@ public class LevelSelect extends JPanel {
 		add(btnPrevious);
 		btnPrevious.addActionListener(new PreviousLevelController(this));
 		
-		btnReset = new JButton("Reset Levels");
+		btnReset = new JButton("Reset");
 		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnReset.setBounds(51, 253, 120, 45);
+		btnReset.setBounds(668, 0, 120, 45);
 		add(btnReset);
 		btnReset.addActionListener(new ResetLevelsController(this));
 		
