@@ -4,7 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import views.NewLevel;
-
+/**
+ * Calls the move to editor controller.
+ * @author ejcerini
+ *
+ */
 public class ActivateGoController implements ActionListener{
 
 	NewLevel nlevel;

@@ -6,7 +6,12 @@ import views.GameLossOverlay;
 import views.GameScreen;
 import views.GameWinOverlay;
 import views.KabasujiFrame;
-
+/**
+ * Sends the view to a loss screen or a win screen, depending on whether a user won or lost a level.
+ * 
+ * @author bjbenson
+ *
+ */
 public class EndGameController {
 	public EndGameController(Level level, KabasujiFrame frame) {
 		//Hide the previous screen

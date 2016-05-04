@@ -7,6 +7,12 @@ import views.GameScreen;
 import models.Directions;
 import models.Piece;
 
+/**
+ * Deals with rotating and flipping a piece on key press on the game screen in the player.
+ * 
+ * @author bjbenson
+ *
+ */
 public class GameScreenPieceOrientationController implements KeyListener {
 	
 		GameScreen gamescreen;

@@ -7,6 +7,12 @@ import java.util.Stack;
 import models.Level;
 import views.LevelSetListener;
 
+/**
+ * Deals with redo for changes in the editor.
+ * 
+ * @author ejcerini
+ *
+ */
 public class EditorLevelRedoController implements ActionListener {
 
 	/** The stack of levels that can be returned to */

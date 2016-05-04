@@ -7,6 +7,12 @@ import views.PuzzleEditor;
 import models.Directions;
 import models.Piece;
 
+/**
+ * Deals with rotating and flipping a piece on key press on the puzzle editor screen in the builder.
+ * 
+ * @author bjbenson
+ *
+ */
 public class PuzzleEditorPieceOrientationController implements KeyListener {
 	
 		PuzzleEditor editor;

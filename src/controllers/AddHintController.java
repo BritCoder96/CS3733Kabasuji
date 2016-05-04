@@ -9,7 +9,12 @@ import models.Board;
 import views.EditorBoardView;
 import views.LevelEditor;
 import views.LevelModifiedListener;
-
+/**
+ * Adds hints to the squares in the editor.
+ * 
+ * @author ejcerini
+ *
+ */
 public class AddHintController extends EditorSquareController{
 
 	/** The board the square is on */

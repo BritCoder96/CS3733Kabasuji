@@ -16,6 +16,7 @@ import views.GameScreen;
 import views.PieceView;
 
 /**
+ * Deals with moving pieces around the board and ending the game.
  * 
  * @author ejcerini
  * @author bhuchley
@@ -132,7 +133,10 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 			}
 		}
 	}
-
+	/** 
+	 * Saves the stars and the winning state of the level on level end to a file.
+	 * @param numStars the number of stars the player acheived.
+	 */
 	private void saveStars(int numStars) {
 		Level originalLevel = gamescreen.getOriginalLevel(); // in case level was won
 		originalLevel.setNumberOfStars(numStars);
