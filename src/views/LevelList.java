@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * The screen that shows the list of existing levels and allows you to select one to edit or delete.
@@ -76,7 +77,10 @@ public class LevelList extends JPanel {
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
+		// TODO: get it to scroll
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportView(panel);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(150, 100, 500, 350);
 		add(scrollPane);
 
@@ -114,12 +118,20 @@ public class LevelList extends JPanel {
 	 * Load the level given by the current index and refresh the level info display. 
 	 */
 	private void updateLevelEntries() {
+		int addedLevels = 0;
+		
 		for (int i = 0, length = SaveFile.instance().getNumberOfLevels(); i < length; i++) {
-			LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
-			entries.add(levelEntry);
-			levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
-			panel.add(levelEntry);
-			levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
+			try{
+				LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
+				entries.add(levelEntry);
+				levelEntry.setBounds(10, 10 + 70 * (addedLevels), 463, 50);
+				panel.add(levelEntry);
+				levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
+				addedLevels += 1;
+			}
+			catch(IllegalArgumentException e){
+				
+			}
 		}
 	}
 
@@ -166,6 +178,9 @@ public class LevelList extends JPanel {
 	public void reload(){
 		removeEntries();
 		updateLevelEntries();
+		toggledLevelEntry = null;
+		revalidate();
+		repaint();
 	}
 
 	private void removeEntries() {
