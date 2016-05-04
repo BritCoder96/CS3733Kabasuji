@@ -1,13 +1,16 @@
 7
 PUZZLE
 
-x,x,x,x,x, 
-x,x,x,x,x,x
- , ,x,x,x,x
-x,x,x,x,x,x
- , ,x,x,x, 
-x,x,x,x,x,x
+x,x,x, , ,x,x,x, 
+ ,x,x, ,x,x,x,x,x
+x,x,x,x,x,x,x,x,x
+ , ,x, ,x,x,x,x, 
+ , ,x, ,x,x,x,x, 
+x,x,x,x,x,x,x, , 
+x,x,x,x, , ,x,x, 
+x,x,x,x,x,x,x,x,x
+ , , , , , , , , 
 
-0,1,2,4,11,
-7
+12,9,19,24,1,13,12,22,11,
+16
 0

@@ -118,7 +118,7 @@ public class LevelList extends JPanel {
 	private void updateLevelEntries() {
 		int addedLevels = 0;
 		
-		for (int i = 0, length = SaveFile.instance().getMaxLevelNumber(); i < length; i++) {
+		for (int i = 0, length = SaveFile.instance().getMaxLevelNumber() + 2; i < length; i++) {
 			try{
 				LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
 				entries.add(levelEntry);

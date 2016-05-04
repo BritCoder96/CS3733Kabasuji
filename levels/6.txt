@@ -1,14 +1,11 @@
 6
-LIGHTNING
+RELEASE
 
- , ,x,x,x,x,x, 
- , ,x,x,x,x,x, 
-x,x,x,x,x,x,x,x
-x,x,x,x,x,x,x,x
-x,x,x,x,x,x,x,x
-x,x,x,x,x,x,x,x
- ,x,x,x,x,x, , 
- ,x,x,x,x,x, , 
+1R,-1,-1,-1,1G
+2R,-1,1Y,-1,2G
+3R,3Y,2Y,4Y,3G
+4R,6Y,-1,5Y,4G
+5R,6R, ,6G,5G
 
-90
+5,10,16,33,
 0

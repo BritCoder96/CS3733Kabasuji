@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 
 import models.Level;
 import models.LevelType;
+import models.LightningLevelLogic;
+import models.PuzzleLevelLogic;
 import views.KabasujiFrame;
 import views.LightningEditor;
 import views.NewLevel;
@@ -54,8 +56,13 @@ public class MoveToEditorController implements ActionListener{
 			//If the user wishes to create/edit a puzzle level
 			case PUZZLE:
 				//Hide this screen
+				PuzzleEditor puzzlePanel;
 				previousScreen.setVisible(false);
-				PuzzleEditor puzzlePanel = new PuzzleEditor(frame, level, ((NewLevel) previousScreen).getMoveLimit());
+				if(previousScreen instanceof NewLevel)
+					puzzlePanel = new PuzzleEditor(frame, level, ((NewLevel) previousScreen).getMoveLimit());
+				else{
+					puzzlePanel = new PuzzleEditor(frame, level, ((PuzzleLevelLogic) level.getLevelLogic()).getAllottedMoves());
+				}
 				puzzlePanel.setVisible(true);
 				//Load the puzzle editor
 				frame.setContentPane(puzzlePanel);
@@ -65,7 +72,13 @@ public class MoveToEditorController implements ActionListener{
 			case LIGHTNING:
 				//Hide this screen
 				previousScreen.setVisible(false);
-				LightningEditor lightningPanel = new LightningEditor(frame, level, ((NewLevel) previousScreen).getMoveLimit());
+				LightningEditor lightningPanel;
+
+				if(previousScreen instanceof NewLevel)
+					lightningPanel = new LightningEditor(frame, level, ((NewLevel) previousScreen).getMoveLimit());
+				else{
+					lightningPanel = new LightningEditor(frame, level, ((LightningLevelLogic) level.getLevelLogic()).getAllottedSeconds());
+				}
 				lightningPanel.setVisible(true);
 				//Load the lightning editor
 				frame.setContentPane(lightningPanel);

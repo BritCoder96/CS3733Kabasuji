@@ -1,13 +1,16 @@
 5
-PUZZLE
+LIGHTNING
 
- , , , , , 
- , ,x,x,x, 
-x,x,x,x,x,x
-x,x,x,x, ,x
-x,x,x,x,x,x
- ,x,x,x, ,x
+ ,x,x,x, ,x,x,x, , 
+x,x,x,x,x,x,x,x,x, 
+x,x,x,x,x,x,x,x,x, 
+x,x,x,x,x,x,x,x,x, 
+x,x,x,x,x,x,x,x,x, 
+ ,x,x,x,x,x,x,x, , 
+ , ,x,x,x,x,x, , , 
+ , , ,x,x,x, , , , 
+ , , , ,x, , , , , 
+ , , , , , , , , , 
 
-5,7,19,12,
-5
+83
 0
