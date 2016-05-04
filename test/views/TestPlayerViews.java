@@ -51,10 +51,16 @@ public class TestPlayerViews extends TestCase {
 	    lvlSelect2.getBtnNext().doClick();
 	    lvlSelect2.getBtnPlay().doClick();
 	    gameScreen = (GameScreen)frame.getContentPane();
-	    KeyEvent key = new KeyEvent(gameScreen, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Q');
-	    gameScreen.getKeyListeners()[0].keyPressed(key);
 	    me = new MouseEvent(gameScreen.getBullpen().scrollingPanel, MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 111, 94, 1, false, MouseEvent.BUTTON1);
 	    gameScreen.getBullpen().scrollingPanel.dispatchEvent(me);
+	    KeyEvent key = new KeyEvent(gameScreen, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Q');
+	    gameScreen.getKeyListeners()[0].keyReleased(key);
+	    key = new KeyEvent(gameScreen, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'W');
+	    gameScreen.getKeyListeners()[0].keyReleased(key);
+	    key = new KeyEvent(gameScreen, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'S');
+	    gameScreen.getKeyListeners()[0].keyReleased(key);
+	    key = new KeyEvent(gameScreen, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'A');
+	    gameScreen.getKeyListeners()[0].keyReleased(key);
 	    me = new MouseEvent(gameScreen, MouseEvent.MOUSE_MOVED, 0, 0, 200, 200, 0, false, 0);
 	    gameScreen.dispatchEvent(me);
 	    me = new MouseEvent(gameScreen.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_MOVED, 0, 0, 10, 10, 0, false, 0);
@@ -62,7 +68,7 @@ public class TestPlayerViews extends TestCase {
 	    me = new MouseEvent(gameScreen.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, 0, 10, 10, 1, false, MouseEvent.BUTTON1);
 	    gameScreen.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
     	Thread.sleep(3000);
-	    GameWinOverlay winScreen = (GameWinOverlay)frame.getContentPane();
+	    GameLossOverlay winScreen = (GameLossOverlay)frame.getContentPane();
 	    winScreen.getBtnLvlSelect().doClick();
 	  }
 }

@@ -21,22 +21,25 @@ public class PuzzleEditorPieceOrientationController implements KeyListener {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			Piece piece = editor.getDraggingPiece().getPiece();
-			if (e.getKeyCode() == 'Q') {
-				piece.rotatePiece(Directions.SOUTH);
+			if (editor.getDraggingPiece() != null) {
+	
+				Piece piece = editor.getDraggingPiece().getPiece();
+				if (e.getKeyCode() == 'Q') {
+					piece.rotatePiece(Directions.SOUTH);
+				}
+				else if (e.getKeyCode() == 'W') {
+					piece.rotatePiece(Directions.NORTH);
+				}
+				else if (e.getKeyCode() == 'A') {
+					piece.flipPiece(Directions.NORTH);
+				}
+				else if (e.getKeyCode() == 'S') {
+					piece.flipPiece(Directions.WEST);
+				}
+				editor.getDraggingPiece().updatePieceView();
+				editor.revalidate();
+				editor.repaint();
 			}
-			else if (e.getKeyCode() == 'W') {
-				piece.rotatePiece(Directions.NORTH);
-			}
-			else if (e.getKeyCode() == 'A') {
-				piece.flipPiece(Directions.NORTH);
-			}
-			else if (e.getKeyCode() == 'S') {
-				piece.flipPiece(Directions.WEST);
-			}
-			editor.getDraggingPiece().updatePieceView();
-			editor.revalidate();
-			editor.repaint();
 		}
 
 		@Override

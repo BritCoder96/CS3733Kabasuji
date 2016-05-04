@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
@@ -43,12 +44,16 @@ public class TestBuilderViews extends TestCase {
 	    AddPieceOverlay apo = (AddPieceOverlay) frame.getContentPane();
 	    me = new MouseEvent(apo.getBullpenView().getPieceAtY(40), MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 100, 10, 1, false, MouseEvent.BUTTON1);
 	    apo.getBullpenView().getPieceAtY(40).dispatchEvent(me);
+	    pEditor.getBtnDecrease().doClick();
+	    pEditor.getBtnIncrease().doClick();
 	    pEditor.getBtnBack().doClick();
 	    level.getNameField().setText("4");
 	    level.getLightningBtn().doClick();
 	    level.getBtnGo().doClick();
 	    LightningEditor lEditor = (LightningEditor) frame.getContentPane();
 	    SaveLevelController.serializeLevel(lEditor.getLevel());
+	    lEditor.getBtnDecrease().doClick();
+	    lEditor.getBtnIncrease().doClick();
 	    lEditor.getBtnBack().doClick();
 	    level.getNameField().setText("5");
 	    level.getReleaseBtn().doClick();
@@ -59,11 +64,19 @@ public class TestBuilderViews extends TestCase {
 	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	    me = new MouseEvent(rEditor.getBullpen().scrollingPanel, MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 111, 94, 1, false, MouseEvent.BUTTON1);
 	    rEditor.getBullpen().scrollingPanel.dispatchEvent(me);
+	    KeyEvent key = new KeyEvent(rEditor, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Q');
+	    rEditor.getKeyListeners()[0].keyReleased(key);
+	    key = new KeyEvent(rEditor, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'W');
+	    rEditor.getKeyListeners()[0].keyReleased(key);
+	    key = new KeyEvent(rEditor, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'S');
+	    rEditor.getKeyListeners()[0].keyReleased(key);
+	    key = new KeyEvent(rEditor, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'A');
+	    rEditor.getKeyListeners()[0].keyReleased(key);
 	    me = new MouseEvent(rEditor, MouseEvent.MOUSE_MOVED, 0, 0, 200, 200, 0, false, 0);
 	    rEditor.dispatchEvent(me);
 	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_MOVED, 0, 0, 10, 10, 0, false, 0);
 	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, 0, 10, 10, 1, false, MouseEvent.BUTTON1);
 	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
-	  }
+	}
 }

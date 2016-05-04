@@ -13,7 +13,6 @@ public class ReleaseEditorPieceOrientationController implements KeyListener {
 	
 		public ReleaseEditorPieceOrientationController(ReleaseEditor e) {
 			this.editor = e;
-			System.out.println("sgd");
 		}
 		
 		@Override
@@ -22,24 +21,25 @@ public class ReleaseEditorPieceOrientationController implements KeyListener {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			System.out.println(editor.getDraggingPiece().getPiece());
-			System.out.println(e.getKeyCode());
-			Piece piece = editor.getDraggingPiece().getPiece();
-			if (e.getKeyCode() == 'Q') {
-				piece.rotatePiece(Directions.SOUTH);
+			if (editor.getDraggingPiece() != null) {
+	
+				Piece piece = editor.getDraggingPiece().getPiece();
+				if (e.getKeyCode() == 'Q') {
+					piece.rotatePiece(Directions.SOUTH);
+				}
+				else if (e.getKeyCode() == 'W') {
+					piece.rotatePiece(Directions.NORTH);
+				}
+				else if (e.getKeyCode() == 'A') {
+					piece.flipPiece(Directions.NORTH);
+				}
+				else if (e.getKeyCode() == 'S') {
+					piece.flipPiece(Directions.WEST);
+				}
+				editor.getDraggingPiece().updatePieceView();
+				editor.revalidate();
+				editor.repaint();
 			}
-			else if (e.getKeyCode() == 'W') {
-				piece.rotatePiece(Directions.NORTH);
-			}
-			else if (e.getKeyCode() == 'A') {
-				piece.flipPiece(Directions.NORTH);
-			}
-			else if (e.getKeyCode() == 'S') {
-				piece.flipPiece(Directions.WEST);
-			}
-			editor.getDraggingPiece().updatePieceView();
-			editor.revalidate();
-			editor.repaint();
 		}
 
 		@Override

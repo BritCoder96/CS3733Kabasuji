@@ -87,7 +87,11 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	private JButton btnHint;
 	/** the button to switch into Edit Mode */
 	private JButton btnEdit;
-
+	/** the button to increase the number of moves */
+	private JButton btnIncrease;
+	/** the button to decrease the number of moves */
+	private JButton btnDecrease;
+	
 	/**
 	 * Create the editor screen, with a rectangular level and no pieces.
 	 * @param frame the frame to show the screen in
@@ -139,14 +143,14 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		moveLimitLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(moveLimitLabel);
 		
-		JButton btnIncrease = new JButton("");
+		btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
 		btnIncrease.setBounds(20, 195, 24, 24);
 		btnIncrease.addActionListener(new IncrementMoveLimitController(this, this));
 		add(btnIncrease);
 		btnIncrease.addMouseMotionListener(new EditorComponentDragListener(this, btnIncrease));
 		
-		JButton btnDecrease = new JButton("");
+		btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(PuzzleEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnDecrease.setBounds(20, 247, 24, 24);
 		btnDecrease.addActionListener(new DecrementMoveLimitController(this, this));
@@ -303,6 +307,8 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	
 	public void setDraggingPiece(Piece p) {
 		setDraggingPiece(boardPieceViews.get(p));
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 
 	@Override
@@ -318,6 +324,8 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		add(pv);
 		setDraggingPiece(pv);
 		boardPieceViews.put(pv.getPiece(), pv);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 	
 	@Override
@@ -345,12 +353,29 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 			draggingPiece.setBounds(x, y, draggingPiece.getWidth(), draggingPiece.getHeight());
 		}
 	}
+	
 	/**
 	 * Gets the add Piece button
 	 * @return the add Piece button
 	 */
 	public JButton getBtnAddPiece() {
 		return btnAddPiece;
+	}
+	
+	/**
+	 * Gets the decrease moves button
+	 * @return the decrease moves button
+	 */
+	public JButton getBtnDecrease() {
+		return btnDecrease;
+	}
+	
+	/**
+	 * Gets the increase moves button
+	 * @return the increase moves button
+	 */
+	public JButton getBtnIncrease() {
+		return btnIncrease;
 	}
 
 	@Override

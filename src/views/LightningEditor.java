@@ -66,6 +66,10 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	private JButton btnHint;
 	/** the button to switch into Edit Mode */
 	private JButton btnEdit;
+	/** the button to increase the time limit */
+	private JButton btnIncrease;
+	/** the button to decrease the time limit */
+	private JButton btnDecrease;
 
 	/**
 	 * Create the frame with an rectangular lightning level of the specified size and time.
@@ -90,13 +94,13 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		gameboard.setBounds(283, 94, 430, 430);
 		add(gameboard);
 		
-		JButton btnIncrease = new JButton("");
+		btnIncrease = new JButton("");
 		btnIncrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortUp.png")));
 		btnIncrease.setBounds(117, 117, 24, 24);
 		btnIncrease.addActionListener(new IncrementTimeLimitController(this, this));
 		add(btnIncrease);
 		
-		JButton btnDecrease = new JButton("");
+		btnDecrease = new JButton("");
 		btnDecrease.setIcon(new ImageIcon(LightningEditor.class.getResource("/javax/swing/plaf/metal/icons/sortDown.png")));
 		btnDecrease.setBounds(117, 174, 24, 24);
 		btnDecrease.addActionListener(new DecrementTimeLimitController(this, this));
@@ -254,6 +258,22 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	public PieceView getDraggingPiece() {
 		// There isn't one, no bullpen in lightning levels so no dragged pieces
 		return null;
+	}
+	
+	/**
+	 * Gets the increase time limit button
+	 * @return the increase time limit button
+	 */
+	public JButton getBtnIncrease() {
+		return btnIncrease;
+	}
+	
+	/**
+	 * Gets the decrease time limit button
+	 * @return the decrease time limit button
+	 */
+	public JButton getBtnDecrease() {
+		return btnDecrease;
 	}
 
 	@Override

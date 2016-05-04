@@ -342,6 +342,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	
 	public void setDraggingPiece(Piece p) {
 		setDraggingPiece(boardPieceViews.get(p));
+		
 	}
 
 	@Override
@@ -350,6 +351,8 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		if (pv != null) {
 			setComponentZOrder(pv, 0);
 		}
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 
 	@Override
@@ -357,6 +360,8 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		add(pv);
 		setDraggingPiece(pv);
 		boardPieceViews.put(pv.getPiece(), pv);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 	
 	@Override

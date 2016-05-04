@@ -21,22 +21,24 @@ public class GameScreenPieceOrientationController implements KeyListener {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			Piece piece = gamescreen.getActiveDraggingWidget().getPiece();
-			if (e.getKeyCode() == 'Q') {
-				piece.rotatePiece(Directions.SOUTH);
+			if (gamescreen.getActiveDraggingWidget() != null) {
+				Piece piece = gamescreen.getActiveDraggingWidget().getPiece();
+				if (e.getKeyCode() == 'Q') {
+					piece.rotatePiece(Directions.SOUTH);
+				}
+				else if (e.getKeyCode() == 'W') {
+					piece.rotatePiece(Directions.NORTH);
+				}
+				else if (e.getKeyCode() == 'A') {
+					piece.flipPiece(Directions.NORTH);
+				}
+				else if (e.getKeyCode() == 'S') {
+					piece.flipPiece(Directions.WEST);
+				}
+				gamescreen.getActiveDraggingWidget().updatePieceView();
+				gamescreen.revalidate();
+				gamescreen.repaint();
 			}
-			else if (e.getKeyCode() == 'W') {
-				piece.rotatePiece(Directions.NORTH);
-			}
-			else if (e.getKeyCode() == 'A') {
-				piece.flipPiece(Directions.NORTH);
-			}
-			else if (e.getKeyCode() == 'S') {
-				piece.flipPiece(Directions.WEST);
-			}
-			gamescreen.getActiveDraggingWidget().updatePieceView();
-			gamescreen.revalidate();
-			gamescreen.repaint();
 		}
 
 		@Override
