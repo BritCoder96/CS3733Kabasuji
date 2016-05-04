@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -53,6 +54,9 @@ public class LevelList extends JPanel {
 	
 	/** The button that deletes an existing level. */
 	JButton btnDelete;
+	
+	/** The levels on the screen */
+	ArrayList<LevelEntry> entries = new ArrayList<LevelEntry>();
 	
 	/** The button that creates a new level. */
 	private JButton btnNew;
@@ -116,6 +120,7 @@ public class LevelList extends JPanel {
 	private void updateLevelEntries() {
 		for (int i = 0, length = SaveFile.instance().getNumberOfLevels(); i < length; i++) {
 			LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
+			entries.add(levelEntry);
 			levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
 			panel.add(levelEntry);
 			levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
@@ -161,4 +166,18 @@ public class LevelList extends JPanel {
 	public JButton getBtnNew() {
 		return btnNew;
 	}
+	
+	public void reload(){
+		removeEntries();
+		updateLevelEntries();
+	}
+
+	private void removeEntries() {
+		for(LevelEntry i : entries){
+			panel.remove(i);
+		}
+		
+		entries = new ArrayList<LevelEntry>();
+	}
+
 }

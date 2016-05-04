@@ -113,7 +113,6 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						saveStars(originalLevel);
 					}
 					else if (level.getBoard().getPieces().size() == totalNumPieces - 2) {
-						System.out.println(totalNumPieces);
 						originalLevel.setNumberOfStars(1);
 						saveStars(originalLevel);
 					}

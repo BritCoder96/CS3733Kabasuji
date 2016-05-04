@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -35,6 +37,7 @@ import javax.swing.table.DefaultTableModel;
 import controllers.BullpenGameController;
 import controllers.EndGameController;
 import controllers.MoveDraggingPieceController;
+import controllers.GameScreenPieceOrientationController;
 import main.KabasujiMain;
 import models.Level;
 import models.LevelType;
@@ -83,6 +86,7 @@ public class GameScreen extends JPanel {
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
+		this.addKeyListener(new GameScreenPieceOrientationController(this));
 		
 		// Due to the fact that the level is used to keep track of the pieces on the board,
 		// we need to clone the level for this screen.
@@ -96,7 +100,6 @@ public class GameScreen extends JPanel {
 		// listener will handle all mouse motion events
 		setEnabled(true);
 		this.addMouseMotionListener(new MoveDraggingPieceController(this));
-		
 		boardView = new GameBoardView(this, this.level.getBoard());
 		boardView.setBounds(10, 88, 356, 356);
 		
@@ -113,14 +116,14 @@ public class GameScreen extends JPanel {
 		bullpen = new BullpenView(boardView.getSquareSize(), bullpenBounds);
 		add(bullpen);
 		for (Piece p : level.getBullpen().getPieces()) {
-			bullpen.addPiece(p);
+			bullpen.addPiece(new Piece(p));
 		}
 		if (level.getLvlType() == LevelType.LIGHTNING) {
 			Random rand = new Random();
 			Piece[] pieces = Piece.allValidPieces;
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
 		}
 		BullpenGameController bullpenController = new BullpenGameController(bullpen, this);
 		bullpen.addMouseListener(bullpenController);
@@ -146,6 +149,8 @@ public class GameScreen extends JPanel {
 			movesLeftDisplay.setBounds(517, 552, 186, 29);
 			add(movesLeftDisplay);
 		}
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 	
 	 class DecrementTimer extends TimerTask {
@@ -199,6 +204,8 @@ public class GameScreen extends JPanel {
 	public void setActiveDraggingPiece(Piece p) {
 		draggingWidget = viewsForLevelPiecesOnBoard.get(p);
 		setComponentZOrder(draggingWidget, 0);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 	
 	public void setActiveDraggingPiece(PieceView pv) {
@@ -206,6 +213,8 @@ public class GameScreen extends JPanel {
 		viewsForLevelPiecesOnBoard.put(pv.getPiece(), pv);
 		add(pv);
 		setComponentZOrder(pv, 0);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 	
 	public boolean isOptimizedDrawingEnabled() {

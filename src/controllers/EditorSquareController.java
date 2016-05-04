@@ -44,7 +44,9 @@ public abstract class EditorSquareController implements MouseListener {
 	 * but the views aren't deleted and recreated.
 	 * @param b the board the square is now on
 	 */
-	public abstract void setBoard(Board b);
+	public void setBoard(Board b) {
+		this.b = b;
+	}
 	
 	
 	/**
@@ -62,6 +64,7 @@ public abstract class EditorSquareController implements MouseListener {
 			if (coveringPiece == null) {
 				return false;
 			} else {
+				System.out.println(coveringPiece.getPieceNumber());
 				b.removePiece(coveringPiece);
 				editorscreen.setDraggingPiece(coveringPiece);
 				return true;

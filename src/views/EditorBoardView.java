@@ -97,7 +97,7 @@ public class EditorBoardView extends JPanel {
 		
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
-				squares[r][c].setOpaque(board.getSquares()[r][c] != null);
+				squares[r][c].setOpaque(bsquares[r][c] != null);
 				if(bsquares[r][c] != null){
 					currentSquareLogic = bsquares[r][c].getSquareLogic();
 					if(board.getLevelType() == LevelType.RELEASE){
@@ -112,9 +112,9 @@ public class EditorBoardView extends JPanel {
 							squares[r][c].setForeground(color);
 						}
 					}
-					squares[r][c].repaint();
-					squareControllers[r][c].setBoard(board);
 				}
+				squares[r][c].repaint();
+				squareControllers[r][c].setBoard(board);
 			}
 		}
 	}
