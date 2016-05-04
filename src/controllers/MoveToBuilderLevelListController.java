@@ -54,10 +54,12 @@ public class MoveToBuilderLevelListController implements ActionListener {
 	 * @param e - the actual event that calls the function, i.e. the button press.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		File[] levelFiles = new File(pathToLevelsFolder).listFiles();
-		
-		for (File i : levelFiles) {
-			SaveFile.instance().addLevel(parseData(loadLevel(i)));
+		// load levels on initial launch
+		if (SaveFile.instance().getNumberOfLevels() == 0) {
+			File[] levelFiles = new File(pathToLevelsFolder).listFiles();
+			for (File i : levelFiles) {
+				SaveFile.instance().addLevel(parseData(loadLevel(i)));
+			}
 		}
 		
 		//Hide the previous screen.

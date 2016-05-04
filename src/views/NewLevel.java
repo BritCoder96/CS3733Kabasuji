@@ -1,6 +1,5 @@
 package views;
 
-
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -14,6 +13,7 @@ import controllers.GoBackOnePanelController;
 import controllers.MoveToEditorController;
 import controllers.NewLevelTypeController;
 import main.KabasujiMain;
+import models.Level;
 import models.LevelType;
 
 import java.awt.Color;
@@ -53,6 +53,9 @@ public class NewLevel extends JPanel {
 	private JButton btnRelease;
 	/** The button that starts the editor */
 	private JButton btnGo;
+	
+	/** The controller for the button that starts the editor */
+	MoveToEditorController btnGoController;
 	
 
 	/**
@@ -168,7 +171,8 @@ public class NewLevel extends JPanel {
 		btnGo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnGo.setBounds(405, 451, 118, 45);
 		add(btnGo);
-		btnGo.addActionListener(new MoveToEditorController(this, frame));
+		btnGoController = new MoveToEditorController(new Level(getRows(), getCols(), Integer.parseInt(getName()), getLevelType(), getName()), this, frame);
+		btnGo.addActionListener(btnGoController);
 		
 		updateOptionDisplay();
 	}
@@ -220,6 +224,10 @@ public class NewLevel extends JPanel {
 				
 				break;
 		}
+		
+		btnGo.removeActionListener(btnGoController);
+		btnGoController = new MoveToEditorController(new Level(getRows(), getCols(), Integer.parseInt(getName()), getLevelType(), getName()), this, frame);
+		btnGo.addActionListener(btnGoController);
 	}
 	
 	public int getRows() {

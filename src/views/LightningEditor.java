@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,6 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controllers.DecrementTimeLimitController;
+import controllers.EditorLevelRedoController;
 import controllers.EditorLevelUndoController;
 import controllers.EditorModeController;
 import controllers.GoBackOnePanelController;
@@ -49,6 +52,8 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	Board board;
 	/** The undo controller, which maintains the back stack of levels */
 	EditorLevelUndoController undoController; 
+	/** The redo controller, which maintains the forward stack of levels */
+	EditorLevelRedoController redoController; 
 	/** The mode that the Editor is in */
 	private EditorMode editMode;
 	/** The label that shows the time limit */
@@ -66,20 +71,20 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 	 * Create the frame with an rectangular lightning level of the specified size and time.
 	 * @param frame the frame to show the screen in
 	 */
-	public LightningEditor(KabasujiFrame frame, String levelName, int boardRows, int boardCols, int timeLimit) {
+	public LightningEditor(KabasujiFrame frame, Level level) {
+		// TODO: remove
+		int timeLimit = 1;
+		
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		board = new Board(boardRows, boardCols, LevelType.LIGHTNING);
-		board.fillWithSquares();
+		board = level.getBoard();
 		
-		ell = new LightningLevelLogic(boardRows * boardCols, timeLimit);
+		ell =((LightningLevelLogic) level.getLevelLogic()).getAllottedSeconds() < 0 ? new LightningLevelLogic(board.getNumberOfSquares(), timeLimit) : (LightningLevelLogic) level.getLevelLogic();
 		
-		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.LIGHTNING, levelName);
-		level.setBoard(board);
-		level.setLevelLogic(ell);
+		this.level = level;
 		
 		gameboard = new EditorBoardView(this, board, EditorMode.EDIT);
 		gameboard.setBounds(283, 94, 430, 430);
@@ -109,7 +114,9 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		btnSave.addActionListener(new SaveLevelController(level));
 		add(btnSave);
 		
-		undoController = new EditorLevelUndoController(this);
+		undoController = new EditorLevelUndoController(this, redoController);
+		redoController = undoController.generateRedoController();
+		
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnUndo.setBounds(69, 363, 120, 45);
@@ -125,6 +132,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		JButton btnRedo = new JButton("Redo");
 		btnRedo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRedo.setBounds(69, 421, 120, 45);
+		btnRedo.addActionListener(redoController);
 		add(btnRedo);
 		
 		timeLimitLabel = new JLabel();
@@ -168,6 +176,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 
 	@Override
 	public void onLevelChanged() {
+		redoController.clearForwardStack();
 		pushBackStack();
 	}
 	

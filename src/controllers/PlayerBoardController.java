@@ -53,7 +53,8 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 				for (Square s : p.getPiece().getSquares()) {
 					int squareX = square.getCoordinates().getRow() + s.getCoordinates().getRow();
 					int squareY = square.getCoordinates().getCol() + s.getCoordinates().getCol();
-					if (level.getBoard().getSquareAt(squareX, squareY) != null) {
+					if (((squareX >= 0 && squareX < b.getRows())&& (squareY >= 0 && squareY < b.getColumns())) 
+							&& level.getBoard().getSquareAt(squareX, squareY) != null) {
 						LightningBoardSquareLogic lsbl = (LightningBoardSquareLogic)level.getBoard().getSquareAt(squareX, squareY).getSquareLogic();
 						if (!lsbl.getMarked()) {
 							markedSquares++;
@@ -101,7 +102,7 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						logic.decrementRemainingMoves();
 					}
 					gamescreen.updateMovesDisplay();
-					int totalNumPieces = level.getBullpen().getNumberOfPieces() + level.getBoard().getPieces().size();
+					int totalNumPieces = level.getBullpen().getNumberOfPieces() + gamescreen.getPiecesOnBoard().size();
 					if (level.getBoard().getPieces().size() == totalNumPieces) {
 						originalLevel.setNumberOfStars(3);
 						saveStars(originalLevel);
@@ -112,6 +113,7 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						saveStars(originalLevel);
 					}
 					else if (level.getBoard().getPieces().size() == totalNumPieces - 2) {
+						System.out.println(totalNumPieces);
 						originalLevel.setNumberOfStars(1);
 						saveStars(originalLevel);
 					}

@@ -52,10 +52,12 @@ public class MoveToLevelSelectController implements ActionListener {
 	 * @param e - The actual event, i.e. the Button Press.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		File[] levelFiles = new File(pathToLevelsFolder).listFiles();
-		
-		for (File i : levelFiles) {
-			SaveFile.instance().addLevel(parseData(loadLevel(i)));
+		// load levels on initial launch
+		if (SaveFile.instance().getNumberOfLevels() == 0) {
+			File[] levelFiles = new File(pathToLevelsFolder).listFiles();
+			for (File i : levelFiles) {
+				SaveFile.instance().addLevel(parseData(loadLevel(i)));
+			}
 		}
 		
 		//Hide the previous screen

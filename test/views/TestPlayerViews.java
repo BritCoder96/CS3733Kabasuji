@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import controllers.MoveToBuilderLevelListController;
 import controllers.MoveToLevelSelectController;
 import main.KabasujiMain;
+import models.SaveFile;
 import junit.framework.TestCase;
 
 /**
@@ -18,8 +19,9 @@ import junit.framework.TestCase;
  *
  */
 public class TestPlayerViews extends TestCase {
-
+	
 	public void testMouseClickTriggersEvent() throws Exception { 
+		SaveFile.instance().clear();
 		MoveToLevelSelectController.pathToLevelsFolder = "test_levels/";
 		MoveToBuilderLevelListController.pathToLevelsFolder = "test_levels/";
 		KabasujiMain player = new KabasujiMain();
@@ -42,7 +44,7 @@ public class TestPlayerViews extends TestCase {
 	    me = new MouseEvent(gameScreen.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, 0, 10, 10, 1, false, MouseEvent.BUTTON1);
 	    gameScreen.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	    Thread.sleep(1000);
-	    GameWinOverlay lossScreen = (GameWinOverlay)frame.getContentPane();
+	    GameLossOverlay lossScreen = (GameLossOverlay)frame.getContentPane();
 	    lossScreen.getBtnLvlSelect().doClick();
 	    LevelSelect lvlSelect2 = (LevelSelect)frame.getContentPane();
 	    lvlSelect2.getBtnNext().doClick();
@@ -56,7 +58,7 @@ public class TestPlayerViews extends TestCase {
 	    gameScreen.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	    me = new MouseEvent(gameScreen.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, 0, 10, 10, 1, false, MouseEvent.BUTTON1);
 	    gameScreen.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
-	    Thread.sleep(3000);
+    	Thread.sleep(3000);
 	    GameWinOverlay winScreen = (GameWinOverlay)frame.getContentPane();
 	    winScreen.getBtnLvlSelect().doClick();
 	  }

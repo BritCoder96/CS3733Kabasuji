@@ -1,9 +1,14 @@
 package views;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
+import controllers.MoveToBuilderLevelListController;
+import controllers.MoveToLevelSelectController;
 import controllers.SaveLevelController;
 import main.KabuildsujiMain;
+import models.Level;
+import models.SaveFile;
 import junit.framework.TestCase;
 
 /**
@@ -13,6 +18,9 @@ import junit.framework.TestCase;
  */
 public class TestBuilderViews extends TestCase {
 	public void testMouseClickTriggersEvent() throws Exception { 
+		SaveFile.instance().clear();
+		MoveToLevelSelectController.pathToLevelsFolder = "test_levels/";
+		MoveToBuilderLevelListController.pathToLevelsFolder = "test_levels/";
 		KabuildsujiMain player = new KabuildsujiMain();
 		player.main(new String [0]);
 		KabasujiFrame frame = player.getFrame();
@@ -47,7 +55,6 @@ public class TestBuilderViews extends TestCase {
 	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 100, 10, 1, false, MouseEvent.BUTTON1);
 	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	    SaveLevelController.serializeLevel(rEditor.getLevel());
-	    rEditor.getBtnBack().doClick();
-	   
+	    rEditor.getBtnBack().doClick();	   
 	  }
 }
