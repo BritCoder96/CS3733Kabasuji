@@ -221,18 +221,6 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 * Pushes a clone of the current level to the back stack.
 	 */
 	private void pushBackStack() {
-		for (int i = 0; i < board.getRows(); i++) {
-			for (int j = 0; j < board.getColumns(); j++) {
-				Square s = board.getSquareAt(i, j);
-				String releaseNumText = "";
-				if (s != null && s.getSquareLogic() != null) {
-					ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) s.getSquareLogic();
-					releaseNumText = rbsl.getNumber() + " " + rbsl.getColorOfNumber();
-				}
-				System.out.print(s == null ? " " : (s.getSquareLogic() == null ? "x" : releaseNumText));
-			}
-			System.out.println();
-		}
 		undoController.pushLevel(level);
 	}
 

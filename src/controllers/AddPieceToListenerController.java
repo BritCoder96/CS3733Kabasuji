@@ -46,7 +46,7 @@ public class AddPieceToListenerController implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		frame.returnToLastContentPane();
 		thingToAddTo.onLevelChanged();
-		thingToAddTo.addPiece(pieceToAdd);
+		thingToAddTo.addPiece(new Piece(pieceToAdd));
 	}
 
 	public void mouseEntered(MouseEvent e) {

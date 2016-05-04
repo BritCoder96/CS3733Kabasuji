@@ -102,9 +102,7 @@ public class EditorBoardView extends JPanel {
 					currentSquareLogic = bsquares[r][c].getSquareLogic();
 					if(board.getLevelType() == LevelType.RELEASE){
 						number = ((ReleaseBoardSquareLogic) currentSquareLogic).getNumber();
-						System.out.println(number.toString());
 						color = ((ReleaseBoardSquareLogic) currentSquareLogic).getColorOfNumber();
-						System.out.println(color);
 						if(number < 0){
 							squares[r][c].setText("");
 							squares[r][c].setForeground(Color.BLACK);
@@ -114,10 +112,11 @@ public class EditorBoardView extends JPanel {
 							squares[r][c].setForeground(color);
 						}
 					}
-					squares[r][c].repaint();
-					squareControllers[r][c].setBoard(board);
 				}
+				squares[r][c].repaint();
+				squareControllers[r][c].setBoard(board);
 			}
+			System.out.println();
 		}
 	}
 	

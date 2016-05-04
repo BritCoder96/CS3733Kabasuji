@@ -66,6 +66,7 @@ public class BullpenView extends JPanel {
 	 * @return the PieceView that now holds the piece p
 	 */
 	public PieceView addPiece(Piece p) {
+		System.out.println(p);
 		int priorPieceBottom = 0;
 		// If there are existing pieces, place this below the last one.
 		// This assumes that the last one in the list is the lowest, which
