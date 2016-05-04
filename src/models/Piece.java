@@ -63,19 +63,12 @@ public class Piece {
 	 * @param direction the direction to rotate the piece.
 	 */
 	public void rotatePiece(Directions direction) {
-		if (direction == Directions.SOUTH || direction == Directions.WEST) {
-			for (Square square : squares) {
-				Square last = square.attachedSquares[square.attachedSquares.length-1];
-				System.arraycopy(square.attachedSquares, 0, square.attachedSquares, 1, square.attachedSquares.length-1 );
-				squares[0] = last;
+		for (Square square : squares) {
+			if (direction == Directions.SOUTH || direction == Directions.WEST) {
+				square.setCoordinates(new Coordinate (6 - square.getCoordinates().getCol() - 1, square.getCoordinates().getRow()));
 			}
-		}
-	
-		else {
-			for (Square square : squares) {
-				Square start = squares[0];
-			    System.arraycopy(square.attachedSquares, 1, square.attachedSquares, 0, square.attachedSquares.length - 1);
-			    squares[square.attachedSquares.length - 1] = start;
+			else {
+				square.setCoordinates(new Coordinate (square.getCoordinates().getCol(), 6 - square.getCoordinates().getRow() - 1));
 			}
 		}
 	}
@@ -89,16 +82,12 @@ public class Piece {
 	public void flipPiece(Directions direction) {
 		if (direction == Directions.SOUTH || direction == Directions.NORTH ) {
 			for (Square square : squares) {
-				Square temp = square.attachedSquares[0];
-				square.attachedSquares[0] = square.attachedSquares[2];
-				square.attachedSquares[2] = temp;
+				square.setCoordinates(new Coordinate (square.getCoordinates().getRow(), 6 - square.getCoordinates().getCol() - 1));
 			}
 		}
 		else {
 			for (Square square : squares) {
-				Square temp = square.attachedSquares[1];
-				square.attachedSquares[1] = square.attachedSquares[3];
-				square.attachedSquares[3] = temp;
+				square.setCoordinates(new Coordinate (6 - square.getCoordinates().getRow() - 1, square.getCoordinates().getCol()));
 			}
 		}
 	}
