@@ -41,7 +41,7 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 		
 		// If no dragging piece, check and see if there's a piece at this point on the board.
 		// If so, start dragging that piece.
-		if (p == null) {
+		if (p == null && level.getLvlType() != LevelType.RELEASE) {
 			if (b.getSquareAt(row, col) != null) {
 				Piece coveringPiece = b.getPieceAt(row, col);
 				if (coveringPiece == null) {
