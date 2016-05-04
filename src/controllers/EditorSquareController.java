@@ -59,7 +59,7 @@ public abstract class EditorSquareController implements MouseListener {
 		
 		// If no dragging piece, check and see if there's a piece at this point on the board.
 		// If so, start dragging that piece.
-		if (p == null) {
+		if (p == null && square != null) {
 			Piece coveringPiece = b.getPieceAt(square.getCoordinates().getRow(), square.getCoordinates().getCol());
 			if (coveringPiece == null) {
 				return false;
@@ -69,11 +69,12 @@ public abstract class EditorSquareController implements MouseListener {
 				editorscreen.setDraggingPiece(coveringPiece);
 				return true;
 			}
-		} else {
+		} else if (square != null) {
 			if (b.addPiece(editorscreen.getDraggingPiece().getPiece(), square.getCoordinates())) {
 				editorscreen.setDraggingPiece((PieceView) null);
 			}
 			return true;
 		}
+		return false;
 	}
 }
