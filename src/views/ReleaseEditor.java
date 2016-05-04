@@ -393,6 +393,14 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	}
 	
 	/**
+	 * Gets the bullpen view 
+	 * @return the bullpen view 
+	 */
+	public BullpenView getBullpen() {
+		return bullpen;
+	}
+	
+	/**
 	 * Gets the board view 
 	 * @return the board view
 	 */
