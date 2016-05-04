@@ -2,11 +2,11 @@
 PUZZLE
 
 x,x,x,x,x,x
-x,x,x,x,x,x
-x,x,x,x,x,x
-x,x,x,x,x,x
-x,x,x,x,x,x
-x,x,x,x,x,x
+ , , , , , 
+x,x,x,x,x, 
+ ,x, , , , 
+ ,x,x,x,x,x
+ , , ,x, , 
 
 0,2,3,
 3

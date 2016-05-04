@@ -53,10 +53,10 @@ public class GameBoardView extends JPanel {
 				Color squareBackground = (((r+c)%2)==0) ? lighterGray : darkerGray;
 				if (initialBoard.getSquares()[r][c] != null) {
 					square.setOpaque(true);
-					// Set on click listener to deal with placing pieces on the square
-					squareControllers[r][c] = new PlayerBoardController(gameScreen, gameScreen.getLevel(), initialBoard.getSquares()[r][c]);
-					square.addMouseListener(squareControllers[r][c]);
 				}
+				squareControllers[r][c] = new PlayerBoardController(gameScreen, gameScreen.getLevel(), r, c);
+				// Set on click listener to deal with placing pieces on the square
+				square.addMouseListener(squareControllers[r][c]);
 				square.setBackground(squareBackground);
 				square.addMouseMotionListener(new GameSquareDragListener(this, square, gameScreen));
 				squares[r][c] = square;

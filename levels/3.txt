@@ -1,12 +1,12 @@
 3
 LIGHTNING
 
- ,x,x,x,x, 
- ,x,x,x,x, 
+ ,x, ,x, ,x
 x,x,x,x,x,x
 x,x,x,x,x,x
- ,x,x,x,x, 
- ,x,x,x,x, 
+x,x,x,x,x,x
+x,x,x,x,x,x
+x, ,x, ,x, 
 
-30
-3
+45
+2

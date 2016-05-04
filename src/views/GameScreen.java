@@ -69,6 +69,8 @@ public class GameScreen extends JPanel {
 	HashMap<Piece, PieceView> viewsForLevelPiecesOnBoard;
 	/** The JLabel showing how many moves are left */
 	JLabel movesLeftDisplay;
+	/** The display showing how many stars the player has */
+	StarsDisplay starsDisplay;
 	
 	/** The timer that ticks down the time left in lightning levels */
 	Timer lightningTimer;
@@ -126,7 +128,7 @@ public class GameScreen extends JPanel {
 		bullpen.addMouseListener(bullpenController);
 		bullpen.addMouseMotionListener(bullpenController);
 		
-		StarsDisplay starsDisplay = new StarsDisplay();
+		starsDisplay = new StarsDisplay(0);
 		starsDisplay.setBounds(250, 552, 186, 40);
 		add(starsDisplay);
 		if (level.getLvlType() == LevelType.LIGHTNING) {
@@ -233,7 +235,7 @@ public class GameScreen extends JPanel {
 		if (lightningTimer != null) {
 			lightningTimer.cancel();
 		}
-		new EndGameController(originalLevel, frame);
+		new EndGameController(level, frame);
 	}
 	
 	/**
@@ -258,6 +260,13 @@ public class GameScreen extends JPanel {
 	 */
 	public HashMap<Piece, PieceView> getPiecesOnBoard() {
 		return viewsForLevelPiecesOnBoard;
+	}
+	
+	/**
+	 * Updates the number of stars to show how many are filled
+	 */
+	public void updateStarsDisplay() {
+		starsDisplay.setNumStarsFilled(level.getNumberOfStars());
 	}
 	
 }
