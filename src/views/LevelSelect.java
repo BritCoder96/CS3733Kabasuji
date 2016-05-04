@@ -8,7 +8,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
@@ -19,6 +21,7 @@ import models.LevelType;
 import models.SaveFile;
 import controllers.MoveToLevelController;
 import controllers.PreviousLevelController;
+import controllers.ResetLevelsController;
 import controllers.ToggleLevelEntryController;
 import controllers.NextLevelController;
 
@@ -26,6 +29,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
 
 /**
@@ -59,7 +63,9 @@ public class LevelSelect extends JPanel {
     JButton btnPrevious;
     /** The button that allows the user to navigate to a succeeding level. */
     JButton btnNext;
-
+    /** The button that allows the user to reset the stars in all the levels. */
+    JButton btnReset;
+    
 	/** The controller for btnPlay. */
 	MoveToLevelController moveToLevelController;
 	
@@ -123,6 +129,13 @@ public class LevelSelect extends JPanel {
 		btnPrevious.setBounds(51, 253, 120, 45);
 		add(btnPrevious);
 		btnPrevious.addActionListener(new PreviousLevelController(this));
+		
+		btnReset = new JButton("Reset Levels");
+		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnReset.setBounds(51, 253, 120, 45);
+		add(btnReset);
+		btnReset.addActionListener(new ResetLevelsController(this));
+		
 		
 		btnNext = new JButton("Next");
 		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -201,6 +214,21 @@ public class LevelSelect extends JPanel {
 	 */
 	public JButton getBtnNext() {
 		return btnNext;
+	}
+	
+	/**
+	 * gets all the levels
+	 * @return the next levels
+	 */
+	public ArrayList<Level> getLevels() {
+		return levels;
+	}
+	
+	/**
+	 * clears all the levels
+	 */
+	public void clearLevels() {
+		levels = new ArrayList<Level>();
 	}
 	
 	/**
