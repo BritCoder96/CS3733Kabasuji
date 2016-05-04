@@ -2,6 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -77,17 +78,18 @@ public class LevelList extends JPanel {
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
-		// TODO: get it to scroll
+		panel = new JPanel();
+		panel.setBounds(0, 0, 500, 1500);
+		panel.setPreferredSize(new Dimension(panel.getWidth(), panel.getHeight()));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setLayout(null);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(panel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(150, 100, 500, 350);
 		add(scrollPane);
-
-		panel = new JPanel();
-		scrollPane.setViewportView(panel);
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setLayout(null);
 		
 		btnNew = new JButton("New");
 		btnNew.setFont(new Font("Tahoma", Font.PLAIN, 20));

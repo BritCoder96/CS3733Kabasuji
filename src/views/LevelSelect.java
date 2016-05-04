@@ -150,7 +150,7 @@ public class LevelSelect extends JPanel {
 		}
 
         // display level info
-		currentLevelIndexLabel.setText("Level " + (currentLevelIndex + 1));
+		currentLevelIndexLabel.setText("Level " + (currentLevel.getLevelNumber() + 1));
 		starsDisplay.setNumStarsFilled(numStars);
 		levelTypeLabel.setText(lvlType.name()); // TODO should be lowercased?
 
