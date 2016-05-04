@@ -118,13 +118,16 @@ public class LevelList extends JPanel {
 	 * Load the level given by the current index and refresh the level info display. 
 	 */
 	private void updateLevelEntries() {
+		int addedLevels = 0;
+		
 		for (int i = 0, length = SaveFile.instance().getNumberOfLevels(); i < length; i++) {
 			try{
 				LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
 				entries.add(levelEntry);
-				levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
+				levelEntry.setBounds(10, 10 + 70 * (addedLevels), 463, 50);
 				panel.add(levelEntry);
 				levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
+				addedLevels += 1;
 			}
 			catch(IllegalArgumentException e){
 				
