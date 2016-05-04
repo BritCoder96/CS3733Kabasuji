@@ -53,6 +53,7 @@ public class SaveLevelController implements ActionListener {
 	 */
 	public void saveLevel() {
 		String data = serializeLevel(level);
+		//System.out.println(level.getLevelNumber());
 		File file = new File("levels/" + level.getLevelNumber() + ".txt");
 		try {
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());

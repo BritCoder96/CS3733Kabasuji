@@ -11,7 +11,7 @@ import views.NewLevel;
  * 
  * @author ejcerini
  */
-public class NewLevelTypeController implements ActionListener {
+public class UpdateLevelViewController implements ActionListener {
 
 	NewLevel nlevel;
 	LevelType ltype;
@@ -21,7 +21,7 @@ public class NewLevelTypeController implements ActionListener {
 	 *  
 	 * @param nlevel - the New Level screen
 	 */
-	public NewLevelTypeController(NewLevel nlevel, LevelType ltype){
+	public UpdateLevelViewController(NewLevel nlevel, LevelType ltype){
 		this.nlevel = nlevel;
 		this.ltype = ltype;
 	}
@@ -32,10 +32,12 @@ public class NewLevelTypeController implements ActionListener {
 	 * @param e - the event, i.e. the button press.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		//Change the level type to Lightning
-		nlevel.setLevelType(ltype);
+		// Change the level type if necessary
+		if (ltype != null){
+			nlevel.setLevelType(ltype);
+		}
 		
-		//Update the display
+		// Update the display
 		nlevel.updateOptionDisplay();
 	}
 }

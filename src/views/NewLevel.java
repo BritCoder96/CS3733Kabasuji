@@ -11,7 +11,7 @@ import javax.swing.border.LineBorder;
 
 import controllers.GoBackOnePanelController;
 import controllers.MoveToEditorController;
-import controllers.NewLevelTypeController;
+import controllers.UpdateLevelViewController;
 import main.KabasujiMain;
 import models.Level;
 import models.LevelType;
@@ -85,6 +85,7 @@ public class NewLevel extends JPanel {
 		txtInsertNameHere.setBounds(339, 95, 156, 22);
 		add(txtInsertNameHere);
 		txtInsertNameHere.setColumns(10);
+		txtInsertNameHere.addActionListener(new UpdateLevelViewController(this, null));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
@@ -96,20 +97,20 @@ public class NewLevel extends JPanel {
 		btnPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnPuzzle.setBounds(30, 44, 153, 47);
 		panel.add(btnPuzzle);
-		btnPuzzle.addActionListener(new NewLevelTypeController(this, LevelType.PUZZLE));
+		btnPuzzle.addActionListener(new UpdateLevelViewController(this, LevelType.PUZZLE));
 				
 		this.btnLightning = new JButton("Lightning");
 		btnLightning.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnLightning.setBounds(213, 44, 153, 47);
 		panel.add(btnLightning);
-		btnLightning.addActionListener(new NewLevelTypeController(this, LevelType.LIGHTNING));
+		btnLightning.addActionListener(new UpdateLevelViewController(this, LevelType.LIGHTNING));
 
 				
 		this.btnRelease = new JButton("Release");
 		btnRelease.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRelease.setBounds(396, 44, 153, 47);
 		panel.add(btnRelease);
-		btnRelease.addActionListener(new NewLevelTypeController(this, LevelType.RELEASE));
+		btnRelease.addActionListener(new UpdateLevelViewController(this, LevelType.RELEASE));
 
 		
 		this.lblMoveLimit = new JLabel("Move Limit:");
@@ -122,6 +123,7 @@ public class NewLevel extends JPanel {
 		textField.setBounds(290, 140, 116, 22);
 		panel.add(textField);
 		textField.setColumns(10);
+		textField.addActionListener(new UpdateLevelViewController(this, null));
 		
 		this.lblTimeLimit = new JLabel("Time Limit:");
 		lblTimeLimit.setBounds(159, 135, 119, 32);
@@ -138,6 +140,7 @@ public class NewLevel extends JPanel {
 		txtRows.setBounds(402, 368, 52, 22);
 		add(txtRows);
 		txtRows.setColumns(10);
+		txtRows.addActionListener(new UpdateLevelViewController(this, null));
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 20));
