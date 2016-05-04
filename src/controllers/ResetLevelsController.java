@@ -39,6 +39,7 @@ public class ResetLevelsController implements ActionListener {
 		}
 		levelSelect.clearLevels();
 		levelSelect.loadLevels();
+		levelSelect.updateLevelDisplay();
 		levelSelect.revalidate();
 		levelSelect.repaint();
 	}

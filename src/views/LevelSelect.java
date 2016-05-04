@@ -154,7 +154,7 @@ public class LevelSelect extends JPanel {
 	/** 
 	 * Load the level given by the current index and refresh the level info display. 
 	 */
-	private void updateLevelDisplay() {
+	public void updateLevelDisplay() {
         // get current level info
 		Level currentLevel = levels.get(currentLevelIndex);
 		int numStars = currentLevel.getNumberOfStars();
