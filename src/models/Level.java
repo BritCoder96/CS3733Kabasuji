@@ -33,10 +33,10 @@ public class Level {
 	 * Constructor for a Level. Used to make a new level in the builder.
 	 * 
 	 * @param numberOfBoardRows	The initial number of rows in the board.
-	 * @param numberOfBoardCols	The initial number of columns in the board.
 	 * @param levelNumber	The number of the level.
 	 * @param lvlType	The type of the level: Lightning, Release, and Puzzle.
 	 * @param levelName	The name of the level.
+	 * @param fillAutomatically	Determines whether to fill the level's board with squares.
 	 */
 	public Level (int numberOfBoardRows, int levelNumber, LevelType lvlType, String levelName, boolean fillAutomatically) {
 		Board board = new Board(numberOfBoardRows, numberOfBoardRows, lvlType);
@@ -203,7 +203,7 @@ public class Level {
 	/**
 	 * Gets whether or not the player has won the level.
 	 * 
-	 * @return whether or not the player has won the level.
+	 * @return Whether or not the player has won the level.
 	 */
 	public boolean getHasWon() {
 		return hasWon;
@@ -212,7 +212,7 @@ public class Level {
 	/**
 	 * Sets the bullpen associated with the level.
 	 * 
-	 * @param bullpen	The bullpen to be associated with the level.
+	 * @param bullpen The bullpen to be associated with the level.
 	 */
 	public void setBullpen(Bullpen bullpen) {
 		this.bullpen = bullpen;
@@ -291,6 +291,11 @@ public class Level {
 		return copy;
 	}
 
+	/**
+	 * Sets whether or not the player has won the level.
+	 * 
+	 * @param hasWon	whether or not the player has won the level.
+	 */
 	public void setHasWon(boolean hasWon) {
 		this.hasWon = hasWon;
 	}

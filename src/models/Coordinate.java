@@ -24,18 +24,38 @@ public class Coordinate {
 		this.setCol(col);
 	}
 
+	/**
+	 * Get the column coordinate.
+	 * 
+	 * @return The column coordinate.
+	 */
 	public int getCol() {
 		return col;
 	}
 
+	/**
+	 * Set the column coordinate.
+	 * 
+	 * @param col The new column coordinate.
+	 */
 	public void setCol(int col) {
 		this.col = col;
 	}
 
+	/**
+	 * Get the row coordinate.
+	 * 
+	 * @return The row coordinate.
+	 */
 	public int getRow() {
 		return row;
 	}
 
+	/**
+	 * Set the row coordinate.
+	 * 
+	 * @param row The new row coordinate.
+	 */
 	public void setRow(int row) {
 		this.row = row;
 	}

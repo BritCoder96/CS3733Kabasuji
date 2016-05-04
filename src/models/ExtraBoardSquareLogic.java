@@ -8,6 +8,7 @@ package models;
 public abstract class ExtraBoardSquareLogic {
 	/** Indicates whether the board square is covered by a piece. */
 	boolean isCovered;
+	/** Indicates whether a hint is associated with the board square. */
 	boolean isHint;
 	
 	/**
@@ -37,12 +38,19 @@ public abstract class ExtraBoardSquareLogic {
 	}
 	
 	/**
-	 * Indicate that the board square is a hint.
+	 * Indicate that the board square is associated with a hint.
+	 * 
+	 * @param hint The hint to associate.
 	 */
 	public void setHint(boolean hint) {
 		isHint = hint;
 	}
-
+	
+	/**
+	 * Determine that the board square is associated with a hint.
+	 * 
+	 * @return Whether the board square is associated with a hint.
+	 */
 	public boolean getIsHint() {
 		return isHint;
 	}

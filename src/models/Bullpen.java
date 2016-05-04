@@ -9,9 +9,14 @@ import java.util.ArrayList;
  *
  */
 public class Bullpen{
-	ArrayList<Piece> pieces;	// TODO: enact pieces.trimToSize() occasionally 
+	/** Collection of pieces. */
+	ArrayList<Piece> pieces;	// TODO: enact pieces.trimToSize() occasionally
+	/** Number of pieces. */
 	int numberOfPieces;
 	
+	/**
+	 * Constructor for a Bullpen.
+	 */
 	public Bullpen() {
 		super();
 		
@@ -19,34 +24,41 @@ public class Bullpen{
 		numberOfPieces = 0;
 	}
 	
+	/**
+	 * Returns an iterable collection of all pieces from the bullpen. 
+	 * 
+	 * @return The collection of all bullpen pieces.
+	 */
 	public ArrayList<Piece> getPieces() {
 		return pieces;
 	}
 	
+	/**
+	 * Adds a piece to the bullpen.
+	 * 
+	 * @param piece The piece to add.
+	 */
 	public void addPiece(Piece piece) {
 		pieces.add(piece);
 		numberOfPieces = pieces.size();
 	}
 	
+	/**
+	 * Removes a piece from the bullpen.
+	 * 
+	 * @param piece The piece to remove.
+	 */
 	public void removePiece(Piece piece) {
 		pieces.remove(piece);
 		numberOfPieces = pieces.size();
 	}
 	
-	public boolean isMember(Piece piece) {
-		for (Piece i : pieces) {
-			if (i == piece) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
+	/**
+	 * Gets the number of pieces in the bullpen.
+	 * 
+	 * @return The number of bullpen pieces.
+	 */
 	public int getNumberOfPieces() {
 		return numberOfPieces;
-	}
-
-	public boolean containsPiece(Piece p) {
-		return pieces.contains(p);
 	}
 }
