@@ -60,17 +60,18 @@ public class GameBoardView extends JPanel {
 				if (initialBoard.getSquares()[r][c] != null) {
 					square.setOpaque(true);
 				}
-				if(initialBoard.getSquareAt(r, c) != null)
+				if(initialBoard.getSquareAt(r, c) != null){
 					currentSquare = initialBoard.getSquares()[r][c].getSquareLogic();
-				if(initialBoard.getLevelType() == LevelType.RELEASE){
-					Integer number = ((ReleaseBoardSquareLogic) currentSquare).getNumber();
-					Color color = ((ReleaseBoardSquareLogic) currentSquare).getColorOfNumber();
+					if(initialBoard.getLevelType() == LevelType.RELEASE){
+						Integer number = ((ReleaseBoardSquareLogic) currentSquare).getNumber();
+						Color color = ((ReleaseBoardSquareLogic) currentSquare).getColorOfNumber();
 
-					if(number > 0){
-						square.setText(number.toString());
-						square.setForeground(color);
+						if(number > 0){
+							square.setText(number.toString());
+							square.setForeground(color);
+						}
+
 					}
-
 				}
 				squareControllers[r][c] = new PlayerBoardController(gameScreen, gameScreen.getLevel(), r, c);
 				// Set on click listener to deal with placing pieces on the square

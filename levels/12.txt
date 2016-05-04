@@ -1,0 +1,14 @@
+12
+LIGHTNING
+
+ ,x,x,x,x,x,x, 
+x,x,x,x,x,x,x,x
+x,x, ,x,x, ,x,x
+x,x,x,x,x,x,x,x
+x,x,x, ,x,x,x,x
+ ,x,x,x,x,x, , 
+ ,x,x,x,x,x,x, 
+ ,x, ,x, ,x, , 
+
+96
+0
