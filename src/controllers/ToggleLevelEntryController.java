@@ -1,22 +1,26 @@
 package controllers;
 
 import java.awt.Color;
-
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
+import views.LevelEntry;
 import views.LevelList;
+import views.KabasujiFrame;
 
 public class ToggleLevelEntryController implements MouseListener {
+	LevelEntry levelEntry;
 	LevelList levelList;
-	JPanel levelEntry;
+	KabasujiFrame frame;
 	
-	public ToggleLevelEntryController(LevelList levelList, JPanel levelEntry) {
-		this.levelList = levelList;
+	public ToggleLevelEntryController(LevelEntry levelEntry, LevelList levelList, KabasujiFrame frame) {
 		this.levelEntry = levelEntry;
+		this.levelList = levelList;
+		this.frame = frame;
 	}
 	
 	@Override
@@ -25,12 +29,17 @@ public class ToggleLevelEntryController implements MouseListener {
 		JButton btnEdit = levelList.getBtnEdit();
 		JButton btnDelete = levelList.getBtnDelete();
 		if (toggled == null) {
+			btnEdit.addActionListener(new MoveToEditorController(levelEntry.getLevel(), (JPanel) levelList, frame));
 			btnEdit.setEnabled(true);
 			btnDelete.setEnabled(true);
 			levelEntry.setBackground(Color.YELLOW);
 			levelList.setToggledLevelEntry(levelEntry);
 		}
 		else if (toggled != levelEntry) {
+			for (ActionListener i : btnEdit.getActionListeners()) {
+				btnEdit.removeActionListener(i);
+			}
+			btnEdit.addActionListener(new MoveToEditorController(levelEntry.getLevel(), (JPanel) levelList, frame));
 			toggled.setBackground(toggled.getParent().getBackground());
 			levelEntry.setBackground(Color.YELLOW);
 			levelList.setToggledLevelEntry(levelEntry);

@@ -46,6 +46,7 @@ public class EditorLevelUndoController implements ActionListener {
 			// Pop the level back stack.
 			Level lastLevel = levelBackStack.pop();
 			// Add the popped level to the level forward stack
+			System.out.println("nPieces:" + lastLevel.getBoard().getPieces().size());
 			redo.pushLevel(lastLevel);
 			System.out.println("Level Pushed to Redo");
 			listener.setLevel(lastLevel);

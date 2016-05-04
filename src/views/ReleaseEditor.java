@@ -26,7 +26,9 @@ import models.EditorMode;
 import models.Level;
 import models.LevelType;
 import models.Piece;
+import models.ReleaseBoardSquareLogic;
 import models.ReleaseLevelLogic;
+import models.Square;
 
 import javax.swing.JPopupMenu;
 import java.awt.Component;
@@ -94,7 +96,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 * Create the screen, with a rectangular level and no numbers yet.
 	 * @param frame the frame to show the screen in
 	 */
-	public ReleaseEditor(KabasujiFrame frame, String levelName, int boardRows, int boardCols) {
+	public ReleaseEditor(KabasujiFrame frame, Level level) {
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -106,13 +108,12 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		setEnabled(true);
 		this.addMouseMotionListener(new MoveDraggingPieceEditorController(this));
 		
-		board = new Board(boardRows, boardCols, LevelType.RELEASE);
-		board.fillWithSquares();
+		board = level.getBoard();
 		
+		// TODO: probably nothing
 		ell = new ReleaseLevelLogic();
 		
-		level = new Level(boardRows, boardCols, Integer.parseInt(levelName), LevelType.RELEASE, levelName);
-		level.setBoard(board);
+		this.level = level;
 		
 		boardPieceViews = new HashMap<Piece, PieceView>();
 		
@@ -120,11 +121,15 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		gameboard.setBounds(60, 71, 325, 325);
 		add(gameboard);
 		
-		bullpen = new BullpenView(gameboard.getWidth() / boardCols, new Rectangle(412, 14, 350, 455));
+		bullpen = new BullpenView(gameboard.getWidth() / board.getColumns(), new Rectangle(412, 14, 350, 455));
 		add(bullpen);
 		BullpenEditorController bullpenController = new BullpenEditorController(bullpen, this);
 		bullpen.addMouseListener(bullpenController);
 		bullpen.addMouseMotionListener(bullpenController);
+		
+		for (Piece i : level.getBullpen().getPieces()) {
+			bullpen.addPiece(i);
+		}
 		
 		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -235,6 +240,18 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		this.level = level;
 		ell = (ReleaseLevelLogic) level.getLevelLogic();
 		board = level.getBoard();
+		for (int i = 0; i < board.getRows(); i++) {
+			for (int j = 0; j < board.getColumns(); j++) {
+				Square s = board.getSquareAt(i, j);
+				String releaseNumText = "";
+				if (s != null && s.getSquareLogic() != null) {
+					ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) s.getSquareLogic();
+					releaseNumText = rbsl.getNumber() + " " + rbsl.getColorOfNumber();
+				}
+				System.out.print(s == null ? " " : (s.getSquareLogic() == null ? "x" : releaseNumText));
+			}
+			System.out.println();
+		}
 		gameboard.setVisibleBoard(board);
 		bullpen.clearPieces();
 		for (Piece p : level.getBullpen().getPieces()) {
