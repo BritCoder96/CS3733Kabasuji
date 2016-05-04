@@ -39,9 +39,11 @@ public class Level {
 	 * @param lvlType	The type of the level: Lightning, Release, and Puzzle.
 	 * @param levelName	The name of the level.
 	 */
-	public Level (int numberOfBoardRows, int numberOfBoardCols, int levelNumber, LevelType lvlType, String levelName) {
-		Board board = new Board(numberOfBoardRows, numberOfBoardCols, lvlType);
-		board.fillWithSquares();
+	public Level (int numberOfBoardRows, int levelNumber, LevelType lvlType, String levelName, boolean fillAutomatically) {
+		Board board = new Board(numberOfBoardRows, numberOfBoardRows, lvlType);
+		if (fillAutomatically) {
+			board.fillWithSquares();
+		}
 		setBoard(board);
 		
 		setLevelNumber(levelNumber);
@@ -250,7 +252,7 @@ public class Level {
 		default:
 			throw new IllegalStateException("level has unknown type " + lvlType);
 		}
-		Level copy = new Level(board.getRows(), board.getColumns(), levelNumber, lvlType, levelName);
+		Level copy = new Level(board.getRows(), levelNumber, lvlType, levelName, false);
 		// Copy the number of stars, logic, bullpen, and board into the copy
 		copy.setNumberOfStars(getNumberOfStars());
 		copy.setLevelLogic(lvlLogicCopy);

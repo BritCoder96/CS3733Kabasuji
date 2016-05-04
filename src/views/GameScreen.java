@@ -2,55 +2,32 @@ package views;
 
 import models.Level;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.event.ActionEvent;
-
 import javax.swing.JLabel;
 
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Rectangle;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import controllers.BullpenGameController;
 import controllers.EndGameController;
 import controllers.MoveDraggingPieceController;
 import controllers.GameScreenPieceOrientationController;
 import main.KabasujiMain;
-import models.Level;
 import models.LevelType;
 import models.LightningLevelLogic;
 import models.Piece;
 import models.PuzzleLevelLogic;
 
-import javax.swing.border.LineBorder;
-
 import java.awt.Font;
 
 /**
- * The screen that the game is shown in. At the moment basically just a mockup
+ * The screen that the game is shown in.
  * @author bhuchley
  * @author bjbenson
  */
@@ -72,6 +49,8 @@ public class GameScreen extends JPanel {
 	HashMap<Piece, PieceView> viewsForLevelPiecesOnBoard;
 	/** The JLabel showing how many moves are left */
 	JLabel movesLeftDisplay;
+	/** The display showing how many stars the player has */
+	StarsDisplay starsDisplay;
 	
 	/** The timer that ticks down the time left in lightning levels */
 	Timer lightningTimer;
@@ -129,7 +108,7 @@ public class GameScreen extends JPanel {
 		bullpen.addMouseListener(bullpenController);
 		bullpen.addMouseMotionListener(bullpenController);
 		
-		StarsDisplay starsDisplay = new StarsDisplay();
+		starsDisplay = new StarsDisplay(0);
 		starsDisplay.setBounds(250, 552, 186, 40);
 		add(starsDisplay);
 		if (level.getLvlType() == LevelType.LIGHTNING) {
@@ -242,7 +221,7 @@ public class GameScreen extends JPanel {
 		if (lightningTimer != null) {
 			lightningTimer.cancel();
 		}
-		new EndGameController(originalLevel, frame);
+		new EndGameController(level, frame);
 	}
 	
 	/**
@@ -267,6 +246,21 @@ public class GameScreen extends JPanel {
 	 */
 	public HashMap<Piece, PieceView> getPiecesOnBoard() {
 		return viewsForLevelPiecesOnBoard;
+	}
+	
+	/**
+	 * Updates the number of stars to show how many are filled
+	 */
+	public void updateStarsDisplay() {
+		starsDisplay.setNumStarsFilled(level.getNumberOfStars());
+	}
+	
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		if (lightningTimer != null && ! visible) {
+			lightningTimer.cancel();
+		}
 	}
 	
 }

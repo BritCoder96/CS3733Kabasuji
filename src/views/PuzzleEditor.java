@@ -208,9 +208,9 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		editMode = EditorMode.EDIT;
 		updateOptionsDisplay();
 		btnRedo.addMouseMotionListener(new EditorComponentDragListener(this, btnRedo));
+		updateOptionsDisplay();
 		this.setFocusable(true);
 		this.requestFocusInWindow();
-		updateOptionsDisplay();
 	}
 
 	/**

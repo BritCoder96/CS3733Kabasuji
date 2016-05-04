@@ -210,9 +210,9 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		btnRedo.addMouseMotionListener(new EditorComponentDragListener(this, btnRedo));
 		
 		editMode = EditorMode.EDIT;
+		updateOptionsDisplay();
 		this.setFocusable(true);
 		this.requestFocusInWindow();
-		updateOptionsDisplay();
 	}
 
 	/**

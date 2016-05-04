@@ -81,12 +81,13 @@ public class Piece {
 	public void rotatePiece(Directions direction) {
 		for (Square square : squares) {
 			if (direction == Directions.SOUTH || direction == Directions.WEST) {
-				square.setCoordinates(new Coordinate (6 - square.getCoordinates().getCol() - 1, square.getCoordinates().getRow()));
+				square.setCoordinates(new Coordinate (-square.getCoordinates().getCol(), square.getCoordinates().getRow()));
 			}
 			else {
-				square.setCoordinates(new Coordinate (square.getCoordinates().getCol(), 6 - square.getCoordinates().getRow() - 1));
+				square.setCoordinates(new Coordinate (square.getCoordinates().getCol(), -square.getCoordinates().getRow()));
 			}
 		}
+		renormalizeCoordinates();
 	}
 	
 	/**
@@ -98,13 +99,32 @@ public class Piece {
 	public void flipPiece(Directions direction) {
 		if (direction == Directions.SOUTH || direction == Directions.NORTH ) {
 			for (Square square : squares) {
-				square.setCoordinates(new Coordinate (square.getCoordinates().getRow(), 6 - square.getCoordinates().getCol() - 1));
+				square.setCoordinates(new Coordinate (square.getCoordinates().getRow(), -square.getCoordinates().getCol()));
 			}
 		}
 		else {
 			for (Square square : squares) {
-				square.setCoordinates(new Coordinate (6 - square.getCoordinates().getRow() - 1, square.getCoordinates().getCol()));
+				square.setCoordinates(new Coordinate (-square.getCoordinates().getRow(), square.getCoordinates().getCol()));
 			}
+		}
+		renormalizeCoordinates();
+	}
+	
+	/**
+	 * Moves all the squares so that no square has negative coordinates and there
+	 * exists a square at row 0 and a square at column 0.
+	 */
+	private void renormalizeCoordinates() {
+		int xOffset = 0;
+		int yOffset = 0;
+		for (Square square : squares) {
+			xOffset = Math.max(xOffset, - square.getCoordinates().getRow());
+			yOffset = Math.max(yOffset, - square.getCoordinates().getCol());
+		}
+		for (Square square : squares) {
+			int newX = square.getCoordinates().getRow() + xOffset;
+			int newY = square.getCoordinates().getCol() + yOffset;
+			square.setCoordinates(new Coordinate(newX, newY));
 		}
 	}
 	

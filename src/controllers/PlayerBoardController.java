@@ -3,6 +3,7 @@ package controllers;
 import java.util.Random;
 
 import models.Board;
+import models.Coordinate;
 import models.Level;
 import models.LevelType;
 import models.LightningBoardSquareLogic;
@@ -22,13 +23,15 @@ import views.PieceView;
  */
 public class PlayerBoardController extends java.awt.event.MouseAdapter {
 	protected GameScreen gamescreen;
-	protected Square square;
 	protected Level level;
+	int row;
+	int col;
 		
-	public PlayerBoardController(GameScreen gamescreen, Level level, Square square){
+	public PlayerBoardController(GameScreen gamescreen, Level level, int row, int col){
 		this.gamescreen = gamescreen;
-		this.square = square;
 		this.level = level;
+		this.row = row;
+		this.col = col;
 	}
 	
 	public void mouseClicked(java.awt.event.MouseEvent me){
@@ -39,20 +42,22 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 		// If no dragging piece, check and see if there's a piece at this point on the board.
 		// If so, start dragging that piece.
 		if (p == null) {
-			Piece coveringPiece = b.getPieceAt(square.getCoordinates().getRow(), square.getCoordinates().getCol());
-			if (coveringPiece == null) {
-				return;
-			} else {
-				b.removePiece(coveringPiece);
-				gamescreen.setActiveDraggingPiece(coveringPiece);
+			if (b.getSquareAt(row, col) != null) {
+				Piece coveringPiece = b.getPieceAt(row, col);
+				if (coveringPiece == null) {
+					return;
+				} else {
+					b.removePiece(coveringPiece);
+					gamescreen.setActiveDraggingPiece(coveringPiece);
+				}
 			}
 		} else {
 			int markedSquares = 0;
 			// Place the piece if it's valid. If it worked, tell the game screen to release the widget
 			if(level.getLvlType() == LevelType.LIGHTNING) {
 				for (Square s : p.getPiece().getSquares()) {
-					int squareX = square.getCoordinates().getRow() + s.getCoordinates().getRow();
-					int squareY = square.getCoordinates().getCol() + s.getCoordinates().getCol();
+					int squareX = row + s.getCoordinates().getRow();
+					int squareY = col + s.getCoordinates().getCol();
 					if (((squareX >= 0 && squareX < b.getRows())&& (squareY >= 0 && squareY < b.getColumns())) 
 							&& level.getBoard().getSquareAt(squareX, squareY) != null) {
 						LightningBoardSquareLogic lsbl = (LightningBoardSquareLogic)level.getBoard().getSquareAt(squareX, squareY).getSquareLogic();
@@ -62,8 +67,7 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 					}
 				}
 			}
-			if (level.getBoard().addPiece(gamescreen.getActiveDraggingWidget().getPiece(), square.getCoordinates())) {
-				Level originalLevel = gamescreen.getOriginalLevel(); // in case level was won
+			if (level.getBoard().addPiece(gamescreen.getActiveDraggingWidget().getPiece(), new Coordinate(row, col))) {
 				gamescreen.releaseActiveDraggingWidget();
 				if(level.getLvlType() == LevelType.LIGHTNING) {
 					Random rand = new Random();
@@ -71,28 +75,19 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 					gamescreen.getBullpen().addPiece(pieces[rand.nextInt(pieces.length -1)]);
 					gamescreen.getBullpen().addPiece(pieces[rand.nextInt(pieces.length -1)]);
 					gamescreen.getBullpen().addPiece(pieces[rand.nextInt(pieces.length -1)]);
-					LightningLevelLogic logic = ((LightningLevelLogic) originalLevel.getLevelLogic());
+					LightningLevelLogic logic = ((LightningLevelLogic) gamescreen.getLevel().getLevelLogic());
 					for (int i = 0; i < markedSquares; i++) {
 						logic.decrementUnmarkedSquares();
 					}
 					if (logic.getUnmarkedSquares() == 0) {
-						originalLevel.setNumberOfStars(3);
-						saveStars(originalLevel);
+						saveStars(3);
 						gamescreen.endGame();
 					}
 					else if (logic.getUnmarkedSquares() <= 6 && logic.getUnmarkedSquares() > 0) {
-						originalLevel.setNumberOfStars(2);
-						saveStars(originalLevel);							
+						saveStars(2);							
 					}
 					else if (logic.getUnmarkedSquares() <= 12 && logic.getUnmarkedSquares() > 6) {
-						originalLevel.setNumberOfStars(1);
-						saveStars(originalLevel);
-					}
-					else {
-						level.setHasWon(false);
-						originalLevel.setNumberOfStars(0);
-						SaveLevelController saveLevelController = new SaveLevelController(level);
-						saveLevelController.saveLevel();
+						saveStars(1);
 					}
 					
 				}
@@ -102,25 +97,15 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 						logic.decrementRemainingMoves();
 					}
 					gamescreen.updateMovesDisplay();
-					int totalNumPieces = level.getBullpen().getNumberOfPieces() + gamescreen.getPiecesOnBoard().size();
-					if (level.getBoard().getPieces().size() == totalNumPieces) {
-						originalLevel.setNumberOfStars(3);
-						saveStars(originalLevel);
+					if (gamescreen.getBullpen().getNumPieces() == 0) {
+						saveStars(3);
 						gamescreen.endGame();
 					}
-					else if (level.getBoard().getPieces().size() == totalNumPieces - 1) {
-						originalLevel.setNumberOfStars(2);
-						saveStars(originalLevel);
+					else if (gamescreen.getBullpen().getNumPieces() == 1) {
+						saveStars(2);
 					}
-					else if (level.getBoard().getPieces().size() == totalNumPieces - 2) {
-						originalLevel.setNumberOfStars(1);
-						saveStars(originalLevel);
-					}
-					else {
-						level.setHasWon(false);
-						originalLevel.setNumberOfStars(0);
-						SaveLevelController saveLevelController = new SaveLevelController(level);
-						saveLevelController.saveLevel();
+					else if (gamescreen.getBullpen().getNumPieces() == 2) {
+						saveStars(1);
 					}
 					if (((PuzzleLevelLogic)level.getLevelLogic()).getRemainingMoves() == 0) {
 						gamescreen.endGame();
@@ -130,23 +115,14 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 					ReleaseLevelLogic logic = ((ReleaseLevelLogic)level.getLevelLogic());
 					int  numUnreleasedSets = logic.getNumberOfUnreleasedSets();
 					if (numUnreleasedSets == 0) {
-						originalLevel.setNumberOfStars(3);
-						saveStars(originalLevel);
+						saveStars(3);
 						gamescreen.endGame();
 					}
 					else if (numUnreleasedSets == 1) {
-						originalLevel.setNumberOfStars(2);
-						saveStars(originalLevel);
+						saveStars(2);
 					}
 					else if (numUnreleasedSets == 2) {
-						originalLevel.setNumberOfStars(1);
-						saveStars(originalLevel);
-					}
-					else {
-						level.setHasWon(false);
-						originalLevel.setNumberOfStars(0);
-						SaveLevelController saveLevelController = new SaveLevelController(level);
-						saveLevelController.saveLevel();
+						saveStars(1);
 					}
 					
 				}
@@ -154,9 +130,15 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 		}
 	}
 
-	private void saveStars(Level level) {
+	private void saveStars(int numStars) {
+		System.out.println(numStars);
+		Level originalLevel = gamescreen.getOriginalLevel(); // in case level was won
+		originalLevel.setNumberOfStars(numStars);
+		originalLevel.setHasWon(true);
+		level.setNumberOfStars(numStars);
 		level.setHasWon(true);
-		SaveLevelController saveLevelController = new SaveLevelController(level);
+		SaveLevelController saveLevelController = new SaveLevelController(originalLevel);
 		saveLevelController.saveLevel();
+		gamescreen.updateStarsDisplay();
 	}
 }

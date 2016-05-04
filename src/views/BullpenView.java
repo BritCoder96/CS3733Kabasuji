@@ -148,4 +148,12 @@ public class BullpenView extends JPanel {
 	public int getScrollOffset() {
 		return scrollingPanel.getY();
 	}
+	
+	/**
+	 * Get number of pieces in the bullpen view
+	 * @return the number of pieces in this view
+	 */
+	public int getNumPieces() {
+		return pieces.size();
+	}
 }
