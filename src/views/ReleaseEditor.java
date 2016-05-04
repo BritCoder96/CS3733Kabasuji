@@ -115,8 +115,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		
 		board = level.getBoard();
 		
-		// TODO: probably nothing
-		ell = new ReleaseLevelLogic();
+		ell = (ReleaseLevelLogic) level.getLevelLogic();
 		
 		this.level = level;
 		
@@ -328,11 +327,23 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		this.editMode = em;
 	}
 	
+	/** sets the dragging piece 
+	 * 
+	 * @param the piece to drag
+	 */
 	public void setDraggingPiece(Piece p) {
 		setDraggingPiece(boardPieceViews.get(p));
 		
 	}
 
+	/**
+	 * Gets the hint button
+	 * @return the hintbutton
+	 */
+	public JButton getBtnHint() {
+		return btnHint;
+	}
+	
 	@Override
 	public void setDraggingPiece(PieceView pv) {
 		draggingPiece = pv;

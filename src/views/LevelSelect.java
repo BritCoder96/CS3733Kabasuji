@@ -225,6 +225,14 @@ public class LevelSelect extends JPanel {
 	}
 	
 	/**
+	 * gets the reset button
+	 * @return the reset button
+	 */
+	public JButton getBtnReset() {
+		return btnReset;
+	}
+	
+	/**
 	 * clears all the levels
 	 */
 	public void clearLevels() {

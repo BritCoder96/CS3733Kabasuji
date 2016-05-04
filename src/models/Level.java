@@ -138,11 +138,9 @@ public class Level {
 	}
 	
 	/**
-	 * resets the number of stars for this level to zero
-	 * 
+	 * Resets the number of stars for this level to zero.
 	 */
 	public void clearStars() {
-		// Number of stars can only go up
 		this.numberOfStars = 0;
 	}
 	
@@ -257,7 +255,7 @@ public class Level {
 			lvlLogicCopy = new LightningLevelLogic(elll.getTotalSquares(), elll.getAllottedSeconds());
 			break;
 		case RELEASE:
-			lvlLogicCopy = new ReleaseLevelLogic(); // nothing needed to copy here
+			lvlLogicCopy = new ReleaseLevelLogic();
 			break;
 		default:
 			throw new IllegalStateException("level has unknown type " + lvlType);
@@ -287,6 +285,9 @@ public class Level {
 					copyLogic.setHint(board.getSquares()[r][c].getSquareLogic().getIsHint());
 				}
 			}
+		}
+		if (lvlType == LevelType.RELEASE) {
+			((ReleaseLevelLogic) copy.getLevelLogic()).fillSets(copy.getBoard());
 		}
 		return copy;
 	}

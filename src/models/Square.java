@@ -84,4 +84,8 @@ public class Square {
 	public void setSquareLogic(ExtraBoardSquareLogic squareLogic) {
 		this.squareLogic = squareLogic;
 	}
+	
+	public SquareTypes getType() {
+		return type;
+	}
 }
