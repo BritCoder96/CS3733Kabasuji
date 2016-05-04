@@ -81,6 +81,29 @@ public class SaveFile {
     public void addLevel(Level level) {
         levels.add(level);
     }
+    
+    /**
+     * Destroys a passed-in level.
+     *
+     * @param level The level to be annihilated.
+     */
+    public void removeLevel(Level level) {
+        levels.remove(level);
+    }
+    
+    /**
+     * Checks if a passed-in level exists.
+     *
+     * @param level The level to be checked.
+     */
+    public boolean levelExists(Integer level) {
+        for(Level i : levels){
+        	if(i.getLevelNumber() == level)
+        		return true;
+        }
+        
+        return false;
+    }
 	
 	/**
 	 * Gets the name of the current save file.

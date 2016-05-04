@@ -23,8 +23,8 @@ import models.Square;
  *
  */
 public class GameBoardView extends JPanel {
-	public static final Color lighterGray = new Color(230, 230, 230);
-	public static final Color darkerGray = new Color(200, 200, 200);
+	public static final Color lighterGray = new Color(180, 180, 180);
+	public static final Color darkerGray = new Color(140, 140, 140);
 	
 	int rows;
 	int cols;

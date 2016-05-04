@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -19,6 +20,7 @@ import models.ReleaseLevelLogic;
 import models.SaveFile;
 import models.Square;
 import models.SquareTypes;
+import models.ReleaseBoardSquareLogic;
 
 import views.KabasujiFrame;
 import views.LevelSelect;
@@ -145,12 +147,28 @@ public class MoveToLevelSelectController implements ActionListener {
 			for (; numberOfBoardCols < rowEntries.length; numberOfBoardCols++) {
 				if (rowEntries[numberOfBoardCols].equals(" ")) {
 				}
-				// TODO: alternating colors, this can probably be more concise
+				// TODO: alternating colors?, this can probably be more concise
 				else if (rowEntries[numberOfBoardCols].equals("x")) {
 					squares.add(new Square(0x808080, lvlType == LevelType.LIGHTNING ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols));
 				}
 				else {
-					squares.add(new Square(0x808080, SquareTypes.RELEASEBOARDSQUARE, numberOfBoardRows, numberOfBoardCols));
+					// TODO: this can DEFINATELY be more concise
+					Square releaseBoardSquare = new Square(0x808080, SquareTypes.RELEASEBOARDSQUARE, numberOfBoardRows, numberOfBoardCols);
+					((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setNumber(Integer.parseInt(rowEntries[numberOfBoardCols].substring(0, 0)));
+					switch (rowEntries[numberOfBoardCols].substring(1, 1)) {
+					case "R":
+						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.RED);
+						break;
+					case "G":
+						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.GREEN);
+						break;
+					case "Y":
+						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.YELLOW);
+						break;
+					default:
+						throw new IllegalArgumentException();
+					}
+					squares.add(releaseBoardSquare);
 				}
 			}
 		}

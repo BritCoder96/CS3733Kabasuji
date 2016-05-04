@@ -2,6 +2,8 @@ package views;
 
 import java.awt.Container;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
@@ -43,6 +45,7 @@ public class KabasujiFrame extends JFrame {
 	 * Pops the backstack, sets the content pane to the last one, then makes that pane visible.
 	 */
 	public void returnToLastContentPane() {
+		getContentPane().setVisible(false);
 		super.setContentPane(backMgr.popContainerAndPeek());
 		getContentPane().setVisible(true);
 	}

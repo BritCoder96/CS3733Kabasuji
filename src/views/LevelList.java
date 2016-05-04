@@ -28,8 +28,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * The screen that shows the list of existing levels and allows you to select one to edit or delete.
@@ -53,6 +55,9 @@ public class LevelList extends JPanel {
 	/** The button that deletes an existing level. */
 	JButton btnDelete;
 	
+	/** The levels on the screen */
+	ArrayList<LevelEntry> entries = new ArrayList<LevelEntry>();
+	
 	/** The button that creates a new level. */
 	private JButton btnNew;
 	
@@ -72,7 +77,10 @@ public class LevelList extends JPanel {
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
+		// TODO: get it to scroll
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportView(panel);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(150, 100, 500, 350);
 		add(scrollPane);
 
@@ -110,11 +118,20 @@ public class LevelList extends JPanel {
 	 * Load the level given by the current index and refresh the level info display. 
 	 */
 	private void updateLevelEntries() {
+		int addedLevels = 0;
+		
 		for (int i = 0, length = SaveFile.instance().getNumberOfLevels(); i < length; i++) {
-			LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
-			levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
-			panel.add(levelEntry);
-			levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
+			try{
+				LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
+				entries.add(levelEntry);
+				levelEntry.setBounds(10, 10 + 70 * (addedLevels), 463, 50);
+				panel.add(levelEntry);
+				levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
+				addedLevels += 1;
+			}
+			catch(IllegalArgumentException e){
+				
+			}
 		}
 	}
 
@@ -157,4 +174,21 @@ public class LevelList extends JPanel {
 	public JButton getBtnNew() {
 		return btnNew;
 	}
+	
+	public void reload(){
+		removeEntries();
+		updateLevelEntries();
+		toggledLevelEntry = null;
+		revalidate();
+		repaint();
+	}
+
+	private void removeEntries() {
+		for(LevelEntry i : entries){
+			panel.remove(i);
+		}
+		
+		entries = new ArrayList<LevelEntry>();
+	}
+
 }

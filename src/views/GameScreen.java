@@ -2,52 +2,32 @@ package views;
 
 import models.Level;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.event.ActionEvent;
-
 import javax.swing.JLabel;
 
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Rectangle;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import controllers.BullpenGameController;
 import controllers.EndGameController;
 import controllers.MoveDraggingPieceController;
+import controllers.GameScreenPieceOrientationController;
 import main.KabasujiMain;
-import models.Level;
 import models.LevelType;
 import models.LightningLevelLogic;
 import models.Piece;
 import models.PuzzleLevelLogic;
 
-import javax.swing.border.LineBorder;
-
 import java.awt.Font;
 
 /**
- * The screen that the game is shown in. At the moment basically just a mockup
+ * The screen that the game is shown in.
  * @author bhuchley
  * @author bjbenson
  */
@@ -85,6 +65,7 @@ public class GameScreen extends JPanel {
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
+		this.addKeyListener(new GameScreenPieceOrientationController(this));
 		
 		// Due to the fact that the level is used to keep track of the pieces on the board,
 		// we need to clone the level for this screen.
@@ -98,7 +79,6 @@ public class GameScreen extends JPanel {
 		// listener will handle all mouse motion events
 		setEnabled(true);
 		this.addMouseMotionListener(new MoveDraggingPieceController(this));
-		
 		boardView = new GameBoardView(this, this.level.getBoard());
 		boardView.setBounds(10, 88, 356, 356);
 		
@@ -148,6 +128,8 @@ public class GameScreen extends JPanel {
 			movesLeftDisplay.setBounds(517, 552, 186, 29);
 			add(movesLeftDisplay);
 		}
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 	
 	 class DecrementTimer extends TimerTask {
@@ -201,6 +183,8 @@ public class GameScreen extends JPanel {
 	public void setActiveDraggingPiece(Piece p) {
 		draggingWidget = viewsForLevelPiecesOnBoard.get(p);
 		setComponentZOrder(draggingWidget, 0);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 	
 	public void setActiveDraggingPiece(PieceView pv) {
@@ -208,6 +192,8 @@ public class GameScreen extends JPanel {
 		viewsForLevelPiecesOnBoard.put(pv.getPiece(), pv);
 		add(pv);
 		setComponentZOrder(pv, 0);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 	}
 	
 	public boolean isOptimizedDrawingEnabled() {
@@ -267,6 +253,14 @@ public class GameScreen extends JPanel {
 	 */
 	public void updateStarsDisplay() {
 		starsDisplay.setNumStarsFilled(level.getNumberOfStars());
+	}
+	
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		if (lightningTimer != null && ! visible) {
+			lightningTimer.cancel();
+		}
 	}
 	
 }

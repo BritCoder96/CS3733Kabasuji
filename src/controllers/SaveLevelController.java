@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,6 +12,7 @@ import models.LightningLevelLogic;
 import models.Piece;
 import models.PuzzleLevelLogic;
 import models.ReleaseBoardSquareLogic;
+import models.SaveFile;
 import models.Square;
 
 /**
@@ -41,6 +43,9 @@ public class SaveLevelController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		saveLevel();
+		if(! SaveFile.instance().levelExists(level.getLevelNumber())){
+			SaveFile.instance().addLevel(level);
+		}
 	}
 	
 	/**
@@ -66,7 +71,9 @@ public class SaveLevelController implements ActionListener {
 	 * @return the serialized form of the level
 	 */
 	public static String serializeLevel(Level level) {
+		// write level number/name and level type
 	    String data = level.getLevelNumber() + "\n" + level.getLvlType() + "\n\n";
+	    
 	    int numRows = level.getBoard().getRows();
 	    int numCols = level.getBoard().getColumns();
 	    String[][] board = new String[numRows][numCols];
@@ -75,8 +82,25 @@ public class SaveLevelController implements ActionListener {
 	    		Square square = level.getBoard().getSquares()[r][c];
 	    		if (square != null) {
 	    			if (square.getSquareLogic() instanceof ReleaseBoardSquareLogic) {
-	    				board[r][c] = "" + (((ReleaseBoardSquareLogic) square.getSquareLogic()).getNumber()
-	    						+ ((ReleaseBoardSquareLogic) square.getSquareLogic()).getColorOfNumber().toString());
+	    				ReleaseBoardSquareLogic releaseLogic = (ReleaseBoardSquareLogic) square.getSquareLogic();
+	    				
+	    				String colorChar;
+	    				switch (releaseLogic.getColorOfNumber().getRGB()) {
+	    				case -65536:
+	    					colorChar = "R";
+	    					break;
+	    				case -16711936:
+	    					colorChar = "G";
+	    					break;
+	    				case -256:
+	    					colorChar = "Y";
+	    					break;
+	    				default:
+	    					// should never get here
+	    					colorChar = "";
+	    				}
+	    				
+	    				board[r][c] = releaseLogic.getNumber() + colorChar;
 	    			}
 	    			else {
 	    				board[r][c] = "x";

@@ -79,21 +79,15 @@ public class Piece {
 	 * @param direction the direction to rotate the piece.
 	 */
 	public void rotatePiece(Directions direction) {
-		if (direction == Directions.SOUTH || direction == Directions.WEST) {
-			for (Square square : squares) {
-				Square last = square.attachedSquares[square.attachedSquares.length-1];
-				System.arraycopy(square.attachedSquares, 0, square.attachedSquares, 1, square.attachedSquares.length-1 );
-				squares[0] = last;
+		for (Square square : squares) {
+			if (direction == Directions.SOUTH || direction == Directions.WEST) {
+				square.setCoordinates(new Coordinate (-square.getCoordinates().getCol(), square.getCoordinates().getRow()));
+			}
+			else {
+				square.setCoordinates(new Coordinate (square.getCoordinates().getCol(), -square.getCoordinates().getRow()));
 			}
 		}
-	
-		else {
-			for (Square square : squares) {
-				Square start = squares[0];
-			    System.arraycopy(square.attachedSquares, 1, square.attachedSquares, 0, square.attachedSquares.length - 1);
-			    squares[square.attachedSquares.length - 1] = start;
-			}
-		}
+		renormalizeCoordinates();
 	}
 	
 	/**
@@ -105,17 +99,32 @@ public class Piece {
 	public void flipPiece(Directions direction) {
 		if (direction == Directions.SOUTH || direction == Directions.NORTH ) {
 			for (Square square : squares) {
-				Square temp = square.attachedSquares[0];
-				square.attachedSquares[0] = square.attachedSquares[2];
-				square.attachedSquares[2] = temp;
+				square.setCoordinates(new Coordinate (square.getCoordinates().getRow(), -square.getCoordinates().getCol()));
 			}
 		}
 		else {
 			for (Square square : squares) {
-				Square temp = square.attachedSquares[1];
-				square.attachedSquares[1] = square.attachedSquares[3];
-				square.attachedSquares[3] = temp;
+				square.setCoordinates(new Coordinate (-square.getCoordinates().getRow(), square.getCoordinates().getCol()));
 			}
+		}
+		renormalizeCoordinates();
+	}
+	
+	/**
+	 * Moves all the squares so that no square has negative coordinates and there
+	 * exists a square at row 0 and a square at column 0.
+	 */
+	private void renormalizeCoordinates() {
+		int xOffset = 0;
+		int yOffset = 0;
+		for (Square square : squares) {
+			xOffset = Math.max(xOffset, - square.getCoordinates().getRow());
+			yOffset = Math.max(yOffset, - square.getCoordinates().getCol());
+		}
+		for (Square square : squares) {
+			int newX = square.getCoordinates().getRow() + xOffset;
+			int newY = square.getCoordinates().getCol() + yOffset;
+			square.setCoordinates(new Coordinate(newX, newY));
 		}
 	}
 	
