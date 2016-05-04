@@ -119,6 +119,9 @@ public class EditorBoardView extends JPanel {
 					if(bsquares[r][c].getSquareLogic().getIsHint()){
 						squares[r][c].setBackground(hintColor);
 					}
+					else {
+						squares[r][c].setBackground((((r+c)%2)==0) ? lighterGray : darkerGray);
+					}
 				}
 				squares[r][c].repaint();
 				squareControllers[r][c].setBoard(board);

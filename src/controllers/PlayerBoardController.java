@@ -16,10 +16,12 @@ import views.GameScreen;
 import views.PieceView;
 
 /**
+ * Deals with moving pieces around the board and ending the game.
  * 
  * @author ejcerini
  * @author bhuchley
  * @author bjbenson
+ * @author sthuynh
  */
 public class PlayerBoardController extends java.awt.event.MouseAdapter {
 	protected GameScreen gamescreen;
@@ -41,7 +43,7 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 		
 		// If no dragging piece, check and see if there's a piece at this point on the board.
 		// If so, start dragging that piece.
-		if (p == null) {
+		if (p == null && level.getLvlType() != LevelType.RELEASE) {
 			if (b.getSquareAt(row, col) != null) {
 				Piece coveringPiece = b.getPieceAt(row, col);
 				if (coveringPiece == null) {
@@ -132,7 +134,10 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 			}
 		}
 	}
-
+	/** 
+	 * Saves the stars and the winning state of the level on level end to a file.
+	 * @param numStars the number of stars the player acheived.
+	 */
 	private void saveStars(int numStars) {
 		Level originalLevel = gamescreen.getOriginalLevel(); // in case level was won
 		originalLevel.setNumberOfStars(numStars);

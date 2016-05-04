@@ -2,6 +2,8 @@ package models;
 
 /**
  * Extra square logic exclusive to squares for a lightning level's board.
+ * 
+ * @author sthuynh
  */
 public class LightningBoardSquareLogic extends ExtraBoardSquareLogic {
 	/** Indicates whether the lightning board square has been marked after being covered by a piece. */

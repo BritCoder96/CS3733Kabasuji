@@ -30,6 +30,7 @@ import views.Title;
  * Level Select Screen.
  * 
  * @author bhuchley
+ * @author sthuynh
  */
 public class MoveToLevelSelectController implements ActionListener {
 	KabasujiFrame frame;
@@ -175,12 +176,10 @@ public class MoveToLevelSelectController implements ActionListener {
 							throw new IllegalArgumentException();
 						}
 					}
-					
 					char[] entryData = rowEntries[numberOfBoardCols].toCharArray();
 					if(entryData[entryData.length - 1] == 'H'){
 						releaseBoardSquare.getSquareLogic().setHint(true);
 					}
-					
 					squares.add(releaseBoardSquare);
 				}
 			}

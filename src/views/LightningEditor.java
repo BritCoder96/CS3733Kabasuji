@@ -36,6 +36,7 @@ import javax.swing.ImageIcon;
  * @author bhuchley
  * @author ejcerini
  * @author bjbenson
+ * @author sthuynh
  */
 public class LightningEditor extends JPanel implements LevelModifiedListener, LevelSetListener, LevelEditor {
 

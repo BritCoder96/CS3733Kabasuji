@@ -5,12 +5,11 @@ import java.util.HashSet;
 import views.KabasujiFrame;
 
 /**
- * 
  * The main Level class represents a level and all of it's attributes. 
  * 
  * @author bjbenson
  * @author jberry
- *
+ * @author sthuynh
  */
 public class Level {
 	/** The board for the level. */

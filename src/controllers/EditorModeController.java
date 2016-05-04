@@ -10,7 +10,12 @@ import models.EditorMode;
 import views.EditorBoardView;
 import views.LevelEditor;
 import views.LevelModifiedListener;
-
+/**
+ * Changes the editor mode (i.e. hints, undo, redo, etc.)
+ * 
+ * @author ejcerini
+ *
+ */
 public class EditorModeController implements ActionListener {
 
 	EditorMode em;

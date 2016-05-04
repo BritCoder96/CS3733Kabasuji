@@ -2,6 +2,8 @@ package models;
 
 /**
  * Extra level logic exclusive to puzzle levels.
+ * 
+ * @author sthuynh
  */
 public class PuzzleLevelLogic implements ExtraLevelLogic{
 	/** Number of pieces present in the level. */

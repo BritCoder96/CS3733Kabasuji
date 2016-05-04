@@ -2,7 +2,12 @@ package main;
 
 import java.awt.Container;
 import java.util.Stack;
-
+/**
+ * Deals with the state of the view.
+ * 
+ * @author bhuchley
+ *
+ */
 public class PanelBackManager {
 	Stack<Container> panels;
 	

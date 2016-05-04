@@ -4,6 +4,8 @@ import java.awt.Color;
 
 /**
  * Extra square logic exclusive to squares for a lightning level's board.
+ * 
+ * @author sthuynh
  */
 public class ReleaseBoardSquareLogic extends ExtraBoardSquareLogic {
 	/**

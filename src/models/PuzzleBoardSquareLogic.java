@@ -2,6 +2,8 @@ package models;
 
 /**
  * Extra square logic exclusive to squares for a puzzle level's board.
+ * 
+ * @author sthuynh
  */
 public class PuzzleBoardSquareLogic extends ExtraBoardSquareLogic {
 	

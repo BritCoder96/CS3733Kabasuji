@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
  * The screen from which the player can select which unlocked level to play.
  * @author bhuchley
  * @author bjbenson
+ * @author sthuynh
  */
 public class LevelSelect extends JPanel {
 	
