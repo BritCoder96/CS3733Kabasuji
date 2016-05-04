@@ -1,14 +1,5 @@
 package views;
 
-import models.SaveFile;
-
-import java.awt.EventQueue;
-
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import main.KabasujiMain;
 import models.Piece;
 
@@ -16,15 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JSpinner;
 
 /**
  * The splash screen for the game.
@@ -65,14 +49,9 @@ public class Title extends JPanel {
 		
 		btnPlay = new JButton("Play");
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnPlay.setBounds(332, 244, 120, 45);
+		btnPlay.setBounds(331, 259, 123, 45);
 		add(btnPlay);
 		btnPlay.addActionListener(new controllers.MoveToLevelSelectController(frame, this));
-		
-		JButton btnExit = new JButton("Exit");
-		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnExit.setBounds(332, 302, 120, 45);
-		add(btnExit);
 		
 		JLabel lblEuphorbus = new JLabel("Euphorbus");
 		lblEuphorbus.setFont(new Font("Tahoma", Font.PLAIN, 30));

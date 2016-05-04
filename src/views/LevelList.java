@@ -98,10 +98,6 @@ public class LevelList extends JPanel {
 		btnNew.addActionListener(new CreateNewLevelController(frame, this));
 		
 		btnEdit = new JButton("Edit");
-		btnEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(160, 480, 120, 45);
 		add(btnEdit);

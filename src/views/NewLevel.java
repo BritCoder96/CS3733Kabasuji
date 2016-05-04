@@ -86,7 +86,6 @@ public class NewLevel extends JPanel {
 		txtInsertNameHere.setBounds(339, 95, 156, 22);
 		add(txtInsertNameHere);
 		txtInsertNameHere.setColumns(10);
-		txtInsertNameHere.addActionListener(new UpdateLevelViewController(this, null));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
@@ -124,7 +123,6 @@ public class NewLevel extends JPanel {
 		textField.setBounds(290, 140, 116, 22);
 		panel.add(textField);
 		textField.setColumns(10);
-		textField.addActionListener(new UpdateLevelViewController(this, null));
 		
 		this.lblTimeLimit = new JLabel("Time Limit:");
 		lblTimeLimit.setBounds(159, 135, 119, 32);
@@ -141,7 +139,6 @@ public class NewLevel extends JPanel {
 		txtRows.setBounds(402, 368, 52, 22);
 		add(txtRows);
 		txtRows.setColumns(10);
-		txtRows.addActionListener(new UpdateLevelViewController(this, null));
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -206,11 +203,6 @@ public class NewLevel extends JPanel {
 				
 				break;
 		}
-	/*	
-		btnGo.removeActionListener(btnGoController);
-		btnGoController = new MoveToEditorController(new Level(getRows(), Integer.parseInt(getName()), getLevelType(), getName(), true), this, frame);
-		btnGo.addActionListener(btnGoController);
-	*/
 	}
 	
 	public int getRows() {
