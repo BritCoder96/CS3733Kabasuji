@@ -156,19 +156,23 @@ public class MoveToBuilderLevelListController implements ActionListener {
 				else {
 					// TODO: this can DEFINATELY be more concise
 					Square releaseBoardSquare = new Square(0x808080, SquareTypes.RELEASEBOARDSQUARE, numberOfBoardRows, numberOfBoardCols);
-					((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setNumber(Integer.parseInt(rowEntries[numberOfBoardCols].substring(0, 0)));
-					switch (rowEntries[numberOfBoardCols].substring(1, 1)) {
-					case "R":
-						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.RED);
-						break;
-					case "G":
-						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.GREEN);
-						break;
-					case "Y":
-						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.YELLOW);
-						break;
-					default:
-						throw new IllegalArgumentException();
+					String substring = rowEntries[numberOfBoardCols].substring(0, 0);
+					if (substring == "1" || substring == "2" || substring == "3"|| substring == "4" || substring == "5" || substring == "6") {
+						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setNumber(Integer.parseInt(substring));
+				
+						switch (rowEntries[numberOfBoardCols].substring(1, 1)) {
+						case "R":
+							((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.RED);
+							break;
+						case "G":
+							((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.GREEN);
+							break;
+						case "Y":
+							((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.YELLOW);
+							break;
+						default:
+							throw new IllegalArgumentException();
+						}
 					}
 					squares.add(releaseBoardSquare);
 				}

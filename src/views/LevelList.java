@@ -175,6 +175,14 @@ public class LevelList extends JPanel {
 		return btnNew;
 	}
 	
+	/**
+	 * Gets the level panel at the index of the  panel
+	 * @return the level panel
+	 */
+	public LevelEntry getLevelPanel(int index) {
+		return entries.get(index);
+	}
+	
 	public void reload(){
 		removeEntries();
 		updateLevelEntries();
