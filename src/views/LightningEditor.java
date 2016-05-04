@@ -86,7 +86,10 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 		
 		board = level.getBoard();
 		
-		ell =((LightningLevelLogic) level.getLevelLogic()).getAllottedSeconds() < 0 ? new LightningLevelLogic(board.getNumberOfSquares(), timeLimit) : (LightningLevelLogic) level.getLevelLogic();
+		if (((LightningLevelLogic) level.getLevelLogic()).getAllottedSeconds() < 0) {
+			level.setLevelLogic(new LightningLevelLogic(board.getNumberOfSquares(), timeLimit));
+		}
+		ell =(LightningLevelLogic) level.getLevelLogic();
 		
 		this.level = level;
 		
@@ -197,6 +200,7 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 			connector = connector + "0";
 		}
 		timeLimitLabel.setText(minutes + connector + seconds);
+		System.out.println(((LightningLevelLogic) level.getLevelLogic()).getAllottedSeconds());
 	}
 
 	@Override

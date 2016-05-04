@@ -30,6 +30,7 @@ import models.Board;
 import models.EditorMode;
 import models.Level;
 import models.LevelType;
+import models.LightningLevelLogic;
 import models.Piece;
 import models.PuzzleLevelLogic;
 
@@ -99,8 +100,6 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 	 * @param moveLimit 
 	 */
 	public PuzzleEditor(KabasujiFrame frame, Level level, int moveLimit) {
-
-		
 		this.frame = frame;
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -116,7 +115,10 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		
 		board = level.getBoard();
 		
-		ell =((PuzzleLevelLogic) level.getLevelLogic()).getAllottedMoves() < 0 ? new PuzzleLevelLogic(0, moveLimit) : (PuzzleLevelLogic) level.getLevelLogic();
+		if (((PuzzleLevelLogic) level.getLevelLogic()).getAllottedMoves() < 0) {
+			level.setLevelLogic(new PuzzleLevelLogic(0, moveLimit));
+		}
+		ell = (PuzzleLevelLogic) level.getLevelLogic();
 		
 		this.level = level;
 		
