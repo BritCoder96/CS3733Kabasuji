@@ -3,6 +3,9 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JPanel;
+
+import models.Level;
 import models.LevelType;
 import views.KabasujiFrame;
 import views.LightningEditor;
@@ -12,26 +15,26 @@ import views.ReleaseEditor;
 
 
 /**
- * Controller for drawing the inputs in the New Level screen
- * and using them to open the level editor with the desired
- * parameters.
+ * Controller to open the level editor with the desired parameters.
  * 
  * @author ejcerini
- *
  */
 public class MoveToEditorController implements ActionListener{
 	
-	NewLevel newlevel;
+	Level level;
+	JPanel previousScreen;
 	KabasujiFrame frame;
 	
 	/**
 	 * The constructor for a MoveToEditorController 
 	 * 
-	 * @param nlevel - the previous screen, in this case the New Level screen
+	 * @param level
+	 * @param previousScreen - the previous screen, in this case the New Level screen
 	 * @param frame - The static frame that is being passed along throughout the application
 	 */
-	public MoveToEditorController(NewLevel nlevel, KabasujiFrame frame){
-		this.newlevel = nlevel;
+	public MoveToEditorController(Level level, JPanel previousScreen, KabasujiFrame frame){
+		this.level = level;
+		this.previousScreen = previousScreen;
 		this.frame = frame;
 	}
 	
@@ -42,40 +45,37 @@ public class MoveToEditorController implements ActionListener{
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
-		//Receives the type of level the user wishes to create
-		LevelType leveltype = newlevel.getLevelType();
+		//Receives the type of level the user wishes to create/edit
+		LevelType leveltype = level.getLvlType();
 		
 		//Check what kind it is.
 		switch(leveltype){
 		
-			//If the user wishes to create a puzzle level
+			//If the user wishes to create/edit a puzzle level
 			case PUZZLE:
 				//Hide this screen
-				newlevel.setVisible(false);
-				PuzzleEditor puzzlePanel = new PuzzleEditor(frame, newlevel.getName(), 
-						newlevel.getRows(), newlevel.getCols(), newlevel.getMoveLimit());
+				previousScreen.setVisible(false);
+				PuzzleEditor puzzlePanel = new PuzzleEditor(frame, level);
 				puzzlePanel.setVisible(true);
 				//Load the puzzle editor
 				frame.setContentPane(puzzlePanel);
 				break;
-			
+				
 			//If the user wishes to create a lightning level
 			case LIGHTNING:
 				//Hide this screen
-				newlevel.setVisible(false);
-				LightningEditor lightningPanel = new LightningEditor(frame, newlevel.getName(), 
-						newlevel.getRows(), newlevel.getCols(), newlevel.getTimeLimit());
+				previousScreen.setVisible(false);
+				LightningEditor lightningPanel = new LightningEditor(frame, level);
 				lightningPanel.setVisible(true);
 				//Load the lightning editor
 				frame.setContentPane(lightningPanel);
 				break;
-
+				
 			//If the user wishes to create a release level
 			case RELEASE:
 				//Hide this screen
-				newlevel.setVisible(false);
-				ReleaseEditor releasePanel = new ReleaseEditor(frame, newlevel.getName(), 
-						newlevel.getRows(), newlevel.getCols());
+				previousScreen.setVisible(false);
+				ReleaseEditor releasePanel = new ReleaseEditor(frame, level);
 				releasePanel.setVisible(true);
 				//Load the release editor.
 				frame.setContentPane(releasePanel);

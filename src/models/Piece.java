@@ -40,6 +40,22 @@ public class Piece {
 	}
 	
 	/**
+	 * Creates a new piece that is identical to the given piece.
+	 * @param other the piece to copy
+	 */
+	public Piece(Piece other) {
+		squares = new Square[6];
+		pieceNumber = other.pieceNumber;
+		for (int i = 0; i < 6; i++) {
+			Square s = other.getSquares()[i];
+			int r = s.getCoordinates().getRow();
+			int c = s.getCoordinates().getCol();
+			Square newSquare = new Square(s.color, s.type, r, c);
+			squares[i] = newSquare;
+		}
+	}
+	
+	/**
 	 * Gets the associated number of the piece
 	 * 
 	 * @return the associated number of the piece

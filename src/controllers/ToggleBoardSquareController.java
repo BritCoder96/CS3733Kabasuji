@@ -88,6 +88,7 @@ public class ToggleBoardSquareController extends EditorSquareController {
 	
 	@Override
 	public void setBoard(Board b) {
+		super.setBoard(b);
 		board = b;
 	}
 

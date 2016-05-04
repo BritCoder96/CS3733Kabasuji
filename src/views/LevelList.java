@@ -14,6 +14,7 @@ import controllers.CreateNewLevelController;
 import controllers.GoBackOnePanelController;
 import controllers.MoveToBuilderLevelListController;
 import controllers.MoveToLevelController;
+import controllers.MoveToEditorController;
 import controllers.ToggleLevelEntryController;
 import main.KabasujiMain;
 import models.Level;
@@ -27,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
@@ -52,8 +54,12 @@ public class LevelList extends JPanel {
 	/** The button that deletes an existing level. */
 	JButton btnDelete;
 	
+	/** The levels on the screen */
+	ArrayList<LevelEntry> entries = new ArrayList<LevelEntry>();
+	
 	/** The button that creates a new level. */
 	private JButton btnNew;
+	
 	/**
 	 * Get the existing levels and make the frame to show them.
 	 * @param frame the frame to show the screen in
@@ -110,9 +116,10 @@ public class LevelList extends JPanel {
 	private void updateLevelEntries() {
 		for (int i = 0, length = SaveFile.instance().getNumberOfLevels(); i < length; i++) {
 			LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
+			entries.add(levelEntry);
 			levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
 			panel.add(levelEntry);
-			levelEntry.addMouseListener(new ToggleLevelEntryController(this, levelEntry));
+			levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
 		}
 	}
 
@@ -155,4 +162,18 @@ public class LevelList extends JPanel {
 	public JButton getBtnNew() {
 		return btnNew;
 	}
+	
+	public void reload(){
+		removeEntries();
+		updateLevelEntries();
+	}
+
+	private void removeEntries() {
+		for(LevelEntry i : entries){
+			panel.remove(i);
+		}
+		
+		entries = new ArrayList<LevelEntry>();
+	}
+
 }

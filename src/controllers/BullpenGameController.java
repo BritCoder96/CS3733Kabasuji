@@ -42,10 +42,7 @@ public class BullpenGameController implements MouseListener, MouseMotionListener
 			// If a piece was clicked, then remove it from the bullpen and set it to the dragging piece
 			if (clickedPiece != null) {
 				gameScreen.getLevel().getBullpen().removePiece(clickedPiece.getPiece());
-				bpView.clearPieces();
-				for (Piece p : gameScreen.getLevel().getBullpen().getPieces()) {
-					bpView.addPiece(p);
-				}
+				bpView.removePieceView(clickedPiece);
 				gameScreen.setActiveDraggingPiece(clickedPiece);
 			}
 		} else {

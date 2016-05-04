@@ -104,11 +104,8 @@ public class BullpenView extends JPanel {
 	 */
 	public void removePieceView(PieceView pv) {
 		ArrayList<Piece> piecesCpy = new ArrayList<Piece>();
-		System.out.println(pieces.size());
 		piecesCpy.addAll(pieces);
-		System.out.println(piecesCpy.size());
 		piecesCpy.remove(pv.getPiece());
-		System.out.println(piecesCpy.size());
 		clearPieces();
 		for (Piece p : piecesCpy) {
 			addPiece(p);

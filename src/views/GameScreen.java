@@ -116,14 +116,14 @@ public class GameScreen extends JPanel {
 		bullpen = new BullpenView(boardView.getSquareSize(), bullpenBounds);
 		add(bullpen);
 		for (Piece p : level.getBullpen().getPieces()) {
-			bullpen.addPiece(p);
+			bullpen.addPiece(new Piece(p));
 		}
 		if (level.getLvlType() == LevelType.LIGHTNING) {
 			Random rand = new Random();
 			Piece[] pieces = Piece.allValidPieces;
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
-			bullpen.addPiece(pieces[rand.nextInt(pieces.length -1)]);
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
+			bullpen.addPiece(new Piece(pieces[rand.nextInt(pieces.length -1)]));
 		}
 		BullpenGameController bullpenController = new BullpenGameController(bullpen, this);
 		bullpen.addMouseListener(bullpenController);
