@@ -116,7 +116,6 @@ public class EditorBoardView extends JPanel {
 				squares[r][c].repaint();
 				squareControllers[r][c].setBoard(board);
 			}
-			System.out.println();
 		}
 	}
 	
