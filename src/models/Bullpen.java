@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author sthuynh
  *
  */
-public class Bullpen extends PieceSet {
+public class Bullpen{
 	ArrayList<Piece> pieces;	// TODO: enact pieces.trimToSize() occasionally 
 	int numberOfPieces;
 	

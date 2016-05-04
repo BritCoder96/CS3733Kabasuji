@@ -138,6 +138,14 @@ public class Level {
 	}
 	
 	/**
+	 * Resets the number of stars for this level to zero.
+	 */
+	public void clearStars() {
+		this.numberOfStars = 0;
+	}
+	
+	
+	/**
 	 * Gets the type of the level.
 	 * 
 	 * @return The type of the level.

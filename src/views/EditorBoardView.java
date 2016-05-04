@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controllers.AddHintController;
 import controllers.AddReleaseNumberController;
 import controllers.EditorSquareController;
 import controllers.EditorSquareDragListener;
@@ -28,6 +29,7 @@ import models.Square;
 public class EditorBoardView extends JPanel {
 	public static final Color lighterGray = new Color(180, 180, 180);
 	public static final Color darkerGray = new Color(140, 140, 140);
+	public static final Color hintColor = Color.BLUE;
 	
 	int rows;
 	int cols;
@@ -124,7 +126,7 @@ public class EditorBoardView extends JPanel {
 		case EDIT:
 			return new ToggleBoardSquareController[rows][cols];
 		case HINT:
-			break;
+			return new AddHintController[rows][cols];
 		case NUMBER:
 			return new AddReleaseNumberController[rows][cols];
 		
@@ -139,7 +141,7 @@ public class EditorBoardView extends JPanel {
 		case EDIT:
 			return new ToggleBoardSquareController(square, initialBoard, r, c, listener);
 		case HINT:
-			break;
+			return new AddHintController(square, initialBoard, r, c, listener);
 		case NUMBER:
 			return new AddReleaseNumberController(r, c, square, (ReleaseEditor) listener);
 		}

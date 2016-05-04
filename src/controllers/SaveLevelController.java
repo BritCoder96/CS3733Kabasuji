@@ -100,11 +100,20 @@ public class SaveLevelController implements ActionListener {
 	    					// should never get here
 	    					colorChar = "";
 	    				}
-	    				
-	    				board[r][c] = releaseLogic.getNumber() + colorChar;
+	    				if (square.getSquareLogic().getIsHint()) {
+	    					board[r][c] = releaseLogic.getNumber() + colorChar + " H";
+	    				} 
+	    				else {
+	    					board[r][c] = releaseLogic.getNumber() + colorChar;
+	    				}
 	    			}
 	    			else {
-	    				board[r][c] = "x";
+	    				if (square.getSquareLogic().getIsHint()) {
+		    				board[r][c] = "x H";
+	    				}
+	    				else {
+	    					board[r][c] = "x";
+	    				}
 	    			}
 	    		} else {
 	    			board[r][c] = " ";
