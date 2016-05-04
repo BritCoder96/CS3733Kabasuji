@@ -32,6 +32,7 @@ public class ToggleLevelEntryController implements MouseListener {
 			btnEdit.addActionListener(new MoveToEditorController(levelEntry.getLevel(), (JPanel) levelList, frame));
 			btnEdit.setEnabled(true);
 			btnDelete.setEnabled(true);
+			btnDelete.addActionListener(new DeleteLevelController(levelEntry.getLevel(), levelList));
 			levelEntry.setBackground(Color.YELLOW);
 			levelList.setToggledLevelEntry(levelEntry);
 		}
@@ -39,7 +40,11 @@ public class ToggleLevelEntryController implements MouseListener {
 			for (ActionListener i : btnEdit.getActionListeners()) {
 				btnEdit.removeActionListener(i);
 			}
+			for (ActionListener i : btnDelete.getActionListeners()) {
+				btnDelete.removeActionListener(i);
+			}
 			btnEdit.addActionListener(new MoveToEditorController(levelEntry.getLevel(), (JPanel) levelList, frame));
+			btnDelete.addActionListener(new DeleteLevelController(levelEntry.getLevel(), levelList));
 			toggled.setBackground(toggled.getParent().getBackground());
 			levelEntry.setBackground(Color.YELLOW);
 			levelList.setToggledLevelEntry(levelEntry);

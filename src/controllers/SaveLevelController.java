@@ -11,6 +11,7 @@ import models.LightningLevelLogic;
 import models.Piece;
 import models.PuzzleLevelLogic;
 import models.ReleaseBoardSquareLogic;
+import models.SaveFile;
 import models.Square;
 
 /**
@@ -41,6 +42,9 @@ public class SaveLevelController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		saveLevel();
+		if(! SaveFile.instance().levelExists(level.getLevelNumber())){
+			SaveFile.instance().addLevel(level);
+		}
 	}
 	
 	/**

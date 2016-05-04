@@ -115,11 +115,16 @@ public class LevelList extends JPanel {
 	 */
 	private void updateLevelEntries() {
 		for (int i = 0, length = SaveFile.instance().getNumberOfLevels(); i < length; i++) {
-			LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
-			entries.add(levelEntry);
-			levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
-			panel.add(levelEntry);
-			levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
+			try{
+				LevelEntry levelEntry = new LevelEntry(SaveFile.instance().getLevel(i));
+				entries.add(levelEntry);
+				levelEntry.setBounds(10, 10 + 70 * (levelEntry.getLevel().getLevelNumber()), 463, 50);
+				panel.add(levelEntry);
+				levelEntry.addMouseListener(new ToggleLevelEntryController(levelEntry, this, frame));
+			}
+			catch(IllegalArgumentException e){
+				
+			}
 		}
 	}
 
@@ -166,6 +171,9 @@ public class LevelList extends JPanel {
 	public void reload(){
 		removeEntries();
 		updateLevelEntries();
+		toggledLevelEntry = null;
+		revalidate();
+		repaint();
 	}
 
 	private void removeEntries() {

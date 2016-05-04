@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import models.Level;
+import models.SaveFile;
 import views.LevelList;
 
 public class DeleteLevelController implements ActionListener{
@@ -23,6 +24,8 @@ public class DeleteLevelController implements ActionListener{
 		
 		File file = new File("levels/" + fileName + ".txt");
 		file.delete();
+		
+		SaveFile.instance().removeLevel(level);
 		
 		llist.reload();
 	}
