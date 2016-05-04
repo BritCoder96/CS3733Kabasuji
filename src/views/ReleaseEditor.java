@@ -16,9 +16,11 @@ import controllers.EditorComponentDragListener;
 import controllers.EditorLevelRedoController;
 import controllers.EditorLevelUndoController;
 import controllers.EditorModeController;
+import controllers.GameScreenPieceOrientationController;
 import controllers.GoBackOnePanelController;
 import controllers.MoveDraggingPieceController;
 import controllers.MoveDraggingPieceEditorController;
+import controllers.ReleaseEditorPieceOrientationController;
 import controllers.SaveLevelController;
 import main.KabasujiMain;
 import models.Board;
@@ -31,6 +33,7 @@ import models.ReleaseLevelLogic;
 import models.Square;
 
 import javax.swing.JPopupMenu;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -101,6 +104,8 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
+		this.addKeyListener(new ReleaseEditorPieceOrientationController(this));
+
 		
 		// Add listener for the entire screen to catch mouse movement that's not on a subwidget
 		// Actually, mouse motion from subwidgets is redirected to this screen anyway, so this
@@ -205,6 +210,8 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		btnRedo.addMouseMotionListener(new EditorComponentDragListener(this, btnRedo));
 		
 		editMode = EditorMode.EDIT;
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 		updateOptionsDisplay();
 	}
 
@@ -383,6 +390,14 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 	 */
 	public JButton getBtnNum() {
 		return btnNum;
+	}
+	
+	/**
+	 * Gets the bullpen view 
+	 * @return the bullpen view 
+	 */
+	public BullpenView getBullpen() {
+		return bullpen;
 	}
 	
 	/**

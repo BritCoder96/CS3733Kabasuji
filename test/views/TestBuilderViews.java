@@ -46,15 +46,22 @@ public class TestBuilderViews extends TestCase {
 	    level.getLightningBtn().doClick();
 	    level.getBtnGo().doClick();
 	    LightningEditor lEditor = (LightningEditor) frame.getContentPane();
+	    SaveLevelController.serializeLevel(lEditor.getLevel());
 	    lEditor.getBtnBack().doClick();
 	    level.getNameField().setText("5");
 	    level.getReleaseBtn().doClick();
-	    level.getBtnGo().doClick();
+	    level.getBtnGo().doClick();	   
 	    ReleaseEditor rEditor = (ReleaseEditor) frame.getContentPane();
 	    rEditor.getBtnNum().doClick();
 	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 100, 10, 1, false, MouseEvent.BUTTON1);
 	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
-	    SaveLevelController.serializeLevel(rEditor.getLevel());
-	    rEditor.getBtnBack().doClick();	   
+	    me = new MouseEvent(rEditor.getBullpen().scrollingPanel, MouseEvent.MOUSE_CLICKED, 0, MouseEvent.BUTTON1_MASK, 111, 94, 1, false, MouseEvent.BUTTON1);
+	    rEditor.getBullpen().scrollingPanel.dispatchEvent(me);
+	    me = new MouseEvent(rEditor, MouseEvent.MOUSE_MOVED, 0, 0, 200, 200, 0, false, 0);
+	    rEditor.dispatchEvent(me);
+	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_MOVED, 0, 0, 10, 10, 0, false, 0);
+	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
+	    me = new MouseEvent(rEditor.getBoardView().getSquareAt(1, 1), MouseEvent.MOUSE_CLICKED, 0, 0, 10, 10, 1, false, MouseEvent.BUTTON1);
+	    rEditor.getBoardView().getSquareAt(1, 1).dispatchEvent(me);
 	  }
 }

@@ -23,6 +23,7 @@ import controllers.EditorModeController;
 import controllers.GoBackOnePanelController;
 import controllers.IncrementMoveLimitController;
 import controllers.MoveDraggingPieceEditorController;
+import controllers.PuzzleEditorPieceOrientationController;
 import controllers.SaveLevelController;
 import main.KabasujiMain;
 import models.Board;
@@ -33,8 +34,10 @@ import models.Piece;
 import models.PuzzleLevelLogic;
 
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.awt.event.ActionEvent;
@@ -97,6 +100,8 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		setBounds(KabasujiMain.windowSize);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
+		this.addKeyListener(new PuzzleEditorPieceOrientationController(this));
+
 		
 		// Add listener for the entire screen to catch mouse movement that's not on a subwidget
 		// Actually, mouse motion from subwidgets is redirected to this screen anyway, so this
@@ -203,7 +208,8 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		editMode = EditorMode.EDIT;
 		updateOptionsDisplay();
 		btnRedo.addMouseMotionListener(new EditorComponentDragListener(this, btnRedo));
-		
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 		updateOptionsDisplay();
 	}
 

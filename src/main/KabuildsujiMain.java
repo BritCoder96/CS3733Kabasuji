@@ -24,7 +24,7 @@ public class KabuildsujiMain {
 		frame.setContentPane(new views.BuilderTitle(frame));
 		frame.setVisible(true);
 		frame.setBounds(KabuildsujiMain.windowSize);
-		frame.setDefaultCloseOperation(KabasujiFrame.EXIT_ON_CLOSE);		
+		frame.setDefaultCloseOperation(KabasujiFrame.EXIT_ON_CLOSE);
 	}
 
 	/** gets the frame

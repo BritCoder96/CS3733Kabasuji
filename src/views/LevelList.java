@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * The screen that shows the list of existing levels and allows you to select one to edit or delete.
@@ -76,7 +77,10 @@ public class LevelList extends JPanel {
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
+		// TODO: get it to scroll
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportView(panel);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(150, 100, 500, 350);
 		add(scrollPane);
 
