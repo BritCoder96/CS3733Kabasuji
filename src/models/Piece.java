@@ -46,29 +46,11 @@ public class Piece {
 	public Piece(Piece other) {
 		squares = new Square[6];
 		pieceNumber = other.pieceNumber;
-		Square[][] squareLocations = new Square[6][6];
 		for (int i = 0; i < 6; i++) {
 			Square s = other.getSquares()[i];
 			int r = s.getCoordinates().getRow();
 			int c = s.getCoordinates().getCol();
 			Square newSquare = new Square(s.color, s.type, r, c);
-			squareLocations[r][c] = newSquare;
-			if (r > 0 && squareLocations[r-1][c] != null) {
-				newSquare.attachToOtherSide(squareLocations[r-1][c], Directions.NORTH);
-				squareLocations[r-1][c].attachToOtherSide(newSquare, Directions.SOUTH);
-			}
-			if (c > 0 && squareLocations[r][c-1] != null) {
-				newSquare.attachToOtherSide(squareLocations[r][c-1], Directions.WEST);
-				squareLocations[r][c-1].attachToOtherSide(newSquare, Directions.EAST);
-			}
-			if (r < 5 && squareLocations[r+1][c] != null) {
-				newSquare.attachToOtherSide(squareLocations[r+1][c], Directions.SOUTH);
-				squareLocations[r+1][c].attachToOtherSide(newSquare, Directions.NORTH);
-			}
-			if (c < 5 && squareLocations[r][c+1] != null) {
-				newSquare.attachToOtherSide(squareLocations[r][c+1], Directions.EAST);
-				squareLocations[r][c+1].attachToOtherSide(newSquare, Directions.WEST);
-			}
 			squares[i] = newSquare;
 		}
 	}
