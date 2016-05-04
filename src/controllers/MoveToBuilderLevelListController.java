@@ -227,7 +227,9 @@ public class MoveToBuilderLevelListController implements ActionListener {
 		case LIGHTNING:
 			return new Level(board, bullpen, levelNumber, numberOfStars, new LightningLevelLogic(board.getNumberOfSquares(), allottedSeconds), Integer.toString(levelNumber));
 		case RELEASE:
-			return new Level(board, bullpen, levelNumber, numberOfStars, new ReleaseLevelLogic(), Integer.toString(levelNumber));
+			ReleaseLevelLogic releaseLogic = new ReleaseLevelLogic();
+			releaseLogic.fillSets(board);
+			return new Level(board, bullpen, levelNumber, numberOfStars, releaseLogic, Integer.toString(levelNumber));
 		default:
 			throw new IllegalArgumentException();
 		}

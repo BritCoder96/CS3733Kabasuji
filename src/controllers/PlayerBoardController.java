@@ -113,6 +113,7 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 				}
 				else if(level.getLvlType() == LevelType.RELEASE) {
 					ReleaseLevelLogic logic = ((ReleaseLevelLogic)level.getLevelLogic());
+					logic.checkSets();
 					int  numUnreleasedSets = logic.getNumberOfUnreleasedSets();
 					if (numUnreleasedSets == 0) {
 						saveStars(3);

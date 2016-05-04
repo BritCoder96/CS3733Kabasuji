@@ -115,8 +115,7 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		
 		board = level.getBoard();
 		
-		// TODO: probably nothing
-		ell = new ReleaseLevelLogic();
+		ell = (ReleaseLevelLogic) level.getLevelLogic();
 		
 		this.level = level;
 		

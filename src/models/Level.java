@@ -247,7 +247,7 @@ public class Level {
 			lvlLogicCopy = new LightningLevelLogic(elll.getTotalSquares(), elll.getAllottedSeconds());
 			break;
 		case RELEASE:
-			lvlLogicCopy = new ReleaseLevelLogic(); // nothing needed to copy here
+			lvlLogicCopy = new ReleaseLevelLogic();
 			break;
 		default:
 			throw new IllegalStateException("level has unknown type " + lvlType);
@@ -274,6 +274,9 @@ public class Level {
 					}
 				}
 			}
+		}
+		if (lvlType == LevelType.RELEASE) {
+			((ReleaseLevelLogic) copy.getLevelLogic()).fillSets(copy.getBoard());
 		}
 		return copy;
 	}
