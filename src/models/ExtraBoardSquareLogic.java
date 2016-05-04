@@ -44,15 +44,4 @@ public abstract class ExtraBoardSquareLogic {
 	public boolean getIsHint() {
 		return isHint;
 	}
-	
-	/**
-	 * Indicate that the board square is a hint.
-	 */
-	public void setHint(boolean hint) {
-		isHint = hint;
-	}
-
-	public boolean getIsHint() {
-		return isHint;
-	}
 }
