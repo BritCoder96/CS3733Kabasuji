@@ -9,7 +9,7 @@ import java.util.HashSet;
  * @author jberry
  * @author bhuchley
  */
-public class Board extends PieceSet {
+public class Board {
 	/** The number of rows in the board. */
 	int rows;
 	/** The number of columns in the board. */

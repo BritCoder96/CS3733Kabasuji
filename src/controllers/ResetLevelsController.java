@@ -34,7 +34,6 @@ public class ResetLevelsController implements ActionListener {
 		for(Level level : levelSelect.getLevels()) {
 			level.clearStars();
 			level.setHasWon(false);
-			System.out.println(level.getNumberOfStars());
 			SaveLevelController sc = new SaveLevelController(level);
 			sc.saveLevel();
 		}

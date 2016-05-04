@@ -202,7 +202,12 @@ public class LightningEditor extends JPanel implements LevelModifiedListener, Le
 
 	@Override
 	public void setGameBoard(EditorBoardView ebv) {
+		remove(this.gameboard);
 		this.gameboard = ebv;
+		gameboard.setBounds(283, 94, 430, 430);
+		add(gameboard);
+		revalidate();
+		repaint();
 	}
 	
 	/**

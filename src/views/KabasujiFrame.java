@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import main.PanelBackManager;
 import models.Level;
 import models.Piece;
-import models.PieceSet;
 import models.Square;
 
 /**
