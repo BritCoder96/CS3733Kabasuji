@@ -122,6 +122,10 @@ public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModif
 		bullpen.addMouseListener(bullpenController);
 		bullpen.addMouseMotionListener(bullpenController);
 		
+		for (Piece i : level.getBullpen().getPieces()) {
+			bullpen.addPiece(i);
+		}
+		
 		editMode = EditorMode.EDIT;
 		
 		moveLimitLabel = new JLabel(String.valueOf(ell.getAllottedMoves()));

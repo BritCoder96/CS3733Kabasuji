@@ -125,6 +125,10 @@ public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModi
 		bullpen.addMouseListener(bullpenController);
 		bullpen.addMouseMotionListener(bullpenController);
 		
+		for (Piece i : level.getBullpen().getPieces()) {
+			bullpen.addPiece(i);
+		}
+		
 		btnEdit = new JButton("Edit");
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnEdit.setBounds(46, 495, 127, 45);
