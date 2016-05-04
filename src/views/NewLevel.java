@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import controllers.ActivateGoController;
 import controllers.GoBackOnePanelController;
 import controllers.MoveToEditorController;
 import controllers.UpdateLevelViewController;
@@ -53,7 +54,7 @@ public class NewLevel extends JPanel {
 	private JButton btnGo;
 	
 	/** The controller for the button that starts the editor */
-	MoveToEditorController btnGoController;
+	ActivateGoController btnGoController;
 	
 
 	/**
@@ -152,7 +153,7 @@ public class NewLevel extends JPanel {
 		btnGo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnGo.setBounds(405, 451, 118, 45);
 		add(btnGo);
-		btnGoController = new MoveToEditorController(new Level(getRows(), Integer.parseInt(getName()), getLevelType(), getName(), true), this, frame);
+		btnGoController = new ActivateGoController(this);
 		btnGo.addActionListener(btnGoController);
 		
 		updateOptionDisplay();
@@ -205,10 +206,11 @@ public class NewLevel extends JPanel {
 				
 				break;
 		}
-		
+	/*	
 		btnGo.removeActionListener(btnGoController);
 		btnGoController = new MoveToEditorController(new Level(getRows(), Integer.parseInt(getName()), getLevelType(), getName(), true), this, frame);
 		btnGo.addActionListener(btnGoController);
+	*/
 	}
 	
 	public int getRows() {
@@ -263,5 +265,11 @@ public class NewLevel extends JPanel {
 	 */
 	public JTextField getNameField() {
 		return 	txtInsertNameHere;
+	}
+
+	public void invokeNextScreen() {
+		MoveToEditorController go =new MoveToEditorController(new Level(getRows(), Integer.parseInt(getName()), getLevelType(), getName(), true), this, frame);
+		
+		go.actionPerformed(null);
 	}
 }
