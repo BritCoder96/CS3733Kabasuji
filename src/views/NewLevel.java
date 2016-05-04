@@ -76,7 +76,7 @@ public class NewLevel extends JPanel {
 		add(btnBack);
 		btnBack.addActionListener(new GoBackOnePanelController(frame));
 		
-		JLabel lblLevelName = new JLabel("Level Name:");
+		JLabel lblLevelName = new JLabel("Level Num:");
 		lblLevelName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLevelName.setBounds(207, 85, 120, 37);
 		add(lblLevelName);
