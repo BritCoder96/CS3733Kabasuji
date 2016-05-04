@@ -42,8 +42,7 @@ public class EditorLevelRedoController implements ActionListener {
 			// Pop the level Forward Stack
 			Level lastLevel = levelForwardStack.pop();
 			// Add the popped level to the back stack
-			undo.pushLevel(lastLevel);
-			System.out.println("Level Pushed to Undo");
+			undo.pushLevel(listener.getLevel().deepClone());
 			listener.setLevel(lastLevel);
 		}
 	}

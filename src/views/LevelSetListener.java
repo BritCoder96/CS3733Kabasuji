@@ -14,4 +14,9 @@ public interface LevelSetListener {
 	 * @param level the new level to use
 	 */
 	public void setLevel(Level level);
+	
+	/**
+	 * Get the current level used by this object.
+	 */
+	public Level getLevel();
 }
