@@ -28,6 +28,7 @@ import models.Square;
 public class GameBoardView extends JPanel {
 	public static final Color lighterGray = new Color(180, 180, 180);
 	public static final Color darkerGray = new Color(140, 140, 140);
+	public static final Color hintColor = Color.BLUE;
 	
 	int rows;
 	int cols;
@@ -75,6 +76,10 @@ public class GameBoardView extends JPanel {
 				// Set on click listener to deal with placing pieces on the square
 				square.addMouseListener(squareControllers[r][c]);
 				square.setBackground(squareBackground);
+								
+				if(initialBoard.getSquareAt(r, c) != null && initialBoard.getSquareAt(r, c).getSquareLogic().getIsHint()){
+					square.setBackground(hintColor);
+				}
 				square.addMouseMotionListener(new GameSquareDragListener(this, square, gameScreen));
 				squares[r][c] = square;
 				add(square);

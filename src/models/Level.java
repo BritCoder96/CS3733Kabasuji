@@ -273,7 +273,7 @@ public class Level {
 		for (int r = 0; r < board.getRows(); r++) {
 			for (int c = 0; c < board.getColumns(); c++) {
 				if (board.getSquares()[r][c] != null) {
-					copy.getBoard().addSquareAt(r, c);
+					copy.getBoard().addSquareAt(r, c);					
 					// If release level, copy numbers
 					if (lvlType == LevelType.RELEASE) {
 						ReleaseBoardSquareLogic rbsl = (ReleaseBoardSquareLogic) board.getSquareAt(r, c).getSquareLogic();
@@ -282,6 +282,9 @@ public class Level {
 						rbslCopy.setNumber(rbsl.getNumber());
 						copy.getBoard().getSquareAt(r, c).setSquareLogic(rbslCopy);
 					}
+					
+					ExtraBoardSquareLogic copyLogic = copy.getBoard().getSquareAt(r, c).getSquareLogic();
+					copyLogic.setHint(board.getSquares()[r][c].getSquareLogic().getIsHint());
 				}
 			}
 		}

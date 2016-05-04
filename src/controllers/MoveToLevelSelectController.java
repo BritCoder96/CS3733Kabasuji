@@ -144,14 +144,19 @@ public class MoveToLevelSelectController implements ActionListener {
 			String[] rowEntries = dataTokens[numberOfBoardRows].split(",");
 			numberOfBoardCols = 0;
 			for (; numberOfBoardCols < rowEntries.length; numberOfBoardCols++) {
+								
 				if (rowEntries[numberOfBoardCols].equals(" ")) {
 				}
-				// TODO: alternating colors?, this can probably be more concise
 				else if (rowEntries[numberOfBoardCols].equals("x")) {
-					squares.add(new Square(0x808080, lvlType == LevelType.LIGHTNING ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols));
+					Square s = new Square(0x808080, lvlType == LevelType.LIGHTNING ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols);
+					squares.add(s);
+				}
+				else if (rowEntries[numberOfBoardCols].equalsIgnoreCase("x H")) {
+					Square s = new Square(0x808080, lvlType == LevelType.LIGHTNING ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols);
+					s.getSquareLogic().setHint(true);
+					squares.add(s);
 				}
 				else {
-					// TODO: this can DEFINITELY be more concise
 					Square releaseBoardSquare = new Square(0x808080, SquareTypes.RELEASEBOARDSQUARE, numberOfBoardRows, numberOfBoardCols);
 					Character c = rowEntries[numberOfBoardCols].toCharArray()[0];
 					if (c == '1' || c == '2' || c == '3'|| c == '4' || c == '5' || c == '6') {
@@ -170,6 +175,12 @@ public class MoveToLevelSelectController implements ActionListener {
 							throw new IllegalArgumentException();
 						}
 					}
+					
+					char[] entryData = rowEntries[numberOfBoardCols].toCharArray();
+					if(entryData[entryData.length - 1] == 'H'){
+						releaseBoardSquare.getSquareLogic().setHint(true);
+					}
+					
 					squares.add(releaseBoardSquare);
 				}
 			}

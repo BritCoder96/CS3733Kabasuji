@@ -29,7 +29,8 @@ public class AddHintController extends EditorSquareController{
 		this.board = board;
 		this.row = row;
 		this.col = col;
-		this.listener = listener;	}
+		this.listener = listener;	
+		}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

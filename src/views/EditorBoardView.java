@@ -81,6 +81,8 @@ public class EditorBoardView extends JPanel {
 					}
 				}
 				square.setBackground(squareBackground);
+				if(bsquares[r][c] != null && bsquares[r][c].getSquareLogic().getIsHint())
+					square.setBackground(hintColor);
 				// Set on click listener to toggle the square
 				squareControllers[r][c] = setSquareListener(square, initialBoard, r, c, parent, em);
 				square.addMouseListener(squareControllers[r][c]);
@@ -113,6 +115,9 @@ public class EditorBoardView extends JPanel {
 							squares[r][c].setText(number.toString());
 							squares[r][c].setForeground(color);
 						}
+					}
+					if(bsquares[r][c].getSquareLogic().getIsHint()){
+						squares[r][c].setBackground(hintColor);
 					}
 				}
 				squares[r][c].repaint();

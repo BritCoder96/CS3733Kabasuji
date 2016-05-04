@@ -131,7 +131,6 @@ public class PlayerBoardController extends java.awt.event.MouseAdapter {
 	}
 
 	private void saveStars(int numStars) {
-		System.out.println(numStars);
 		Level originalLevel = gamescreen.getOriginalLevel(); // in case level was won
 		originalLevel.setNumberOfStars(numStars);
 		originalLevel.setHasWon(true);

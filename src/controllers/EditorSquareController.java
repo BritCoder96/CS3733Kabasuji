@@ -64,7 +64,6 @@ public abstract class EditorSquareController implements MouseListener {
 			if (coveringPiece == null) {
 				return false;
 			} else {
-				System.out.println(coveringPiece.getPieceNumber());
 				b.removePiece(coveringPiece);
 				editorscreen.setDraggingPiece(coveringPiece);
 				return true;

@@ -153,6 +153,11 @@ public class MoveToBuilderLevelListController implements ActionListener {
 				else if (rowEntries[numberOfBoardCols].equals("x")) {
 					squares.add(new Square(0x808080, lvlType == LevelType.LIGHTNING ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols));
 				}
+				else if (rowEntries[numberOfBoardCols].equalsIgnoreCase("x H")) {
+					Square s = new Square(0x808080, lvlType == LevelType.LIGHTNING ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols);
+					s.getSquareLogic().setHint(true);
+					squares.add(s);
+				}
 				else {
 					// TODO: this can DEFINATELY be more concise
 					Square releaseBoardSquare = new Square(0x808080, SquareTypes.RELEASEBOARDSQUARE, numberOfBoardRows, numberOfBoardCols);
