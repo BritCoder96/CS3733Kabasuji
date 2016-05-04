@@ -151,19 +151,19 @@ public class MoveToLevelSelectController implements ActionListener {
 					squares.add(new Square(0x808080, lvlType == LevelType.LIGHTNING ? SquareTypes.LIGHTNINGBOARDSQUARE : SquareTypes.PUZZLEBOARDSQUARE,numberOfBoardRows, numberOfBoardCols));
 				}
 				else {
-					// TODO: this can DEFINATELY be more concise
+					// TODO: this can DEFINITELY be more concise
 					Square releaseBoardSquare = new Square(0x808080, SquareTypes.RELEASEBOARDSQUARE, numberOfBoardRows, numberOfBoardCols);
-					String substring = rowEntries[numberOfBoardCols].substring(0, 0);
-					if (substring == "1" || substring == "2" || substring == "3"|| substring == "4" || substring == "5" || substring == "6") {
-						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setNumber(Integer.parseInt(substring));
-						switch (rowEntries[numberOfBoardCols].substring(1, 1)) {
-						case "R":
+					Character c = rowEntries[numberOfBoardCols].toCharArray()[0];
+					if (c == '1' || c == '2' || c == '3'|| c == '4' || c == '5' || c == '6') {
+						((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setNumber(Character.getNumericValue(c));
+						switch (rowEntries[numberOfBoardCols].toCharArray()[1]) {
+						case 'R':
 							((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.RED);
 							break;
-						case "G":
+						case 'G':
 							((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.GREEN);
 							break;
-						case "Y":
+						case 'Y':
 							((ReleaseBoardSquareLogic) releaseBoardSquare.getSquareLogic()).setColorOfNumber(Color.YELLOW);
 							break;
 						default:

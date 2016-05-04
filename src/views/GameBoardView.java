@@ -12,6 +12,9 @@ import controllers.GameSquareDragListener;
 import controllers.MoveDraggingPieceController;
 import controllers.PlayerBoardController;
 import models.Board;
+import models.ExtraBoardSquareLogic;
+import models.LevelType;
+import models.ReleaseBoardSquareLogic;
 import models.Square;
 
 /**
@@ -47,12 +50,26 @@ public class GameBoardView extends JPanel {
 		setLayout(new GridLayout(rows, cols, 0, 0));
 		squares = new JLabel[rows][cols];
 		squareControllers = new PlayerBoardController[rows][cols];
+		ExtraBoardSquareLogic currentSquare = null;
+		
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				JLabel square = new JLabel();
 				Color squareBackground = (((r+c)%2)==0) ? lighterGray : darkerGray;
 				if (initialBoard.getSquares()[r][c] != null) {
 					square.setOpaque(true);
+				}
+				if(initialBoard.getSquareAt(r, c) != null)
+					currentSquare = initialBoard.getSquares()[r][c].getSquareLogic();
+				if(initialBoard.getLevelType() == LevelType.RELEASE){
+					Integer number = ((ReleaseBoardSquareLogic) currentSquare).getNumber();
+					Color color = ((ReleaseBoardSquareLogic) currentSquare).getColorOfNumber();
+
+					if(number > 0){
+						square.setText(number.toString());
+						square.setForeground(color);
+					}
+
 				}
 				squareControllers[r][c] = new PlayerBoardController(gameScreen, gameScreen.getLevel(), r, c);
 				// Set on click listener to deal with placing pieces on the square
