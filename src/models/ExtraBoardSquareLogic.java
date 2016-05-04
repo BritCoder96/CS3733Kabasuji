@@ -2,6 +2,8 @@ package models;
 
 /**
  * Class to be extended by Squares used by Boards.
+ * 
+ * @author sthuynh
  */
 public abstract class ExtraBoardSquareLogic {
 	/** Indicates whether the board square is covered by a piece. */

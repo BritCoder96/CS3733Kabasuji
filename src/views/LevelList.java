@@ -36,8 +36,10 @@ import javax.swing.ScrollPaneConstants;
 
 /**
  * The screen that shows the list of existing levels and allows you to select one to edit or delete.
+ * 
  * @author ejcerini
  * @author bjbenson
+ * @author sthuynh
  */
 public class LevelList extends JPanel {
 

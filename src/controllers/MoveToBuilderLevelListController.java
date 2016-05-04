@@ -33,6 +33,7 @@ import views.Title;
  * to the List of levels that are available for editing.
  * 
  * @author ejcerini
+ * @author sthuynh
  */
 public class MoveToBuilderLevelListController implements ActionListener {
 	KabasujiFrame frame;

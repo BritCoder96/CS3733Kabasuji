@@ -47,6 +47,7 @@ import java.awt.event.ActionEvent;
  * @author ejcerini
  * @author bhuchley
  * @author bjbenson
+ * @author sthuynh
  */
 public class PuzzleEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener, LevelEditor {
 

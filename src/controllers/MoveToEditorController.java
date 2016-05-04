@@ -18,6 +18,7 @@ import views.ReleaseEditor;
  * Controller to open the level editor with the desired parameters.
  * 
  * @author ejcerini
+ * @author sthuynh
  */
 public class MoveToEditorController implements ActionListener{
 	

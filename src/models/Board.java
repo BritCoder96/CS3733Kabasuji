@@ -8,6 +8,7 @@ import java.util.HashSet;
  * @author bjbenson
  * @author jberry
  * @author bhuchley
+ * @author sthuynh
  */
 public class Board {
 	/** The number of rows in the board. */

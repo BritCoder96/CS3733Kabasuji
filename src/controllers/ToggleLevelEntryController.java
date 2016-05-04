@@ -16,7 +16,6 @@ import views.KabasujiFrame;
  * Toggle the selection of a level on the level list.
  * 
  * @author sthuynh
- *
  */
 public class ToggleLevelEntryController implements MouseListener {
 	LevelEntry levelEntry;

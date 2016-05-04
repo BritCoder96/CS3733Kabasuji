@@ -2,6 +2,8 @@ package models;
 
 /**
  * Extra level logic exclusive to lightning levels.
+ * 
+ * @author sthuynh
  */
 public class LightningLevelLogic implements ExtraLevelLogic{
 	/** Number of board squares present in the level. */

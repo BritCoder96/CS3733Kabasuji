@@ -30,6 +30,7 @@ import views.Title;
  * Level Select Screen.
  * 
  * @author bhuchley
+ * @author sthuynh
  */
 public class MoveToLevelSelectController implements ActionListener {
 	KabasujiFrame frame;

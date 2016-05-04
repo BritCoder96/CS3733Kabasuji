@@ -4,6 +4,8 @@ package models;
 
 /**
  * Extra level logic exclusive to release levels.
+ * 
+ * @author sthuynh
  */
 public class ReleaseLevelLogic implements ExtraLevelLogic{
 	/**

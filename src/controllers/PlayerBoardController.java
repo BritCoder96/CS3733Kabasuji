@@ -21,6 +21,7 @@ import views.PieceView;
  * @author ejcerini
  * @author bhuchley
  * @author bjbenson
+ * @author sthuynh
  */
 public class PlayerBoardController extends java.awt.event.MouseAdapter {
 	protected GameScreen gamescreen;

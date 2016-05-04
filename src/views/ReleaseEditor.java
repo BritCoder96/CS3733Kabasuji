@@ -48,6 +48,7 @@ import javax.swing.DefaultComboBoxModel;
  * @author bhuchley
  * @author bjbenson
  * @author ejcerini
+ * @author sthuynh
  */
 public class ReleaseEditor extends JPanel implements AddPieceListener, LevelModifiedListener, LevelSetListener, LevelEditor{
 
